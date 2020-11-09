@@ -2,8 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:osFotoFix.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="osFotoFix.Views.SettingsView">
+             x:Class="osFotoFix.Views.SettingsView"
+             >
   <StackPanel>
     <Expander 
       Header="Verzeichnisse"
@@ -20,6 +22,24 @@
           Grid.Row="1"/>
         <Button
           Grid.Row="1"
+          Grid.Column="1"
+          Content="..." />
+        <ContentControl
+          Grid.Row="2"
+          Content="Ziel" />
+        <TextBox
+          Grid.Row="3"/>
+        <Button
+          Grid.Row="3"
+          Grid.Column="1"
+          Content="..." />
+        <ContentControl
+          Grid.Row="4"
+          Content="Papierkorb" />
+        <TextBox
+          Grid.Row="5"/>
+        <Button
+          Grid.Row="5"
           Grid.Column="1"
           Content="..." />
       </Grid>

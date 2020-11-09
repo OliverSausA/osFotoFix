@@ -7,7 +7,9 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="osFotoFix.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="osFotoFix">
+        Title="osFotoFix"
+        DataContext="{Binding }"
+        >
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
@@ -15,8 +17,14 @@
 
   <DockPanel>
     <views:SettingsView 
+      DataContext="{Binding SettingsVM}"
       DockPanel.Dock="Left"
       Width="200"
+      />
+    <views:FotoInfoListView
+      DockPanel.Dock="Bottom"
+      />
+    <views:ImageView
       />
   </DockPanel>
 
