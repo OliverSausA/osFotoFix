@@ -16,12 +16,13 @@
 
   <DockPanel>
     <views:SettingsView 
-      Content="{Binding SettingsVM}"
-      DockPanel.Dock="Left"
       Width="300"
+      DockPanel.Dock="Left"
+      DataContext="{Binding SettingsVM}"
       />
     <views:FotoInfoListView
       DockPanel.Dock="Bottom"
+      DataContext="{Binding FotoInfoListVM}"
       />
     <views:ImageView
       />

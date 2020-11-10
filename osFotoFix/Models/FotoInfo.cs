@@ -3,12 +3,14 @@ using System.IO;
 
 namespace osFotoFix.Models
 {
+  using ViewModels;
   public class FotoInfo {
 
     public FotoInfo( FileInfo file, DateTime created, bool isExifValid ) {
       File = file;
       Created = created;
       IsExifValid = isExifValid;
+      FileNameNew = "DAS IST TEST";
     }
 
     public FileInfo File {get;set;}
