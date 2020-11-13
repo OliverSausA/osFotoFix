@@ -18,5 +18,6 @@
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.9.12" />
     <PackageReference Include="Avalonia.Desktop" Version="0.9.12" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.12" />
+    <PackageReference Include="ExifLib" Version="1.7.0" />
   </ItemGroup>
 </Project>
