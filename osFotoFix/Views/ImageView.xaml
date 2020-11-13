@@ -4,5 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="osFotoFix.Views.ImageView">
-  Welcome to Avalonia!
+  <Border
+    Background="Yellow"
+    BorderBrush="Black"
+    BorderThickness="2"
+    CornerRadius="10"
+    Padding="4"
+    >
+    <Grid RowDefinitions="*,Auto">
+      <Image>
+      </Image>
+      <StackPanel 
+        Grid.Row="1"
+        Orientation="Horizontal"
+        HorizontalAlignment="Center"
+        >
+        <Button Width="50" Height="30" Content="Z" />
+        <Button Width="50" Height="30" Content="V" />
+        <Button Width="50" Height="30" Content="X" />
+        <Button Width="50" Height="30" Content="O" />
+      </StackPanel>
+    </Grid>
+  </Border>
 </UserControl>

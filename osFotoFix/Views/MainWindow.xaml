@@ -10,22 +10,41 @@
         Title="osFotoFix"
         >
 
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
-
-  <DockPanel>
+  <Grid 
+    ColumnDefinitions="300,Auto,*"
+    >
     <views:SettingsView 
-      Width="300"
+      Grid.Column="0"
       DockPanel.Dock="Left"
       DataContext="{Binding SettingsVM}"
       />
-    <views:FotoInfoListView
-      DockPanel.Dock="Bottom"
-      DataContext="{Binding FotoInfoListVM}"
+    <GridSplitter 
+      Grid.Column="1"
+      HorizontalAlignment="Stretch"
+      VerticalAlignment="Center"
+      Background="Green" 
+      Width="3"       
       />
-    <views:ImageView
-      />
-  </DockPanel>
+    <Grid
+      Grid.Column="2"
+      RowDefinitions="*,Auto,*"
+      >
+      <views:ImageView
+        Grid.Row="0"
+        />
+      <GridSplitter 
+        Grid.Row="1"
+        VerticalAlignment="Center"
+        HorizontalAlignment="Stretch"
+        Background="Green" 
+        Height="3"       
+        />
+      <views:FotoInfoListView
+        Grid.Row="2"
+        DockPanel.Dock="Bottom"
+        DataContext="{Binding FotoInfoListVM}"
+        />
+    </Grid>
+  </Grid>
 
 </Window>
