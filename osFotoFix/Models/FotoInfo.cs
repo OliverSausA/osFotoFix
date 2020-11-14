@@ -12,6 +12,8 @@ namespace osFotoFix.Models
       IsExifValid = isExifValid;
       FileNameNew = "DAS IST TEST";
     }
+    
+    public int Index {get;set;}
 
     public FileInfo File {get;set;}
 

@@ -12,6 +12,9 @@
     Padding="4"
     >
     <Grid RowDefinitions="*,Auto">
+      <TextBox
+        Text="{Binding Foto.FileNameOld}"
+        />
       <Image>
       </Image>
       <StackPanel 
@@ -19,8 +22,8 @@
         Orientation="Horizontal"
         HorizontalAlignment="Center"
         >
-        <Button Width="50" Height="30" Content="Z" />
-        <Button Width="50" Height="30" Content="V" />
+        <Button Width="50" Height="30" Content="Z" Command="{Binding PrevImageCmd}" />
+        <Button Width="50" Height="30" Content="V" Command="{Binding NextImageCmd}" />
         <Button Width="50" Height="30" Content="X" />
         <Button Width="50" Height="30" Content="O" />
       </StackPanel>
