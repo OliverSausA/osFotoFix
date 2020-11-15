@@ -7,13 +7,17 @@ using ReactiveUI;
 namespace osFotoFix.ViewModels
 {
   using Models;
+  using Services;
 
   public class FotoInfoListViewModel : ViewModelBase
   {
+    private UserSettings userSettings;
+    private FotoInfoService service;
     private FotoInfoDetailViewModel FotoInfoDetailVM;
     private ImageViewModel ImageVM;
     public FotoInfoListViewModel( ImageViewModel ImageVM, FotoInfoDetailViewModel FotoInfoDetailVM )
     {
+      service = new FotoInfoService();
       this.ImageVM = ImageVM;
       this.ImageVM.NextImageEvent += SelectNextFoto;
       this.ImageVM.PrevImageEvent += SelectPrevFoto;
@@ -21,6 +25,7 @@ namespace osFotoFix.ViewModels
       this.FotoInfoDetailVM = FotoInfoDetailVM;
       FotoInfoList = new ObservableCollection<FotoInfo>();
 
+      /*
       var fotoInfo = new FotoInfo( new FileInfo( "TEST.jpg"), DateTime.Now, true );
       fotoInfo.FileLocationOld = "FileLocaltionOld";
       fotoInfo.FileNameOld = "FileNameOle";
@@ -36,9 +41,12 @@ namespace osFotoFix.ViewModels
       fotoInfo.FileNameNew = "FileNameNew 2";
       FotoInfoList.Add( fotoInfo );
       fotoInfo.Index = FotoInfoList.Count -1;
+      */
     }
 
     public ObservableCollection<FotoInfo> FotoInfoList { get; set; }
+
+    
 
     private FotoInfo fotoSelected;
     public FotoInfo FotoSelected { 
@@ -51,14 +59,27 @@ namespace osFotoFix.ViewModels
       } 
     }
 
-    public void SelectNextFoto()
+    public void Update( UserSettings userSettings )
+    {
+      this.userSettings = userSettings;
+      FotoInfoList = new ObservableCollection<FotoInfo>();
+      var baseDir = new DirectoryInfo( userSettings.Quelle );
+      var fotos = service.GetFotoInfos( baseDir );
+      foreach( var foto in fotos )
+      {
+        foto.Index = FotoInfoList.Count;
+        FotoInfoList.Add( foto );
+      }
+    }
+
+    protected void SelectNextFoto()
     {
       if( fotoSelected == null ) return;
       int idx = fotoSelected.Index +1;
       if( idx < FotoInfoList.Count )
         FotoSelected = FotoInfoList[ idx ];
     }
-    public void SelectPrevFoto()
+    protected void SelectPrevFoto()
     {
       if( fotoSelected == null ) return;
       int idx = fotoSelected.Index -1;

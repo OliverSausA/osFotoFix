@@ -3,17 +3,18 @@ using System;
 namespace osFotoFix.ViewModels
 {
   using Models;
+  using Services;
+
   public class SettingsViewModel : ViewModelBase
   {
+    private UserSettingsService service;
     public SettingsViewModel() : base()
     {
-        Settings = new Settings() {
-          Quelle = "/home/oliver/bilder/import",
-          Ziel = "/home/oliver/bilder/FotoSammlung",
-          Papierkorb = "/home/oliver/bilder/papierkorb"
-        };
+      service = new UserSettingsService();
+      Settings = service.GetUserSettings();
+      service.SaveUserSettings( Settings );
     }
 
-    public Settings Settings {get; set;}
+    public UserSettings Settings {get; set;}
   }
 }

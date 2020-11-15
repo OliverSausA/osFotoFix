@@ -14,6 +14,7 @@ namespace osFotoFix.ViewModels
         ImageVM = new ImageViewModel();
         FotoInfoDetailVM = new FotoInfoDetailViewModel();
         FotoInfoListVM = new FotoInfoListViewModel( ImageVM, FotoInfoDetailVM );
+        FotoInfoListVM.Update( SettingsVM.Settings );
       }
 
 
