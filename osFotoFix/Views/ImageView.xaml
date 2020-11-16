@@ -17,19 +17,24 @@
     >
     <Grid RowDefinitions="*,Auto">
       <TextBox
-        Text="{Binding Foto.FileNameOld}"
+        Text="{Binding Foto.Foto.File.Name}"
         />
-      <Image Source="{Binding Foto.File.FullName, Converter={StaticResource FotoImage}}">
+      <Image Source="{Binding Foto.Foto.File.FullName, Converter={StaticResource FotoImage}}">
       </Image>
       <StackPanel 
         Grid.Row="1"
         Orientation="Horizontal"
         HorizontalAlignment="Center"
         >
+        <ContentControl VerticalAlignment="Center" Margin="2" Content="Event" />
+        <TextBox Width="150" Text="{Binding EventName}" />
+        <ContentControl VerticalAlignment="Center" Margin="2" Content="Beschreibung" />
+        <TextBox Width="150" Text="{Binding Description}" />
         <Button Width="50" Height="30" Content="Z" Command="{Binding PrevImageCmd}" />
         <Button Width="50" Height="30" Content="V" Command="{Binding NextImageCmd}" />
-        <Button Width="50" Height="30" Content="X" />
-        <Button Width="50" Height="30" Content="O" />
+        <Button Width="50" Height="30" Content="X" Command="{Binding DelImageCmd}"  />
+        <Button Width="50" Height="30" Content="M" Command="{Binding MoveImageCmd}" />
+        <Button Width="50" Height="30" Content="C" Command="{Binding CopyImageCmd}" />
       </StackPanel>
     </Grid>
   </Border>

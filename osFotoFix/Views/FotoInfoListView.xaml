@@ -13,32 +13,35 @@
     CornerRadius="10"
     Padding="4"
     >
-    <Grid RowDefinitions="Auto">
-      <DataGrid
-        Grid.Row="0"
-        AutoGenerateColumns="False"
-        Items="{Binding FotoInfoList}"
-        SelectedItem="{Binding FotoSelected, Mode=TwoWay}"
-        >
-        <DataGrid.Columns>
-        <DataGridTextColumn 
-          Header="Verzeichnis"
-          Binding="{Binding FileLocationOld}"
-        />
-        <DataGridTextColumn 
-          Header="Originalname"
-          Binding="{Binding FileNameOld}"
-        />
-        <DataGridTextColumn 
-          Header="Ziel"
-          Binding="{Binding FileLocationNew}"
-        />
-        <DataGridTextColumn 
-          Header="Datei"
-          Binding="{Binding FileNameNew}"
-        />
-        </DataGrid.Columns>
-      </DataGrid>
-    </Grid>
+        <DataGrid
+          Name="FotoList"
+          Grid.Row="0"
+          AutoGenerateColumns="False"
+          Items="{Binding FotoInfoList}"
+          SelectedItem="{Binding FotoSelected, Mode=TwoWay}"
+          >
+          <DataGrid.Columns>
+          <DataGridTextColumn 
+            Header="Verzeichnis"
+            Binding="{Binding Foto.File.DirectoryName}"
+          />
+          <DataGridTextColumn 
+            Header="Originalname"
+            Binding="{Binding Foto.File.Name}"
+          />
+          <DataGridTextColumn 
+            Header="Ziel"
+            Binding="{Binding NewFileLocation}"
+          />
+          <DataGridTextColumn 
+            Header="Datei"
+            Binding="{Binding NewFileName}"
+          />
+          <DataGridTextColumn
+            Header="Aktion"
+            Binding="{Binding Action}"
+          />
+          </DataGrid.Columns>
+        </DataGrid>
   </Border>
 </UserControl>

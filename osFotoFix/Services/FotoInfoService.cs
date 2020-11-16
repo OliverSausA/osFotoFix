@@ -39,15 +39,7 @@ namespace osFotoFix.Services
       {
         DateTime d;
         if( reader.GetTagValue<DateTime>(ExifTags.DateTimeDigitized, out d))
-        {
-          var fotoInfo = new FotoInfo( file, d, true );
-          fotoInfo.FileLocationOld = file.DirectoryName;
-          fotoInfo.FileLocationNew = Path.Combine( d.ToString("yyyy"), d.ToString("yyyy_MM") );
-          fotoInfo.FileNameOld = file.Name;
-          fotoInfo.FileNameNew = string.Format("{0}_{1}{2}",
-            d.ToString("yyyyMMdd_hhmmss"), "TEXT", file.Extension );
-          return fotoInfo;
-        }
+          return new FotoInfo( file, d, true );
       }
       return new FotoInfo( file, file.CreationTime, false );
     }
