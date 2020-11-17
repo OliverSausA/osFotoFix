@@ -26,12 +26,10 @@
         Orientation="Horizontal"
         HorizontalAlignment="Center"
         >
-        <ContentControl VerticalAlignment="Center" Margin="2" Content="Event" />
-        <TextBox Width="150" Text="{Binding EventName}" />
-        <ContentControl VerticalAlignment="Center" Margin="2" Content="Beschreibung" />
-        <TextBox Width="150" Text="{Binding Description}" />
+        <Button Width="50" Height="30" Content="U" Command="{Binding UndoImageCmd}" />
         <Button Width="50" Height="30" Content="Z" Command="{Binding PrevImageCmd}" />
         <Button Width="50" Height="30" Content="V" Command="{Binding NextImageCmd}" />
+        <Button Width="50" Height="30" Content="T" Command="{Binding TrashImageCmd}" />
         <Button Width="50" Height="30" Content="X" Command="{Binding DelImageCmd}"  />
         <Button Width="50" Height="30" Content="M" Command="{Binding MoveImageCmd}" />
         <Button Width="50" Height="30" Content="C" Command="{Binding CopyImageCmd}" />

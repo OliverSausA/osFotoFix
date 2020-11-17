@@ -12,7 +12,10 @@ namespace osFotoFix.ViewModels
       ignore = 0,
       copy,
       move,
-      delete
+      delete,
+      trash,
+      done,
+      failed
     };
 
     public FotoInfoVM( FotoInfo foto, int index )
@@ -25,6 +28,7 @@ namespace osFotoFix.ViewModels
     public FotoInfo Foto {get;set;}
 
     public int Index {get;set;}
+    public string Comment {get;set;}
 
     private string newFileLocation;
     public string NewFileLocation {

@@ -29,9 +29,10 @@
       Grid.Column="2"
       RowDefinitions="*,Auto,*"
       >
-      <views:ImageView
+      <views:FotoInfoListView
         Grid.Row="0"
-        DataContext="{Binding ImageVM}"
+        DockPanel.Dock="Bottom"
+        DataContext="{Binding FotoInfoListVM}"
         />
       <GridSplitter 
         Grid.Row="1"
@@ -40,10 +41,9 @@
         Background="Green" 
         Height="3"       
         />
-      <views:FotoInfoListView
+      <views:ImageView
         Grid.Row="2"
-        DockPanel.Dock="Bottom"
-        DataContext="{Binding FotoInfoListVM}"
+        DataContext="{Binding ImageVM}"
         />
     </Grid>
   </Grid>
