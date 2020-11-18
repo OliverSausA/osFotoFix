@@ -8,7 +8,9 @@ namespace osFotoFix.ViewModels
   public class ImageViewModel : ViewModelBase
   {
 
-    public ImageViewModel() {
+    public ImageViewModel( SettingsViewModel UserSettingsVM ) {
+      this.UserSettingsVM = UserSettingsVM;
+
       UndoImageCmd = ReactiveCommand.Create( OnUndoImage );
       NextImageCmd = ReactiveCommand.Create( OnNextImage );
       PrevImageCmd = ReactiveCommand.Create( OnPrevImage );
@@ -18,6 +20,8 @@ namespace osFotoFix.ViewModels
       MoveImageCmd = ReactiveCommand.Create( OnMoveImage );
       CopyImageCmd = ReactiveCommand.Create( OnCopyImage );
     }
+
+    public SettingsViewModel UserSettingsVM { get;set; }
 
     private FotoInfoVM foto;
     public FotoInfoVM Foto {
@@ -31,7 +35,7 @@ namespace osFotoFix.ViewModels
         UndoImageEvent();
     }
     public delegate void UndoImage();
-    public NextImage UndoImageEvent;
+    public UndoImage UndoImageEvent;
 
     public ReactiveCommand<Unit, Unit> NextImageCmd { get; }
     public void OnNextImage() {
@@ -47,7 +51,7 @@ namespace osFotoFix.ViewModels
         PrevImageEvent();
     }
     public delegate void PrevImage();
-    public NextImage PrevImageEvent;
+    public PrevImage PrevImageEvent;
 
     public ReactiveCommand<Unit, Unit> TrashImageCmd { get; }
     public void OnTrashImage() {
@@ -55,7 +59,7 @@ namespace osFotoFix.ViewModels
         TrashImageEvent();
     }
     public delegate void TrashImage();
-    public NextImage TrashImageEvent;
+    public TrashImage TrashImageEvent;
 
     public ReactiveCommand<Unit, Unit> DelImageCmd { get; }
     public void OnDelImage() {
@@ -63,7 +67,7 @@ namespace osFotoFix.ViewModels
         DelImageEvent();
     }
     public delegate void DelImage();
-    public NextImage DelImageEvent;
+    public DelImage DelImageEvent;
 
     public ReactiveCommand<Unit, Unit> MoveImageCmd { get; }
     public void OnMoveImage() {
@@ -71,7 +75,7 @@ namespace osFotoFix.ViewModels
         MoveImageEvent();
     }
     public delegate void MoveImage();
-    public NextImage MoveImageEvent;
+    public MoveImage MoveImageEvent;
 
     public ReactiveCommand<Unit, Unit> CopyImageCmd { get; }
     public void OnCopyImage() {
@@ -79,7 +83,7 @@ namespace osFotoFix.ViewModels
         CopyImageEvent();
     }
     public delegate void CopyImage();
-    public NextImage CopyImageEvent;
+    public CopyImage CopyImageEvent;
 
   }
 }

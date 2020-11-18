@@ -26,13 +26,56 @@
         Orientation="Horizontal"
         HorizontalAlignment="Center"
         >
-        <Button Width="50" Height="30" Content="U" Command="{Binding UndoImageCmd}" />
-        <Button Width="50" Height="30" Content="Z" Command="{Binding PrevImageCmd}" />
-        <Button Width="50" Height="30" Content="V" Command="{Binding NextImageCmd}" />
-        <Button Width="50" Height="30" Content="T" Command="{Binding TrashImageCmd}" />
-        <Button Width="50" Height="30" Content="X" Command="{Binding DelImageCmd}"  />
-        <Button Width="50" Height="30" Content="M" Command="{Binding MoveImageCmd}" />
-        <Button Width="50" Height="30" Content="C" Command="{Binding CopyImageCmd}" />
+        <Button
+          Width="50"
+          Height="30"
+          Content="U"
+          Command="{Binding UndoImageCmd}"
+          />
+        <Button
+          Width="50"
+          Height="30"
+          Content="Z"
+          Command="{Binding PrevImageCmd}"
+          />
+        <Button
+          Width="50"
+          Height="30"
+          Content="V"
+          Command="{Binding NextImageCmd}"
+          />
+        <Button
+          Width="50"
+          Height="30"
+          Content="T"
+          IsEnabled="{Binding UserSettingsVM.TrashCmdActive}"
+          IsVisible="{Binding UserSettingsVM.TrashCmdActive}"
+          Command="{Binding TrashImageCmd}"
+          />
+        <Button
+          Width="50"
+          Height="30"
+          Content="X"
+          IsEnabled="{Binding UserSettingsVM.DelCmdActive}"
+          IsVisible="{Binding UserSettingsVM.DelCmdActive}"
+          Command="{Binding DelImageCmd}"
+          />
+        <Button
+          Width="50"
+          Height="30"
+          Content="M"
+          IsEnabled="{Binding UserSettingsVM.MoveCmdActive}"
+          IsVisible="{Binding UserSettingsVM.MoveCmdActive}"
+          Command="{Binding MoveImageCmd}"
+          />
+        <Button
+          Width="50"
+          Height="30"
+          Content="C"
+          IsEnabled="{Binding UserSettingsVM.CopyCmdActive}"
+          IsVisible="{Binding UserSettingsVM.CopyCmdActive}"
+          Command="{Binding CopyImageCmd}"
+          />
       </StackPanel>
     </Grid>
   </Border>

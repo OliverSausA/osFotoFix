@@ -11,10 +11,10 @@ namespace osFotoFix.ViewModels
       public MainWindowViewModel()
       {
         SettingsVM = new SettingsViewModel();
-        ImageVM = new ImageViewModel();
+        ImageVM = new ImageViewModel( SettingsVM );
         FotoInfoDetailVM = new FotoInfoDetailViewModel();
-        FotoInfoListVM = new FotoInfoListViewModel( ImageVM, FotoInfoDetailVM );
-        FotoInfoListVM.Update( SettingsVM.Settings );
+        FotoInfoListVM = new FotoInfoListViewModel( SettingsVM, ImageVM, FotoInfoDetailVM );
+        FotoInfoListVM.Update();
       }
 
 

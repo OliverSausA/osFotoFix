@@ -24,11 +24,44 @@
         <ContentControl VerticalAlignment="Center" Margin="2" Content="Beschreibung" />
         <TextBox Width="150" Text="{Binding Description}" />
         <Button Width="50" Height="30" Content="U" Command="{Binding UndoAllCmd}"  />
-        <Button Width="50" Height="30" Content="T" Command="{Binding TrashAllCmd}"  />
-        <Button Width="50" Height="30" Content="X" Command="{Binding DelAllCmd}"  />
-        <Button Width="50" Height="30" Content="M" Command="{Binding MoveAllCmd}" />
-        <Button Width="50" Height="30" Content="C" Command="{Binding CopyAllCmd}" />
-        <Button Width="50" Height="30" Content="DoIt" Command="{Binding DoItCmd}" />
+        <Button 
+          Width="50" 
+          Height="30" 
+          Content="T" 
+          IsEnabled="{Binding UserSettingsVM.TrashCmdActive}"
+          IsVisible="{Binding UserSettingsVM.TrashCmdActive}"
+          Command="{Binding TrashAllCmd}"
+          />
+        <Button 
+          Width="50"
+          Height="30"
+          Content="X"
+          IsEnabled="{Binding UserSettingsVM.DelCmdActive}"
+          IsVisible="{Binding UserSettingsVM.DelCmdActive}"
+          Command="{Binding DelAllCmd}"
+          />
+        <Button
+          Width="50"
+          Height="30"
+          Content="M"
+          IsEnabled="{Binding UserSettingsVM.MoveCmdActive}"
+          IsVisible="{Binding UserSettingsVM.MoveCmdActive}"
+          Command="{Binding MoveAllCmd}"
+          />
+        <Button
+          Width="50"
+          Height="30"
+          Content="C"
+          IsEnabled="{Binding UserSettingsVM.CopyCmdActive}"
+          IsVisible="{Binding UserSettingsVM.CopyCmdActive}"
+          Command="{Binding CopyAllCmd}"
+          />
+        <Button
+          Width="50"
+          Height="30"
+          Content="DoIt"
+          Command="{Binding DoItCmd}"
+          />
       </StackPanel>
       <DataGrid
         Name="FotoList"

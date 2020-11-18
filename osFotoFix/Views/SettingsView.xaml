@@ -57,6 +57,32 @@
             Content="..." />
         </Grid>
       </Expander>
+      <Expander 
+        Margin="0,50,0,0"
+        Header="Knöpfe"
+        IsExpanded="True"
+        >
+        <Grid 
+          ColumnDefinitions="Auto"
+          RowDefinitions="30,30,30,30"
+          >
+          <CheckBox
+            Content="Papierkorb"
+            IsChecked="{Binding TrashCmdActive, Mode=TwoWay}" />
+          <CheckBox
+            Grid.Row="1"
+            Content="Löschen"
+            IsChecked="{Binding DelCmdActive}" />
+          <CheckBox 
+            Grid.Row="2"
+            Content="Verschieben"
+            IsChecked="{Binding MoveCmdActive}" />
+          <CheckBox 
+            Grid.Row="3"
+            Content="Kopieren"
+            IsChecked="{Binding CopyCmdActive}" />
+        </Grid> 
+      </Expander>
     </StackPanel>
   </Border>
 </UserControl>
