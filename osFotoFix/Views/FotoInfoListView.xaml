@@ -19,11 +19,29 @@
         Orientation="Horizontal"
         HorizontalAlignment="Center"
         >
-        <ContentControl VerticalAlignment="Center" Margin="2" Content="Event" />
-        <TextBox Width="150" Text="{Binding EventName}" />
-        <ContentControl VerticalAlignment="Center" Margin="2" Content="Beschreibung" />
-        <TextBox Width="150" Text="{Binding Description}" />
-        <Button Width="50" Height="30" Content="U" Command="{Binding UndoAllCmd}"  />
+        <ContentControl
+          VerticalAlignment="Center"
+          Margin="2"
+          Content="Event"
+          />
+        <TextBox
+          Width="150"
+          Text="{Binding EventName}"
+          />
+        <ContentControl
+          VerticalAlignment="Center"
+          Margin="2" Content="Beschreibung"
+          />
+        <TextBox
+          Width="150"
+          Text="{Binding Description}"
+          />
+        <Button
+          Width="50"
+          Height="30"
+          Content="U"
+          Command="{Binding UndoAllCmd}"
+          />
         <Button 
           Width="50" 
           Height="30" 
@@ -31,7 +49,9 @@
           IsEnabled="{Binding UserSettingsVM.TrashCmdActive}"
           IsVisible="{Binding UserSettingsVM.TrashCmdActive}"
           Command="{Binding TrashAllCmd}"
-          />
+          >
+	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.Add}" />
+        </Button>
         <Button 
           Width="50"
           Height="30"

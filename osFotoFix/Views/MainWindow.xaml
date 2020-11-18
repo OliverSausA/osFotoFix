@@ -14,14 +14,15 @@
     ColumnDefinitions="300,Auto,*"
     >
     <views:SettingsView 
+      Margin="5,5,0,5"
       Grid.Column="0"
       DockPanel.Dock="Left"
       DataContext="{Binding SettingsVM}"
       />
     <GridSplitter 
       Grid.Column="1"
-      HorizontalAlignment="Stretch"
-      VerticalAlignment="Center"
+      VerticalAlignment="Stretch"
+      HorizontalAlignment="Center"
       Background="Green" 
       Width="3"       
       />
@@ -30,6 +31,7 @@
       RowDefinitions="*,Auto,*"
       >
       <views:FotoInfoListView
+        Margin="0,5,5,0"
         Grid.Row="0"
         DockPanel.Dock="Bottom"
         DataContext="{Binding FotoInfoListVM}"
@@ -42,6 +44,7 @@
         Height="3"       
         />
       <views:ImageView
+        Margin="0,0,5,5"
         Grid.Row="2"
         DataContext="{Binding ImageVM}"
         />
