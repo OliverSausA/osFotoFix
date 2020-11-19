@@ -29,53 +29,67 @@
         <Button
           Width="50"
           Height="30"
-          Content="U"
           Command="{Binding UndoImageCmd}"
-          />
+          ToolTip.Tip="Rückgängig"
+          >
+	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.Undo}" />
+        </Button>
         <Button
           Width="50"
           Height="30"
-          Content="Z"
           Command="{Binding PrevImageCmd}"
-          />
+          ToolTip.Tip="Das Bild davor"
+          >
+	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.ArrowUp}" />
+        </Button>
         <Button
           Width="50"
           Height="30"
-          Content="V"
+          ToolTip.Tip="Das nächste Bild"
           Command="{Binding NextImageCmd}"
-          />
+          >
+	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.ArrowDown}" />
+        </Button>
         <Button
           Width="50"
           Height="30"
-          Content="T"
+          ToolTip.Tip="Ab in den Papierkorb"
           IsEnabled="{Binding UserSettingsVM.TrashCmdActive}"
           IsVisible="{Binding UserSettingsVM.TrashCmdActive}"
           Command="{Binding TrashImageCmd}"
-          />
+          >
+	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.Noentry}" />
+        </Button>
         <Button
           Width="50"
           Height="30"
-          Content="X"
+          ToolTip.Tip="Bild löschen, weg isses."
           IsEnabled="{Binding UserSettingsVM.DelCmdActive}"
           IsVisible="{Binding UserSettingsVM.DelCmdActive}"
           Command="{Binding DelImageCmd}"
-          />
+          >
+	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.Delete}" />
+        </Button>
         <Button
           Width="50"
           Height="30"
-          Content="M"
+          ToolTip.Tip="Ins Ziel verschieben"
           IsEnabled="{Binding UserSettingsVM.MoveCmdActive}"
           IsVisible="{Binding UserSettingsVM.MoveCmdActive}"
           Command="{Binding MoveImageCmd}"
-          />
+          >
+	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.PageMinus}" />
+        </Button>
         <Button
           Width="50"
           Height="30"
-          Content="C"
+          ToolTip.Tip="Ins Ziel kopieren"
           IsEnabled="{Binding UserSettingsVM.CopyCmdActive}"
           IsVisible="{Binding UserSettingsVM.CopyCmdActive}"
           Command="{Binding CopyImageCmd}"
-          />
+          >
+	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.PageCopy}" />
+        </Button>
       </StackPanel>
     </Grid>
   </Border>

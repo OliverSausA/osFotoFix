@@ -27,6 +27,7 @@
         <TextBox
           Width="150"
           Text="{Binding EventName}"
+          Watermark="Event"
           />
         <ContentControl
           VerticalAlignment="Center"
@@ -35,53 +36,69 @@
         <TextBox
           Width="150"
           Text="{Binding Description}"
+          Watermark="Beschreibung"
+          ToolTip.Tip="Wo kommen zum Beispiel die Bilder her?"
           />
         <Button
           Width="50"
           Height="30"
           Content="U"
           Command="{Binding UndoAllCmd}"
-          />
+          ToolTip.Tip="Rückgängig"
+          >
+	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.Undo}" />
+        </Button>
         <Button 
           Width="50" 
           Height="30" 
-          Content="T" 
           IsEnabled="{Binding UserSettingsVM.TrashCmdActive}"
           IsVisible="{Binding UserSettingsVM.TrashCmdActive}"
           Command="{Binding TrashAllCmd}"
+          ToolTip.Tip="Ab in den Papierkorb"
           >
-	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.Add}" />
+	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.Noentry}" />
         </Button>
         <Button 
           Width="50"
           Height="30"
-          Content="X"
           IsEnabled="{Binding UserSettingsVM.DelCmdActive}"
           IsVisible="{Binding UserSettingsVM.DelCmdActive}"
           Command="{Binding DelAllCmd}"
-          />
+          ToolTip.Tip="Ich lösche alle Bilder. Soll ich?"
+          >
+	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.Delete}" />
+        </Button>
         <Button
           Width="50"
           Height="30"
           Content="M"
           IsEnabled="{Binding UserSettingsVM.MoveCmdActive}"
           IsVisible="{Binding UserSettingsVM.MoveCmdActive}"
+          ToolTip.Tip="Alle Bilder ins Ziel verschieben"
           Command="{Binding MoveAllCmd}"
-          />
+          >
+	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.PageMinus}" />
+        </Button>
         <Button
           Width="50"
           Height="30"
           Content="C"
           IsEnabled="{Binding UserSettingsVM.CopyCmdActive}"
           IsVisible="{Binding UserSettingsVM.CopyCmdActive}"
+          ToolTip.Tip="Alle Bilder ins Ziel kopieren"
           Command="{Binding CopyAllCmd}"
-          />
+          >
+	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.PageCopy}" />
+        </Button>
         <Button
           Width="50"
           Height="30"
           Content="DoIt"
           Command="{Binding DoItCmd}"
-          />
+          ToolTip.Tip="Alle Bilder verarbeiten"
+          >
+	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.Check}" />
+        </Button>
       </StackPanel>
       <DataGrid
         Name="FotoList"
