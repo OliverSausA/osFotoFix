@@ -28,7 +28,11 @@ namespace osFotoFix.ViewModels
     public FotoInfo Foto {get;set;}
 
     public int Index {get;set;}
-    public string Comment {get;set;}
+    private string comment;
+    public string Comment {
+      get { return comment; }
+      set { this.RaiseAndSetIfChanged( ref comment, value ); }
+    }
 
     private string newFileLocation;
     public string NewFileLocation {

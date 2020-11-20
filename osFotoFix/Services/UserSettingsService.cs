@@ -27,11 +27,10 @@ namespace osFotoFix.Services
             userSettings = (UserSettings) serializier.Deserialize( reader );
           }
         }
+        // Set to default values
         else
         {
-          userSettings.Quelle = "/home/oliver/Bilder/import";
-          userSettings.Ziel = "/home/oliver/Bilder/FotoSammlung";
-          userSettings.Papierkorb = "/home/oliver/Bilder/papierkorb";
+
         }
       }
       catch

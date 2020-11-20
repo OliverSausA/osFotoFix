@@ -227,7 +227,12 @@ namespace osFotoFix.ViewModels
     {
       try
       {
-        if( foto.Action == FotoInfoVM.EAction.copy ) {
+        if( !foto.Foto.IsExifValid )
+        {
+          foto.Comment = "Exif Infomation ist ungültig!";
+          foto.Action = FotoInfoVM.EAction.failed;
+        }
+        else if( foto.Action == FotoInfoVM.EAction.copy ) {
           File.Copy( foto.Foto.File.FullName, 
                     Path.Combine( UserSettingsVM.Target,
                                   foto.NewFileName ) );
