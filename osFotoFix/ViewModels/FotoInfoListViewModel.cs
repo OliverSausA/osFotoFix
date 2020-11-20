@@ -233,22 +233,31 @@ namespace osFotoFix.ViewModels
           foto.Action = FotoInfoVM.EAction.failed;
         }
         else if( foto.Action == FotoInfoVM.EAction.copy ) {
-          File.Copy( foto.Foto.File.FullName, 
-                    Path.Combine( UserSettingsVM.Target,
-                                  foto.NewFileName ) );
+          var f = Copy( foto.Foto.File.FullName,
+                        UserSettingsVM.Target,
+                        foto.NewFileLocation,
+                        foto.NewFileName );
+          AdjustTimeStamp( f, foto.Foto.Created );
           foto.Action = FotoInfoVM.EAction.done;
+          foto.NewFileName = f;
         }
         else if( foto.Action == FotoInfoVM.EAction.move ) {
-          File.Move( foto.Foto.File.FullName, 
-                    Path.Combine( UserSettingsVM.Target,
-                                  foto.NewFileName ) );
+          var f = Move( foto.Foto.File.FullName,
+                        UserSettingsVM.Target,
+                        foto.NewFileLocation,
+                        foto.NewFileName );
+          AdjustTimeStamp( f, foto.Foto.Created );
           foto.Action = FotoInfoVM.EAction.done;
+          foto.NewFileName = f;
         }
         else if( foto.Action == FotoInfoVM.EAction.trash ) {
-          File.Move( foto.Foto.File.FullName, 
-                    Path.Combine( UserSettingsVM.Trash,
-                                  foto.NewFileName ) );
+          var f = Move( foto.Foto.File.FullName,
+                        UserSettingsVM.Trash,
+                        foto.NewFileLocation,
+                        foto.NewFileName );
+          AdjustTimeStamp( f, foto.Foto.Created );
           foto.Action = FotoInfoVM.EAction.done;
+          foto.NewFileName = f;
         }
         else if( foto.Action == FotoInfoVM.EAction.delete ) {
           File.Delete( foto.Foto.File.FullName );
@@ -261,6 +270,40 @@ namespace osFotoFix.ViewModels
         foto.Comment = e.Message;
       }
 
+    }
+
+    private string Copy( string source, string target, string targetDir, string targetFile )
+    {
+      target = Prepare( source, target, targetDir, targetFile );
+      File.Copy( source, target );
+      return target;
+    }
+    private string Move( string source, string target, string targetDir, string targetFile )
+    {
+      target = Prepare( source, target, targetDir, targetFile );
+      File.Move( source, target );
+      return target;
+    }
+    private string Prepare( string source, string target, string targetDir, string targetFile )
+    {
+      target = Path.Combine( target, targetDir );
+      var dir = new DirectoryInfo( target );
+      dir.Create();
+      target = Path.Combine( target, targetFile );
+      var file = new FileInfo( target );
+      int idx = 0;
+      while( file.Exists )
+      {
+        var next = target.Replace( file.Extension, string.Format("_{0}{1}", ++idx, file.Extension ) );
+        file = new FileInfo( next );
+      }
+      return file.FullName;
+    }
+    private void AdjustTimeStamp( string file, DateTime timestamp )
+    {
+      var f = new FileInfo( file );
+      if( f.Exists && f.CreationTime != timestamp )
+        File.SetCreationTime( file, timestamp );
     }
   }
 }

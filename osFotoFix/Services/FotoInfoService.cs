@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using ExifLib;
 
@@ -10,6 +11,7 @@ namespace osFotoFix.Services
 
   public class FotoInfoService
   {
+    const string ext = ".jpg.bmp";
     public FotoInfoService()
     {
 
@@ -25,14 +27,17 @@ namespace osFotoFix.Services
     private void ReadFotoInfos( List<FotoInfo> infos, DirectoryInfo dir )
     {
       if(!dir.Exists) return;
+      if( ( dir.Attributes & FileAttributes.Hidden ) != 0 ) return;
         
-      foreach( var d in dir.GetDirectories() )
+      //foreach( var d in dir.GetDirectories() )
+      foreach( var d in dir.EnumerateDirectories().OrderBy( d => d.Name ) )
         ReadFotoInfos(infos, d);
 
-      foreach( var f in dir.GetFiles() ) {
-        infos.Add( CreateFotoInfo(f) );
+      //foreach( var f in dir.GetFiles() ) {
+      foreach( var f in dir.EnumerateFiles().OrderBy( f => f.Name ) ) {
+        if( ext.IndexOf(f.Extension, 0, StringComparison.InvariantCultureIgnoreCase ) >= 0 )
+          infos.Add( CreateFotoInfo(f) );
       }
-      
     }
 
     private FotoInfo CreateFotoInfo( FileInfo file )
