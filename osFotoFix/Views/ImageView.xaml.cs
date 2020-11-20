@@ -29,10 +29,15 @@ namespace osFotoFix.Views
       if( value == null)
         return null;
       
-      if( value is string filename && targetType == typeof(IBitmap))
+      try 
       {
-        var b = new Bitmap( filename );
-        return b;
+        if( value is string filename && targetType == typeof(IBitmap))
+        {
+          var b = new Bitmap( filename );
+          return b;
+        }
+      }
+      catch {
       }
       return null;
     }

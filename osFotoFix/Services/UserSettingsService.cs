@@ -45,7 +45,11 @@ namespace osFotoFix.Services
       try
       {
         string filePath = Path.Combine( getUserHomePath(), CONF );
-        using ( var writer = XmlWriter.Create( filePath ) )
+        var writerSettings = new XmlWriterSettings() {
+          Indent = true,
+          NewLineOnAttributes = true
+        };
+        using ( var writer = XmlWriter.Create( filePath, writerSettings ) )
         {
           XmlSerializer serializier = new XmlSerializer( typeof( UserSettings ) );
           serializier.Serialize(writer, userSettings);
@@ -60,7 +64,7 @@ namespace osFotoFix.Services
     private string getUserHomePath()
     {
       return Environment.GetFolderPath(
-                Environment.SpecialFolder.CommonApplicationData);
+                Environment.SpecialFolder.ApplicationData);
     }
 
   }

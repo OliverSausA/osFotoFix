@@ -25,8 +25,12 @@ namespace osFotoFix.Views
         }
         private void OnCellChanged( object sender, EventArgs e )
         {
-          var vm = (FotoInfoListViewModel) this.DataContext;
-          FotoList.ScrollIntoView( vm.FotoSelected, null );
+          try {
+            var vm = (FotoInfoListViewModel) this.DataContext;
+            FotoList.ScrollIntoView( vm.FotoSelected, null );
+          }
+          catch {
+          }
         }
     }
 }

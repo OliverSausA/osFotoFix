@@ -27,21 +27,24 @@
             Content="Quelle" />
           <TextBox
             Grid.Row="1"
-            Text="{Binding Settings.Quelle}"
+            Text="{Binding Source}"
             />
           <Button
             Grid.Row="1"
             Grid.Column="1"
-            Content="..." />
+            Content="..." 
+            Command="{Binding SelectSourceCmd}"
+            />
           <ContentControl
             Grid.Row="2"
             Content="Ziel" />
           <TextBox
             Grid.Row="3"
-            Text="{Binding Settings.Ziel}"
+            Text="{Binding Target}"
             />
           <Button
             Grid.Row="3"
+            Command="{Binding SelectTargetCmd}"
             Grid.Column="1"
             Content="..." />
           <ContentControl
@@ -49,12 +52,14 @@
             Content="Papierkorb" />
           <TextBox
             Grid.Row="5"
-            Text="{Binding Settings.Papierkorb}"
+            Text="{Binding Trash}"
             />
           <Button
             Grid.Row="5"
             Grid.Column="1"
-            Content="..." />
+            Content="..."
+            Command="{Binding SelectTrashCmd}"
+            />
         </Grid>
       </Expander>
       <Expander 

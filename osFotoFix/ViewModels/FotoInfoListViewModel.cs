@@ -39,9 +39,11 @@ namespace osFotoFix.ViewModels
       DoItCmd = ReactiveCommand.Create( OnDoIt );
       
       this.FotoInfoDetailVM = FotoInfoDetailVM;
-      FotoInfoList = new ObservableCollection<FotoInfoVM>();
-    }
 
+      UserSettingsVM.NewSourceSelectedEvent += OnNewSourceSelected;
+      OnNewSourceSelected( UserSettingsVM.Source );
+    }
+    
     public SettingsViewModel UserSettingsVM { get;set; }
     public ObservableCollection<FotoInfoVM> FotoInfoList { get; set; }
 
@@ -59,10 +61,10 @@ namespace osFotoFix.ViewModels
       } 
     }
 
-    public void Update()
+    private void OnNewSourceSelected( string source ) 
     {
       FotoInfoList = new ObservableCollection<FotoInfoVM>();
-      var baseDir = new DirectoryInfo( UserSettingsVM.Settings.Quelle );
+      var baseDir = new DirectoryInfo( UserSettingsVM.Source );
       var fotos = service.GetFotoInfos( baseDir );
 
       int index = 0;
@@ -70,8 +72,15 @@ namespace osFotoFix.ViewModels
       {
         FotoInfoList.Add( new FotoInfoVM( foto, index++ ) );
       }
+      this.RaisePropertyChanged( nameof( FotoInfoList ) );
+      SelectFirstFoto();
     }
 
+    protected void SelectFirstFoto()
+    {
+      if( FotoInfoList.Count > 0 )
+        FotoSelected = FotoInfoList[0];
+    }
     protected void SelectNextFoto()
     {
       int idx = 0;
@@ -220,19 +229,19 @@ namespace osFotoFix.ViewModels
       {
         if( foto.Action == FotoInfoVM.EAction.copy ) {
           File.Copy( foto.Foto.File.FullName, 
-                    Path.Combine( UserSettingsVM.Settings.Ziel,
+                    Path.Combine( UserSettingsVM.Target,
                                   foto.NewFileName ) );
           foto.Action = FotoInfoVM.EAction.done;
         }
         else if( foto.Action == FotoInfoVM.EAction.move ) {
           File.Move( foto.Foto.File.FullName, 
-                    Path.Combine( UserSettingsVM.Settings.Ziel,
+                    Path.Combine( UserSettingsVM.Target,
                                   foto.NewFileName ) );
           foto.Action = FotoInfoVM.EAction.done;
         }
         else if( foto.Action == FotoInfoVM.EAction.trash ) {
           File.Move( foto.Foto.File.FullName, 
-                    Path.Combine( UserSettingsVM.Settings.Papierkorb,
+                    Path.Combine( UserSettingsVM.Trash,
                                   foto.NewFileName ) );
           foto.Action = FotoInfoVM.EAction.done;
         }
