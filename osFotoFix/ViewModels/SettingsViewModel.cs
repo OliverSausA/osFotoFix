@@ -115,6 +115,19 @@ namespace osFotoFix.ViewModels
       set { this.RaiseAndSetIfChanged( ref copyCmdActive, value ); }
     }
 
+    private string title;
+    public string Title {
+      get { return title; }
+      set { this.RaiseAndSetIfChanged( ref title, value ); }
+    }
+
+    private string description;
+    public string Description {
+      get { return description; }
+      set { this.RaiseAndSetIfChanged( ref description, value ); }
+    }
+
+
     private void Read()
     {
       service = new UserSettingsService();
@@ -127,6 +140,9 @@ namespace osFotoFix.ViewModels
       DelCmdActive   = settings.DelCmdActive;
       MoveCmdActive  = settings.MoveCmdActive;
       CopyCmdActive  = settings.CopyCmdActive;
+
+      Description = settings.Description;
+      Title = settings.Title;
     }
     private void Write()
     {
@@ -140,6 +156,9 @@ namespace osFotoFix.ViewModels
       settings.DelCmdActive   = DelCmdActive;
       settings.MoveCmdActive  = MoveCmdActive;
       settings.CopyCmdActive  = CopyCmdActive;
+
+      settings.Title = Title;
+      settings.Description = Description;
 
       service.SaveUserSettings( settings );
     }

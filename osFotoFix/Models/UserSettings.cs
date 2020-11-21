@@ -28,5 +28,10 @@ namespace osFotoFix.Models
     public bool MoveCmdActive {get;set;}
     [XmlAttribute]
     public bool CopyCmdActive {get;set;}
+
+    [XmlAttribute]
+    public string Title {get;set;}
+    [XmlAttribute]
+    public string Description {get;set;}
   }
 }

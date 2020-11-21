@@ -26,8 +26,8 @@
           />
         <TextBox
           Width="150"
-          Text="{Binding EventName}"
-          Watermark="Event"
+          Text="{Binding UserSettingsVM.Title}"
+          Watermark="Title"
           />
         <ContentControl
           VerticalAlignment="Center"
@@ -35,7 +35,7 @@
           />
         <TextBox
           Width="150"
-          Text="{Binding Description}"
+          Text="{Binding UserSettingsVM.Description}"
           Watermark="Beschreibung"
           ToolTip.Tip="Wo kommen zum Beispiel die Bilder her?"
           />

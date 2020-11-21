@@ -47,8 +47,8 @@ namespace osFotoFix.ViewModels
     public SettingsViewModel UserSettingsVM { get;set; }
     public ObservableCollection<FotoInfoVM> FotoInfoList { get; set; }
 
-    public string EventName {get;set;}
-    public string Description {get;set;}
+    //public string EventName {get;set;}
+    //public string Description {get;set;}
 
     private FotoInfoVM fotoSelected;
     public FotoInfoVM FotoSelected { 
@@ -173,8 +173,8 @@ namespace osFotoFix.ViewModels
       if( foto == null ) return;
       if( foto.Action == FotoInfoVM.EAction.done ) return;
       foto.Action = FotoInfoVM.EAction.copy;
-      foto.NewFileLocation = CreateNewFileLocation( foto.Foto, EventName );
-      foto.NewFileName = CreateNewFileName( foto.Foto, Description );
+      foto.NewFileLocation = CreateNewFileLocation( foto.Foto, UserSettingsVM.Title );
+      foto.NewFileName = CreateNewFileName( foto.Foto, UserSettingsVM.Description );
     }
 
     protected void MoveFoto()
@@ -187,8 +187,8 @@ namespace osFotoFix.ViewModels
       if( foto == null ) return;
       if( foto.Action == FotoInfoVM.EAction.done ) return;
       foto.Action = FotoInfoVM.EAction.move;
-      foto.NewFileLocation = CreateNewFileLocation( foto.Foto, EventName );
-      foto.NewFileName = CreateNewFileName( foto.Foto, Description );
+      foto.NewFileLocation = CreateNewFileLocation( foto.Foto, UserSettingsVM.Title );
+      foto.NewFileName = CreateNewFileName( foto.Foto, UserSettingsVM.Description );
     }
 
     protected void TrashFoto()
@@ -201,8 +201,8 @@ namespace osFotoFix.ViewModels
       if( foto == null ) return;
       if( foto.Action == FotoInfoVM.EAction.done ) return;
       foto.Action = FotoInfoVM.EAction.trash;
-      foto.NewFileLocation = CreateNewFileLocation( foto.Foto, EventName );
-      foto.NewFileName = CreateNewFileName( foto.Foto, Description );
+      foto.NewFileLocation = CreateNewFileLocation( foto.Foto, UserSettingsVM.Title );
+      foto.NewFileName = CreateNewFileName( foto.Foto, UserSettingsVM.Description );
     }
 
     protected string CreateNewFileName( FotoInfo foto, string description )
@@ -213,13 +213,13 @@ namespace osFotoFix.ViewModels
                foto.File.Extension );
     }
 
-    protected string CreateNewFileLocation( FotoInfo foto, string eventName )
+    protected string CreateNewFileLocation( FotoInfo foto, string title )
     {
       string path = Path.Combine( 
               foto.Created.ToString("yyyy"), 
               foto.Created.ToString("yyyy_MM") );
-      if( !string.IsNullOrEmpty( eventName ) )
-        path += "-" + eventName;
+      if( !string.IsNullOrEmpty( title ) )
+        path += "-" + title;
       return path;
     }
      
