@@ -130,7 +130,11 @@
         />
         <DataGridTextColumn 
           Header="Exif"
-          Binding="{Binding Foto.IsExifValid}"
+          Binding="{Binding Foto.TypeOfCreationDate}"
+          />
+        <DataGridTextColumn
+          Header="Erstelldatum"
+          Binding="{Binding Foto.Created}"
           />
         <DataGridTextColumn 
           Header="Comment"

@@ -227,7 +227,7 @@ namespace osFotoFix.ViewModels
     {
       try
       {
-        if( !foto.Foto.IsExifValid )
+        if( (foto.Foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Filesystem) )
         {
           foto.Comment = "Exif Infomation ist ungültig!";
           foto.Action = FotoInfoVM.EAction.failed;

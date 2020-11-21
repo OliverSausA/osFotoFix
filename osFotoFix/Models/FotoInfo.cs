@@ -6,27 +6,25 @@ namespace osFotoFix.Models
   using ViewModels;
   public class FotoInfo {
 
-    public FotoInfo( FileInfo file, DateTime created, bool isExifValid ) {
+    public enum ETypeOfCreationDate
+    {
+      Exif,
+      Filename,
+      Filesystem 
+    }
+
+    public FotoInfo( FileInfo file, DateTime created, ETypeOfCreationDate typeOfCreationDate) {
       File = file;
       Created = created;
-      IsExifValid = isExifValid;
+      TypeOfCreationDate = typeOfCreationDate;
     }
 
     public FileInfo File {get;set;}
 
     public DateTime Created {get;set;}
 
-    public bool IsExifValid {get;set;}
+    public ETypeOfCreationDate TypeOfCreationDate {get;set;}
 
-    public override string ToString()
-    {
-      return string.Format( "{0} | {1} | {2} | {3}",
-        IsExifValid, 
-        Created.ToString("yyyy_MM"), 
-        Created.ToString("yyyyMMdd_hhmmss"), 
-        File.Name
-        );
-    }
   }
 
 }
