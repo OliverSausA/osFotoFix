@@ -117,12 +117,12 @@
           Binding="{Binding Foto.File.Name}"
         />
         <DataGridTextColumn 
-          Header="Ziel"
-          Binding="{Binding NewFileLocation}"
+          Header="Title"
+          Binding="{Binding Title}"
         />
         <DataGridTextColumn 
-          Header="Datei"
-          Binding="{Binding NewFileName}"
+          Header="Description"
+          Binding="{Binding Description}"
         />
         <DataGridTextColumn
           Header="Aktion"
@@ -133,6 +133,10 @@
           Binding="{Binding Foto.TypeOfCreationDate}"
           />
         <DataGridTextColumn
+          Header="Doppelt"
+          Binding="{Binding FileExistsOnTarget}"
+          />
+        <DataGridTextColumn
           Header="Erstelldatum"
           Binding="{Binding Foto.Created}"
           />
@@ -140,6 +144,10 @@
           Header="Comment"
           Binding="{Binding Comment}"
           />
+        <DataGridTextColumn
+          Header="Datei"
+          Binding="{Binding NewFileName}"
+        />
         </DataGrid.Columns>
       </DataGrid>
     </Grid>

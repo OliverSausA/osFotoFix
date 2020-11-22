@@ -25,6 +25,13 @@ namespace osFotoFix.Models
 
     public ETypeOfCreationDate TypeOfCreationDate {get;set;}
 
+    public string Target {get;set;}
+    public string Title {get;set;}
+    public string Description {get;set;}
+
+    public string NewFileName {get;set;}
+    public bool FileExistsOnTarget {get;set;}
+
   }
 
 }

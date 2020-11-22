@@ -145,8 +145,12 @@ namespace osFotoFix.ViewModels
       if( foto == null ) return;
       if( foto.Action == FotoInfoVM.EAction.done ) return;
       foto.Action = FotoInfoVM.EAction.ignore;
-      foto.NewFileLocation = "";
+      foto.Target = "";
+      foto.Title = "";
+      foto.Description = "";
       foto.NewFileName = "";
+      foto.FileExistsOnTarget = false;
+      foto.UpdateView();
     }
 
     protected void DelFoto()
@@ -158,9 +162,8 @@ namespace osFotoFix.ViewModels
     {
       if( foto == null ) return;
       if( foto.Action == FotoInfoVM.EAction.done ) return;
+      UndoFoto( foto );
       foto.Action = FotoInfoVM.EAction.delete;
-      foto.NewFileLocation = "";
-      foto.NewFileName = "";
     }
 
     protected void CopyFoto()
@@ -173,8 +176,11 @@ namespace osFotoFix.ViewModels
       if( foto == null ) return;
       if( foto.Action == FotoInfoVM.EAction.done ) return;
       foto.Action = FotoInfoVM.EAction.copy;
-      foto.NewFileLocation = CreateNewFileLocation( foto.Foto, UserSettingsVM.Title );
-      foto.NewFileName = CreateNewFileName( foto.Foto, UserSettingsVM.Description );
+      foto.Target = UserSettingsVM.Target;
+      foto.Title = UserSettingsVM.Title;
+      foto.Description = UserSettingsVM.Description;
+      foto.NewFileName = service.GetNewFileName( foto.Foto );
+      foto.UpdateView();
     }
 
     protected void MoveFoto()
@@ -187,8 +193,11 @@ namespace osFotoFix.ViewModels
       if( foto == null ) return;
       if( foto.Action == FotoInfoVM.EAction.done ) return;
       foto.Action = FotoInfoVM.EAction.move;
-      foto.NewFileLocation = CreateNewFileLocation( foto.Foto, UserSettingsVM.Title );
-      foto.NewFileName = CreateNewFileName( foto.Foto, UserSettingsVM.Description );
+      foto.Target = UserSettingsVM.Target;
+      foto.Title = UserSettingsVM.Title;
+      foto.Description = UserSettingsVM.Description;
+      foto.NewFileName = service.GetNewFileName( foto.Foto );
+      foto.UpdateView();
     }
 
     protected void TrashFoto()
@@ -201,28 +210,13 @@ namespace osFotoFix.ViewModels
       if( foto == null ) return;
       if( foto.Action == FotoInfoVM.EAction.done ) return;
       foto.Action = FotoInfoVM.EAction.trash;
-      foto.NewFileLocation = CreateNewFileLocation( foto.Foto, UserSettingsVM.Title );
-      foto.NewFileName = CreateNewFileName( foto.Foto, UserSettingsVM.Description );
+      foto.Target = UserSettingsVM.Trash;
+      foto.Title = UserSettingsVM.Title;
+      foto.Description = UserSettingsVM.Description;
+      foto.NewFileName = service.GetNewFileName( foto.Foto );
+      foto.UpdateView();
     }
 
-    protected string CreateNewFileName( FotoInfo foto, string description )
-    {
-      return string.Format("{0}_{1}{2}",
-               foto.Created.ToString("yyyyMMdd_hhmmss"), 
-               description,
-               foto.File.Extension );
-    }
-
-    protected string CreateNewFileLocation( FotoInfo foto, string title )
-    {
-      string path = Path.Combine( 
-              foto.Created.ToString("yyyy"), 
-              foto.Created.ToString("yyyy_MM") );
-      if( !string.IsNullOrEmpty( title ) )
-        path += "-" + title;
-      return path;
-    }
-     
     protected void DoIt( FotoInfoVM foto )
     {
       try
@@ -233,34 +227,19 @@ namespace osFotoFix.ViewModels
           foto.Action = FotoInfoVM.EAction.failed;
         }
         else if( foto.Action == FotoInfoVM.EAction.copy ) {
-          var f = Copy( foto.Foto.File.FullName,
-                        UserSettingsVM.Target,
-                        foto.NewFileLocation,
-                        foto.NewFileName );
-          AdjustTimeStamp( f, foto.Foto.Created );
+          foto.NewFileName = service.CopyFoto( foto.Foto );
           foto.Action = FotoInfoVM.EAction.done;
-          foto.NewFileName = f;
         }
         else if( foto.Action == FotoInfoVM.EAction.move ) {
-          var f = Move( foto.Foto.File.FullName,
-                        UserSettingsVM.Target,
-                        foto.NewFileLocation,
-                        foto.NewFileName );
-          AdjustTimeStamp( f, foto.Foto.Created );
+          foto.NewFileName = service.MoveFoto( foto.Foto );
           foto.Action = FotoInfoVM.EAction.done;
-          foto.NewFileName = f;
         }
         else if( foto.Action == FotoInfoVM.EAction.trash ) {
-          var f = Move( foto.Foto.File.FullName,
-                        UserSettingsVM.Trash,
-                        foto.NewFileLocation,
-                        foto.NewFileName );
-          AdjustTimeStamp( f, foto.Foto.Created );
+          foto.NewFileName = service.MoveFoto( foto.Foto );
           foto.Action = FotoInfoVM.EAction.done;
-          foto.NewFileName = f;
         }
         else if( foto.Action == FotoInfoVM.EAction.delete ) {
-          File.Delete( foto.Foto.File.FullName );
+          service.DeleteFoto( foto.Foto );
           foto.Action = FotoInfoVM.EAction.done;
         }
       }
@@ -271,7 +250,7 @@ namespace osFotoFix.ViewModels
       }
 
     }
-
+    /*****
     private string Copy( string source, string target, string targetDir, string targetFile )
     {
       target = Prepare( source, target, targetDir, targetFile );
@@ -305,5 +284,6 @@ namespace osFotoFix.ViewModels
       if( f.Exists && f.CreationTime != timestamp )
         File.SetCreationTime( file, timestamp );
     }
+    *****/
   }
 }

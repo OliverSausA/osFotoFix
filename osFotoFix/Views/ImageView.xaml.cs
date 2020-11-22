@@ -20,31 +20,4 @@ namespace osFotoFix.Views
             AvaloniaXamlLoader.Load(this);
         }
     }
-  public class BitmapFileValueConverter : IValueConverter
-  {
-    public static BitmapFileValueConverter Instance = new BitmapFileValueConverter();
-
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture )
-    {
-      if( value == null)
-        return null;
-      
-      try 
-      {
-        if( value is string filename && targetType == typeof(IBitmap))
-        {
-          var b = new Bitmap( filename );
-          return b;
-        }
-      }
-      catch {
-      }
-      return null;
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture )
-    {
-      throw new NotSupportedException();
-    }
-  }
 }

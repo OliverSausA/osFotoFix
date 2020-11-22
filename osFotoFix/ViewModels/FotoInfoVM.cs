@@ -34,22 +34,46 @@ namespace osFotoFix.ViewModels
       set { this.RaiseAndSetIfChanged( ref comment, value ); }
     }
 
-    private string newFileLocation;
-    public string NewFileLocation {
-      get {return newFileLocation; }
-      set { this.RaiseAndSetIfChanged( ref newFileLocation, value ); }
+    public string Target {
+      get {return Foto.Target; }
+      set { Foto.Target = value;
+            this.RaisePropertyChanged(); }
     }
 
-    private string newFileName;
+    public string Title {
+      get { return Foto.Title; }
+      set { Foto.Title = value;
+            this.RaisePropertyChanged(); }
+    }
+
+    public string Description {
+      get { return Foto.Description; }
+      set { Foto.Description = value;
+            this.RaisePropertyChanged(); }
+    }
+
     public string NewFileName {
-      get { return newFileName; }
-      set { this.RaiseAndSetIfChanged( ref newFileName, value ); }
+      get { return Foto.NewFileName; }
+      set { Foto.NewFileName = value;
+            this.RaisePropertyChanged(); }
+    }
+
+    public bool FileExistsOnTarget {
+      get { return Foto.FileExistsOnTarget; }
+      set { Foto.FileExistsOnTarget = value;
+            this.RaisePropertyChanged(); }
     }
 
     private EAction action;
     public EAction Action {
       get { return action; }
       set { this.RaiseAndSetIfChanged( ref action, value ); }
+    }
+
+    public void UpdateView()
+    {
+      this.RaisePropertyChanged(nameof(FileExistsOnTarget));
+      this.RaisePropertyChanged(nameof(Comment));
     }
   }
 }
