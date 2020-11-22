@@ -6,13 +6,7 @@
              xmlns:models="clr-namespace:osFotoFix.Models;assembly=osFotoFix"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="osFotoFix.Views.FotoInfoListView">
-  <Border
-    Background="Yellow"
-    BorderBrush="Black"
-    BorderThickness="2"
-    CornerRadius="10"
-    Padding="4"
-    >
+  <Border Classes="View">
     <Grid RowDefinitions="Auto,*">
       <StackPanel 
         Grid.Row="0"
@@ -39,65 +33,50 @@
           Watermark="Beschreibung"
           ToolTip.Tip="Wo kommen zum Beispiel die Bilder her?"
           />
-        <Button
-          Width="50"
-          Height="30"
-          Content="U"
+        <Button Classes="cmd cmdundo"
           Command="{Binding UndoAllCmd}"
           ToolTip.Tip="Rückgängig"
           >
-	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.Undo}" />
+	        <DrawingPresenter Classes="cmd cmdundo"/>
         </Button>
-        <Button 
-          Width="50" 
-          Height="30" 
+        <Button Classes="cmd cmdtrash"
+          ToolTip.Tip="Ab in den Papierkorb"
           IsEnabled="{Binding UserSettingsVM.TrashCmdActive}"
           IsVisible="{Binding UserSettingsVM.TrashCmdActive}"
           Command="{Binding TrashAllCmd}"
-          ToolTip.Tip="Ab in den Papierkorb"
           >
-	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.Noentry}" />
+          <DrawingPresenter Classes="cmd cmdtrash" />
         </Button>
-        <Button 
-          Width="50"
-          Height="30"
+        <Button Classes="cmd cmddelete"
           IsEnabled="{Binding UserSettingsVM.DelCmdActive}"
           IsVisible="{Binding UserSettingsVM.DelCmdActive}"
           Command="{Binding DelAllCmd}"
           ToolTip.Tip="Ich lösche alle Bilder. Soll ich?"
           >
-	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.Delete}" />
+	        <DrawingPresenter Classes="cmd cmddelete" />
         </Button>
-        <Button
-          Width="50"
-          Height="30"
-          Content="M"
+        <Button Classes="cmd cmdmove"
           IsEnabled="{Binding UserSettingsVM.MoveCmdActive}"
           IsVisible="{Binding UserSettingsVM.MoveCmdActive}"
           ToolTip.Tip="Alle Bilder ins Ziel verschieben"
           Command="{Binding MoveAllCmd}"
           >
-	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.PageMinus}" />
+	        <DrawingPresenter Classes="cmd cmdmove" />
         </Button>
-        <Button
-          Width="50"
-          Height="30"
-          Content="C"
+        <Button Classes="cmd cmdcopy"
           IsEnabled="{Binding UserSettingsVM.CopyCmdActive}"
           IsVisible="{Binding UserSettingsVM.CopyCmdActive}"
           ToolTip.Tip="Alle Bilder ins Ziel kopieren"
           Command="{Binding CopyAllCmd}"
           >
-	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.PageCopy}" />
+	        <DrawingPresenter Classes="cmd cmdcopy" />
         </Button>
-        <Button
-          Width="50"
-          Height="30"
+        <Button Classes="cmd cmddoit"
           Content="DoIt"
           Command="{Binding DoItCmd}"
           ToolTip.Tip="Alle Bilder verarbeiten"
           >
-	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.Check}" />
+	        <DrawingPresenter Classes="cmd cmddoit" />
         </Button>
       </StackPanel>
       <DataGrid

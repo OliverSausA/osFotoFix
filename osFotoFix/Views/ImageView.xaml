@@ -8,13 +8,7 @@
   <UserControl.Resources>
     <views:BitmapFileValueConverter x:Key="FotoImage" />
   </UserControl.Resources>
-  <Border
-    Background="Yellow"
-    BorderBrush="Black"
-    BorderThickness="2"
-    CornerRadius="10"
-    Padding="4"
-    >
+  <Border Classes="View">
     <Grid RowDefinitions="*,Auto">
       <TextBox
         Text="{Binding Foto.Foto.File.Name}"
@@ -26,69 +20,55 @@
         Orientation="Horizontal"
         HorizontalAlignment="Center"
         >
-        <Button
-          Width="50"
-          Height="30"
+        <Button Classes="cmd cmdundo"
           Command="{Binding UndoImageCmd}"
           ToolTip.Tip="Rückgängig"
           >
-	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.Undo}" />
+	        <DrawingPresenter Classes="cmd cmdundo" />
         </Button>
-        <Button
-          Width="50"
-          Height="30"
+        <Button Classes="cmd cmdup"
           Command="{Binding PrevImageCmd}"
           ToolTip.Tip="Das Bild davor"
           >
-	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.ArrowUp}" />
+	        <DrawingPresenter Classes="cmd cmdup" />
         </Button>
-        <Button
-          Width="50"
-          Height="30"
+        <Button Classes="cmd cmddown"
           ToolTip.Tip="Das nächste Bild"
           Command="{Binding NextImageCmd}"
           >
-	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.ArrowDown}" />
+	        <DrawingPresenter Classes="cmd cmddown" />
         </Button>
-        <Button
-          Width="50"
-          Height="30"
+        <Button Classes="cmd cmdtrash"
           ToolTip.Tip="Ab in den Papierkorb"
           IsEnabled="{Binding UserSettingsVM.TrashCmdActive}"
           IsVisible="{Binding UserSettingsVM.TrashCmdActive}"
           Command="{Binding TrashImageCmd}"
           >
-	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.Noentry}" />
+          <DrawingPresenter Classes="cmd cmdtrash" />
         </Button>
-        <Button
-          Width="50"
-          Height="30"
+        <Button Classes="cmd cmddelete"
           ToolTip.Tip="Bild löschen, weg isses."
           IsEnabled="{Binding UserSettingsVM.DelCmdActive}"
           IsVisible="{Binding UserSettingsVM.DelCmdActive}"
           Command="{Binding DelImageCmd}"
           >
-	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.Delete}" />
+	        <DrawingPresenter Classes="cmd cmddelete" />
         </Button>
-        <Button
-          Width="50"
-          Height="30"
+        <Button Classes="cmd cmdmove"
           ToolTip.Tip="Ins Ziel verschieben"
           IsEnabled="{Binding UserSettingsVM.MoveCmdActive}"
           IsVisible="{Binding UserSettingsVM.MoveCmdActive}"
           Command="{Binding MoveImageCmd}"
           >
-	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.PageMinus}" />
+	        <DrawingPresenter Classes="cmd cmdmove" />
         </Button>
-        <Button
-          Width="50"
-          Height="30"
+        <Button Classes="cmd cmdcopy"
           ToolTip.Tip="Ins Ziel kopieren"
           IsEnabled="{Binding UserSettingsVM.CopyCmdActive}"
           IsVisible="{Binding UserSettingsVM.CopyCmdActive}"
           Command="{Binding CopyImageCmd}"
           >
-	        <DrawingPresenter Width="16" Height="16" Drawing="{StaticResource Modern.PageCopy}" />
+	        <DrawingPresenter Classes="cmd cmdcopy" />
         </Button>
       </StackPanel>
     </Grid>
