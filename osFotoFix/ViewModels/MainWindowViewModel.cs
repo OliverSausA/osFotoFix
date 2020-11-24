@@ -11,10 +11,12 @@ using ReactiveUI;
 namespace osFotoFix.ViewModels
 {
   using Models;
+  using Services;
   public class MainWindowViewModel : ViewModelBase
   {
     public MainWindowViewModel()
     {
+      FotoInfoService.GetDateTimeFromStringTests();
       SettingsVM = new SettingsViewModel();
       ImageVM = new ImageViewModel( SettingsVM );
       FotoInfoDetailVM = new FotoInfoDetailViewModel();

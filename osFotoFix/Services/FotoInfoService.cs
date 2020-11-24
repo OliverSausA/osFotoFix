@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Globalization;
@@ -100,26 +101,52 @@ namespace osFotoFix.Services
     private bool GetDateTimeFromString( string text, out DateTime dt )
     {
       dt = DateTime.MinValue;
+
+      // First try date and time
       string pattern = @"(\d{2,4})[\._-]?(\d{2})[\._-]?(\d{2})[_-]?(\d{2})[:_-]?(\d{2})[:_-]?(\d{2})";
       var match = Regex.Match( text, pattern );
-      if( !match.Success ) return false;
+      if( match.Success )
+      {
+        string dtStr = "";
+        for( int i=1; i<match.Groups.Count; i++ )
+          dtStr += match.Groups[i].Value;
+        
+        bool success = DateTime.TryParseExact(
+                          dtStr, "yyyyMMddHHmmss", 
+                          CultureInfo.InvariantCulture,
+                          DateTimeStyles.AssumeLocal, out dt);
+        if( success ) 
+          return true;
+        
+        return DateTime.TryParseExact(
+                          dtStr, "yyMMddHHmmss", 
+                          CultureInfo.InvariantCulture,
+                          DateTimeStyles.AssumeLocal, out dt);
+      }
 
-      string dtStr = "";
-      for( int i=1; i<match.Groups.Count; i++ )
-        dtStr += match.Groups[i].Value;
-      
-      bool success = DateTime.TryParseExact(
-                        dtStr, "yyyyMMddHHmmss", 
-                        CultureInfo.InvariantCulture,
-                        DateTimeStyles.AssumeLocal, out dt);
-      if( success ) 
-        return true;
-      
-      return DateTime.TryParseExact(
-                        dtStr, "yyMMddHHmmss", 
-                        CultureInfo.InvariantCulture,
-                        DateTimeStyles.AssumeLocal, out dt);
+      // Secound try date and time
+      pattern = @"(\d{2,4})[\._-]?(\d{2})[\._-]?(\d{2})";
+      match = Regex.Match( text, pattern );
+      if( match.Success )
+      {
+        string dtStr = "";
+        for( int i=1; i<match.Groups.Count; i++ )
+          dtStr += match.Groups[i].Value;
+        
+        bool success = DateTime.TryParseExact(
+                          dtStr, "yyyyMMdd", 
+                          CultureInfo.InvariantCulture,
+                          DateTimeStyles.AssumeLocal, out dt);
+        if( success ) 
+          return true;
+        
+        return DateTime.TryParseExact(
+                          dtStr, "yyMMdd", 
+                          CultureInfo.InvariantCulture,
+                          DateTimeStyles.AssumeLocal, out dt);
+      }
 
+      return false;
     }
 
     protected string CreateNewFileName( FotoInfo foto )
@@ -165,6 +192,86 @@ namespace osFotoFix.Services
       var f = new FileInfo( file );
       if( f.Exists && f.CreationTime != timestamp )
         File.SetCreationTime( file, timestamp );
+    }
+
+    public static void GetDateTimeFromStringTests()
+    {
+      var service = new FotoInfoService();
+      DateTime dt;
+      bool result;
+      
+      result = service.GetDateTimeFromString( "20030910111213.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,11,12,13) );
+
+      result = service.GetDateTimeFromString( "IMG20030910111213TEST.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,11,12,13) );
+
+      result = service.GetDateTimeFromString( "IMG_20030910111213_TEST.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,11,12,13) );
+
+      result = service.GetDateTimeFromString( "IMG_20030910_111213_TEST.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,11,12,13) );
+
+      result = service.GetDateTimeFromString( "IMG_2003.09.10_11:12:13_TEST.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,11,12,13) );
+
+      result = service.GetDateTimeFromString( "IMG_2003-09-10-11-12-13_TEST.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,11,12,13) );
+
+      result = service.GetDateTimeFromString( "IMG_20030910111213_TEST.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,11,12,13) );
+      
+      result = service.GetDateTimeFromString( "030910111213.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,11,12,13) );
+
+      result = service.GetDateTimeFromString( "IMG030910111213TEST.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,11,12,13) );
+
+      result = service.GetDateTimeFromString( "IMG_030910111213_TEST.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,11,12,13) );
+
+      result = service.GetDateTimeFromString( "IMG_030910_111213_TEST.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,11,12,13) );
+
+      result = service.GetDateTimeFromString( "IMG_03.09.10_11:12:13_TEST.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,11,12,13) );
+
+      result = service.GetDateTimeFromString( "IMG_03-09-10-11-12-13_TEST.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,11,12,13) );
+
+      result = service.GetDateTimeFromString( "IMG_030910111213_TEST.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,11,12,13) );
+      
+      result = service.GetDateTimeFromString( "20030910.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,0,0,0) );
+
+      result = service.GetDateTimeFromString( "IMG20030910TEST.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,0,0,0) );
+
+      result = service.GetDateTimeFromString( "IMG_20030910_TEST.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,0,0,0) );
+
+      result = service.GetDateTimeFromString( "IMG_20030910__TEST.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,0,0,0) );
+
+      result = service.GetDateTimeFromString( "IMG_2003.09.10TEST.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,0,0,0) );
+
+      result = service.GetDateTimeFromString( "030910.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,0,0,0) );
+
+      result = service.GetDateTimeFromString( "IMG030910TEST.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,0,0,0) );
+
+      result = service.GetDateTimeFromString( "IMG_030910_TEST.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,0,0,0) );
+
+      result = service.GetDateTimeFromString( "IMG_030910__TEST.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,0,0,0) );
+
+      result = service.GetDateTimeFromString( "IMG_03.09.10TEST.jpg", out dt );
+      Debug.Assert( result && dt == new DateTime(2003,9,10,0,0,0) );
+
     }
   }
 }
