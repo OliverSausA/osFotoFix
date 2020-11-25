@@ -66,5 +66,10 @@ namespace osFotoFix.Services
                 Environment.SpecialFolder.ApplicationData);
     }
 
+    public string getUserPicturePath()
+    {
+      return Environment.GetFolderPath(
+                Environment.SpecialFolder.MyPictures);
+    }
   }
 }

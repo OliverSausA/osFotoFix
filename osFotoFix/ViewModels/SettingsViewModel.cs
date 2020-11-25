@@ -74,14 +74,16 @@ namespace osFotoFix.ViewModels
     {
       try
       {
-          var dlg = new OpenFolderDialog() {
-            Title = "Wo sollen die Bilder hin?",
-            Directory = current
-          };
+        if( string.IsNullOrEmpty(current) ) 
+          current = service.getUserPicturePath();
+        var dlg = new OpenFolderDialog() {
+          Title = "Wo sollen die Bilder hin?",
+          Directory = current
+        };
 
-          var result = await dlg.ShowAsync( GetMainWindow() );
-          if (result != null)
-            return $"{result}";
+        var result = await dlg.ShowAsync( GetMainWindow() );
+        if (result != null)
+          return $"{result}";
       }
       catch (Exception ex)
       {

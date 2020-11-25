@@ -63,8 +63,11 @@ namespace osFotoFix.ViewModels
 
     private void OnNewSourceSelected( string source ) 
     {
+      if( string.IsNullOrEmpty( source ) ) return;
+      var baseDir = new DirectoryInfo( source );
+      if( !baseDir.Exists ) return;
+
       FotoInfoList = new ObservableCollection<FotoInfoVM>();
-      var baseDir = new DirectoryInfo( UserSettingsVM.Source );
       var fotos = service.GetFotoInfos( baseDir );
 
       int index = 0;
