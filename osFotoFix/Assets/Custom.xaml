@@ -11,6 +11,18 @@
       <Setter Property="Height" Value="16"/>
     </Style>
 
+    <Style Selector="Button.cmdRefresh">
+    </Style>
+    <Style Selector="DrawingPresenter.cmdRefresh">
+      <Setter Property="Drawing" Value="{StaticResource Modern.Undo}" />
+    </Style>
+
+    <Style Selector="Button.cmdCancel">
+    </Style>
+    <Style Selector="DrawingPresenter.cmdCancel">
+      <Setter Property="Drawing" Value="{StaticResource Modern.Undo}" />
+    </Style>
+
     <Style Selector="Button.cmdundo">
     </Style>
     <Style Selector="DrawingPresenter.cmdundo">

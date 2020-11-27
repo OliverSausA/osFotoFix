@@ -11,6 +11,7 @@ namespace osFotoFix.Models
       DelCmdActive = true;
       MoveCmdActive = true;
       CopyCmdActive = true;
+      MaxReadFiles = 100;
     }
 
     [XmlAttribute]
@@ -28,6 +29,9 @@ namespace osFotoFix.Models
     public bool MoveCmdActive {get;set;}
     [XmlAttribute]
     public bool CopyCmdActive {get;set;}
+
+    [XmlAttribute]
+    public int MaxReadFiles {get;set;}
 
     [XmlAttribute]
     public string Title {get;set;}

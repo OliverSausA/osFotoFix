@@ -5,12 +5,21 @@ using System.Linq;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using ExifLib;
-
 
 namespace osFotoFix.Services
 {
   using Models;
+
+  public class FotoInfoEventArgs : EventArgs
+  {
+    public FotoInfoEventArgs( FotoInfo info ) {
+      FotoInfo = info;
+    }
+    public FotoInfo FotoInfo { get; private set; }
+  }
 
   public class FotoInfoService
   {
@@ -20,12 +29,88 @@ namespace osFotoFix.Services
 
     }
 
+    public event EventHandler<FotoInfoEventArgs> FotoInfoReadEvent;
+    public async Task<bool> ReadFotoInfos( DirectoryInfo dir, CancellationToken token )
+    {
+      if(!dir.Exists) return true;
+      if( ( dir.Attributes & FileAttributes.Hidden ) != 0 ) return true;
+      if( token.IsCancellationRequested ) return false;
+        
+      foreach( var d in dir.EnumerateDirectories().OrderBy( d => d.Name ) )
+      {
+        if( ! await ReadFotoInfos(d, token) )
+          return false;
+      }
+
+      foreach( var f in dir.EnumerateFiles().OrderBy( f => f.Name ) ) {
+        if( (!string.IsNullOrEmpty( f.Extension ) ) &&
+            (ext.IndexOf(f.Extension, 0, StringComparison.InvariantCultureIgnoreCase ) >= 0 ) )
+        {
+          Thread.Sleep(1000);
+          var info = CreateFotoInfo( f );
+          if( FotoInfoReadEvent != null )
+            FotoInfoReadEvent?.Invoke( this, new FotoInfoEventArgs( info ) );
+        }
+        if( token.IsCancellationRequested ) return false;
+      }
+      return true;
+
+    }
+    public event EventHandler<FotoInfoEventArgs> FotoFixedEvent;
+    public async Task<bool> FotoFixIt( IEnumerable<FotoInfo> fotoInfos, CancellationToken token )
+    {
+      foreach( var foto in fotoInfos )
+      {
+        if( token.IsCancellationRequested ) return false;
+
+        Thread.Sleep(1000);
+        await Task.Run( () => FotoFixIt( foto ) );
+        if( FotoFixedEvent != null )
+          FotoFixedEvent?.Invoke( this, new FotoInfoEventArgs( foto ) );
+      }
+      return true;
+    }
+    protected void FotoFixIt( FotoInfo foto )
+    {
+      try
+      {
+        if( (foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Filesystem) )
+        {
+          foto.Comment = "Exif Infomation ist ungültig!";
+          foto.Action = EAction.failed;
+        }
+        else if( foto.Action == EAction.copy ) {
+          foto.NewFileName = CopyFoto( foto );
+          foto.Action = EAction.done;
+        }
+        else if( foto.Action == EAction.move ) {
+          foto.NewFileName = MoveFoto( foto );
+          foto.Action = EAction.done;
+        }
+        else if( foto.Action == EAction.trash ) {
+          foto.NewFileName = MoveFoto( foto );
+          foto.Action = EAction.done;
+        }
+        else if( foto.Action == EAction.delete ) {
+          DeleteFoto( foto );
+          foto.Action = EAction.done;
+        }
+      }
+      catch ( Exception e )
+      {
+        foto.Action = EAction.failed;
+        foto.Comment = e.Message;
+      }
+
+    }
+    /*****
     public List<FotoInfo> GetFotoInfos( DirectoryInfo baseDir )
     {
       var fotoInfos = new List<FotoInfo>();
       ReadFotoInfos( fotoInfos, baseDir );
       return fotoInfos;
     }
+    *****/
 
     public string GetNewFileName( FotoInfo foto )
     {
@@ -63,6 +148,7 @@ namespace osFotoFix.Services
       foto.File.Delete();
     }
 
+    /*****
     private void ReadFotoInfos( List<FotoInfo> infos, DirectoryInfo dir )
     {
       if(!dir.Exists) return;
@@ -77,6 +163,7 @@ namespace osFotoFix.Services
           infos.Add( CreateFotoInfo(f) );
       }
     }
+    ****/
 
     private FotoInfo CreateFotoInfo( FileInfo file )
     {

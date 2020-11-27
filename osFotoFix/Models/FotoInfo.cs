@@ -4,7 +4,20 @@ using System.IO;
 namespace osFotoFix.Models
 {
   using ViewModels;
+
+  public enum EAction {
+    ignore = -1,
+    copy,
+    move,
+    delete,
+    trash,
+    done,
+    failed
+  };
+
   public class FotoInfo {
+
+    private static int index;
 
     public enum ETypeOfCreationDate
     {
@@ -14,6 +27,8 @@ namespace osFotoFix.Models
     }
 
     public FotoInfo( FileInfo file, DateTime created, ETypeOfCreationDate typeOfCreationDate) {
+      Index = ++index;
+      Action = EAction.ignore;
       File = file;
       Created = created;
       TypeOfCreationDate = typeOfCreationDate;
@@ -25,6 +40,8 @@ namespace osFotoFix.Models
 
     public ETypeOfCreationDate TypeOfCreationDate {get;set;}
 
+    public int Index { get; private set; }
+    public EAction Action {get;set;}
     public string Target {get;set;}
     public string Title {get;set;}
     public string Description {get;set;}
@@ -32,6 +49,13 @@ namespace osFotoFix.Models
     public string NewFileName {get;set;}
     public bool FileExistsOnTarget {get;set;}
 
+    public string Comment {get;set;}
+    public bool ActionRequiered {
+      get { return ( Action == EAction.copy ||
+                     Action == EAction.move ||
+                     Action == EAction.trash ||
+                     Action == EAction.delete ); }
+    }
   }
 
 }

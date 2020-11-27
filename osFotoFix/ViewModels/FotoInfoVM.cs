@@ -8,30 +8,22 @@ namespace osFotoFix.ViewModels
 
   public class FotoInfoVM : ViewModelBase
   {
-    public enum EAction {
-      ignore = 0,
-      copy,
-      move,
-      delete,
-      trash,
-      done,
-      failed
-    };
-
-    public FotoInfoVM( FotoInfo foto, int index )
+    public FotoInfoVM( FotoInfo foto )
     {
       Action = EAction.ignore;
       Foto = foto;
-      Index = index;
     }
 
     public FotoInfo Foto {get;set;}
 
-    public int Index {get;set;}
-    private string comment;
+    public int Index {
+      get { return Foto.Index; }
+    }
+
     public string Comment {
-      get { return comment; }
-      set { this.RaiseAndSetIfChanged( ref comment, value ); }
+      get { return Foto.Comment; }
+      set { Foto.Comment = value;
+            this.RaisePropertyChanged(); }
     }
 
     public string Target {
@@ -64,10 +56,10 @@ namespace osFotoFix.ViewModels
             this.RaisePropertyChanged(); }
     }
 
-    private EAction action;
     public EAction Action {
-      get { return action; }
-      set { this.RaiseAndSetIfChanged( ref action, value ); }
+      get { return Foto.Action; }
+      set { Foto.Action = value;
+            this.RaisePropertyChanged(); }
     }
 
     public void UpdateView()

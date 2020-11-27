@@ -13,6 +13,18 @@
         Orientation="Horizontal"
         HorizontalAlignment="Center"
         >
+        <Button Classes="cmd cmdRefresh"
+          Command="{Binding RefreshCmd}"
+          ToolTip.Tip="Fotos ganz neu einlesen"
+          >
+	        <DrawingPresenter Classes="cmd cmdRefresh"/>
+        </Button>
+        <Button Classes="cmd cmdCancel"
+          Command="{Binding CancelCmd}"
+          ToolTip.Tip="Hör auf, die ganzen Fotos zu laden"
+          >
+	        <DrawingPresenter Classes="cmd cmdCancel"/>
+        </Button>
         <ContentControl
           VerticalAlignment="Center"
           Margin="2"

@@ -1,7 +1,12 @@
 using System;
+using System.Linq;
 using System.IO;
 using System.Collections.ObjectModel;
 using System.Reactive;
+using System.Threading;
+using System.Threading.Tasks;
+
+using Avalonia.Threading;
 using ReactiveUI;
 
 namespace osFotoFix.ViewModels
@@ -19,9 +24,13 @@ namespace osFotoFix.ViewModels
               ImageViewModel ImageVM, 
               FotoInfoDetailViewModel FotoInfoDetailVM )
     {
+      FotoInfoList = new ObservableCollection<FotoInfoVM>();
       this.UserSettingsVM = UserSettingsVM;
 
       service = new FotoInfoService();
+      service.FotoInfoReadEvent += OnFotoInfoRead;
+      service.FotoFixedEvent += OnFotoFixed;
+
       this.ImageVM = ImageVM;
       this.ImageVM.UndoImageEvent += UndoFoto;
       this.ImageVM.NextImageEvent += SelectNextFoto;
@@ -31,6 +40,8 @@ namespace osFotoFix.ViewModels
       this.ImageVM.CopyImageEvent += CopyFoto;
       this.ImageVM.MoveImageEvent += MoveFoto;
 
+      RefreshCmd = ReactiveCommand.Create( OnRefresh );
+      CancelCmd = ReactiveCommand.Create( OnCancel );
       UndoAllCmd = ReactiveCommand.Create( OnUndoAll );
       TrashAllCmd = ReactiveCommand.Create( OnTrashAll );
       DelAllCmd = ReactiveCommand.Create( OnDelAll );
@@ -47,9 +58,6 @@ namespace osFotoFix.ViewModels
     public SettingsViewModel UserSettingsVM { get;set; }
     public ObservableCollection<FotoInfoVM> FotoInfoList { get; set; }
 
-    //public string EventName {get;set;}
-    //public string Description {get;set;}
-
     private FotoInfoVM fotoSelected;
     public FotoInfoVM FotoSelected { 
       get { return fotoSelected; } 
@@ -63,20 +71,46 @@ namespace osFotoFix.ViewModels
 
     private void OnNewSourceSelected( string source ) 
     {
+      FotoInfoList.Clear();
+      Task.Run( () => ReadFotoInfos( source ) );
+    }
+
+    private bool runningReadFoto;
+    public bool RunningReadFoto {
+      get { return runningReadFoto; }
+      set { this.RaiseAndSetIfChanged( ref runningReadFoto, value ); }
+    }
+    private CancellationTokenSource CancelReadFotoInfos;
+    private async void ReadFotoInfos( string source )
+    {
       if( string.IsNullOrEmpty( source ) ) return;
       var baseDir = new DirectoryInfo( source );
       if( !baseDir.Exists ) return;
 
-      FotoInfoList = new ObservableCollection<FotoInfoVM>();
-      var fotos = service.GetFotoInfos( baseDir );
+      if ( CancelReadFotoInfos != null ) return;
+      CancelReadFotoInfos = new CancellationTokenSource();
 
-      int index = 0;
-      foreach( var foto in fotos )
-      {
-        FotoInfoList.Add( new FotoInfoVM( foto, index++ ) );
-      }
-      this.RaisePropertyChanged( nameof( FotoInfoList ) );
-      SelectFirstFoto();
+      FotoSelected = null;
+      await service.ReadFotoInfos( baseDir, CancelReadFotoInfos.Token );
+
+      CancelReadFotoInfos = null;
+    }
+
+    private void OnFotoInfoRead( object sender, FotoInfoEventArgs args )
+    {
+      Dispatcher.UIThread.InvokeAsync( () => {
+        var fotoInfo = new FotoInfoVM( args.FotoInfo );
+        FotoInfoList.Add( fotoInfo );
+        FotoSelected = fotoInfo;
+      });
+    }
+
+    private void OnFotoFixed( object sender, FotoInfoEventArgs args )
+    {
+      Dispatcher.UIThread.InvokeAsync( () => {
+        var fotoVM = FotoInfoList.Where( f => f.Index == args.FotoInfo.Index ).First();
+        fotoVM.UpdateView();
+      });
     }
 
     protected void SelectFirstFoto()
@@ -99,6 +133,17 @@ namespace osFotoFix.ViewModels
         idx = fotoSelected.Index -1;
       if( idx >= 0 && idx < FotoInfoList.Count )
         FotoSelected = FotoInfoList[ idx ];
+    }
+
+    public ReactiveCommand<Unit, Unit> RefreshCmd { get; }
+    public void OnRefresh() {
+      OnNewSourceSelected( UserSettingsVM.Source );
+    }
+
+    public ReactiveCommand<Unit, Unit> CancelCmd { get; }
+    public void OnCancel() {
+      if( CancelReadFotoInfos != null )
+      CancelReadFotoInfos.Cancel();
     }
 
     public ReactiveCommand<Unit, Unit> UndoAllCmd { get; }
@@ -133,9 +178,13 @@ namespace osFotoFix.ViewModels
 
 
     public ReactiveCommand<Unit, Unit> DoItCmd { get; }
-    public void OnDoIt() {
-      foreach( var foto in FotoInfoList )
-        DoIt( foto );
+    private CancellationTokenSource CancelFotoFixIt;
+    public async void OnDoIt() {
+      if( CancelFotoFixIt == null )
+        CancelFotoFixIt = new CancellationTokenSource();
+      var list = FotoInfoList.Select( f => f.Foto ).Where( r => r.ActionRequiered );
+      var ok = await service.FotoFixIt( list, CancelFotoFixIt.Token );
+      CancelFotoFixIt = null;
     }
 
     protected void UndoFoto()
@@ -146,8 +195,8 @@ namespace osFotoFix.ViewModels
     protected void UndoFoto( FotoInfoVM foto )
     {
       if( foto == null ) return;
-      if( foto.Action == FotoInfoVM.EAction.done ) return;
-      foto.Action = FotoInfoVM.EAction.ignore;
+      if( foto.Action == EAction.done ) return;
+      foto.Action = EAction.ignore;
       foto.Target = "";
       foto.Title = "";
       foto.Description = "";
@@ -164,9 +213,9 @@ namespace osFotoFix.ViewModels
     protected void DelFoto( FotoInfoVM foto )
     {
       if( foto == null ) return;
-      if( foto.Action == FotoInfoVM.EAction.done ) return;
+      if( foto.Action == EAction.done ) return;
       UndoFoto( foto );
-      foto.Action = FotoInfoVM.EAction.delete;
+      foto.Action = EAction.delete;
     }
 
     protected void CopyFoto()
@@ -177,8 +226,8 @@ namespace osFotoFix.ViewModels
     protected void CopyFoto( FotoInfoVM foto )
     {
       if( foto == null ) return;
-      if( foto.Action == FotoInfoVM.EAction.done ) return;
-      foto.Action = FotoInfoVM.EAction.copy;
+      if( foto.Action == EAction.done ) return;
+      foto.Action = EAction.copy;
       foto.Target = UserSettingsVM.Target;
       foto.Title = UserSettingsVM.Title;
       foto.Description = UserSettingsVM.Description;
@@ -194,8 +243,8 @@ namespace osFotoFix.ViewModels
     protected void MoveFoto( FotoInfoVM foto )
     {
       if( foto == null ) return;
-      if( foto.Action == FotoInfoVM.EAction.done ) return;
-      foto.Action = FotoInfoVM.EAction.move;
+      if( foto.Action == EAction.done ) return;
+      foto.Action = EAction.move;
       foto.Target = UserSettingsVM.Target;
       foto.Title = UserSettingsVM.Title;
       foto.Description = UserSettingsVM.Description;
@@ -211,8 +260,8 @@ namespace osFotoFix.ViewModels
     protected void TrashFoto( FotoInfoVM foto )
     {
       if( foto == null ) return;
-      if( foto.Action == FotoInfoVM.EAction.done ) return;
-      foto.Action = FotoInfoVM.EAction.trash;
+      if( foto.Action == EAction.done ) return;
+      foto.Action = EAction.trash;
       foto.Target = UserSettingsVM.Trash;
       foto.Title = UserSettingsVM.Title;
       foto.Description = UserSettingsVM.Description;
@@ -220,6 +269,7 @@ namespace osFotoFix.ViewModels
       foto.UpdateView();
     }
 
+    /*****
     protected void DoIt( FotoInfoVM foto )
     {
       try
@@ -227,65 +277,31 @@ namespace osFotoFix.ViewModels
         if( (foto.Foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Filesystem) )
         {
           foto.Comment = "Exif Infomation ist ungültig!";
-          foto.Action = FotoInfoVM.EAction.failed;
+          foto.Action = EAction.failed;
         }
-        else if( foto.Action == FotoInfoVM.EAction.copy ) {
+        else if( foto.Action == EAction.copy ) {
           foto.NewFileName = service.CopyFoto( foto.Foto );
-          foto.Action = FotoInfoVM.EAction.done;
+          foto.Action = EAction.done;
         }
-        else if( foto.Action == FotoInfoVM.EAction.move ) {
+        else if( foto.Action == EAction.move ) {
           foto.NewFileName = service.MoveFoto( foto.Foto );
-          foto.Action = FotoInfoVM.EAction.done;
+          foto.Action = EAction.done;
         }
-        else if( foto.Action == FotoInfoVM.EAction.trash ) {
+        else if( foto.Action == EAction.trash ) {
           foto.NewFileName = service.MoveFoto( foto.Foto );
-          foto.Action = FotoInfoVM.EAction.done;
+          foto.Action = EAction.done;
         }
-        else if( foto.Action == FotoInfoVM.EAction.delete ) {
+        else if( foto.Action == EAction.delete ) {
           service.DeleteFoto( foto.Foto );
-          foto.Action = FotoInfoVM.EAction.done;
+          foto.Action = EAction.done;
         }
       }
       catch ( Exception e )
       {
-        foto.Action = FotoInfoVM.EAction.failed;
+        foto.Action = EAction.failed;
         foto.Comment = e.Message;
       }
 
-    }
-    /*****
-    private string Copy( string source, string target, string targetDir, string targetFile )
-    {
-      target = Prepare( source, target, targetDir, targetFile );
-      File.Copy( source, target );
-      return target;
-    }
-    private string Move( string source, string target, string targetDir, string targetFile )
-    {
-      target = Prepare( source, target, targetDir, targetFile );
-      File.Move( source, target );
-      return target;
-    }
-    private string Prepare( string source, string target, string targetDir, string targetFile )
-    {
-      target = Path.Combine( target, targetDir );
-      var dir = new DirectoryInfo( target );
-      dir.Create();
-      target = Path.Combine( target, targetFile );
-      var file = new FileInfo( target );
-      int idx = 0;
-      while( file.Exists )
-      {
-        var next = target.Replace( file.Extension, string.Format("_{0}{1}", ++idx, file.Extension ) );
-        file = new FileInfo( next );
-      }
-      return file.FullName;
-    }
-    private void AdjustTimeStamp( string file, DateTime timestamp )
-    {
-      var f = new FileInfo( file );
-      if( f.Exists && f.CreationTime != timestamp )
-        File.SetCreationTime( file, timestamp );
     }
     *****/
   }

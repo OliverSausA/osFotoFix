@@ -7,15 +7,15 @@
 
   !define APP_NAME "osFotoFix"
   !define MAIN_APP_EXE "osFotoFix.exe"
-  !getdllversion "win10-x64-deployment\${MAIN_APP_EXE}" ver
+  !getdllversion "win10-x64-deployment/${MAIN_APP_EXE}" ver
   !define VERSION "${ver1}.${ver2}.${ver3}"
   !define PROD_VERSION "${ver1}.${ver2}"
   !define FILE_VERSION "${ver1}.${ver2}.${ver3}.${ver4}"
   !define COMP_NAME "Seidel-IT"
   !define COPYRIGHT "OS, 2020"
 
-  !define INSTALLER_NAME "win10-x64-setup\osFotoFix_v${ver1}.${ver2}.${ver3}_setup.exe"
-  !define LICENSE_TEXT "..\osFotoFix\License.txt"
+  !define INSTALLER_NAME "win10-x64-setup/osFotoFix_v${ver1}.${ver2}.${ver3}_setup.exe"
+  !define LICENSE_TEXT "../osFotoFix/License.txt"
   !define REG_ROOT "HKLM"
   !define REG_APP_PATH "Software\Microsoft\Windows\CurrentVersion\App Paths\${MAIN_APP_EXE}"
   !define UNINSTALL_PATH "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
@@ -42,7 +42,8 @@
 ;----------------------------------------------------------
 ; Version Information
 
-  VIProductVersion "${ver1}.${ver2}.0.0"
+  ;VIProductVersion "${ver1}.${ver2}.0.0"
+  VIProductVersion "0.3.0.0"
   VIAddVersionKey "ProductName" "${APP_NAME}"
   VIAddVersionKey "CompanyName" "${COMP_NAME}"
   VIAddVersionKey "ProductVersion" "${PROD_VERSION}"
