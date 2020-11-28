@@ -48,6 +48,7 @@ namespace osFotoFix.ViewModels
       CopyAllCmd = ReactiveCommand.Create( OnCopyAll );
       MoveAllCmd = ReactiveCommand.Create( OnMoveAll );
       DoItCmd = ReactiveCommand.Create( OnDoIt );
+      CancelDoItCmd = ReactiveCommand.Create( OnCancelDoIt );
       
       this.FotoInfoDetailVM = FotoInfoDetailVM;
 
@@ -72,6 +73,7 @@ namespace osFotoFix.ViewModels
     private void OnNewSourceSelected( string source ) 
     {
       FotoInfoList.Clear();
+      FotoSelected = null;
       Task.Run( () => ReadFotoInfos( source ) );
     }
 
@@ -83,23 +85,25 @@ namespace osFotoFix.ViewModels
     private CancellationTokenSource CancelReadFotoInfos;
     private async void ReadFotoInfos( string source )
     {
+      if ( CancelReadFotoInfos != null ) return;
       if( string.IsNullOrEmpty( source ) ) return;
       var baseDir = new DirectoryInfo( source );
       if( !baseDir.Exists ) return;
 
-      if ( CancelReadFotoInfos != null ) return;
       CancelReadFotoInfos = new CancellationTokenSource();
+      RunningReadFoto = true;
 
       FotoSelected = null;
       await service.ReadFotoInfos( baseDir, CancelReadFotoInfos.Token );
 
+      RunningReadFoto = false;
       CancelReadFotoInfos = null;
     }
 
     private void OnFotoInfoRead( object sender, FotoInfoEventArgs args )
     {
       Dispatcher.UIThread.InvokeAsync( () => {
-        var fotoInfo = new FotoInfoVM( args.FotoInfo );
+        var fotoInfo = new FotoInfoVM( args.FotoInfo, FotoInfoList.Count );
         FotoInfoList.Add( fotoInfo );
         FotoSelected = fotoInfo;
       });
@@ -108,7 +112,7 @@ namespace osFotoFix.ViewModels
     private void OnFotoFixed( object sender, FotoInfoEventArgs args )
     {
       Dispatcher.UIThread.InvokeAsync( () => {
-        var fotoVM = FotoInfoList.Where( f => f.Index == args.FotoInfo.Index ).First();
+        var fotoVM = FotoInfoList.Where( f => f.Foto.ID == args.FotoInfo.ID ).First();
         fotoVM.UpdateView();
       });
     }
@@ -143,7 +147,10 @@ namespace osFotoFix.ViewModels
     public ReactiveCommand<Unit, Unit> CancelCmd { get; }
     public void OnCancel() {
       if( CancelReadFotoInfos != null )
-      CancelReadFotoInfos.Cancel();
+      {
+        CancelReadFotoInfos.Cancel();
+        RunningReadFoto = false;
+      }
     }
 
     public ReactiveCommand<Unit, Unit> UndoAllCmd { get; }
@@ -176,15 +183,35 @@ namespace osFotoFix.ViewModels
         MoveFoto( foto );
     }
 
+    private bool runningFotoFixIt;
+    public bool RunningFotoFixIt {
+      get { return runningFotoFixIt; }
+      set { this.RaiseAndSetIfChanged( ref runningFotoFixIt, value ); }
+    }
 
     public ReactiveCommand<Unit, Unit> DoItCmd { get; }
     private CancellationTokenSource CancelFotoFixIt;
-    public async void OnDoIt() {
-      if( CancelFotoFixIt == null )
-        CancelFotoFixIt = new CancellationTokenSource();
-      var list = FotoInfoList.Select( f => f.Foto ).Where( r => r.ActionRequiered );
+    public void OnDoIt()
+    {
+      Task.Run( () => DoIt() );
+    }
+    public async void DoIt() {
+      if( CancelFotoFixIt != null ) return;
+      CancelFotoFixIt = new CancellationTokenSource();
+      RunningFotoFixIt = true;
+      var list = FotoInfoList.Select( f => f.Foto ).Where( r => r.ActionRequiered == true );
       var ok = await service.FotoFixIt( list, CancelFotoFixIt.Token );
+      RunningFotoFixIt = false;
       CancelFotoFixIt = null;
+    }
+    public ReactiveCommand<Unit, Unit> CancelDoItCmd { get; }
+    public void OnCancelDoIt()
+    {
+      if( CancelFotoFixIt != null )
+      {
+        CancelFotoFixIt.Cancel();
+        RunningFotoFixIt = false;
+      }
     }
 
     protected void UndoFoto()

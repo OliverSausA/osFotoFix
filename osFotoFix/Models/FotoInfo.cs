@@ -17,7 +17,7 @@ namespace osFotoFix.Models
 
   public class FotoInfo {
 
-    private static int index;
+    private static int id;
 
     public enum ETypeOfCreationDate
     {
@@ -27,7 +27,7 @@ namespace osFotoFix.Models
     }
 
     public FotoInfo( FileInfo file, DateTime created, ETypeOfCreationDate typeOfCreationDate) {
-      Index = ++index;
+      ID = ++id;
       Action = EAction.ignore;
       File = file;
       Created = created;
@@ -40,7 +40,7 @@ namespace osFotoFix.Models
 
     public ETypeOfCreationDate TypeOfCreationDate {get;set;}
 
-    public int Index { get; private set; }
+    public int ID { get; private set; }
     public EAction Action {get;set;}
     public string Target {get;set;}
     public string Title {get;set;}

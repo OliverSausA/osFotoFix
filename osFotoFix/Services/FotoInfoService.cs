@@ -46,7 +46,7 @@ namespace osFotoFix.Services
         if( (!string.IsNullOrEmpty( f.Extension ) ) &&
             (ext.IndexOf(f.Extension, 0, StringComparison.InvariantCultureIgnoreCase ) >= 0 ) )
         {
-          Thread.Sleep(1000);
+          ///// Thread.Sleep( 1000 );
           var info = CreateFotoInfo( f );
           if( FotoInfoReadEvent != null )
             FotoInfoReadEvent?.Invoke( this, new FotoInfoEventArgs( info ) );
@@ -63,7 +63,6 @@ namespace osFotoFix.Services
       {
         if( token.IsCancellationRequested ) return false;
 
-        Thread.Sleep(1000);
         await Task.Run( () => FotoFixIt( foto ) );
         if( FotoFixedEvent != null )
           FotoFixedEvent?.Invoke( this, new FotoInfoEventArgs( foto ) );
@@ -72,6 +71,9 @@ namespace osFotoFix.Services
     }
     protected void FotoFixIt( FotoInfo foto )
     {
+      ///// Thread.Sleep( 1000 );
+      ///// foto.Action = EAction.done;
+      ///// return;
       try
       {
         if( (foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Filesystem) )

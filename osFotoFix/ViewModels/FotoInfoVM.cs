@@ -8,17 +8,15 @@ namespace osFotoFix.ViewModels
 
   public class FotoInfoVM : ViewModelBase
   {
-    public FotoInfoVM( FotoInfo foto )
+    public FotoInfoVM( FotoInfo foto, int index )
     {
-      Action = EAction.ignore;
       Foto = foto;
+      Index = index;
     }
 
     public FotoInfo Foto {get;set;}
 
-    public int Index {
-      get { return Foto.Index; }
-    }
+    public int Index { get; private set; }
 
     public string Comment {
       get { return Foto.Comment; }
@@ -64,8 +62,13 @@ namespace osFotoFix.ViewModels
 
     public void UpdateView()
     {
-      this.RaisePropertyChanged(nameof(FileExistsOnTarget));
       this.RaisePropertyChanged(nameof(Comment));
+      this.RaisePropertyChanged(nameof(Target));
+      this.RaisePropertyChanged(nameof(Title));
+      this.RaisePropertyChanged(nameof(Description));
+      this.RaisePropertyChanged(nameof(NewFileName));
+      this.RaisePropertyChanged(nameof(FileExistsOnTarget));
+      this.RaisePropertyChanged(nameof(Action));
     }
   }
 }
