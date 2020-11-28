@@ -11,6 +11,8 @@
         <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml"/>
         <StyleInclude Source='/Assets/Modern.xaml'/>
+        <StyleInclude Source='/Assets/FluentUiIcons_Filled.xaml'/>
+        <StyleInclude Source='/Assets/FluentUiIcons_Regular.xaml'/>
         <StyleInclude Source='/Assets/Custom.xaml'/>
     </Application.Styles>
     <Application.Resources>
@@ -18,5 +20,9 @@
         <ResourceDictionary.MergedDictionaries>
         </ResourceDictionary.MergedDictionaries>
       </ResourceDictionary>
+      <SolidColorBrush x:Key="Cancel">#7F7FFF</SolidColorBrush>
+      <SolidColorBrush x:Key="Warning">#FFF77F</SolidColorBrush>
+      <SolidColorBrush x:Key="Alert">#FF7F7F</SolidColorBrush>
+      <SolidColorBrush x:Key="OK_Color">#7FFF7F</SolidColorBrush>
     </Application.Resources>
 </Application>

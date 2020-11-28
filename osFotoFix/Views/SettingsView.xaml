@@ -9,10 +9,12 @@
   <Border Classes="View">
     <StackPanel>
       <Expander 
+        Classes="h1"
         Header="Verzeichnisse"
         IsExpanded="True"
         >
         <Grid 
+          Classes="p"
           ColumnDefinitions="*,32"
           RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
           >
@@ -62,22 +64,65 @@
         IsExpanded="True"
         >
         <Grid 
-          ColumnDefinitions="Auto"
+          ColumnDefinitions="50,Auto"
           RowDefinitions="30,30,30,30"
           >
+          <Panel
+            Margin="10,0,10,0"
+            Background="{StaticResource Warning}"
+            >
+            <DrawingPresenter 
+              Classes="cmd" 
+              Drawing="{StaticResource FluentIcons.delete_regular}" />
+          </Panel>
           <CheckBox
+            Grid.Column="1"
+            IsChecked="{Binding TrashCmdActive, Mode=TwoWay}" 
             Content="Papierkorb"
-            IsChecked="{Binding TrashCmdActive, Mode=TwoWay}" />
+            />
+
+          <Panel
+            Margin="10,0,10,0"
+            Grid.Row="1"
+            Background="{StaticResource Alert}"
+            >
+            <DrawingPresenter 
+              Classes="cmd" 
+              Drawing="{StaticResource FluentIcons.delete_off_regular}" />
+          </Panel>
           <CheckBox
             Grid.Row="1"
+            Grid.Column="1"
             Content="Löschen"
             IsChecked="{Binding DelCmdActive}" />
+
+          <Panel
+            Margin="10,0,10,0"
+            Grid.Row="2"
+            Background="{StaticResource OK_Color}"
+            >
+            <DrawingPresenter 
+              Classes="cmd" 
+              Drawing="{StaticResource FluentIcons.sticker_regular}" />
+          </Panel>
           <CheckBox 
             Grid.Row="2"
+            Grid.Column="1"
             Content="Verschieben"
             IsChecked="{Binding MoveCmdActive}" />
+
+          <Panel
+            Margin="10,0,10,0"
+            Grid.Row="3"
+            Background="{StaticResource OK_Color}"
+            >
+            <DrawingPresenter 
+              Classes="cmd" 
+              Drawing="{StaticResource FluentIcons.sticker_add_regular}" />
+          </Panel> 
           <CheckBox 
             Grid.Row="3"
+            Grid.Column="1"
             Content="Kopieren"
             IsChecked="{Binding CopyCmdActive}" />
         </Grid> 

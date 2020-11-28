@@ -15,60 +15,80 @@
         />
       <Image Source="{Binding Foto.Foto.File.FullName, Converter={StaticResource FotoImage}}">
       </Image>
-      <StackPanel 
+      <StackPanel
         Grid.Row="1"
         Orientation="Horizontal"
         HorizontalAlignment="Center"
         >
-        <Button Classes="cmd cmdundo"
-          Command="{Binding UndoImageCmd}"
-          ToolTip.Tip="Rückgängig"
-          >
-	        <DrawingPresenter Classes="cmd cmdundo" />
-        </Button>
         <Button Classes="cmd cmdup"
           Command="{Binding PrevImageCmd}"
           ToolTip.Tip="Das Bild davor"
           >
-	        <DrawingPresenter Classes="cmd cmdup" />
+          <DrawingPresenter
+            Classes="cmd"
+            Drawing="{StaticResource FluentIcons.chevron_up_regular}" />
         </Button>
         <Button Classes="cmd cmddown"
           ToolTip.Tip="Das nächste Bild"
           Command="{Binding NextImageCmd}"
           >
-	        <DrawingPresenter Classes="cmd cmddown" />
+          <DrawingPresenter
+            Classes="cmd"
+            Drawing="{StaticResource FluentIcons.chevron_down_regular}" />
         </Button>
         <Button Classes="cmd cmdtrash"
           ToolTip.Tip="Ab in den Papierkorb"
           IsEnabled="{Binding UserSettingsVM.TrashCmdActive}"
           IsVisible="{Binding UserSettingsVM.TrashCmdActive}"
+          Background="{StaticResource Warning}"
           Command="{Binding TrashImageCmd}"
           >
-          <DrawingPresenter Classes="cmd cmdtrash" />
+          <DrawingPresenter
+            Classes="cmd"
+            Drawing="{StaticResource FluentIcons.delete_regular}" />
         </Button>
         <Button Classes="cmd cmddelete"
-          ToolTip.Tip="Bild löschen, weg isses."
           IsEnabled="{Binding UserSettingsVM.DelCmdActive}"
           IsVisible="{Binding UserSettingsVM.DelCmdActive}"
+          Background="{StaticResource Alert}"
           Command="{Binding DelImageCmd}"
+          ToolTip.Tip="Ich lösche alle Bilder. Soll ich?"
           >
-	        <DrawingPresenter Classes="cmd cmddelete" />
+          <DrawingPresenter
+            Classes="cmd"
+            Drawing="{StaticResource FluentIcons.delete_off_regular}" />
         </Button>
         <Button Classes="cmd cmdmove"
-          ToolTip.Tip="Ins Ziel verschieben"
           IsEnabled="{Binding UserSettingsVM.MoveCmdActive}"
           IsVisible="{Binding UserSettingsVM.MoveCmdActive}"
+          Background="{StaticResource OK_Color}"
+          ToolTip.Tip="Ins Ziel verschieben"
           Command="{Binding MoveImageCmd}"
           >
-	        <DrawingPresenter Classes="cmd cmdmove" />
+          <DrawingPresenter
+            Classes="cmd"
+            Drawing="{StaticResource FluentIcons.sticker_regular}" />
         </Button>
         <Button Classes="cmd cmdcopy"
-          ToolTip.Tip="Ins Ziel kopieren"
           IsEnabled="{Binding UserSettingsVM.CopyCmdActive}"
           IsVisible="{Binding UserSettingsVM.CopyCmdActive}"
+          Background="{StaticResource OK_Color}"
+          ToolTip.Tip="Ins Ziel kopieren"
           Command="{Binding CopyImageCmd}"
           >
-	        <DrawingPresenter Classes="cmd cmdcopy" />
+          <DrawingPresenter
+            Classes="cmd"
+            Drawing="{StaticResource FluentIcons.sticker_add_regular}" />
+        </Button>
+        <Button Classes="cmd"
+          Command="{Binding UndoImageCmd}"
+          Background="{StaticResource Cancel}"
+          ToolTip.Tip="Rückgängig"
+          >
+	        <DrawingPresenter
+            Classes="cmd"
+            Drawing="{StaticResource FluentIconsFilled.backspace_filled}"
+            />
         </Button>
       </StackPanel>
     </Grid>

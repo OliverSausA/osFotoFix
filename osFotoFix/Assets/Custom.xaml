@@ -2,84 +2,38 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <StyleInclude Source='/Assets/Modern.xaml'/>
+
     <Style Selector="Button.cmd">
-      <Setter Property="Width" Value="48"/>
+      <Setter Property="Width" Value="30"/>
       <Setter Property="Height" Value="30"/>
     </Style>
     <Style Selector="DrawingPresenter.cmd">
-      <Setter Property="Width" Value="16"/>
-      <Setter Property="Height" Value="16"/>
-    </Style>
-
-    <Style Selector="Button.cmdRefresh">
-    </Style>
-    <Style Selector="DrawingPresenter.cmdRefresh">
-      <Setter Property="Drawing" Value="{StaticResource Modern.Undo}" />
-    </Style>
-
-    <Style Selector="Button.cmdCancel">
-    </Style>
-    <Style Selector="DrawingPresenter.cmdCancel">
-      <Setter Property="Drawing" Value="{StaticResource Modern.Undo}" />
-    </Style>
-
-    <Style Selector="Button.cmdundo">
-    </Style>
-    <Style Selector="DrawingPresenter.cmdundo">
-      <Setter Property="Drawing" Value="{StaticResource Modern.Undo}" />
-    </Style>
-
-    <Style Selector="Button.cmdup">
-    </Style>
-    <Style Selector="DrawingPresenter.cmdup">
-      <Setter Property="Drawing" Value="{StaticResource Modern.ArrowUp}" />
-    </Style>
-
-    <Style Selector="Button.cmddown">
-    </Style>
-    <Style Selector="DrawingPresenter.cmddown">
-      <Setter Property="Drawing" Value="{StaticResource Modern.ArrowDown}" />
-    </Style>
-
-    <Style Selector="Button.cmdtrash">
-      <Setter Property="Background" Value="Yellow"/>
-    </Style>
-    <Style Selector="DrawingPresenter.cmdtrash">
-      <Setter Property="Drawing" Value="{StaticResource Modern.PageHidden}" />
-    </Style>
-
-    <Style Selector="Button.cmddelete">
-      <Setter Property="Background" Value="Red"/>
-    </Style>
-    <Style Selector="DrawingPresenter.cmddelete">
-      <Setter Property="Drawing" Value="{StaticResource Modern.Delete}" />
-    </Style>
-
-    <Style Selector="Button.cmdcopy">
-      <Setter Property="Background" Value="Green"/>
-    </Style>
-    <Style Selector="DrawingPresenter.cmdcopy">
-      <Setter Property="Drawing" Value="{StaticResource Modern.PageCopy}" />
-    </Style>
-
-    <Style Selector="Button.cmdmove">
-      <Setter Property="Background" Value="Green"/>
-    </Style>
-    <Style Selector="DrawingPresenter.cmdmove">
-      <Setter Property="Drawing" Value="{StaticResource Modern.PageMinus}" />
-    </Style>
-
-    <Style Selector="Button.cmddoit">
-      <Setter Property="Background" Value="Green"/>
-    </Style>
-    <Style Selector="DrawingPresenter.cmddoit">
-      <Setter Property="Drawing" Value="{StaticResource Modern.Check}" />
+      <Setter Property="Width" Value="28"/>
+      <Setter Property="Height" Value="28"/>
     </Style>
 
     <Style Selector="Border.View">
-      <Setter Property="BorderBrush" Value="Black" />
-      <Setter Property="BorderThickness" Value="2" />
+      <Setter Property="BorderBrush" Value="#202020" />
+      <Setter Property="BorderThickness" Value="1" />
       <Setter Property="CornerRadius" Value="10" />
       <Setter Property="Padding" Value="4" />
+    </Style>
+<!--
+    <Style Selector=":is(Expander)">
+      <Setter Property="FontSize" Value="24"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+-->
+    <Style Selector="ToggleButton DrawingPresenter.tbchecked">
+        <Setter Property="IsVisible" Value="false"/>
+    </Style>
+    <Style Selector="ToggleButton:checked DrawingPresenter.tbchecked">
+        <Setter Property="IsVisible" Value="true"/>
+    </Style>
+    <Style Selector="ToggleButton DrawingPresenter.tbunchecked">
+        <Setter Property="IsVisible" Value="true"/>
+    </Style>
+    <Style Selector="ToggleButton:checked DrawingPresenter.tbunchecked">
+        <Setter Property="IsVisible" Value="false"/>
     </Style>
 </Styles>

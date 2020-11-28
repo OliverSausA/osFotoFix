@@ -8,22 +8,29 @@
              x:Class="osFotoFix.Views.FotoInfoListView">
   <Border Classes="View">
     <Grid RowDefinitions="Auto,*">
-      <StackPanel 
+      <StackPanel
         Grid.Row="0"
         Orientation="Horizontal"
         HorizontalAlignment="Center"
         >
-        <Button Classes="cmd cmdRefresh"
+        <Button Classes="cmd"
           Command="{Binding RefreshCmd}"
+          IsVisible="{Binding !RunningReadFoto}"
           ToolTip.Tip="Fotos ganz neu einlesen"
           >
-	        <DrawingPresenter Classes="cmd cmdRefresh"/>
+          <DrawingPresenter
+            Classes="cmd"
+            Drawing="{StaticResource FluentIcons.camera_add_regular}" />
         </Button>
-        <Button Classes="cmd cmdCancel"
+        <Button Classes="cmd"
           Command="{Binding CancelCmd}"
+          IsVisible="{Binding RunningReadFoto}"
+          Background="{StaticResource Cancel}"
           ToolTip.Tip="Hör auf, die ganzen Fotos zu laden"
           >
-	        <DrawingPresenter Classes="cmd cmdCancel"/>
+          <DrawingPresenter
+            Classes="cmd"
+            Drawing="{StaticResource FluentIcons.camera_add_regular}" />
         </Button>
         <ContentControl
           VerticalAlignment="Center"
@@ -45,50 +52,80 @@
           Watermark="Beschreibung"
           ToolTip.Tip="Wo kommen zum Beispiel die Bilder her?"
           />
-        <Button Classes="cmd cmdundo"
-          Command="{Binding UndoAllCmd}"
-          ToolTip.Tip="Rückgängig"
-          >
-	        <DrawingPresenter Classes="cmd cmdundo"/>
-        </Button>
         <Button Classes="cmd cmdtrash"
           ToolTip.Tip="Ab in den Papierkorb"
           IsEnabled="{Binding UserSettingsVM.TrashCmdActive}"
           IsVisible="{Binding UserSettingsVM.TrashCmdActive}"
+          Background="{StaticResource Warning}"
           Command="{Binding TrashAllCmd}"
           >
-          <DrawingPresenter Classes="cmd cmdtrash" />
+          <DrawingPresenter
+            Classes="cmd"
+            Drawing="{StaticResource FluentIcons.delete_regular}" />
         </Button>
         <Button Classes="cmd cmddelete"
           IsEnabled="{Binding UserSettingsVM.DelCmdActive}"
           IsVisible="{Binding UserSettingsVM.DelCmdActive}"
+          Background="{StaticResource Alert}"
           Command="{Binding DelAllCmd}"
           ToolTip.Tip="Ich lösche alle Bilder. Soll ich?"
           >
-	        <DrawingPresenter Classes="cmd cmddelete" />
+          <DrawingPresenter
+            Classes="cmd"
+            Drawing="{StaticResource FluentIcons.delete_off_regular}" />
         </Button>
         <Button Classes="cmd cmdmove"
           IsEnabled="{Binding UserSettingsVM.MoveCmdActive}"
           IsVisible="{Binding UserSettingsVM.MoveCmdActive}"
+          Background="{StaticResource OK_Color}"
           ToolTip.Tip="Alle Bilder ins Ziel verschieben"
           Command="{Binding MoveAllCmd}"
           >
-	        <DrawingPresenter Classes="cmd cmdmove" />
+          <DrawingPresenter
+            Classes="cmd"
+            Drawing="{StaticResource FluentIcons.sticker_regular}" />
         </Button>
         <Button Classes="cmd cmdcopy"
           IsEnabled="{Binding UserSettingsVM.CopyCmdActive}"
           IsVisible="{Binding UserSettingsVM.CopyCmdActive}"
+          Background="{StaticResource OK_Color}"
           ToolTip.Tip="Alle Bilder ins Ziel kopieren"
           Command="{Binding CopyAllCmd}"
           >
-	        <DrawingPresenter Classes="cmd cmdcopy" />
+          <DrawingPresenter
+            Classes="cmd"
+            Drawing="{StaticResource FluentIcons.sticker_add_regular}" />
+        </Button>
+
+        <Button Classes="cmd"
+          Command="{Binding UndoAllCmd}"
+          Background="{StaticResource Cancel}"
+          ToolTip.Tip="Rückgängig"
+          >
+	        <DrawingPresenter
+            Classes="cmd"
+            Drawing="{StaticResource FluentIconsFilled.backspace_filled}"
+            />
         </Button>
         <Button Classes="cmd cmddoit"
           Content="DoIt"
           Command="{Binding DoItCmd}"
+          IsVisible="{Binding !RunningFotoFixIt}"
           ToolTip.Tip="Alle Bilder verarbeiten"
           >
-	        <DrawingPresenter Classes="cmd cmddoit" />
+          <DrawingPresenter
+            Classes="cmd"
+            Drawing="{StaticResource FluentIcons.camera_switch_regular}" />
+        </Button>
+        <Button Classes="cmd cmdCancel"
+          Command="{Binding CancelDoItCmd}"
+          IsVisible="{Binding RunningFotoFixIt}"
+          Background="{StaticResource Cancel}"
+          ToolTip.Tip="Hör auf, die ganzen Fotos zu bearbeiten"
+          >
+          <DrawingPresenter
+            Classes="cmd"
+            Drawing="{StaticResource FluentIcons.camera_switch_regular}" />
         </Button>
       </StackPanel>
       <DataGrid
@@ -99,19 +136,19 @@
         SelectedItem="{Binding FotoSelected, Mode=TwoWay}"
         >
         <DataGrid.Columns>
-        <DataGridTextColumn 
+        <DataGridTextColumn
           Header="Verzeichnis"
           Binding="{Binding Foto.File.DirectoryName}"
         />
-        <DataGridTextColumn 
+        <DataGridTextColumn
           Header="Originalname"
           Binding="{Binding Foto.File.Name}"
         />
-        <DataGridTextColumn 
+        <DataGridTextColumn
           Header="Title"
           Binding="{Binding Title}"
         />
-        <DataGridTextColumn 
+        <DataGridTextColumn
           Header="Description"
           Binding="{Binding Description}"
         />
@@ -119,7 +156,7 @@
           Header="Aktion"
           Binding="{Binding Action}"
         />
-        <DataGridTextColumn 
+        <DataGridTextColumn
           Header="Exif"
           Binding="{Binding Foto.TypeOfCreationDate}"
           />
@@ -131,7 +168,7 @@
           Header="Erstelldatum"
           Binding="{Binding Foto.Created}"
           />
-        <DataGridTextColumn 
+        <DataGridTextColumn
           Header="Comment"
           Binding="{Binding Comment}"
           />
