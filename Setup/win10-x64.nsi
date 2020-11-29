@@ -43,7 +43,7 @@
 ; Version Information
 
   ;VIProductVersion "${ver1}.${ver2}.0.0"
-  VIProductVersion "0.3.0.0"
+  VIProductVersion "0.3.2.0"
   VIAddVersionKey "ProductName" "${APP_NAME}"
   VIAddVersionKey "CompanyName" "${COMP_NAME}"
   VIAddVersionKey "ProductVersion" "${PROD_VERSION}"

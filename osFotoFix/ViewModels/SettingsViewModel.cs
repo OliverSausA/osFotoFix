@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Reactive;
 
@@ -117,6 +118,18 @@ namespace osFotoFix.ViewModels
       set { this.RaiseAndSetIfChanged( ref copyCmdActive, value ); }
     }
 
+    private int generalFontSize;
+    public string GeneralFontSize {
+      get { return generalFontSize.ToString(); }
+      set { 
+        int size = int.Parse( value );
+        this.RaiseAndSetIfChanged( ref generalFontSize, size ); }
+    }
+
+    public List<string> FontSizeList {
+      get { return new List<string>() { "10", "12", "14", "16", "20", "24", "30" }; }
+    }
+
     private string title;
     public string Title {
       get { return title; }
@@ -142,6 +155,8 @@ namespace osFotoFix.ViewModels
       DelCmdActive   = settings.DelCmdActive;
       MoveCmdActive  = settings.MoveCmdActive;
       CopyCmdActive  = settings.CopyCmdActive;
+      
+      GeneralFontSize = settings.GeneralFontSize.ToString();
 
       Description = settings.Description;
       Title = settings.Title;
@@ -158,6 +173,8 @@ namespace osFotoFix.ViewModels
       settings.DelCmdActive   = DelCmdActive;
       settings.MoveCmdActive  = MoveCmdActive;
       settings.CopyCmdActive  = CopyCmdActive;
+
+      settings.GeneralFontSize = int.Parse(GeneralFontSize);
 
       settings.Title = Title;
       settings.Description = Description;

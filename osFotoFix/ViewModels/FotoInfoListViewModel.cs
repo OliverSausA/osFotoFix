@@ -105,7 +105,8 @@ namespace osFotoFix.ViewModels
       Dispatcher.UIThread.InvokeAsync( () => {
         var fotoInfo = new FotoInfoVM( args.FotoInfo, FotoInfoList.Count );
         FotoInfoList.Add( fotoInfo );
-        FotoSelected = fotoInfo;
+        if( FotoInfoList.Count == 1 )
+          FotoSelected = fotoInfo;
       });
     }
 

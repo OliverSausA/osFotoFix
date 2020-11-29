@@ -9,11 +9,12 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="osFotoFix"
         >
-
+<!--
+      FontSize="{Binding FontSize}"
+-->
   <Window.Styles>
    <Style Selector=":is(Window)">
-     <Setter Property="FontSize" Value="16"/>
-     <!-- <Setter Property="FontWeight" Value="Bold"/> -->
+     <Setter Property="FontSize" Value="{Binding SettingsVM.GeneralFontSize}"/>
    </Style>
   </Window.Styles>
   <Grid 
