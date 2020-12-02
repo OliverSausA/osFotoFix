@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
-    <Version>0.3.2.0</Version>
-    <FileVersion>0.3.2.0</FileVersion>
-    <InformationalVersion>0.3.2.0.20201128</InformationalVersion>
+    <FileVersion>0.3.3.20493</FileVersion>
+    <InformationalVersion>0.3.3.20493_make_by_os</InformationalVersion>
+    <Version>0.3.3.20493</Version>
   </PropertyGroup>
 </Project>
