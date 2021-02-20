@@ -76,6 +76,8 @@ sub BuildTarget($)
   #`dotnet publish $build_args`;
   my $status = system( "dotnet publish $build_args" );
   die "Faild to build\n" if( ($status >>=8) != 0);
+
+  `cp ../osFotoFix/osFotoFix.png $target-deployment`;
   print "Build OK\n";
 
 }
@@ -110,6 +112,8 @@ sub MakeLinuxSetup($$)
   `cp -r DEBIAN $target-setup/osfotofix`;
   `mkdir -p $target-setup/osfotofix/opt/osfotofix`;
   `cp $target-deployment/* $target-setup/osfotofix/opt/osfotofix/`;
+  `mkdir -p $target-setup/osfotofix/usr/share/applications`;
+  `cp osfotofix.desktop $target-setup/osfotofix/usr/share/applications/`;
   `dpkg-deb --build $target-setup/osfotofix`;
 
   print "OK\n";
