@@ -22,6 +22,9 @@ sub main()
     if( $build =~ 'win10' ) {
       MakeWindowsSetup( $build, $version );
     }
+    if( $build =~ 'linux' ) {
+      MakeLinuxSetup( $build, $version );
+    }
   }
 }
 
@@ -67,11 +70,6 @@ sub BuildTarget($)
     `rm -r "$target-deployment"`;
   }
 
-  if ( ! -d "$target-setup" ) {
-    print "create $target-setup\n";
-    `mkdir $target-setup`;
-  }
-
   print "run dotnet publish\n";
   my $build_args = "../osFotoFix -o $target-deployment -r $target -p:PublishReadyRun=true -p:PublishSingleFile=false -p:PublishedTrim=true --self-contained true";
   print "$build_args\n" if $DEBUG;
@@ -85,8 +83,34 @@ sub BuildTarget($)
 sub MakeWindowsSetup($$)
 {
   my ($target, $version) = @_;
+
+  if ( ! -d "$target-setup" ) {
+    print "create $target-setup\n";
+    `mkdir $target-setup`;
+  }
+
   print "run makensis\n";
   `$NSIS -DVERSION=$version $target.nsi`;
+
+  print "OK\n";
+  print "------------------------------------------------------------------------------------\n";
+}
+
+sub MakeLinuxSetup($$)
+{
+  my ($target, $version) = @_;
+
+  if ( ! -d "$target-setup" ) {
+    print "create $target-setup\n";
+    `mkdir $target-setup`;
+  }
+
+  `rm -r $target-setup/`;
+  `mkdir -p $target-setup/osfotofix`;
+  `cp -r DEBIAN $target-setup/osfotofix`;
+  `mkdir -p $target-setup/osfotofix/opt/osfotofix`;
+  `cp $target-deployment/* $target-setup/osfotofix/opt/osfotofix/`;
+  `dpkg-deb --build $target-setup/osfotofix`;
 
   print "OK\n";
   print "------------------------------------------------------------------------------------\n";

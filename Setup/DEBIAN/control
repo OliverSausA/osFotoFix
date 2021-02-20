@@ -1,0 +1,8 @@
+Package: osfotofix
+Version: 1.3
+Section: custom
+Architecture: all
+Essential: no
+Installed-Size: 100M
+Maintainer: oliver@seidel-it.com
+Description: just a tool to mangage pictures
