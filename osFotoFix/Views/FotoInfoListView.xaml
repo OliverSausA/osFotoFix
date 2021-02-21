@@ -7,9 +7,11 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="osFotoFix.Views.FotoInfoListView">
   <Border Classes="View">
-    <Grid RowDefinitions="Auto,*">
+    <Grid 
+      RowDefinitions="Auto,*"
+      ColumnDefinitions="*,Auto"
+      >
       <StackPanel
-        Grid.Row="0"
         Orientation="Horizontal"
         HorizontalAlignment="Center"
         >
@@ -128,9 +130,28 @@
             Drawing="{StaticResource FluentIcons.camera_switch_regular}" />
         </Button>
       </StackPanel>
+      <StackPanel
+        Grid.Column="1"
+        Orientation="Horizontal"
+        HorizontalAlignment="Right"
+      >
+        <ContentControl
+          VerticalAlignment="Center"
+          Content="Anzahl der Bilder: "
+          />
+        <ContentControl
+          VerticalAlignment="Center"
+          Margin="0,0,5,0"
+          >
+          <ContentControl.Content>
+            <Binding Path="FotoInfoList.Count" Mode="OneWay" />
+          </ContentControl.Content>
+        </ContentControl>
+      </StackPanel>
       <DataGrid
         Name="FotoList"
         Grid.Row="1"
+        Grid.ColumnSpan="2"
         AutoGenerateColumns="False"
         Items="{Binding FotoInfoList}"
         SelectedItem="{Binding FotoSelected, Mode=TwoWay}"

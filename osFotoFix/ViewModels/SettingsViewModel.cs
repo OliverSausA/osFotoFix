@@ -120,6 +120,15 @@ namespace osFotoFix.ViewModels
         FilterChangedEvent?.Invoke();
         }
     }
+
+    private bool filterFilenameTrashed;
+    public bool FilterFilenameTrashed {
+      get { return filterFilenameTrashed; }
+      set {
+        this.RaiseAndSetIfChanged( ref filterFilenameTrashed, value );
+        FilterChangedEvent?.Invoke();
+      }
+    }
     public delegate void FilterChanged();
     public FilterChanged FilterChangedEvent;
 

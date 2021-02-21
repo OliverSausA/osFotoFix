@@ -30,6 +30,8 @@ namespace osFotoFix.Models
     public bool FilterDatumFilename {get;set;}
     [XmlAttribute]
     public bool FilterDatumFilechanged {get;set;}
+    [XmlAttribute]
+    public bool FilterFilenameTrashed {get;set;}
 
     [XmlAttribute]
     public bool TrashCmdActive {get;set;}

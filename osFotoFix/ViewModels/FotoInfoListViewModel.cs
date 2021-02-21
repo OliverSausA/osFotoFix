@@ -120,14 +120,14 @@ namespace osFotoFix.ViewModels
     }
     private bool FilterMatch( FotoInfoVM fotoInfo ) 
     {
-      if( fotoInfo.Foto.File.Name.StartsWith( ".trash" ) )
-        return false; 
       if( !UserSettingsVM.FilterDatumExif && fotoInfo.Foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Exif )
         return false;
       if( !UserSettingsVM.FilterDatumFilename && fotoInfo.Foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Filename )
         return false;
       if( !UserSettingsVM.FilterDatumFilechanged && fotoInfo.Foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Filesystem )
         return false;
+      if( !UserSettingsVM.FilterFilenameTrashed && fotoInfo.Foto.File.Name.StartsWith( ".trash" ) )
+        return false; 
 
       return true;
     }
