@@ -62,6 +62,23 @@
             />
         </Grid>
       </Expander>
+      <Expander
+        Margin="0,40,0,0"
+        Header="Filter"
+        IsExpanded="True"
+      >
+        <StackPanel>
+          <CheckBox
+            Content="Datum aus Exif"
+            IsChecked="{Binding FilterDatumExif, Mode=TwoWay}" />
+          <CheckBox
+            Content="Datum aus Dateinamen"
+            IsChecked="{Binding FilterDatumFilename, Mode=TwoWay}" />
+          <CheckBox
+            Content="Datum aus Dateisystem"
+            IsChecked="{Binding FilterDatumFilechanged, Mode=TwoWay}" />
+        </StackPanel>
+      </Expander>
       <Expander 
         Margin="0,40,0,0"
         Header="Knöpfe"

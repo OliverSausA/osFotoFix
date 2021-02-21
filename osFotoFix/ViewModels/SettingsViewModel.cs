@@ -94,6 +94,35 @@ namespace osFotoFix.ViewModels
       return "";    
     }
 
+    private bool filterDatumExif;
+    public bool FilterDatumExif {
+      get { return filterDatumExif; }
+      set { 
+        this.RaiseAndSetIfChanged( ref filterDatumExif, value ); 
+        FilterChangedEvent?.Invoke();
+        }
+    }
+
+    private bool filterDatumFilename;
+    public bool FilterDatumFilename {
+      get { return filterDatumFilename; }
+      set { 
+        this.RaiseAndSetIfChanged( ref filterDatumFilename, value ); 
+        FilterChangedEvent?.Invoke();
+        }
+    }
+
+    private bool filterDatumFilechanged;
+    public bool FilterDatumFilechanged {
+      get { return filterDatumFilechanged; }
+      set { 
+        this.RaiseAndSetIfChanged( ref filterDatumFilechanged, value ); 
+        FilterChangedEvent?.Invoke();
+        }
+    }
+    public delegate void FilterChanged();
+    public FilterChanged FilterChangedEvent;
+
     private bool trashCmdActive;
     public bool TrashCmdActive {
       get { return trashCmdActive; }
@@ -151,6 +180,10 @@ namespace osFotoFix.ViewModels
       Target = settings.Ziel;
       Trash  = settings.Papierkorb;
 
+      FilterDatumExif = settings.FilterDatumExif;
+      FilterDatumFilename = settings.FilterDatumFilename;
+      FilterDatumFilechanged = settings.FilterDatumFilechanged;
+
       TrashCmdActive = settings.TrashCmdActive;
       DelCmdActive   = settings.DelCmdActive;
       MoveCmdActive  = settings.MoveCmdActive;
@@ -168,6 +201,10 @@ namespace osFotoFix.ViewModels
       settings.Quelle = Source;
       settings.Ziel = Target;
       settings.Papierkorb = Trash;
+
+      settings.FilterDatumExif = FilterDatumExif;
+      settings.FilterDatumFilename = FilterDatumFilename;
+      settings.FilterDatumFilechanged = FilterDatumFilechanged;
 
       settings.TrashCmdActive = TrashCmdActive;
       settings.DelCmdActive   = DelCmdActive;

@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.IO;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reactive;
 using System.Threading;
@@ -19,11 +20,13 @@ namespace osFotoFix.ViewModels
     private FotoInfoService service;
     private FotoInfoDetailViewModel FotoInfoDetailVM;
     private ImageViewModel ImageVM;
+    private List<FotoInfoVM> AllFotoInfos;
     public FotoInfoListViewModel( 
               SettingsViewModel UserSettingsVM,
               ImageViewModel ImageVM, 
               FotoInfoDetailViewModel FotoInfoDetailVM )
     {
+      AllFotoInfos = new List<FotoInfoVM>();
       FotoInfoList = new ObservableCollection<FotoInfoVM>();
       this.UserSettingsVM = UserSettingsVM;
 
@@ -54,6 +57,7 @@ namespace osFotoFix.ViewModels
 
       UserSettingsVM.NewSourceSelectedEvent += OnNewSourceSelected;
       OnNewSourceSelected( UserSettingsVM.Source );
+      UserSettingsVM.FilterChangedEvent += OnFilterChanged;
     }
     
     public SettingsViewModel UserSettingsVM { get;set; }
@@ -72,6 +76,7 @@ namespace osFotoFix.ViewModels
 
     private void OnNewSourceSelected( string source ) 
     {
+      AllFotoInfos.Clear();
       FotoInfoList.Clear();
       FotoSelected = null;
       Task.Run( () => ReadFotoInfos( source ) );
@@ -104,10 +109,39 @@ namespace osFotoFix.ViewModels
     {
       Dispatcher.UIThread.InvokeAsync( () => {
         var fotoInfo = new FotoInfoVM( args.FotoInfo, FotoInfoList.Count );
-        FotoInfoList.Add( fotoInfo );
-        if( FotoInfoList.Count == 1 )
-          FotoSelected = fotoInfo;
+        AllFotoInfos.Add( fotoInfo );
+        if( FilterMatch( fotoInfo ) )
+        {
+          FotoInfoList.Add( fotoInfo );
+          if( FotoInfoList.Count == 1 )
+            FotoSelected = fotoInfo;
+        }
       });
+    }
+    private bool FilterMatch( FotoInfoVM fotoInfo ) 
+    {
+      if( fotoInfo.Foto.File.Name.StartsWith( ".trash" ) )
+        return false; 
+      if( !UserSettingsVM.FilterDatumExif && fotoInfo.Foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Exif )
+        return false;
+      if( !UserSettingsVM.FilterDatumFilename && fotoInfo.Foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Filename )
+        return false;
+      if( !UserSettingsVM.FilterDatumFilechanged && fotoInfo.Foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Filesystem )
+        return false;
+
+      return true;
+    }
+    private void OnFilterChanged() 
+    {
+      FotoInfoList.Clear();
+      var s = FotoSelected;
+      FotoSelected = null;
+      foreach( var item in AllFotoInfos.Where( x => FilterMatch( x ) ) ) {
+        FotoInfoList.Add( item );
+        if( item == s ) FotoSelected = item;
+      }
+      if( FotoSelected == null )
+        SelectFirstFoto();
     }
 
     private void OnFotoFixed( object sender, FotoInfoEventArgs args )

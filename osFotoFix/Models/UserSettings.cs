@@ -7,6 +7,9 @@ namespace osFotoFix.Models
   public class UserSettings
   {
     public UserSettings() {
+      FilterDatumExif = true;
+      FilterDatumFilename = true;
+      FilterDatumFilechanged = true;
       TrashCmdActive = true;
       DelCmdActive = true;
       MoveCmdActive = true;
@@ -20,6 +23,13 @@ namespace osFotoFix.Models
     public string Ziel {get;set;}
     [XmlAttribute]
     public string Papierkorb {get;set;}
+
+    [XmlAttribute]
+    public bool FilterDatumExif {get;set;}
+    [XmlAttribute]
+    public bool FilterDatumFilename {get;set;}
+    [XmlAttribute]
+    public bool FilterDatumFilechanged {get;set;}
 
     [XmlAttribute]
     public bool TrashCmdActive {get;set;}
