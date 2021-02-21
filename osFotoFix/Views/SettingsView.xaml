@@ -63,28 +63,60 @@
         </Grid>
       </Expander>
       <Expander
-        Margin="0,40,0,0"
+        Margin="0,30,0,0"
         Header="Filter"
         IsExpanded="True"
       >
         <StackPanel>
-          <CheckBox
-            Content="Datum aus Exif"
-            IsChecked="{Binding FilterDatumExif, Mode=TwoWay}" />
-          <CheckBox
-            Content="Datum aus Dateinamen"
-            IsChecked="{Binding FilterDatumFilename, Mode=TwoWay}" />
-          <CheckBox
-            Content="Datum aus Dateisystem"
-            IsChecked="{Binding FilterDatumFilechanged, Mode=TwoWay}" />
-          <CheckBox
+          <StackPanel
+            Orientation="Horizontal"
+          >
+            <CheckBox
+              IsChecked="{Binding FilterDatumExif, Mode=TwoWay}" />
+            <TextBlock 
+              VerticalAlignment="Center"
+              Margin="4,0,0,0"
+              Text="{Binding Path=FilterDatumExifCount, StringFormat=Datum aus Exif ({0})}"
+            />
+          </StackPanel>
+          <StackPanel
+            Orientation="Horizontal"
+          >
+            <CheckBox
+              IsChecked="{Binding FilterDatumFilename, Mode=TwoWay}" />
+            <TextBlock 
+              VerticalAlignment="Center"
+              Margin="4,0,0,0"
+              Text="{Binding Path=FilterDatumFilenameCount, StringFormat=Datum aus Dateinamen ({0})}"
+            />
+          </StackPanel>
+          <StackPanel
+            Orientation="Horizontal"
+          >
+            <CheckBox
+              IsChecked="{Binding FilterDatumFilechanged, Mode=TwoWay}" />
+            <TextBlock 
+              VerticalAlignment="Center"
+              Margin="4,0,0,0"
+              Text="{Binding Path=FilterDatumFilechangedCount, StringFormat=Datum aus Dateisystem ({0})}"
+            />
+          </StackPanel>
+          <StackPanel
+            Orientation="Horizontal"
             Margin="0,5,0,0"
-            Content="Dateiname beginnt mit .trashed"
-            IsChecked="{Binding FilterFilenameTrashed, Mode=TwoWay}" />
+          >
+            <CheckBox
+              IsChecked="{Binding FilterFilenameTrashed, Mode=TwoWay}" />
+            <TextBlock 
+              VerticalAlignment="Center"
+              Margin="4,0,0,0"
+              Text="{Binding Path=FilterFilenameTrashedCount, StringFormat=Dateiname beginnt mit .trashed ({0})}"
+            />
+          </StackPanel>
         </StackPanel>
       </Expander>
       <Expander 
-        Margin="0,40,0,0"
+        Margin="0,30,0,0"
         Header="Knöpfe"
         IsExpanded="True"
         >
@@ -154,7 +186,7 @@
         </Grid> 
       </Expander>
       <Expander 
-        Margin="0,40,0,0"
+        Margin="0,30,0,0"
         Header="Layout"
         IsExpanded="True"
         >

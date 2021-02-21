@@ -79,6 +79,7 @@ namespace osFotoFix.ViewModels
       AllFotoInfos.Clear();
       FotoInfoList.Clear();
       FotoSelected = null;
+      UserSettingsVM.ResetFilterStatistik();
       Task.Run( () => ReadFotoInfos( source ) );
     }
 
@@ -120,20 +121,35 @@ namespace osFotoFix.ViewModels
     }
     private bool FilterMatch( FotoInfoVM fotoInfo ) 
     {
-      if( !UserSettingsVM.FilterDatumExif && fotoInfo.Foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Exif )
-        return false;
-      if( !UserSettingsVM.FilterDatumFilename && fotoInfo.Foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Filename )
-        return false;
-      if( !UserSettingsVM.FilterDatumFilechanged && fotoInfo.Foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Filesystem )
-        return false;
-      if( !UserSettingsVM.FilterFilenameTrashed && fotoInfo.Foto.File.Name.StartsWith( ".trash" ) )
-        return false; 
+      bool bMatch = true;
 
-      return true;
+      if( fotoInfo.Foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Exif ) {
+        UserSettingsVM.FilterDatumExifCount++;
+        bMatch &= UserSettingsVM.FilterDatumExif;
+      }
+
+      if( fotoInfo.Foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Filename ) {
+        UserSettingsVM.FilterDatumFilenameCount++;
+        bMatch &= UserSettingsVM.FilterDatumFilename;
+      }
+
+      if( fotoInfo.Foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Filesystem ) {
+        UserSettingsVM.FilterDatumFilechangedCount++;
+        bMatch &= UserSettingsVM.FilterDatumFilechanged;
+      }
+
+      if( fotoInfo.Foto.File.Name.StartsWith( ".trash" ) ) {
+        UserSettingsVM.FilterFilenameTrashedCount++;
+        bMatch &= UserSettingsVM.FilterFilenameTrashed;
+      }
+
+      return bMatch;
     }
+
     private void OnFilterChanged() 
     {
       FotoInfoList.Clear();
+      UserSettingsVM.ResetFilterStatistik();
       var s = FotoSelected;
       FotoSelected = null;
       foreach( var item in AllFotoInfos.Where( x => FilterMatch( x ) ) ) {

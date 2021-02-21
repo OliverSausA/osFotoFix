@@ -94,6 +94,14 @@ namespace osFotoFix.ViewModels
       return "";    
     }
 
+    public void ResetFilterStatistik()
+    {
+      FilterDatumExifCount = 0;
+      FilterDatumFilenameCount = 0;
+      FilterDatumFilechangedCount = 0;
+      FilterFilenameTrashedCount = 0;
+    }
+
     private bool filterDatumExif;
     public bool FilterDatumExif {
       get { return filterDatumExif; }
@@ -101,6 +109,13 @@ namespace osFotoFix.ViewModels
         this.RaiseAndSetIfChanged( ref filterDatumExif, value ); 
         FilterChangedEvent?.Invoke();
         }
+    }
+    private int filterDatumExifCount;
+    public int FilterDatumExifCount {
+      get { return filterDatumExifCount; }
+      set {
+        this.RaiseAndSetIfChanged( ref filterDatumExifCount, value );
+      }
     }
 
     private bool filterDatumFilename;
@@ -111,6 +126,13 @@ namespace osFotoFix.ViewModels
         FilterChangedEvent?.Invoke();
         }
     }
+    private int filterDatumFilenameCount;
+    public int FilterDatumFilenameCount {
+      get { return filterDatumFilenameCount; }
+      set {
+        this.RaiseAndSetIfChanged( ref filterDatumFilenameCount, value );
+      }
+    }
 
     private bool filterDatumFilechanged;
     public bool FilterDatumFilechanged {
@@ -120,6 +142,13 @@ namespace osFotoFix.ViewModels
         FilterChangedEvent?.Invoke();
         }
     }
+    private int filterDatumFilechangedCount;
+    public int FilterDatumFilechangedCount {
+      get { return filterDatumFilechangedCount; }
+      set {
+        this.RaiseAndSetIfChanged( ref filterDatumFilechangedCount, value );
+      }
+    }
 
     private bool filterFilenameTrashed;
     public bool FilterFilenameTrashed {
@@ -127,6 +156,13 @@ namespace osFotoFix.ViewModels
       set {
         this.RaiseAndSetIfChanged( ref filterFilenameTrashed, value );
         FilterChangedEvent?.Invoke();
+      }
+    }
+    private int filterFilenameTrashedCount;
+    public int FilterFilenameTrashedCount {
+      get { return filterFilenameTrashedCount; }
+      set {
+        this.RaiseAndSetIfChanged( ref filterFilenameTrashedCount, value );
       }
     }
     public delegate void FilterChanged();
