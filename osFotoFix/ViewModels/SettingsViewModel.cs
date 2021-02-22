@@ -264,5 +264,29 @@ namespace osFotoFix.ViewModels
       service.SaveUserSettings( settings );
     }
 
+		public static string VersionInfo
+		{
+			get
+			{
+				var asm = System.Reflection.Assembly.GetExecutingAssembly();
+				var fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(asm.Location);
+#if PRODUCTION
+				string conf = "PRODUCTION";
+#elif RELEASE
+				string conf = "RELEASE CANDIDATE";
+#else
+				string conf = "DEBUG";
+#endif
+				return string.Format("osFotoFix v{0}.{1}.{2}.{3} ({4})",
+														 fvi.FileMajorPart, fvi.FileMinorPart, fvi.FileBuildPart, fvi.FilePrivatePart, conf);
+			}
+		}
+		public static string AppInfo
+		{
+			get
+			{
+				return "Seidel-it, OS, 2021";
+			}
+		}
   }
 }

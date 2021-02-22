@@ -7,8 +7,10 @@
              x:Class="osFotoFix.Views.SettingsView"
              >
   <Border Classes="View">
-    <StackPanel>
+    <Grid
+      RowDefinitions="Auto,Auto,Auto,*,Auto" >
       <Expander 
+        Grid.Row="0"
         Classes="h1"
         Margin="0,20,0,0"
         Header="Verzeichnisse"
@@ -63,6 +65,7 @@
         </Grid>
       </Expander>
       <Expander
+        Grid.Row="1"
         Margin="0,30,0,0"
         Header="Filter"
         IsExpanded="True"
@@ -116,6 +119,7 @@
         </StackPanel>
       </Expander>
       <Expander 
+        Grid.Row="2"
         Margin="0,30,0,0"
         Header="Knöpfe"
         IsExpanded="True"
@@ -186,6 +190,7 @@
         </Grid> 
       </Expander>
       <Expander 
+        Grid.Row="3"
         Margin="0,30,0,0"
         Header="Layout"
         IsExpanded="True"
@@ -198,6 +203,8 @@
           <ComboBox 
             Items="{Binding FontSizeList}"
             SelectedItem="{Binding GeneralFontSize}"
+            HorizontalAlignment="Left"
+            Width="50"
             >
             <ComboBox.ItemTemplate>
               <DataTemplate>
@@ -208,6 +215,13 @@
         </StackPanel>
 
       </Expander>
-    </StackPanel>
+      <StackPanel
+        Grid.Row="5"
+        Orientation="Horizontal" >
+        <TextBlock Text="{Binding VersionInfo}" />
+        <TextBlock Text=",  " />
+        <TextBlock Text="{Binding AppInfo}" />
+      </StackPanel>
+    </Grid>
   </Border>
 </UserControl>

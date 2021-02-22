@@ -42,7 +42,7 @@ sub UpdateVersion()
 
   $release++;
   my $t = localtime;
-  $build = sprintf( "%d%d%d", $t->yy, $t->week, $t->day_of_week );
+  $build = sprintf( "%d%d%d", $t->yy, $t->week, $t->day_of_week +1 );
   $version = join( '.', ( $major, $minjor, $release, $build ) );
   print "  create new version: $version\n";
 
@@ -108,8 +108,18 @@ sub MakeLinuxSetup($$)
   }
 
   `rm -r $target-setup/`;
-  `mkdir -p $target-setup/osfotofix`;
-  `cp -r DEBIAN $target-setup/osfotofix`;
+  `mkdir -p $target-setup/osfotofix/DEBIAN`;
+
+  open( my $fh_in, "<", "DEBIAN/control" );
+  open( my $fh_out, ">", "$target-setup/osfotofix/DEBIAN/control" );
+  while(<$fh_in>) {
+    chomp;
+    $_ =~ s/^Version.*$/Version: $version/;
+    print $fh_out "$_\n";
+  }
+  close $fh_in;
+  close $fh_out;
+
   `mkdir -p $target-setup/osfotofix/opt/osfotofix`;
   `cp $target-deployment/* $target-setup/osfotofix/opt/osfotofix/`;
   `mkdir -p $target-setup/osfotofix/usr/share/applications`;
