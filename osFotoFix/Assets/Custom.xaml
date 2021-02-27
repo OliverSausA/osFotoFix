@@ -18,12 +18,6 @@
       <Setter Property="CornerRadius" Value="10" />
       <Setter Property="Padding" Value="4" />
     </Style>
-<!--
-    <Style Selector=":is(Expander)">
-      <Setter Property="FontSize" Value="24"/>
-      <Setter Property="FontWeight" Value="Bold"/>
-    </Style>
--->
     <Style Selector="ToggleButton DrawingPresenter.tbchecked">
         <Setter Property="IsVisible" Value="false"/>
     </Style>
@@ -36,4 +30,8 @@
     <Style Selector="ToggleButton:checked DrawingPresenter.tbunchecked">
         <Setter Property="IsVisible" Value="false"/>
     </Style>
+
+    <Style Selector="DataGridRow:selected /template/ Rectangle#BackgroundRectangle">
+      <Setter Property="Fill" Value="Yellow"/>
+    </Style>  
 </Styles>
