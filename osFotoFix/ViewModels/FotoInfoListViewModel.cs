@@ -109,10 +109,11 @@ namespace osFotoFix.ViewModels
     private void OnFotoInfoRead( object sender, FotoInfoEventArgs args )
     {
       Dispatcher.UIThread.InvokeAsync( () => {
-        var fotoInfo = new FotoInfoVM( args.FotoInfo, FotoInfoList.Count );
+        var fotoInfo = new FotoInfoVM( args.FotoInfo );
         AllFotoInfos.Add( fotoInfo );
         if( FilterMatch( fotoInfo ) )
         {
+          fotoInfo.Index = FotoInfoList.Count;
           FotoInfoList.Add( fotoInfo );
           if( FotoInfoList.Count == 1 )
             FotoSelected = fotoInfo;
@@ -153,6 +154,7 @@ namespace osFotoFix.ViewModels
       var s = FotoSelected;
       FotoSelected = null;
       foreach( var item in AllFotoInfos.Where( x => FilterMatch( x ) ) ) {
+        item.Index = FotoInfoList.Count;
         FotoInfoList.Add( item );
         if( item == s ) FotoSelected = item;
       }

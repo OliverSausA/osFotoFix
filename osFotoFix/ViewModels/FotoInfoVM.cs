@@ -8,15 +8,14 @@ namespace osFotoFix.ViewModels
 
   public class FotoInfoVM : ViewModelBase
   {
-    public FotoInfoVM( FotoInfo foto, int index )
+    public FotoInfoVM( FotoInfo foto )
     {
       Foto = foto;
-      Index = index;
     }
 
     public FotoInfo Foto {get;set;}
 
-    public int Index { get; private set; }
+    public int Index { get; set; }
 
     public string Comment {
       get { return Foto.Comment; }
