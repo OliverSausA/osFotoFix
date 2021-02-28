@@ -183,6 +183,61 @@
           Header="Aktion"
           Binding="{Binding Action}"
         />
+        <!--
+        <DataGridTemplateColumn
+          Header="Action">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel>
+        <Panel
+          Margin="10,0,10,0"
+          Width="64" Height="64"
+          HorizontalAlignment="Left"
+          Background="{StaticResource OK_Color}"
+          IsVisible="{Binding Action, Converter={StaticResource EActionCompare}, ConverterParameter=copy}"
+          >
+          <DrawingPresenter 
+            Classes="cmd" 
+            Drawing="{StaticResource FluentIcons.sticker_add_regular}" />
+        </Panel>
+        <Panel
+          Margin="10,0,10,0"
+          Width="64" Height="64"
+          HorizontalAlignment="Left"
+          Background="{StaticResource OK_Color}"
+          IsVisible="{Binding Action, Converter={StaticResource EActionCompare}, ConverterParameter=move}"
+          >
+          <DrawingPresenter 
+            Classes="cmd" 
+            Drawing="{StaticResource FluentIcons.sticker_regular}" />
+        </Panel>
+        <Panel
+          Margin="10,0,10,0"
+          Width="64" Height="64"
+          HorizontalAlignment="Left"
+          Background="{StaticResource Alert}"
+          IsVisible="{Binding Action, Converter={StaticResource EActionCompare}, ConverterParameter=delete}"
+          >
+          <DrawingPresenter 
+            Classes="cmd" 
+            Drawing="{StaticResource FluentIcons.delete_off_regular}" />
+        </Panel>
+        <Panel
+          Margin="10,0,10,0"
+          Width="64" Height="64"
+          HorizontalAlignment="Left"
+          Background="{StaticResource Warning}"
+          IsVisible="{Binding Action, Converter={StaticResource EActionCompare}, ConverterParameter=trash}"
+          >
+          <DrawingPresenter 
+            Classes="cmd" 
+            Drawing="{StaticResource FluentIcons.delete_regular}" />
+        </Panel>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+        -->
         <DataGridTextColumn
           Header="Exif"
           Binding="{Binding Foto.TypeOfCreationDate}"

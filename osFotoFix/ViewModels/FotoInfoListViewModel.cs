@@ -124,6 +124,9 @@ namespace osFotoFix.ViewModels
     {
       bool bMatch = true;
 
+      if( fotoInfo.Foto.Action == EAction.done )
+        bMatch = false;
+
       if( fotoInfo.Foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Exif ) {
         UserSettingsVM.FilterDatumExifCount++;
         bMatch &= UserSettingsVM.FilterDatumExif;
