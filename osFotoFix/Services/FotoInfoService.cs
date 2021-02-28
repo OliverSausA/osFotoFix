@@ -64,24 +64,23 @@ namespace osFotoFix.Services
         if( token.IsCancellationRequested ) return false;
 
         await Task.Run( () => FotoFixIt( foto ) );
-        if( FotoFixedEvent != null )
-          FotoFixedEvent?.Invoke( this, new FotoInfoEventArgs( foto ) );
+        FotoFixedEvent?.Invoke( this, new FotoInfoEventArgs( foto ) );
       }
+      FotoFixedEvent?.Invoke( this, new FotoInfoEventArgs( null ) );
       return true;
     }
     protected void FotoFixIt( FotoInfo foto )
     {
-      ///// Thread.Sleep( 1000 );
-      ///// foto.Action = EAction.done;
-      ///// return;
       try
       {
+        /***** Evtl. per Option auswähbar 
         if( (foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Filesystem) )
         {
           foto.Comment = "Exif Infomation ist ungültig!";
           foto.Action = EAction.failed;
         }
-        else if( foto.Action == EAction.copy ) {
+        else *****/
+        if( foto.Action == EAction.copy ) {
           foto.NewFileName = CopyFoto( foto );
           foto.Action = EAction.done;
         }
@@ -105,14 +104,6 @@ namespace osFotoFix.Services
       }
 
     }
-    /*****
-    public List<FotoInfo> GetFotoInfos( DirectoryInfo baseDir )
-    {
-      var fotoInfos = new List<FotoInfo>();
-      ReadFotoInfos( fotoInfos, baseDir );
-      return fotoInfos;
-    }
-    *****/
 
     public string GetNewFileName( FotoInfo foto )
     {

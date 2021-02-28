@@ -168,8 +168,15 @@ namespace osFotoFix.ViewModels
     private void OnFotoFixed( object sender, FotoInfoEventArgs args )
     {
       Dispatcher.UIThread.InvokeAsync( () => {
-        var fotoVM = FotoInfoList.Where( f => f.Foto.ID == args.FotoInfo.ID ).First();
-        fotoVM.UpdateView();
+        if( args.FotoInfo != null )
+        {
+          var fotoVM = FotoInfoList.Where( f => f.Foto.ID == args.FotoInfo.ID ).First();
+          fotoVM.UpdateView();
+        }
+        else
+        {
+          OnFilterChanged();
+        }
       });
     }
 
