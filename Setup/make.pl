@@ -42,7 +42,7 @@ sub UpdateVersion()
 
   $release++;
   my $t = localtime;
-  $build = sprintf( "%d%d%d", $t->yy, $t->week, $t->day_of_week +1 );
+  $build = sprintf( "%d%02d%d", $t->yy, $t->week, $t->day_of_week +1 );
   $version = join( '.', ( $major, $minjor, $release, $build ) );
   print "  create new version: $version\n";
 

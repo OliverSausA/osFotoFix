@@ -86,7 +86,8 @@ namespace osFotoFix.ViewModels
         if (result != null)
           return $"{result}";
       }
-      catch (Exception ex)
+      //catch (Exception ex)
+      catch
       {
         //  _serviceProvider.GetService<ILog>().LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
       }
