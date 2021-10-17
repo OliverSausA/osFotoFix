@@ -2,12 +2,68 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="clr-namespace:osFotoFix.Views;assembly=osFotoFix"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="osFotoFix.Views.FotoInfoDetailView">
+  <UserControl.Resources>
+    <views:BitmapFileValueConverter x:Key="FotoImage" />
+    <views:EActionCompareConverter x:Key="EActionCompare" />
+    <views:ActionColorValueConverter x:Key="ActionColor" />
+    <views:ActionBitmapValueConverter x:Key="ActionImage" />
+  </UserControl.Resources>
   <Border
     BorderThickness="2"
     CornerRadius="5"
     >
-    
+    <StackPanel>
+      <TextBlock Text="{Binding Foto.File.Name}" />
+      <TextBlock Text="{Binding Foto.Created}" />
+      <TextBlock Text="{Binding Foto.TypeOfCreationDate, StringFormat=Datum: {0}}" />
+      <TextBlock Text="{Binding Foto.FileExistsOnTarget, StringFormat=Doppelt: {0}}" />
+      <Panel
+        Margin="10,0,10,0"
+        HorizontalAlignment="Left"
+        IsVisible="{Binding Foto.Action, Converter={StaticResource EActionCompare}, ConverterParameter=copy}"
+        >
+        <!-- Background="{StaticResource OK_Color}" -->
+        <DrawingPresenter 
+          Classes="cmd" 
+          Width="64" Height="64"
+          Drawing="{StaticResource FluentIcons.sticker_add_regular}" />
+      </Panel>
+      <Panel
+        Margin="10,0,10,0"
+        HorizontalAlignment="Left"
+        IsVisible="{Binding Foto.Action, Converter={StaticResource EActionCompare}, ConverterParameter=move}"
+        >
+        <!-- Background="{StaticResource OK_Color}" -->
+        <DrawingPresenter 
+          Classes="cmd" 
+          Width="64" Height="64"
+          Drawing="{StaticResource FluentIcons.sticker_regular}" />
+      </Panel>
+      <Panel
+        Margin="10,0,10,0"
+        HorizontalAlignment="Left"
+        IsVisible="{Binding Foto.Action, Converter={StaticResource EActionCompare}, ConverterParameter=delete}"
+        >
+        <!-- Background="{StaticResource Alert}" -->
+        <DrawingPresenter 
+          Classes="cmd" 
+          Width="64" Height="64"
+          Drawing="{StaticResource FluentIcons.delete_off_regular}" />
+      </Panel>
+      <Panel
+        Margin="10,0,10,0"
+        HorizontalAlignment="Left"
+        IsVisible="{Binding Foto.Action, Converter={StaticResource EActionCompare}, ConverterParameter=trash}"
+        >
+        <!-- Background="{StaticResource Warning}" -->
+        <DrawingPresenter 
+          Classes="cmd" 
+          Width="64" Height="64"
+          Drawing="{StaticResource FluentIcons.delete_regular}" />
+      </Panel>
+    </StackPanel>
   </Border>
 </UserControl>

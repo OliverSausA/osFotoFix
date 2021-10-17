@@ -14,56 +14,7 @@
   </UserControl.Resources>
   <Border Classes="View">
     <Grid RowDefinitions="*,Auto">
-      <StackPanel>
-        <TextBlock Text="{Binding Foto.Foto.File.Name}" />
-        <TextBlock Text="{Binding Foto.Foto.Created}" />
-        <TextBlock Text="{Binding Foto.Foto.TypeOfCreationDate, StringFormat=Datum: {0}}" />
-        <TextBlock Text="{Binding Foto.Foto.FileExistsOnTarget, StringFormat=Doppelt: {0}}" />
-        <Panel
-          Margin="10,0,10,0"
-          HorizontalAlignment="Left"
-          IsVisible="{Binding Foto.Foto.Action, Converter={StaticResource EActionCompare}, ConverterParameter=copy}"
-          >
-          <!-- Background="{StaticResource OK_Color}" -->
-          <DrawingPresenter 
-            Classes="cmd" 
-            Width="64" Height="64"
-            Drawing="{StaticResource FluentIcons.sticker_add_regular}" />
-        </Panel>
-        <Panel
-          Margin="10,0,10,0"
-          HorizontalAlignment="Left"
-          IsVisible="{Binding Foto.Foto.Action, Converter={StaticResource EActionCompare}, ConverterParameter=move}"
-          >
-          <!-- Background="{StaticResource OK_Color}" -->
-          <DrawingPresenter 
-            Classes="cmd" 
-            Width="64" Height="64"
-            Drawing="{StaticResource FluentIcons.sticker_regular}" />
-        </Panel>
-        <Panel
-          Margin="10,0,10,0"
-          HorizontalAlignment="Left"
-          IsVisible="{Binding Foto.Foto.Action, Converter={StaticResource EActionCompare}, ConverterParameter=delete}"
-          >
-          <!-- Background="{StaticResource Alert}" -->
-          <DrawingPresenter 
-            Classes="cmd" 
-            Width="64" Height="64"
-            Drawing="{StaticResource FluentIcons.delete_off_regular}" />
-        </Panel>
-        <Panel
-          Margin="10,0,10,0"
-          HorizontalAlignment="Left"
-          IsVisible="{Binding Foto.Foto.Action, Converter={StaticResource EActionCompare}, ConverterParameter=trash}"
-          >
-          <!-- Background="{StaticResource Warning}" -->
-          <DrawingPresenter 
-            Classes="cmd" 
-            Width="64" Height="64"
-            Drawing="{StaticResource FluentIcons.delete_regular}" />
-        </Panel>
-      </StackPanel>
+      <views:FotoInfoDetailView DataContext="{Binding Foto}" />
       <Image Source="{Binding Foto.Foto.File.FullName, Converter={StaticResource FotoImage}}">
       </Image>
       <StackPanel

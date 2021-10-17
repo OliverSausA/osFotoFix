@@ -54,7 +54,16 @@
           Watermark="Beschreibung"
           ToolTip.Tip="Wo kommen zum Beispiel die Bilder her?"
           />
-        <Button Classes="cmd cmdtrash"
+        <!--
+        <Button Classes="cmdTrash"
+          ToolTip.Tip="Ab in den Papierkorb"
+          IsEnabled="{Binding UserSettingsVM.TrashCmdActive}"
+          IsVisible="{Binding UserSettingsVM.TrashCmdActive}"
+          Command="{Binding TrashAllCmd}"
+        >
+        </Button>
+        -->
+        <Button Classes="cmd"
           ToolTip.Tip="Ab in den Papierkorb"
           IsEnabled="{Binding UserSettingsVM.TrashCmdActive}"
           IsVisible="{Binding UserSettingsVM.TrashCmdActive}"
