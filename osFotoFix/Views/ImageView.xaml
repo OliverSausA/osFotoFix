@@ -5,7 +5,8 @@
              xmlns:views="clr-namespace:osFotoFix.Views;assembly=osFotoFix"
              xmlns:models="clr-namespace:osFotoFix.Models;assembly=osFotoFix"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="osFotoFix.Views.ImageView">
+             x:Class="osFotoFix.Views.ImageView"
+             >
   <UserControl.Resources>
     <views:BitmapFileValueConverter x:Key="FotoImage" />
     <views:EActionCompareConverter x:Key="EActionCompare" />
@@ -14,7 +15,10 @@
   </UserControl.Resources>
   <Border Classes="View">
     <Grid RowDefinitions="*,Auto">
-      <views:FotoInfoDetailView DataContext="{Binding Foto}" />
+      <views:FotoInfoDetailView 
+        DataContext="{Binding}" 
+        IsVisible="{Binding UserSettingsVM.ShowFotoInfoDetail}"
+        />
       <Image Source="{Binding Foto.Foto.File.FullName, Converter={StaticResource FotoImage}}">
       </Image>
       <StackPanel

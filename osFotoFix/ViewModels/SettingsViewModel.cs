@@ -205,6 +205,12 @@ namespace osFotoFix.ViewModels
       get { return new List<string>() { "10", "12", "14", "16", "20", "24", "30" }; }
     }
 
+    private bool showFotoInfoDetail;
+    public bool ShowFotoInfoDetail { 
+      get {return showFotoInfoDetail; }
+      set { this.RaiseAndSetIfChanged( ref showFotoInfoDetail, value ); }
+    }
+
     private string title;
     public string Title {
       get { return title; }
@@ -236,6 +242,7 @@ namespace osFotoFix.ViewModels
       CopyCmdActive  = settings.CopyCmdActive;
       
       GeneralFontSize = settings.GeneralFontSize.ToString();
+      ShowFotoInfoDetail = settings.ShowFotoInfoDetail;
 
       Description = settings.Description;
       Title = settings.Title;
@@ -258,6 +265,7 @@ namespace osFotoFix.ViewModels
       settings.CopyCmdActive  = CopyCmdActive;
 
       settings.GeneralFontSize = int.Parse(GeneralFontSize);
+      settings.ShowFotoInfoDetail = ShowFotoInfoDetail;
 
       settings.Title = Title;
       settings.Description = Description;

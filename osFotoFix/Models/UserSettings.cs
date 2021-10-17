@@ -44,6 +44,8 @@ namespace osFotoFix.Models
 
     [XmlAttribute]
     public int GeneralFontSize {get;set;}
+    [XmlAttribute]
+    public bool ShowFotoInfoDetail {get;set;}
 
     [XmlAttribute]
     public string Title {get;set;}

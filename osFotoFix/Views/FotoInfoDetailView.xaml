@@ -16,14 +16,14 @@
     CornerRadius="5"
     >
     <StackPanel>
-      <TextBlock Text="{Binding Foto.File.Name}" />
-      <TextBlock Text="{Binding Foto.Created}" />
-      <TextBlock Text="{Binding Foto.TypeOfCreationDate, StringFormat=Datum: {0}}" />
-      <TextBlock Text="{Binding Foto.FileExistsOnTarget, StringFormat=Doppelt: {0}}" />
+      <TextBlock Text="{Binding Foto.Foto.File.Name}" />
+      <TextBlock Text="{Binding Foto.Foto.Created}" />
+      <TextBlock Text="{Binding Foto.Foto.TypeOfCreationDate, StringFormat=Datum: {0}}" />
+      <TextBlock Text="{Binding Foto.Foto.FileExistsOnTarget, StringFormat=Doppelt: {0}}" />
       <Panel
         Margin="10,0,10,0"
         HorizontalAlignment="Left"
-        IsVisible="{Binding Foto.Action, Converter={StaticResource EActionCompare}, ConverterParameter=copy}"
+        IsVisible="{Binding Foto.Foto.Action, Converter={StaticResource EActionCompare}, ConverterParameter=copy}"
         >
         <!-- Background="{StaticResource OK_Color}" -->
         <DrawingPresenter 
@@ -34,7 +34,7 @@
       <Panel
         Margin="10,0,10,0"
         HorizontalAlignment="Left"
-        IsVisible="{Binding Foto.Action, Converter={StaticResource EActionCompare}, ConverterParameter=move}"
+        IsVisible="{Binding Foto.Foto.Action, Converter={StaticResource EActionCompare}, ConverterParameter=move}"
         >
         <!-- Background="{StaticResource OK_Color}" -->
         <DrawingPresenter 
@@ -45,7 +45,7 @@
       <Panel
         Margin="10,0,10,0"
         HorizontalAlignment="Left"
-        IsVisible="{Binding Foto.Action, Converter={StaticResource EActionCompare}, ConverterParameter=delete}"
+        IsVisible="{Binding Foto.Foto.Action, Converter={StaticResource EActionCompare}, ConverterParameter=delete}"
         >
         <!-- Background="{StaticResource Alert}" -->
         <DrawingPresenter 
@@ -56,7 +56,7 @@
       <Panel
         Margin="10,0,10,0"
         HorizontalAlignment="Left"
-        IsVisible="{Binding Foto.Action, Converter={StaticResource EActionCompare}, ConverterParameter=trash}"
+        IsVisible="{Binding Foto.Foto.Action, Converter={StaticResource EActionCompare}, ConverterParameter=trash}"
         >
         <!-- Background="{StaticResource Warning}" -->
         <DrawingPresenter 
