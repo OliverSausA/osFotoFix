@@ -219,7 +219,7 @@
           </StackPanel>
           <CheckBox
             Content="Details zum Foto anzeigen"
-            IsChecked="{Binding ShowFotoInfoDetails, Mode=TwoWay}" />
+            IsChecked="{Binding ShowFotoInfoDetail, Mode=TwoWay}" />
         </StackPanel>
 
       </Expander>
