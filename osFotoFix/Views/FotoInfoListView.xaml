@@ -6,6 +6,12 @@
              xmlns:models="clr-namespace:osFotoFix.Models;assembly=osFotoFix"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="osFotoFix.Views.FotoInfoListView">
+  <UserControl.Resources>
+    <views:BitmapFileValueConverter x:Key="FotoImage" />
+    <views:EActionCompareConverter x:Key="EActionCompare" />
+    <views:ActionColorValueConverter x:Key="ActionColor" />
+    <views:ActionBitmapValueConverter x:Key="ActionImage" />
+  </UserControl.Resources>
   <Border Classes="View">
     <Grid 
       RowDefinitions="Auto,*"
@@ -188,65 +194,59 @@
           Header="Description"
           Binding="{Binding Description}"
         />
-        <DataGridTextColumn
-          Header="Aktion"
-          Binding="{Binding Action}"
-        />
-        <!--
         <DataGridTemplateColumn
           Header="Action">
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate>
               <StackPanel>
-        <Panel
-          Margin="10,0,10,0"
-          Width="64" Height="64"
-          HorizontalAlignment="Left"
-          Background="{StaticResource OK_Color}"
-          IsVisible="{Binding Action, Converter={StaticResource EActionCompare}, ConverterParameter=copy}"
-          >
-          <DrawingPresenter 
-            Classes="cmd" 
-            Drawing="{StaticResource FluentIcons.sticker_add_regular}" />
-        </Panel>
-        <Panel
-          Margin="10,0,10,0"
-          Width="64" Height="64"
-          HorizontalAlignment="Left"
-          Background="{StaticResource OK_Color}"
-          IsVisible="{Binding Action, Converter={StaticResource EActionCompare}, ConverterParameter=move}"
-          >
-          <DrawingPresenter 
-            Classes="cmd" 
-            Drawing="{StaticResource FluentIcons.sticker_regular}" />
-        </Panel>
-        <Panel
-          Margin="10,0,10,0"
-          Width="64" Height="64"
-          HorizontalAlignment="Left"
-          Background="{StaticResource Alert}"
-          IsVisible="{Binding Action, Converter={StaticResource EActionCompare}, ConverterParameter=delete}"
-          >
-          <DrawingPresenter 
-            Classes="cmd" 
-            Drawing="{StaticResource FluentIcons.delete_off_regular}" />
-        </Panel>
-        <Panel
-          Margin="10,0,10,0"
-          Width="64" Height="64"
-          HorizontalAlignment="Left"
-          Background="{StaticResource Warning}"
-          IsVisible="{Binding Action, Converter={StaticResource EActionCompare}, ConverterParameter=trash}"
-          >
-          <DrawingPresenter 
-            Classes="cmd" 
-            Drawing="{StaticResource FluentIcons.delete_regular}" />
-        </Panel>
+                <Panel
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  IsVisible="{Binding Action, Converter={StaticResource EActionCompare}, ConverterParameter=copy}"
+                  >
+                  <DrawingPresenter 
+                    Width="16" Height="16"
+                    Stretch="Fill"
+                    Classes="cmd" 
+                    Drawing="{StaticResource FluentIcons.sticker_add_regular}" />
+                </Panel>
+                <Panel
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  IsVisible="{Binding Action, Converter={StaticResource EActionCompare}, ConverterParameter=move}"
+                  >
+                  <DrawingPresenter 
+                    Width="16" Height="16"
+                    Stretch="Fill"
+                    Classes="cmd" 
+                    Drawing="{StaticResource FluentIcons.sticker_regular}" />
+                </Panel>
+                <Panel
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  IsVisible="{Binding Action, Converter={StaticResource EActionCompare}, ConverterParameter=delete}"
+                  >
+                  <DrawingPresenter 
+                    Width="16" Height="16"
+                    Stretch="Fill"
+                    Classes="cmd" 
+                    Drawing="{StaticResource FluentIcons.delete_off_regular}" />
+                </Panel>
+                <Panel
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  IsVisible="{Binding Action, Converter={StaticResource EActionCompare}, ConverterParameter=trash}"
+                  >
+                  <DrawingPresenter 
+                    Width="16" Height="16"
+                    Stretch="Fill"
+                    Classes="cmd" 
+                    Drawing="{StaticResource FluentIcons.delete_regular}" />
+                </Panel>
               </StackPanel>
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
-        -->
         <DataGridTextColumn
           Header="Exif"
           Binding="{Binding Foto.TypeOfCreationDate}"
