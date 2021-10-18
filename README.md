@@ -1,20 +1,23 @@
 # osFotoFix
 
-Ein kleines Tool, die Bilderflut zu bändigen.
+Yet another tool to manage pictures. The initial idea is simple: All new pictures came from a source directory.
+You can move or copy the good one to the destination in a directory build from the pictures date in this format:<br/>
+[Year]/[Year_]___[Month]<br/>
+Each picture is also renamed like this:<br/>
+[Year][Month][Day]___[Houre][Minute][Secound]___[Kennung].[Extension]
 
-Die schönsten Fotos von meiner Familie und mir sollen alle in eine Verzeichnisstruktur nach folgendem Schema wandern:
+The ugly pictures can moved to the trash directory or can deleted permanetly.
 
-     [Jahr]/[Jahr]_[Monat]/[Jahr][Monat][Tag]_[hh][mm][ss]_[Kennung].[extension]
+![Preview](/Help/Pic/osFotoFix.png)
 
-Natürlich gibt es für diese Arbeit schon ein paar gute Programme, die bei passender Konfiguration und Einarbeitung
-viel Arbeit sparen können. Ich wollte es aber so einfach wie möglich, schießlich soll auch mein Papa damit zurecht kommen.
+## Development
 
-## Entwicklungsstand
+I'm an C++ developer for realtime process control systems. And i have some tools wirtten in C#, so im not an absolut beginner.
+But this is my first open source project. It is only for my private use and to teach myself in C# development under Linux.
 
-Das Projekt befindet sich noch in einer sehr frühen Phase und ich bin mir nicht sicher, ob es jemals fertig wird.
-Es ist auch eher ein Testprojekt für die Entwicklung einer Dot Net Applikation unter Linux.
+And excue me for my englich. I don't wirte in englich very often.
 
-Folgende Abhängigkeiten bestehen:
+In this project i use the folowing great tools:
 
      * [.Net core](https://docs.microsoft.com/de-de/dotnet/core/introduction)
      * [AvaloniaUI](http://avaloniaui.net/)
