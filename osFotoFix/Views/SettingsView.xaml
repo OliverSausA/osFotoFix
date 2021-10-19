@@ -13,7 +13,7 @@
         Grid.Row="0"
         Classes="h1"
         Margin="0,20,0,0"
-        Header="Verzeichnisse"
+        Header="{StaticResource Directories}"
         IsExpanded="True"
         >
         <Grid 
