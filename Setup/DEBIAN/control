@@ -4,5 +4,5 @@ Section: custom
 Architecture: all
 Essential: no
 Installed-Size: 100M
-Maintainer: oliver@seidel-it.com
+Maintainer: OliverSausA
 Description: just a tool to mangage pictures

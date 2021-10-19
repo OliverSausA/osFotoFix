@@ -294,7 +294,7 @@ namespace osFotoFix.ViewModels
 		{
 			get
 			{
-				return "Seidel-it, OS, 2021";
+				return "OliverSausA, OS, 2021";
 			}
 		}
   }

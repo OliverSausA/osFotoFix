@@ -10,11 +10,11 @@
   ;!define VERSION "0.3.3"
   !define PROD_VERSION "${VERSION}"
   !define FILE_VERSION "${VERSION}"
-  !define COMP_NAME "Seidel-IT"
+  !define COMP_NAME "OliverSausA"
   !define COPYRIGHT "OS, 2020"
 
   !define INSTALLER_NAME "win10-x64-setup/osFotoFix_v${VERSION}_setup.exe"
-  !define LICENSE_TEXT "../osFotoFix/License.txt"
+  !define LICENSE_TEXT "../LICENSE"
   !define REG_ROOT "HKLM"
   !define REG_APP_PATH "Software\Microsoft\Windows\CurrentVersion\App Paths\${MAIN_APP_EXE}"
   !define UNINSTALL_PATH "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
@@ -33,7 +33,7 @@
   BrandingText "${APP_NAME}"
 
 	; Default installer folder
-  InstallDir "$PROGRAMFILES32\Seidel-IT\osFotoFix"
+  InstallDir "$PROGRAMFILES32\OliverSausA\osFotoFix"
 
 	; Get installation folder from registry if available from last installation
 	InstallDirRegKey "${REG_ROOT}" "${REG_APP_PATH}" ""
