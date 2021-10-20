@@ -13,7 +13,7 @@
         Grid.Row="0"
         Classes="h1"
         Margin="0,20,0,0"
-        Header="{StaticResource Directories}"
+        Header="{DynamicResource Directories}"
         IsExpanded="True"
         >
         <Grid 
@@ -196,6 +196,26 @@
         IsExpanded="True"
         >
         <StackPanel>
+          <StackPanel
+            Orientation="Horizontal"
+            >
+            <ContentControl
+              Content="Sprache"
+              VerticalAlignment="Center"
+            />
+            <ComboBox 
+              Items="{Binding SupportedLanguages}" 
+              SelectedItem="{Binding CurrentLanguage}"
+              HorizontalAlignment="Left"
+              Width="120"
+            >
+            <ComboBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding Value}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+            </ComboBox>
+          </StackPanel>
           <StackPanel 
             Orientation="Horizontal" 
             >

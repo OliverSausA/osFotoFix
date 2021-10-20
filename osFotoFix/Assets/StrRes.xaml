@@ -4,6 +4,8 @@
   xmlns:system="clr-namespace:System;assembly=mscorlib">
 
   <!-- String resource that can be localized -->
+  <system:String x:Key="de-DE">German</system:String>
+  <system:String x:Key="en-US">English</system:String>
   <system:String x:Key="Directories">Directories</system:String>
 
 </ResourceDictionary>

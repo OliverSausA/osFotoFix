@@ -9,6 +9,7 @@ namespace osFotoFix.Services
   public class UserSettingsService
   {
     private const string CONF = "osFotoFix.config";
+    private UserSettings userSettings;
 
     public UserSettingsService()
     {
@@ -16,7 +17,10 @@ namespace osFotoFix.Services
 
     public UserSettings GetUserSettings()
     {
-      var userSettings = new UserSettings();
+      if( userSettings != null )
+        return userSettings;
+
+      userSettings = new UserSettings();
       try
       {
         string filePath = Path.Combine( getUserHomePath(), CONF );
@@ -57,6 +61,10 @@ namespace osFotoFix.Services
       catch ( Exception e )
       {
         Console.WriteLine( e.Message );
+      }
+      finally
+      {
+        this.userSettings = userSettings;
       }
     }
 

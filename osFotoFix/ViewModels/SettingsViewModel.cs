@@ -19,12 +19,19 @@ namespace osFotoFix.ViewModels
   public class SettingsViewModel : ViewModelBase
   {
     private UserSettingsService service;
+    private List<KeyValuePair<string,string>> SupportedLanguageList;
+
     public SettingsViewModel() : base()
     {
       Read();
       SelectSourceCmd = ReactiveCommand.Create( OnSelectSource );
       SelectTargetCmd = ReactiveCommand.Create( OnSelectTarget );
       SelectTrashCmd  = ReactiveCommand.Create( OnSelectTrash );
+
+      SupportedLanguageList = new List<KeyValuePair<string, string>>(){
+        new KeyValuePair<string, string>("de-DE", App.GetStrRes("de-DE") ),
+        new KeyValuePair<string, string>("en-US", App.GetStrRes("en-US") ),
+      };
     }
 
     public void SaveSettings()
@@ -205,6 +212,27 @@ namespace osFotoFix.ViewModels
       get { return new List<string>() { "10", "12", "14", "16", "20", "24", "30" }; }
     }
 
+    private string cultureId;
+    public string CultureId {
+      get { return cultureId; }
+      set { cultureId = value; }
+    }
+
+    public List<KeyValuePair<string,string>> SupportedLanguages
+    {
+      get {
+        return SupportedLanguageList;
+      }
+    }
+    public KeyValuePair<string,string> CurrentLanguage
+    {
+      get { return SupportedLanguageList.Find( x => x.Key == CultureId); }
+      set { 
+        CultureId = value.Key; 
+        App.SelectLanguage(CultureId);
+      }
+    }
+
     private bool showFotoInfoDetail;
     public bool ShowFotoInfoDetail { 
       get {return showFotoInfoDetail; }
@@ -241,6 +269,7 @@ namespace osFotoFix.ViewModels
       MoveCmdActive  = settings.MoveCmdActive;
       CopyCmdActive  = settings.CopyCmdActive;
       
+      CultureId = settings.CultureId;
       GeneralFontSize = settings.GeneralFontSize.ToString();
       ShowFotoInfoDetail = settings.ShowFotoInfoDetail;
 
@@ -264,6 +293,7 @@ namespace osFotoFix.ViewModels
       settings.MoveCmdActive  = MoveCmdActive;
       settings.CopyCmdActive  = CopyCmdActive;
 
+      settings.CultureId = CultureId;
       settings.GeneralFontSize = int.Parse(GeneralFontSize);
       settings.ShowFotoInfoDetail = ShowFotoInfoDetail;
 

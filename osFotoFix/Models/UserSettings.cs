@@ -14,6 +14,7 @@ namespace osFotoFix.Models
       DelCmdActive = true;
       MoveCmdActive = true;
       CopyCmdActive = true;
+      CultureId = "DE-de";
       GeneralFontSize = 12;
     }
 
@@ -42,6 +43,8 @@ namespace osFotoFix.Models
     [XmlAttribute]
     public bool CopyCmdActive {get;set;}
 
+    [XmlAttribute]
+    public string CultureId {get;set;}
     [XmlAttribute]
     public int GeneralFontSize {get;set;}
     [XmlAttribute]
