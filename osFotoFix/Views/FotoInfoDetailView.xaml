@@ -18,8 +18,8 @@
     <StackPanel>
       <TextBlock Text="{Binding Foto.Foto.File.Name}" />
       <TextBlock Text="{Binding Foto.Foto.Created}" />
-      <TextBlock Text="{Binding Foto.Foto.TypeOfCreationDate, StringFormat=Datum: {0}}" />
-      <TextBlock Text="{Binding Foto.Foto.FileExistsOnTarget, StringFormat=Doppelt: {0}}" />
+      <TextBlock Text="{Binding Foto.Foto.TypeOfCreationDate, StringFormat={StaticResource DetailDate}}" />
+      <TextBlock Text="{Binding Foto.Foto.FileExistsOnTarget, StringFormat={StaticResource DetailDouble}}" />
       <Panel
         Margin="10,0,10,0"
         HorizontalAlignment="Left"

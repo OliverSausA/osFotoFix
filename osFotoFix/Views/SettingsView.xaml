@@ -24,7 +24,7 @@
           <ContentControl
             Margin="0,10,0,0"
             Grid.Row="0"
-            Content="Quelle" />
+            Content="{DynamicResource SourceDir}" />
           <TextBox
             Grid.Row="1"
             Text="{Binding Source}"
@@ -38,7 +38,7 @@
           <ContentControl
             Margin="0,10,0,0"
             Grid.Row="2"
-            Content="Ziel" />
+            Content="{DynamicResource DestinationDir}" />
           <TextBox
             Grid.Row="3"
             Text="{Binding Target}"
@@ -51,7 +51,7 @@
           <ContentControl
             Margin="0,10,0,0"
             Grid.Row="4"
-            Content="Papierkorb" />
+            Content="{DynamicResource TrashDir}" />
           <TextBox
             Grid.Row="5"
             Text="{Binding Trash}"
@@ -67,7 +67,7 @@
       <Expander
         Grid.Row="1"
         Margin="0,30,0,0"
-        Header="Filter"
+        Header="{DynamicResource Filter}"
         IsExpanded="True"
       >
         <StackPanel>
@@ -79,7 +79,7 @@
             <TextBlock 
               VerticalAlignment="Center"
               Margin="4,0,0,0"
-              Text="{Binding Path=FilterDatumExifCount, StringFormat=Datum aus Exif ({0})}"
+              Text="{Binding Path=FilterDatumExifCount, StringFormat={StaticResource FilterDatumExif}}"
             />
           </StackPanel>
           <StackPanel
@@ -90,7 +90,7 @@
             <TextBlock 
               VerticalAlignment="Center"
               Margin="4,0,0,0"
-              Text="{Binding Path=FilterDatumFilenameCount, StringFormat=Datum aus Dateinamen ({0})}"
+              Text="{Binding Path=FilterDatumFilenameCount, StringFormat={StaticResource FilterDatumFilename}}"
             />
           </StackPanel>
           <StackPanel
@@ -101,7 +101,7 @@
             <TextBlock 
               VerticalAlignment="Center"
               Margin="4,0,0,0"
-              Text="{Binding Path=FilterDatumFilechangedCount, StringFormat=Datum aus Dateisystem ({0})}"
+              Text="{Binding Path=FilterDatumFilechangedCount, StringFormat={StaticResource FilterDatumFilesystem}}"
             />
           </StackPanel>
           <StackPanel
@@ -113,7 +113,7 @@
             <TextBlock 
               VerticalAlignment="Center"
               Margin="4,0,0,0"
-              Text="{Binding Path=FilterFilenameTrashedCount, StringFormat=Dateiname beginnt mit .trashed ({0})}"
+              Text="{Binding Path=FilterFilenameTrashedCount, StringFormat={StaticResource FilterFilenameTrash}}"
             />
           </StackPanel>
         </StackPanel>
@@ -121,7 +121,7 @@
       <Expander 
         Grid.Row="2"
         Margin="0,30,0,0"
-        Header="Knöpfe"
+        Header="{DynamicResource CmdButtons}"
         IsExpanded="True"
         >
         <Grid 
@@ -140,7 +140,7 @@
           <CheckBox
             Grid.Column="1"
             IsChecked="{Binding TrashCmdActive, Mode=TwoWay}" 
-            Content="Papierkorb"
+            Content="{DynamicResource CmdTrash}"
             />
 
           <Panel
@@ -155,7 +155,7 @@
           <CheckBox
             Grid.Row="1"
             Grid.Column="1"
-            Content="Löschen"
+            Content="{DynamicResource CmdDelete}"
             IsChecked="{Binding DelCmdActive}" />
 
           <Panel
@@ -170,7 +170,7 @@
           <CheckBox 
             Grid.Row="2"
             Grid.Column="1"
-            Content="Verschieben"
+            Content="{DynamicResource CmdMove}"
             IsChecked="{Binding MoveCmdActive}" />
 
           <Panel
@@ -185,14 +185,14 @@
           <CheckBox 
             Grid.Row="3"
             Grid.Column="1"
-            Content="Kopieren"
+            Content="{DynamicResource CmdCopy}"
             IsChecked="{Binding CopyCmdActive}" />
         </Grid> 
       </Expander>
       <Expander 
         Grid.Row="3"
         Margin="0,30,0,0"
-        Header="Layout"
+        Header="{DynamicResource Layout}"
         IsExpanded="True"
         >
         <StackPanel>
@@ -200,7 +200,7 @@
             Orientation="Horizontal"
             >
             <ContentControl
-              Content="Sprache"
+              Content="{DynamicResource Language}"
               VerticalAlignment="Center"
             />
             <ComboBox 
@@ -221,7 +221,7 @@
             >
             <ContentControl
               Grid.Row="0"
-              Content="Schriftgröße" 
+              Content="{DynamicResource FontSize}" 
               VerticalAlignment="Center"
               />
             <ComboBox 
@@ -238,7 +238,7 @@
             </ComboBox>
           </StackPanel>
           <CheckBox
-            Content="Details zum Foto anzeigen"
+            Content="{DynamicResource ShowDetails}"
             IsChecked="{Binding ShowFotoInfoDetail, Mode=TwoWay}" />
         </StackPanel>
 

@@ -24,7 +24,7 @@
         <Button Classes="cmd"
           Command="{Binding RefreshCmd}"
           IsVisible="{Binding !RunningReadFoto}"
-          ToolTip.Tip="Fotos ganz neu einlesen"
+          ToolTip.Tip="{StaticResource TipCmdRefresh}"
           >
           <DrawingPresenter
             Classes="cmd"
@@ -34,7 +34,7 @@
           Command="{Binding CancelCmd}"
           IsVisible="{Binding RunningReadFoto}"
           Background="{StaticResource Cancel}"
-          ToolTip.Tip="Hör auf, die ganzen Fotos zu laden"
+          ToolTip.Tip="{StaticResource TipCmdCancel}"
           >
           <DrawingPresenter
             Classes="cmd"
@@ -52,13 +52,14 @@
           />
         <ContentControl
           VerticalAlignment="Center"
-          Margin="2" Content="Beschreibung"
+          Margin="2" 
+          Content="{DynamicResource Description}"
           />
         <TextBox
           Width="150"
           Text="{Binding UserSettingsVM.Description}"
-          Watermark="Beschreibung"
-          ToolTip.Tip="Wo kommen zum Beispiel die Bilder her?"
+          Watermark="{DynamicResource Description}"
+          ToolTip.Tip="{DynamicResource TipDescription}"
           />
         <!--
         <Button Classes="cmdTrash"
@@ -70,11 +71,11 @@
         </Button>
         -->
         <Button Classes="cmd"
-          ToolTip.Tip="Ab in den Papierkorb"
           IsEnabled="{Binding UserSettingsVM.TrashCmdActive}"
           IsVisible="{Binding UserSettingsVM.TrashCmdActive}"
           Background="{StaticResource Warning}"
           Command="{Binding TrashAllCmd}"
+          ToolTip.Tip="{DynamicResource TipCmdTrashAll}"
           >
           <DrawingPresenter
             Classes="cmd"
@@ -85,7 +86,7 @@
           IsVisible="{Binding UserSettingsVM.DelCmdActive}"
           Background="{StaticResource Alert}"
           Command="{Binding DelAllCmd}"
-          ToolTip.Tip="Ich lösche alle Bilder. Soll ich?"
+          ToolTip.Tip="{DynamicResource TipCmdDeleteAll}"
           >
           <DrawingPresenter
             Classes="cmd"
@@ -95,7 +96,7 @@
           IsEnabled="{Binding UserSettingsVM.MoveCmdActive}"
           IsVisible="{Binding UserSettingsVM.MoveCmdActive}"
           Background="{StaticResource OK_Color}"
-          ToolTip.Tip="Alle Bilder ins Ziel verschieben"
+          ToolTip.Tip="{DynamicResource TipCmdMoveAll}"
           Command="{Binding MoveAllCmd}"
           >
           <DrawingPresenter
@@ -106,7 +107,7 @@
           IsEnabled="{Binding UserSettingsVM.CopyCmdActive}"
           IsVisible="{Binding UserSettingsVM.CopyCmdActive}"
           Background="{StaticResource OK_Color}"
-          ToolTip.Tip="Alle Bilder ins Ziel kopieren"
+          ToolTip.Tip="{DynamicResource TipCmdCopyAll}"
           Command="{Binding CopyAllCmd}"
           >
           <DrawingPresenter
@@ -117,7 +118,7 @@
         <Button Classes="cmd"
           Command="{Binding UndoAllCmd}"
           Background="{StaticResource Cancel}"
-          ToolTip.Tip="Rückgängig"
+          ToolTip.Tip="{DynamicResource TipCmdUndoAll}"
           >
 	        <DrawingPresenter
             Classes="cmd"
@@ -128,7 +129,7 @@
           Content="DoIt"
           Command="{Binding DoItCmd}"
           IsVisible="{Binding !RunningFotoFixIt}"
-          ToolTip.Tip="Alle Bilder verarbeiten"
+          ToolTip.Tip="{DynamicResource TipCmdDoit}"
           >
           <DrawingPresenter
             Classes="cmd"
@@ -138,7 +139,7 @@
           Command="{Binding CancelDoItCmd}"
           IsVisible="{Binding RunningFotoFixIt}"
           Background="{StaticResource Cancel}"
-          ToolTip.Tip="Hör auf, die ganzen Fotos zu bearbeiten"
+          ToolTip.Tip="{DynamicResource TipCmdCancelDoIt}"
           >
           <DrawingPresenter
             Classes="cmd"
@@ -171,27 +172,21 @@
         Items="{Binding FotoInfoList}"
         SelectedItem="{Binding FotoSelected, Mode=TwoWay}"
         >
-        <!--
-        <DataGrid.Resources>
-          <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" 
-                          Color="#FF0000"/>
-        </DataGrid.Resources>
-        -->
         <DataGrid.Columns>
         <DataGridTextColumn
-          Header="Verzeichnis"
+          Header="{StaticResource TabColDirectorie}"
           Binding="{Binding Foto.File.DirectoryName}"
         />
         <DataGridTextColumn
-          Header="Originalname"
+          Header="{StaticResource TabColOrgName}"
           Binding="{Binding Foto.File.Name}"
         />
         <DataGridTextColumn
-          Header="Title"
+          Header="{StaticResource TabColTitle}"
           Binding="{Binding Title}"
         />
         <DataGridTextColumn
-          Header="Description"
+          Header="{StaticResource TabColDescription}"
           Binding="{Binding Description}"
         />
         <DataGridTemplateColumn
@@ -248,23 +243,23 @@
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
         <DataGridTextColumn
-          Header="Exif"
+          Header="{StaticResource TabColExif}"
           Binding="{Binding Foto.TypeOfCreationDate}"
           />
         <DataGridTextColumn
-          Header="Doppelt"
+          Header="{StaticResource TabColDouble}"
           Binding="{Binding FileExistsOnTarget}"
           />
         <DataGridTextColumn
-          Header="Erstelldatum"
+          Header="{StaticResource TabColCreationDate}"
           Binding="{Binding Foto.Created}"
           />
         <DataGridTextColumn
-          Header="Comment"
+          Header="{StaticResource TabColComment}"
           Binding="{Binding Comment}"
           />
         <DataGridTextColumn
-          Header="Datei"
+          Header="{StaticResource TabColFile}"
           Binding="{Binding NewFileName}"
         />
         </DataGrid.Columns>

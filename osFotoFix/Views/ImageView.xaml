@@ -28,14 +28,14 @@
         >
         <Button Classes="cmd cmdup"
           Command="{Binding PrevImageCmd}"
-          ToolTip.Tip="Das Bild davor"
+          ToolTip.Tip="{DynamicResource TipCmdUp}"
           >
           <DrawingPresenter
             Classes="cmd"
             Drawing="{StaticResource FluentIcons.chevron_up_regular}" />
         </Button>
         <Button Classes="cmd cmddown"
-          ToolTip.Tip="Das nächste Bild"
+          ToolTip.Tip="{DynamicResource TipCmdDown}"
           Command="{Binding NextImageCmd}"
           >
           <DrawingPresenter
@@ -43,7 +43,7 @@
             Drawing="{StaticResource FluentIcons.chevron_down_regular}" />
         </Button>
         <Button Classes="cmd cmdtrash"
-          ToolTip.Tip="Ab in den Papierkorb"
+          ToolTip.Tip="{DynamicResource TipCmdTrash}"
           IsEnabled="{Binding UserSettingsVM.TrashCmdActive}"
           IsVisible="{Binding UserSettingsVM.TrashCmdActive}"
           Background="{StaticResource Warning}"
@@ -58,7 +58,7 @@
           IsVisible="{Binding UserSettingsVM.DelCmdActive}"
           Background="{StaticResource Alert}"
           Command="{Binding DelImageCmd}"
-          ToolTip.Tip="Ich lösche alle Bilder. Soll ich?"
+          ToolTip.Tip="{DynamicResource TipCmdDelete}"
           >
           <DrawingPresenter
             Classes="cmd"
@@ -68,8 +68,8 @@
           IsEnabled="{Binding UserSettingsVM.MoveCmdActive}"
           IsVisible="{Binding UserSettingsVM.MoveCmdActive}"
           Background="{StaticResource OK_Color}"
-          ToolTip.Tip="Ins Ziel verschieben"
           Command="{Binding MoveImageCmd}"
+          ToolTip.Tip="{DynamicResource TipCmdMove}"
           >
           <DrawingPresenter
             Classes="cmd"
@@ -79,8 +79,8 @@
           IsEnabled="{Binding UserSettingsVM.CopyCmdActive}"
           IsVisible="{Binding UserSettingsVM.CopyCmdActive}"
           Background="{StaticResource OK_Color}"
-          ToolTip.Tip="Ins Ziel kopieren"
           Command="{Binding CopyImageCmd}"
+          ToolTip.Tip="{DynamicResource TipCmdCopy}"
           >
           <DrawingPresenter
             Classes="cmd"
@@ -89,7 +89,7 @@
         <Button Classes="cmd"
           Command="{Binding UndoImageCmd}"
           Background="{StaticResource Cancel}"
-          ToolTip.Tip="Rückgängig"
+          ToolTip.Tip="{DynamicResource TipCmdUndo}"
           >
 	        <DrawingPresenter
             Classes="cmd"

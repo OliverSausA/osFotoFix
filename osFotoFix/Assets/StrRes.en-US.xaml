@@ -5,5 +5,56 @@
 
   <!-- String resource that can be localized -->
   <system:String x:Key="Directories">Directories</system:String>
+  <system:String x:Key="SourceDir">Source</system:String>
+  <system:String x:Key="DestinationDir">Destination</system:String>
+  <system:String x:Key="TrashDir">Trash</system:String>
+  <system:String x:Key="Filter">Filter</system:String>
+  <system:String x:Key="FilterDatumExif">Date from Exif ({0})</system:String>
+  <system:String x:Key="FilterDatumFilename">Date from filename ({0})</system:String>
+  <system:String x:Key="FilterDatumFilesystem">Date from file system ({0})</system:String>
+  <system:String x:Key="FilterFilenameTrash">Date start with .trashed ({0})</system:String>
+  <system:String x:Key="CmdButtons">Buttons</system:String>
+  <system:String x:Key="CmdTrash">Trash</system:String>
+  <system:String x:Key="CmdDelete">Delete</system:String>
+  <system:String x:Key="CmdMove">Move</system:String>
+  <system:String x:Key="CmdCopy">Copy</system:String>
+  <system:String x:Key="Layout">Layout</system:String>
+  <system:String x:Key="Language">Language</system:String>
+  <system:String x:Key="FontSize">Font size</system:String>
+  <system:String x:Key="ShowDetails">Show picture details</system:String>
+
+  <system:String x:Key="TipCmdRefresh">Refresh all pictures</system:String>
+  <system:String x:Key="TipCmdCancel">Cancel to read all pictures</system:String>
+
+  <system:String x:Key="Description">Description</system:String>
+  <system:String x:Key="TipDescription">Example: Who did all the pictures coma from?</system:String>
+  <system:String x:Key="TipCmdTrashAll">Move all pictures to trash</system:String>
+  <system:String x:Key="TipCmdDeleteAll">I'm going to delete all files. Should i do that?</system:String>
+  <system:String x:Key="TipCmdMoveAll">Move all pictures to the destination</system:String>
+  <system:String x:Key="TipCmdCopyAll">Copy all pictures to the destination</system:String>
+  <system:String x:Key="TipCmdUndoAll">undo</system:String>
+  <system:String x:Key="TipCmdDoIt">process all pictures</system:String>
+  <system:String x:Key="TipCmdCancelDoIt">Canel to process all pictures</system:String>
+
+  <system:String x:Key="TabColDirectorie">Directorie</system:String>
+  <system:String x:Key="TabColOrgName">original name</system:String>
+  <system:String x:Key="TabColTitle">Titel</system:String>
+  <system:String x:Key="TabColDescription">Description</system:String>
+  <system:String x:Key="TabColExif">Exif</system:String>
+  <system:String x:Key="TabColDouble">Double</system:String>
+  <system:String x:Key="TabColCreationDate">Creation date</system:String>
+  <system:String x:Key="TabColComment">Comment</system:String>
+  <system:String x:Key="TabColFile">File</system:String>
+
+  <system:String x:Key="TipCmdUp">Previous picture</system:String>
+  <system:String x:Key="TipCmdDown">Next picture</system:String>
+  <system:String x:Key="TipCmdTrash">Move to trash</system:String>
+  <system:String x:Key="TipCmdDelete">Delete this picture</system:String>
+  <system:String x:Key="TipCmdMove">Move this picture</system:String>
+  <system:String x:Key="TipCmdCopy">Copy this picture</system:String>
+  <system:String x:Key="TipCmdUndo">Undo</system:String>
+
+  <system:String x:Key="DetailDate">Date: {0}</system:String>
+  <system:String x:Key="DetailDouble">Double: {0}</system:String>
 
 </ResourceDictionary>

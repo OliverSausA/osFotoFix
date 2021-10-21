@@ -5,5 +5,56 @@
 
   <!-- String resource that can be localized -->
   <system:String x:Key="Directories">Verzeichnisse</system:String>
+  <system:String x:Key="SourceDir">Quelle</system:String>
+  <system:String x:Key="DestinationDir">Ziel</system:String>
+  <system:String x:Key="TrashDir">Papierkorb</system:String>
+  <system:String x:Key="Filter">Filter</system:String>
+  <system:String x:Key="FilterDatumExif">Datum aus Exif ({0})</system:String>
+  <system:String x:Key="FilterDatumFilename">Datum aus Dateinamen ({0})</system:String>
+  <system:String x:Key="FilterDatumFilesystem">Datum aus Dateisystem ({0})</system:String>
+  <system:String x:Key="FilterFilenameTrash">Dateiname beginnt mit .trashed ({0})</system:String>
+  <system:String x:Key="CmdButtons">Knöpfe</system:String>
+  <system:String x:Key="CmdTrash">Papierkorb</system:String>
+  <system:String x:Key="CmdDelete">Löschen</system:String>
+  <system:String x:Key="CmdMove">Verschieben</system:String>
+  <system:String x:Key="CmdCopy">Kopieren</system:String>
+  <system:String x:Key="Layout">Layout</system:String>
+  <system:String x:Key="Language">Sprache</system:String>
+  <system:String x:Key="FontSize">Schriftgröße</system:String>
+  <system:String x:Key="ShowDetails">Details zum Foto anzeigen</system:String>
+
+  <system:String x:Key="TipCmdRefresh">Fotos ganz neu einlesen</system:String>
+  <system:String x:Key="TipCmdCancel">Hör auf, die ganzen Fotos zu laden</system:String>
+
+  <system:String x:Key="Description">Beschreibung</system:String>
+  <system:String x:Key="TipDescription">Wo kommen zum Beispiel die Bilder her?</system:String>
+  <system:String x:Key="TipCmdTrashAll">Ab in den Papierkorb</system:String>
+  <system:String x:Key="TipCmdDeleteAll">Ich lösche alle Bilder. Soll ich?</system:String>
+  <system:String x:Key="TipCmdMoveAll">Alle Bilder ins Ziel verschieben</system:String>
+  <system:String x:Key="TipCmdCopyAll">Alle Bilder ins Ziel kopieren</system:String>
+  <system:String x:Key="TipCmdUndoAll">Rückgängig</system:String>
+  <system:String x:Key="TipCmdDoIt">Alle Bilder verarbeiten</system:String>
+  <system:String x:Key="TipCmdCancelDoIt">Hör auf, die ganzen Fotos zu bearbeiten</system:String>
+
+  <system:String x:Key="TabColDirectorie">Verzeichnis</system:String>
+  <system:String x:Key="TabColOrgName">Originalname</system:String>
+  <system:String x:Key="TabColTitle">Titel</system:String>
+  <system:String x:Key="TabColDescription">Beschreibung</system:String>
+  <system:String x:Key="TabColExif">Exif</system:String>
+  <system:String x:Key="TabColDouble">Doppelt</system:String>
+  <system:String x:Key="TabColCreationDate">Erstelldatum</system:String>
+  <system:String x:Key="TabColComment">Kommentar</system:String>
+  <system:String x:Key="TabColFile">Datei</system:String>
+
+  <system:String x:Key="TipCmdUp">Das Bild davor</system:String>
+  <system:String x:Key="TipCmdDown">Das nächste Bild</system:String>
+  <system:String x:Key="TipCmdTrash">Ab in den Papierkorb</system:String>
+  <system:String x:Key="TipCmdDelete">Ich lösche das Bilder. Soll ich?</system:String>
+  <system:String x:Key="TipCmdMove">Das Bilde ins Ziel verschieben</system:String>
+  <system:String x:Key="TipCmdCopy">Das Bilde ins Ziel kopieren</system:String>
+  <system:String x:Key="TipCmdUndo">Rückgängig</system:String>
+
+  <system:String x:Key="DetailDate">Datum: {0}</system:String>
+  <system:String x:Key="DetailDouble">Doppelt: {0}</system:String>
 
 </ResourceDictionary>
