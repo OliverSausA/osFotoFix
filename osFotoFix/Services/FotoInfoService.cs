@@ -48,6 +48,7 @@ namespace osFotoFix.Services
         {
           ///// Thread.Sleep( 1000 );
           var info = CreateFotoInfo( f );
+          info.FileExistsOnTarget = IsFileExistsOnTarget(info);
           if( FotoInfoReadEvent != null )
             FotoInfoReadEvent?.Invoke( this, new FotoInfoEventArgs( info ) );
         }
@@ -176,6 +177,24 @@ namespace osFotoFix.Services
         return new FotoInfo( file, dt, FotoInfo.ETypeOfCreationDate.Filename );
       
       return new FotoInfo( file, file.CreationTime, FotoInfo.ETypeOfCreationDate.Filesystem );
+    }
+
+    private bool IsFileExistsOnTarget( FotoInfo foto )
+    {
+      bool ret = false;
+      try
+      {
+        var targetDir = UserSettingsService.GetInstance.GetUserSettings.Ziel;
+        targetDir = Path.Combine( targetDir, CreateNewFileLocation(foto) );
+        var pattern = foto.Created.ToString("yyyyMMdd_hhmmss*.*");
+        // var matches = Directory.GetFiles(targetDir).Where( path => Regex.Match(path, filename).Success);
+        var matches = Directory.GetFiles( targetDir, pattern );
+        if( matches.Length > 0 )
+          return true;
+      }
+      catch { }
+
+      return ret;
     }
 
     private bool GetDateTimeFromString( string text, out DateTime dt )

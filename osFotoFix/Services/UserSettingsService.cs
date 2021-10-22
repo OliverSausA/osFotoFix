@@ -8,17 +8,29 @@ namespace osFotoFix.Services
   using Models;
   public class UserSettingsService
   {
+    private UserSettingsService() {
+      ReadUserSettings();
+    }
+
+    private static UserSettingsService instance = null;
     private const string CONF = "osFotoFix.config";
     private UserSettings userSettings;
 
-    public UserSettingsService()
-    {
+    public static UserSettingsService GetInstance {
+      get { 
+        if (instance == null )
+          instance = new UserSettingsService();
+        return instance;
+      }
+    }
+    public UserSettings GetUserSettings {
+      get { return userSettings; }
     }
 
-    public UserSettings GetUserSettings()
+    private void ReadUserSettings()
     {
       if( userSettings != null )
-        return userSettings;
+        return ;
 
       userSettings = new UserSettings();
       try
@@ -31,19 +43,11 @@ namespace osFotoFix.Services
             userSettings = (UserSettings) serializier.Deserialize( reader );
           }
         }
-        // Set to default values
-        else
-        {
-
-        }
       }
-      catch
-      {
-      }
-      return userSettings;
+      catch {}
     }
 
-    public void SaveUserSettings( UserSettings userSettings )
+    public void SaveUserSettings()
     {
       try
       {
@@ -62,19 +66,15 @@ namespace osFotoFix.Services
       {
         Console.WriteLine( e.Message );
       }
-      finally
-      {
-        this.userSettings = userSettings;
-      }
     }
 
-    private string getUserHomePath()
+    public static string getUserHomePath()
     {
       return Environment.GetFolderPath(
                 Environment.SpecialFolder.ApplicationData);
     }
 
-    public string getUserPicturePath()
+    public static string getUserPicturePath()
     {
       return Environment.GetFolderPath(
                 Environment.SpecialFolder.MyPictures);

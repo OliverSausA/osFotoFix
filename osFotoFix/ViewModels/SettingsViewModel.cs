@@ -83,7 +83,7 @@ namespace osFotoFix.ViewModels
       try
       {
         if( string.IsNullOrEmpty(current) ) 
-          current = service.getUserPicturePath();
+          current = UserSettingsService.getUserPicturePath();
         var dlg = new OpenFolderDialog() {
           Title = "Wo sollen die Bilder hin?",
           Directory = current
@@ -254,8 +254,7 @@ namespace osFotoFix.ViewModels
 
     private void Read()
     {
-      service = new UserSettingsService();
-      var settings = service.GetUserSettings();
+      var settings = UserSettingsService.GetInstance.GetUserSettings;
       Source = settings.Quelle;
       Target = settings.Ziel;
       Trash  = settings.Papierkorb;
@@ -278,8 +277,7 @@ namespace osFotoFix.ViewModels
     }
     private void Write()
     {
-      service = new UserSettingsService();
-      var settings = service.GetUserSettings();
+      var settings = UserSettingsService.GetInstance.GetUserSettings;
       settings.Quelle = Source;
       settings.Ziel = Target;
       settings.Papierkorb = Trash;
@@ -300,7 +298,7 @@ namespace osFotoFix.ViewModels
       settings.Title = Title;
       settings.Description = Description;
 
-      service.SaveUserSettings( settings );
+      UserSettingsService.GetInstance.SaveUserSettings();
     }
 
 		public static string VersionInfo

@@ -18,9 +18,9 @@ namespace osFotoFix
     {
       AvaloniaXamlLoader.Load(this);
 
-      var service = new UserSettingsService();
-      var settings = service.GetUserSettings();
+      var settings = UserSettingsService.GetInstance.GetUserSettings;
       SelectLanguage(settings.CultureId);
+
     }
 
     public override void OnFrameworkInitializationCompleted()
