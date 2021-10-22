@@ -3,6 +3,13 @@ using System.Xml.Serialization;
 
 namespace osFotoFix.Models
 {
+  public enum EFilterState
+  {
+    eDisable,
+    eOn,
+    eOff,
+  }
+
   [XmlRootAttribute("UserSettings")]
   public class UserSettings
   {
@@ -33,6 +40,8 @@ namespace osFotoFix.Models
     public bool FilterDatumFilechanged {get;set;}
     [XmlAttribute]
     public bool FilterFilenameTrashed {get;set;}
+    [XmlAttribute]
+    public EFilterState FilterDoubles {get;set;}
 
     [XmlAttribute]
     public bool TrashCmdActive {get;set;}

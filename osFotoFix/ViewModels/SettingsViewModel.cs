@@ -108,6 +108,7 @@ namespace osFotoFix.ViewModels
       FilterDatumFilenameCount = 0;
       FilterDatumFilechangedCount = 0;
       FilterFilenameTrashedCount = 0;
+      FilterDoublesCount = 0;
     }
 
     private bool filterDatumExif;
@@ -171,6 +172,61 @@ namespace osFotoFix.ViewModels
       get { return filterFilenameTrashedCount; }
       set {
         this.RaiseAndSetIfChanged( ref filterFilenameTrashedCount, value );
+      }
+    }
+
+    private EFilterState filterDoubles;
+    public EFilterState FilterDoubles 
+    {
+      get { return filterDoubles; }
+      set {
+        this.RaiseAndSetIfChanged( ref filterDoubles, value );
+        FilterChangedEvent?.Invoke();
+      }
+    }
+    /*****
+    public bool? FilterDoubles
+    {
+      get {
+        bool? ret = null;
+        if( filterDoubles == EFilterState.eOn )
+          ret = true;
+        else if( filterDoubles == EFilterState.eOff )
+          ret = false;
+        return ret;
+      }
+
+      set {
+        if( !value.HasValue )
+          filterDoubles = EFilterState.eDisable;
+        else if( value.Value )
+          filterDoubles = EFilterState.eOn;
+        else
+          filterDoubles = EFilterState.eOff;
+      }
+    }
+    *****/
+    /*****
+    public EFilterState FilterDoubles 
+    {
+      get { return filterDoubles; }
+      set {
+        var state = EFilterState.eDisable;
+        if( filterDoubles == EFilterState.eDisable )
+          state = EFilterState.eOn;
+        else if( filterDoubles == EFilterState.eOn )
+          state = EFilterState.eOff;
+        this.RaiseAndSetIfChanged( ref filterDoubles, state );
+        FilterChangedEvent?.Invoke();
+      }
+    }
+    *****/
+
+    private int filterDoublesCount;
+    public int FilterDoublesCount {
+      get { return filterDoublesCount; }
+      set {
+        this.RaiseAndSetIfChanged( ref filterDoublesCount, value );
       }
     }
     public delegate void FilterChanged();
@@ -262,6 +318,7 @@ namespace osFotoFix.ViewModels
       FilterDatumExif = settings.FilterDatumExif;
       FilterDatumFilename = settings.FilterDatumFilename;
       FilterDatumFilechanged = settings.FilterDatumFilechanged;
+      filterDoubles = settings.FilterDoubles;
 
       TrashCmdActive = settings.TrashCmdActive;
       DelCmdActive   = settings.DelCmdActive;
@@ -285,6 +342,7 @@ namespace osFotoFix.ViewModels
       settings.FilterDatumExif = FilterDatumExif;
       settings.FilterDatumFilename = FilterDatumFilename;
       settings.FilterDatumFilechanged = FilterDatumFilechanged;
+      settings.FilterDoubles = FilterDoubles;
 
       settings.TrashCmdActive = TrashCmdActive;
       settings.DelCmdActive   = DelCmdActive;

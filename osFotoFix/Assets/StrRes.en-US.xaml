@@ -13,6 +13,7 @@
   <system:String x:Key="FilterDatumFilename">Date from filename ({0})</system:String>
   <system:String x:Key="FilterDatumFilesystem">Date from file system ({0})</system:String>
   <system:String x:Key="FilterFilenameTrash">Date start with .trashed ({0})</system:String>
+  <system:String x:Key="FilterDoubles">Pictures already at destination ({0})</system:String>
   <system:String x:Key="CmdButtons">Buttons</system:String>
   <system:String x:Key="CmdTrash">Trash</system:String>
   <system:String x:Key="CmdDelete">Delete</system:String>

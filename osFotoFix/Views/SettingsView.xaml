@@ -3,9 +3,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:osFotoFix.ViewModels"
+             xmlns:views="clr-namespace:osFotoFix.Views;assembly=osFotoFix"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="osFotoFix.Views.SettingsView"
              >
+  <UserControl.Resources>
+    <views:EFilterStatusCheckedConverter x:Key="EFilterStatusCheckedConverter" />
+  </UserControl.Resources>
   <Border Classes="View">
     <Grid
       RowDefinitions="Auto,Auto,Auto,*,Auto" >
@@ -114,6 +118,25 @@
               VerticalAlignment="Center"
               Margin="4,0,0,0"
               Text="{Binding Path=FilterFilenameTrashedCount, StringFormat={StaticResource FilterFilenameTrash}}"
+            />
+          </StackPanel>
+          <StackPanel
+            Orientation="Horizontal"
+          >
+            <CheckBox
+              IsChecked="{Binding FilterDoubles, Mode=TwoWay, Converter={StaticResource EFilterStatusCheckedConverter}}" 
+              IsThreeState="true"
+              />
+            <!--
+            <CheckBox
+              IsChecked="{Binding FilterDoubles, Mode=TwoWay}" 
+              IsThreeState="true"
+              />
+            -->
+            <TextBlock 
+              VerticalAlignment="Center"
+              Margin="4,0,0,0"
+              Text="{Binding Path=FilterDoublesCount, StringFormat={StaticResource FilterDoubles}}"
             />
           </StackPanel>
         </StackPanel>

@@ -13,6 +13,7 @@
   <system:String x:Key="FilterDatumFilename">Datum aus Dateinamen ({0})</system:String>
   <system:String x:Key="FilterDatumFilesystem">Datum aus Dateisystem ({0})</system:String>
   <system:String x:Key="FilterFilenameTrash">Dateiname beginnt mit .trashed ({0})</system:String>
+  <system:String x:Key="FilterDoubles">Im Ziel bereits vorhandene Fotos ({0})</system:String>
   <system:String x:Key="CmdButtons">Knöpfe</system:String>
   <system:String x:Key="CmdTrash">Papierkorb</system:String>
   <system:String x:Key="CmdDelete">Löschen</system:String>

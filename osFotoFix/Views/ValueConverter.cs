@@ -11,6 +11,39 @@ namespace osFotoFix.Views
 {
   using Models;
 
+  public class EFilterStatusCheckedConverter : IValueConverter
+  {
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture )
+    {
+      bool? ret = null;
+
+      try{
+        EFilterState state = (EFilterState) value;
+        if( state == EFilterState.eOn )
+          ret = true;
+        else if ( state == EFilterState.eOff )
+          ret = false;
+      }
+      catch { }
+      return ret;
+    }
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture )
+    {
+      EFilterState ret = EFilterState.eDisable;
+      try {
+        if ( value != null )
+        {
+          if( (bool)value )
+            ret = EFilterState.eOn;
+          else 
+            ret = EFilterState.eOff;
+        }
+      }
+      catch {}
+      return ret;
+    }
+  }
+
   public class EActionCompareConverter : IValueConverter
   {
     public static EActionCompareConverter Instance = new EActionCompareConverter();

@@ -147,6 +147,14 @@ namespace osFotoFix.ViewModels
         bMatch &= UserSettingsVM.FilterFilenameTrashed;
       }
 
+      if( fotoInfo.Foto.FileExistsOnTarget )
+        UserSettingsVM.FilterDoublesCount++;
+
+      if( UserSettingsVM.FilterDoubles == EFilterState.eOn )
+        bMatch &= fotoInfo.Foto.FileExistsOnTarget;
+      if( UserSettingsVM.FilterDoubles == EFilterState.eOff )
+        bMatch &= !fotoInfo.Foto.FileExistsOnTarget;
+
       return bMatch;
     }
 
