@@ -129,22 +129,46 @@ namespace osFotoFix.ViewModels
 
       if( fotoInfo.Foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Exif ) {
         UserSettingsVM.FilterDatumExifCount++;
-        bMatch &= UserSettingsVM.FilterDatumExif;
+        if( UserSettingsVM.FilterDatumExif == EFilterState.eOff )
+          bMatch = false;
+      }
+      else
+      {
+        if( UserSettingsVM.FilterDatumExif == EFilterState.eOn )
+          bMatch = false;
       }
 
       if( fotoInfo.Foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Filename ) {
         UserSettingsVM.FilterDatumFilenameCount++;
-        bMatch &= UserSettingsVM.FilterDatumFilename;
+        if( UserSettingsVM.FilterDatumFilename == EFilterState.eOff )
+          bMatch = false;
+      }
+      else
+      {
+        if( UserSettingsVM.FilterDatumFilename == EFilterState.eOn )
+          bMatch = false;
       }
 
       if( fotoInfo.Foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Filesystem ) {
         UserSettingsVM.FilterDatumFilechangedCount++;
-        bMatch &= UserSettingsVM.FilterDatumFilechanged;
+        if( UserSettingsVM.FilterDatumFilechanged == EFilterState.eOff )
+          bMatch = false;
+      }
+      else
+      {
+        if( UserSettingsVM.FilterDatumFilechanged == EFilterState.eOn )
+          bMatch = false;
       }
 
       if( fotoInfo.Foto.File.Name.StartsWith( ".trash" ) ) {
         UserSettingsVM.FilterFilenameTrashedCount++;
-        bMatch &= UserSettingsVM.FilterFilenameTrashed;
+        if( UserSettingsVM.FilterFilenameTrashed == EFilterState.eOff )
+          bMatch = false;
+      }
+      else
+      {
+        if( UserSettingsVM.FilterFilenameTrashed == EFilterState.eOn )
+          bMatch = false;
       }
 
       if( fotoInfo.Foto.FileExistsOnTarget )

@@ -14,9 +14,11 @@ namespace osFotoFix.Models
   public class UserSettings
   {
     public UserSettings() {
-      FilterDatumExif = true;
-      FilterDatumFilename = true;
-      FilterDatumFilechanged = true;
+      FilterDatumExif = EFilterState.eDisable;
+      FilterDatumFilename = EFilterState.eDisable;
+      FilterDatumFilechanged = EFilterState.eDisable;
+      FilterFilenameTrashed = EFilterState.eDisable;
+      FilterDoubles = EFilterState.eDisable;
       TrashCmdActive = true;
       DelCmdActive = true;
       MoveCmdActive = true;
@@ -33,13 +35,13 @@ namespace osFotoFix.Models
     public string Papierkorb {get;set;}
 
     [XmlAttribute]
-    public bool FilterDatumExif {get;set;}
+    public EFilterState FilterDatumExif {get;set;}
     [XmlAttribute]
-    public bool FilterDatumFilename {get;set;}
+    public EFilterState FilterDatumFilename {get;set;}
     [XmlAttribute]
-    public bool FilterDatumFilechanged {get;set;}
+    public EFilterState FilterDatumFilechanged {get;set;}
     [XmlAttribute]
-    public bool FilterFilenameTrashed {get;set;}
+    public EFilterState FilterFilenameTrashed {get;set;}
     [XmlAttribute]
     public EFilterState FilterDoubles {get;set;}
 

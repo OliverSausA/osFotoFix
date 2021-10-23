@@ -18,11 +18,12 @@ namespace osFotoFix.ViewModels
 
   public class SettingsViewModel : ViewModelBase
   {
-    private UserSettingsService service;
     private List<KeyValuePair<string,string>> SupportedLanguageList;
+    private UserSettings userSettings;
 
     public SettingsViewModel() : base()
     {
+      userSettings = UserSettingsService.GetInstance.GetUserSettings;
       Read();
       SelectSourceCmd = ReactiveCommand.Create( OnSelectSource );
       SelectTargetCmd = ReactiveCommand.Create( OnSelectTarget );
@@ -38,8 +39,6 @@ namespace osFotoFix.ViewModels
     {
       Write();
     }
-
-    ///// public UserSettings Settings {get; set;}
 
     private string source;
     public string Source { 
@@ -111,13 +110,16 @@ namespace osFotoFix.ViewModels
       FilterDoublesCount = 0;
     }
 
-    private bool filterDatumExif;
-    public bool FilterDatumExif {
-      get { return filterDatumExif; }
+    public EFilterState FilterDatumExif {
+      get { return userSettings.FilterDatumExif; }
       set { 
-        this.RaiseAndSetIfChanged( ref filterDatumExif, value ); 
-        FilterChangedEvent?.Invoke();
+        if( userSettings.FilterDatumExif != value )
+        {
+          userSettings.FilterDatumExif = value;
+          this.RaisePropertyChanged( nameof( FilterDatumExif ) );
+          FilterChangedEvent?.Invoke();
         }
+      }
     }
     private int filterDatumExifCount;
     public int FilterDatumExifCount {
@@ -127,13 +129,16 @@ namespace osFotoFix.ViewModels
       }
     }
 
-    private bool filterDatumFilename;
-    public bool FilterDatumFilename {
-      get { return filterDatumFilename; }
+    public EFilterState FilterDatumFilename {
+      get { return userSettings.FilterDatumFilename; }
       set { 
-        this.RaiseAndSetIfChanged( ref filterDatumFilename, value ); 
-        FilterChangedEvent?.Invoke();
+        if( userSettings.FilterDatumFilename != value )
+        {
+          userSettings.FilterDatumFilename = value;
+          this.RaisePropertyChanged( nameof( FilterDatumFilename ) );
+          FilterChangedEvent?.Invoke();
         }
+      }
     }
     private int filterDatumFilenameCount;
     public int FilterDatumFilenameCount {
@@ -143,13 +148,16 @@ namespace osFotoFix.ViewModels
       }
     }
 
-    private bool filterDatumFilechanged;
-    public bool FilterDatumFilechanged {
-      get { return filterDatumFilechanged; }
+    public EFilterState FilterDatumFilechanged {
+      get { return userSettings.FilterDatumFilechanged; }
       set { 
-        this.RaiseAndSetIfChanged( ref filterDatumFilechanged, value ); 
-        FilterChangedEvent?.Invoke();
+        if( userSettings.FilterDatumFilechanged != value )
+        {
+          userSettings.FilterDatumFilechanged = value;
+          this.RaisePropertyChanged( nameof( FilterDatumFilechanged ) );
+          FilterChangedEvent?.Invoke();
         }
+      }
     }
     private int filterDatumFilechangedCount;
     public int FilterDatumFilechangedCount {
@@ -159,12 +167,15 @@ namespace osFotoFix.ViewModels
       }
     }
 
-    private bool filterFilenameTrashed;
-    public bool FilterFilenameTrashed {
-      get { return filterFilenameTrashed; }
+    public EFilterState FilterFilenameTrashed {
+      get { return userSettings.FilterFilenameTrashed; }
       set {
-        this.RaiseAndSetIfChanged( ref filterFilenameTrashed, value );
-        FilterChangedEvent?.Invoke();
+        if( userSettings.FilterFilenameTrashed != value )
+        {
+          userSettings.FilterFilenameTrashed = value;
+          this.RaisePropertyChanged( nameof( FilterFilenameTrashed ) );
+          FilterChangedEvent?.Invoke();
+        }
       }
     }
     private int filterFilenameTrashedCount;
@@ -175,52 +186,18 @@ namespace osFotoFix.ViewModels
       }
     }
 
-    private EFilterState filterDoubles;
     public EFilterState FilterDoubles 
     {
-      get { return filterDoubles; }
+      get { return userSettings.FilterDoubles; }
       set {
-        this.RaiseAndSetIfChanged( ref filterDoubles, value );
-        FilterChangedEvent?.Invoke();
+        if( userSettings.FilterDoubles != value )
+        {
+          userSettings.FilterDoubles = value;
+          this.RaisePropertyChanged(nameof(FilterDoubles));
+          FilterChangedEvent?.Invoke();
+        }
       }
     }
-    /*****
-    public bool? FilterDoubles
-    {
-      get {
-        bool? ret = null;
-        if( filterDoubles == EFilterState.eOn )
-          ret = true;
-        else if( filterDoubles == EFilterState.eOff )
-          ret = false;
-        return ret;
-      }
-
-      set {
-        if( !value.HasValue )
-          filterDoubles = EFilterState.eDisable;
-        else if( value.Value )
-          filterDoubles = EFilterState.eOn;
-        else
-          filterDoubles = EFilterState.eOff;
-      }
-    }
-    *****/
-    /*****
-    public EFilterState FilterDoubles 
-    {
-      get { return filterDoubles; }
-      set {
-        var state = EFilterState.eDisable;
-        if( filterDoubles == EFilterState.eDisable )
-          state = EFilterState.eOn;
-        else if( filterDoubles == EFilterState.eOn )
-          state = EFilterState.eOff;
-        this.RaiseAndSetIfChanged( ref filterDoubles, state );
-        FilterChangedEvent?.Invoke();
-      }
-    }
-    *****/
 
     private int filterDoublesCount;
     public int FilterDoublesCount {
@@ -315,11 +292,6 @@ namespace osFotoFix.ViewModels
       Target = settings.Ziel;
       Trash  = settings.Papierkorb;
 
-      FilterDatumExif = settings.FilterDatumExif;
-      FilterDatumFilename = settings.FilterDatumFilename;
-      FilterDatumFilechanged = settings.FilterDatumFilechanged;
-      filterDoubles = settings.FilterDoubles;
-
       TrashCmdActive = settings.TrashCmdActive;
       DelCmdActive   = settings.DelCmdActive;
       MoveCmdActive  = settings.MoveCmdActive;
@@ -338,11 +310,6 @@ namespace osFotoFix.ViewModels
       settings.Quelle = Source;
       settings.Ziel = Target;
       settings.Papierkorb = Trash;
-
-      settings.FilterDatumExif = FilterDatumExif;
-      settings.FilterDatumFilename = FilterDatumFilename;
-      settings.FilterDatumFilechanged = FilterDatumFilechanged;
-      settings.FilterDoubles = FilterDoubles;
 
       settings.TrashCmdActive = TrashCmdActive;
       settings.DelCmdActive   = DelCmdActive;

@@ -79,7 +79,9 @@
             Orientation="Horizontal"
           >
             <CheckBox
-              IsChecked="{Binding FilterDatumExif, Mode=TwoWay}" />
+              IsChecked="{Binding FilterDatumExif, Mode=TwoWay, Converter={StaticResource EFilterStatusCheckedConverter}}"
+              IsThreeState="true"
+            />
             <TextBlock 
               VerticalAlignment="Center"
               Margin="4,0,0,0"
@@ -90,7 +92,9 @@
             Orientation="Horizontal"
           >
             <CheckBox
-              IsChecked="{Binding FilterDatumFilename, Mode=TwoWay}" />
+              IsChecked="{Binding FilterDatumFilename, Mode=TwoWay, Converter={StaticResource EFilterStatusCheckedConverter}}"
+              IsThreeState="true"
+            />
             <TextBlock 
               VerticalAlignment="Center"
               Margin="4,0,0,0"
@@ -101,7 +105,9 @@
             Orientation="Horizontal"
           >
             <CheckBox
-              IsChecked="{Binding FilterDatumFilechanged, Mode=TwoWay}" />
+              IsChecked="{Binding FilterDatumFilechanged, Mode=TwoWay, Converter={StaticResource EFilterStatusCheckedConverter}}"
+              IsThreeState="true" 
+            />
             <TextBlock 
               VerticalAlignment="Center"
               Margin="4,0,0,0"
@@ -113,7 +119,9 @@
             Margin="0,5,0,0"
           >
             <CheckBox
-              IsChecked="{Binding FilterFilenameTrashed, Mode=TwoWay}" />
+              IsChecked="{Binding FilterFilenameTrashed, Mode=TwoWay, Converter={StaticResource EFilterStatusCheckedConverter}}"
+              IsThreeState="true" 
+            />
             <TextBlock 
               VerticalAlignment="Center"
               Margin="4,0,0,0"
@@ -126,13 +134,7 @@
             <CheckBox
               IsChecked="{Binding FilterDoubles, Mode=TwoWay, Converter={StaticResource EFilterStatusCheckedConverter}}" 
               IsThreeState="true"
-              />
-            <!--
-            <CheckBox
-              IsChecked="{Binding FilterDoubles, Mode=TwoWay}" 
-              IsThreeState="true"
-              />
-            -->
+            />
             <TextBlock 
               VerticalAlignment="Center"
               Margin="4,0,0,0"
