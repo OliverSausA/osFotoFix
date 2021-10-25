@@ -184,13 +184,22 @@ namespace osFotoFix.Services
       bool ret = false;
       try
       {
-        var targetDir = UserSettingsService.GetInstance.GetUserSettings.Ziel;
-        targetDir = Path.Combine( targetDir, CreateNewFileLocation(foto) );
-        var pattern = foto.Created.ToString("yyyyMMdd_hhmmss*.*");
-        // var matches = Directory.GetFiles(targetDir).Where( path => Regex.Match(path, filename).Success);
-        var matches = Directory.GetFiles( targetDir, pattern );
-        if( matches.Length > 0 )
-          return true;
+        string path = Path.Combine(
+                UserSettingsService.GetInstance.GetUserSettings.Ziel,
+                foto.Created.ToString("yyyy"));
+        if( !Directory.Exists( path ) )
+          return false;
+
+        foreach( var dir in Directory.GetDirectories( path, foto.Created.ToString("yyyy_MM*") ) )
+        {
+          var pattern = foto.Created.ToString("yyyyMMdd_HHmmss*.*");
+          foreach( var file in Directory.GetFiles( dir, pattern ))
+          {
+            var f = new FileInfo(file);
+            if( f.Length  == foto.File.Length )
+              return true;
+          }
+        }
       }
       catch { }
 
@@ -270,7 +279,7 @@ namespace osFotoFix.Services
       string postfix = "";
       if( idx > 0) postfix = string.Format("_{0}", idx);
       return string.Format("{0}_{1}{2}{3}",
-               foto.Created.ToString("yyyyMMdd_hhmmss"),
+               foto.Created.ToString("yyyyMMdd_HHmmss"),
                foto.Description,
                postfix,
                foto.File.Extension );
