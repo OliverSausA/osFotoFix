@@ -7,7 +7,6 @@ using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using ExifLib;
 
 namespace osFotoFix.Services
 {
@@ -163,12 +162,14 @@ namespace osFotoFix.Services
     {
       try
       {
-        using( ExifReader reader = new ExifReader( file.FullName ) )
-        {
-          DateTime d;
-          if( reader.GetTagValue<DateTime>(ExifTags.DateTimeDigitized, out d))
-            return new FotoInfo( file, d, FotoInfo.ETypeOfCreationDate.Exif );
-        }
+        /*
+        var exifDirectorie = MetadataExtractor.ImageMetadataReader.ReadMetadata(file.FullName);
+        var subIfd0Directorie = exifDirectorie.OfType<MetadataExtractor.Formats.Exif.ExifIfd0Directory>().FirstOrDefault();
+        DateTime? d = subIfd0Directorie?.GetDateTime(MetadataExtractor.Formats.Exif.ExifDirectoryBase.TagDateTime);
+        */
+        DateTime? d = ExifService.ReadCreationTime( file.FullName );
+        if( d.HasValue )
+          return new FotoInfo( file, d.Value, FotoInfo.ETypeOfCreationDate.Exif );
       }
       catch { }
 

@@ -9,7 +9,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/osFotoFix/bin/Debug/netcoreapp3.1/osFotoFix.dll",
+      "program": "${workspaceFolder}/osFotoFix/bin/Debug/net7.0/osFotoFix.dll",
       "args": [],
       "cwd": "${workspaceFolder}/osFotoFix",
       "console": "internalConsole",
