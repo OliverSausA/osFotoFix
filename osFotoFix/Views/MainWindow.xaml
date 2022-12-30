@@ -18,7 +18,7 @@
    </Style>
   </Window.Styles>
   <Grid 
-    ColumnDefinitions="300,Auto,*"
+    ColumnDefinitions="300,Auto,*,Auto,300"
     >
     <views:SettingsView 
       Margin="5,5,0,5"
@@ -56,6 +56,19 @@
         DataContext="{Binding ImageVM}"
         />
     </Grid>
+    <GridSplitter 
+      Grid.Column="3"
+      VerticalAlignment="Stretch"
+      HorizontalAlignment="Center"
+      Background="Green" 
+      Width="3"       
+      />
+    <views:FotoPreviewView 
+      Margin="5,5,0,5"
+      Grid.Column="4"
+      DockPanel.Dock="Right"
+      DataContext="{Binding FotoPreviewListVM}"
+      />
   </Grid>
 
 </Window>

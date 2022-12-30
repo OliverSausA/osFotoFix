@@ -18,12 +18,14 @@ namespace osFotoFix.ViewModels
   public class FotoInfoListViewModel : ViewModelBase
   {
     private FotoInfoService service;
+    private FotoPreviewViewModel FotoPreviewVM;
     private FotoInfoDetailViewModel FotoInfoDetailVM;
     private ImageViewModel ImageVM;
     private List<FotoInfoVM> AllFotoInfos;
     public FotoInfoListViewModel( 
               SettingsViewModel UserSettingsVM,
               ImageViewModel ImageVM, 
+              FotoPreviewViewModel FotoPreviewVM,
               FotoInfoDetailViewModel FotoInfoDetailVM )
     {
       AllFotoInfos = new List<FotoInfoVM>();
@@ -53,6 +55,7 @@ namespace osFotoFix.ViewModels
       DoItCmd = ReactiveCommand.Create( OnDoIt );
       CancelDoItCmd = ReactiveCommand.Create( OnCancelDoIt );
       
+      this.FotoPreviewVM = FotoPreviewVM;
       this.FotoInfoDetailVM = FotoInfoDetailVM;
 
       UserSettingsVM.NewSourceSelectedEvent += OnNewSourceSelected;
@@ -71,6 +74,20 @@ namespace osFotoFix.ViewModels
         fotoSelected = value;
         ImageVM.Foto = value;
         FotoInfoDetailVM.Foto = value;
+        //FotoPreviewVM.FotoList.Clear();
+        var previewList = new ObservableCollection<FotoInfo>();
+        if( fotoSelected != null)
+        {
+          if( fotoSelected.Index >= 2)
+            previewList.Add(FotoInfoList[fotoSelected.Index -2].Foto);
+          if( fotoSelected.Index >= 1)
+            previewList.Add(FotoInfoList[fotoSelected.Index -1].Foto);
+          if( FotoInfoList.Count - fotoSelected.Index > 1)
+            previewList.Add(FotoInfoList[fotoSelected.Index +1].Foto);
+          if( FotoInfoList.Count - fotoSelected.Index > 2)
+            previewList.Add(FotoInfoList[fotoSelected.Index +2].Foto);
+        }
+        FotoPreviewVM.FotoList = previewList;
       } 
     }
 

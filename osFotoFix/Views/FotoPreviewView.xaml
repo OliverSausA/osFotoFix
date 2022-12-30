@@ -1,0 +1,26 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="clr-namespace:osFotoFix.Views;assembly=osFotoFix"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="osFotoFix.Views.FotoPreviewView">
+  <UserControl.Resources>
+    <views:BitmapFileValueConverter x:Key="FotoImage" />
+    <views:EActionCompareConverter x:Key="EActionCompare" />
+    <views:ActionColorValueConverter x:Key="ActionColor" />
+    <views:ActionBitmapValueConverter x:Key="ActionImage" />
+  </UserControl.Resources>
+  <Border Classes="View">
+    <Grid ColumnDefinitions="*">
+      <ListBox Items="{Binding FotoList}">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <Image Width="300"
+              Source="{Binding File.FullName, Converter={StaticResource FotoImage}}"/>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+    </Grid>
+  </Border>
+</UserControl>

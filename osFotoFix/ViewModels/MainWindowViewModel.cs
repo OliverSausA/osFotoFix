@@ -20,7 +20,8 @@ namespace osFotoFix.ViewModels
       SettingsVM = new SettingsViewModel();
       ImageVM = new ImageViewModel( SettingsVM );
       FotoInfoDetailVM = new FotoInfoDetailViewModel();
-      FotoInfoListVM = new FotoInfoListViewModel( SettingsVM, ImageVM, FotoInfoDetailVM );
+      FotoPreviewListVM = new FotoPreviewViewModel();
+      FotoInfoListVM = new FotoInfoListViewModel( SettingsVM, ImageVM, FotoPreviewListVM, FotoInfoDetailVM );
 
       var alt = Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
       alt.Exit += OnExit;
@@ -36,6 +37,8 @@ namespace osFotoFix.ViewModels
     public FotoInfoListViewModel FotoInfoListVM {get;set;}
 
     public FotoInfoDetailViewModel FotoInfoDetailVM {get;set;}
+
+    public FotoPreviewViewModel FotoPreviewListVM {get;set;}
 
     public ImageViewModel ImageVM {get;set;}
 
