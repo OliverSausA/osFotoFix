@@ -20,6 +20,7 @@
         IsVisible="{Binding UserSettingsVM.ShowFotoInfoDetail}"
         />
       <Image Source="{Binding Foto.Foto.File.FullName, Converter={StaticResource FotoImage}}">
+      <!-- <Image Source="{Binding Foto.Image}"> -->
       </Image>
       <StackPanel
         Grid.Row="1"

@@ -10,8 +10,8 @@ namespace osFotoFix.ViewModels
 
   public class FotoPreviewViewModel : ViewModelBase
   {
-    private ObservableCollection<FotoInfo> fotoList = new ObservableCollection<FotoInfo>();
-    public ObservableCollection<FotoInfo> FotoList {
+    private ObservableCollection<FotoInfoVM> fotoList = new ObservableCollection<FotoInfoVM>();
+    public ObservableCollection<FotoInfoVM> FotoList {
       get { return fotoList; }
       set { this.RaiseAndSetIfChanged(ref fotoList, value); }
     }

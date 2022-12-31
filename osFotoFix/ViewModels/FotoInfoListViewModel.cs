@@ -74,20 +74,18 @@ namespace osFotoFix.ViewModels
         fotoSelected = value;
         ImageVM.Foto = value;
         FotoInfoDetailVM.Foto = value;
-        //FotoPreviewVM.FotoList.Clear();
-        var previewList = new ObservableCollection<FotoInfo>();
-        if( fotoSelected != null)
+        FotoPreviewVM.FotoList.Clear();
+        if(fotoSelected != null)
         {
           if( fotoSelected.Index >= 2)
-            previewList.Add(FotoInfoList[fotoSelected.Index -2].Foto);
+            FotoPreviewVM.FotoList.Add(FotoInfoList[fotoSelected.Index -2]);
           if( fotoSelected.Index >= 1)
-            previewList.Add(FotoInfoList[fotoSelected.Index -1].Foto);
+            FotoPreviewVM.FotoList.Add(FotoInfoList[fotoSelected.Index -1]);
           if( FotoInfoList.Count - fotoSelected.Index > 1)
-            previewList.Add(FotoInfoList[fotoSelected.Index +1].Foto);
+            FotoPreviewVM.FotoList.Add(FotoInfoList[fotoSelected.Index +1]);
           if( FotoInfoList.Count - fotoSelected.Index > 2)
-            previewList.Add(FotoInfoList[fotoSelected.Index +2].Foto);
+            FotoPreviewVM.FotoList.Add(FotoInfoList[fotoSelected.Index +2]);
         }
-        FotoPreviewVM.FotoList = previewList;
       } 
     }
 

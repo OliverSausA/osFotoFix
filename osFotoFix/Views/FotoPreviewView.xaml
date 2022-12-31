@@ -16,8 +16,7 @@
       <ListBox Items="{Binding FotoList}">
         <ListBox.ItemTemplate>
           <DataTemplate>
-            <Image Width="300"
-              Source="{Binding File.FullName, Converter={StaticResource FotoImage}}"/>
+            <Image Width="300" Source="{Binding Thumpnail}"/>
           </DataTemplate>
         </ListBox.ItemTemplate>
       </ListBox>

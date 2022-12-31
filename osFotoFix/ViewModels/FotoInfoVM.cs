@@ -1,6 +1,9 @@
 using System;
 using System.IO;
+using Avalonia.Media.Imaging;
 using ReactiveUI;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 
 namespace osFotoFix.ViewModels
 {
@@ -57,6 +60,31 @@ namespace osFotoFix.ViewModels
       get { return Foto.Action; }
       set { Foto.Action = value;
             this.RaisePropertyChanged(); }
+    }
+
+    private Bitmap thumpnail;
+    public Bitmap Thumpnail {
+      get {
+        if( thumpnail == null )
+        {
+          using (var image = Image.Load( Foto.File.FullName ))
+          {
+            int w = 300;
+            // int h = w * (image.Width / image.Height);
+            image.Mutate( x => x.Resize(w, 0));
+            using( var memstream = new MemoryStream() )
+            {
+              image.Save(memstream, new SixLabors.ImageSharp.Formats.Bmp.BmpEncoder());
+              memstream.Position = 0;
+              thumpnail = new Avalonia.Media.Imaging.Bitmap(memstream);
+            }
+          }
+        }
+        return thumpnail;
+      }
+    }
+    public bool ThumpnailCallback() {
+      return false;
     }
 
     public void UpdateView()
