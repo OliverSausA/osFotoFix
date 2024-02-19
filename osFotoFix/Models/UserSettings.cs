@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace osFotoFix.Models
@@ -33,6 +34,8 @@ namespace osFotoFix.Models
     public string Ziel {get;set;}
     [XmlAttribute]
     public string Papierkorb {get;set;}
+    [XmlArray]
+    public List<Target> Targets {get; set;}
 
     [XmlAttribute]
     public EFilterState FilterDatumExif {get;set;}

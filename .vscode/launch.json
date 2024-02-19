@@ -16,6 +16,17 @@
       "stopAtEntry": false
     },
     {
+      "name": "osFotoFix xUnit",
+      "type": "coreclr",
+      "request": "test",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/osFotoFix.Tests/bin/Debug/net7.0/osFotoFix.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/osFotoFix.Tests",
+      "console": "internalConsole",
+      "stopAtEntry": false
+    },
+    {
       "name": ".NET Core Attach",
       "type": "coreclr",
       "request": "attach",

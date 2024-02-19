@@ -3,8 +3,6 @@ using System.IO;
 
 namespace osFotoFix.Models
 {
-  using ViewModels;
-
   public enum EAction {
     ignore = -1,
     copy,

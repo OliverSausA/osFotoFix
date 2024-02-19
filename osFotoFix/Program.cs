@@ -1,6 +1,6 @@
 ﻿using System;
 using Avalonia;
-using Avalonia.Logging.Serilog;
+///// using Avalonia.Logging.Serilog;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.ReactiveUI;
 
@@ -18,7 +18,7 @@ namespace osFotoFix
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
-                .LogToDebug()
+                .LogToTrace()
                 .UseReactiveUI();
     }
 }
