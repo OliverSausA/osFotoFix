@@ -2,18 +2,12 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace osFotoFix.Views
-{
-    public class FotoInfoDetailView : UserControl
-    {
-        public FotoInfoDetailView()
-        {
-            InitializeComponent();
-        }
+namespace osFotoFix.Views;
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+public partial class FotoInfoDetailView : UserControl
+{
+    public FotoInfoDetailView()
+    {
+        InitializeComponent();
     }
 }

@@ -3,7 +3,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:views="clr-namespace:osFotoFix.Views;assembly=osFotoFix"
+             xmlns:viewmodels="clr-namespace:osFotoFix.ViewModels;assembly=osFotoFix"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:CompileBindings="True"
+		         x:DataType="viewmodels:FotoPreviewViewModel"
              x:Class="osFotoFix.Views.FotoPreviewView">
   <UserControl.Resources>
     <views:BitmapFileValueConverter x:Key="FotoImage" />
@@ -13,7 +16,7 @@
   </UserControl.Resources>
   <Border Classes="View">
     <Grid ColumnDefinitions="*">
-      <ListBox Items="{Binding FotoList}">
+      <ListBox ItemsSource="{Binding FotoList}">
         <ListBox.ItemTemplate>
           <DataTemplate>
             <Image Width="300" Source="{Binding Thumpnail}"/>

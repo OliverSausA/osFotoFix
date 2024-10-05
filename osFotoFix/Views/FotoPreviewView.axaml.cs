@@ -4,16 +4,11 @@ using Avalonia.Markup.Xaml;
 
 namespace osFotoFix.Views
 {
-    public class FotoPreviewView : UserControl
+    public partial class FotoPreviewView : UserControl
     {
         public FotoPreviewView()
         {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
+            // InitializeComponent();
         }
     }
 }

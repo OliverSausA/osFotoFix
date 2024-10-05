@@ -12,7 +12,7 @@ namespace osFotoFix.ViewModels
 {
   using Models;
   using Services;
-  public class MainWindowViewModel : ViewModelBase
+  public partial class MainWindowViewModel : ViewModelBase
   {
     public MainWindowViewModel()
     {

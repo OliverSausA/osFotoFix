@@ -2,9 +2,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ic="FluentIcons.WinUI"
              xmlns:views="clr-namespace:osFotoFix.Views;assembly=osFotoFix"
+             xmlns:viewmodels="clr-namespace:osFotoFix.ViewModels;assembly=osFotoFix"
              xmlns:models="clr-namespace:osFotoFix.Models;assembly=osFotoFix"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:CompileBindings="True"
+		         x:DataType="viewmodels:FotoInfoListViewModel"
              x:Class="osFotoFix.Views.FotoInfoListView">
   <UserControl.Resources>
     <views:BitmapFileValueConverter x:Key="FotoImage" />
@@ -26,9 +30,9 @@
           IsVisible="{Binding !RunningReadFoto}"
           ToolTip.Tip="{StaticResource TipCmdRefresh}"
           >
-          <DrawingPresenter
-            Classes="cmd"
-            Drawing="{StaticResource FluentIcons.camera_add_regular}" />
+          <Image Classes="cmd">
+            <DrawingImage Drawing="{StaticResource FluentIcons.camera_add_regular}" />
+          </Image>
         </Button>
         <Button Classes="cmd"
           Command="{Binding CancelCmd}"
@@ -36,11 +40,11 @@
           Background="{StaticResource Cancel}"
           ToolTip.Tip="{StaticResource TipCmdCancel}"
           >
-          <DrawingPresenter
-            Classes="cmd"
-            Drawing="{StaticResource FluentIcons.camera_add_regular}" />
+          <Image Classes="cmd">
+            <DrawingImage Drawing="{StaticResource FluentIcons.camera_add_regular}" />
+          </Image>
         </Button>
-        <ContentControl
+        <ContentPresenter
           VerticalAlignment="Center"
           Margin="2"
           Content="Event"
@@ -50,7 +54,7 @@
           Text="{Binding UserSettingsVM.Title}"
           Watermark="Title"
           />
-        <ContentControl
+        <ContentPresenter
           VerticalAlignment="Center"
           Margin="2" 
           Content="{DynamicResource Description}"
@@ -77,9 +81,9 @@
           Command="{Binding TrashAllCmd}"
           ToolTip.Tip="{DynamicResource TipCmdTrashAll}"
           >
-          <DrawingPresenter
-            Classes="cmd"
-            Drawing="{StaticResource FluentIcons.delete_regular}" />
+          <Image Classes="cmd">
+            <DrawingImage Drawing="{StaticResource FluentIcons.delete_regular}" />
+          </Image>
         </Button>
         <Button Classes="cmd cmddelete"
           IsEnabled="{Binding UserSettingsVM.DelCmdActive}"
@@ -88,9 +92,9 @@
           Command="{Binding DelAllCmd}"
           ToolTip.Tip="{DynamicResource TipCmdDeleteAll}"
           >
-          <DrawingPresenter
-            Classes="cmd"
-            Drawing="{StaticResource FluentIcons.delete_off_regular}" />
+          <Image Classes="cmd">
+            <DrawingImage Drawing="{StaticResource FluentIcons.delete_off_regular}" />
+          </Image>
         </Button>
         <Button Classes="cmd cmdmove"
           IsEnabled="{Binding UserSettingsVM.MoveCmdActive}"
@@ -99,9 +103,9 @@
           ToolTip.Tip="{DynamicResource TipCmdMoveAll}"
           Command="{Binding MoveAllCmd}"
           >
-          <DrawingPresenter
-            Classes="cmd"
-            Drawing="{StaticResource FluentIcons.sticker_regular}" />
+          <Image Classes="cmd">
+            <DrawingImage Drawing="{StaticResource FluentIcons.sticker_regular}" />
+          </Image>
         </Button>
         <Button Classes="cmd cmdcopy"
           IsEnabled="{Binding UserSettingsVM.CopyCmdActive}"
@@ -110,9 +114,9 @@
           ToolTip.Tip="{DynamicResource TipCmdCopyAll}"
           Command="{Binding CopyAllCmd}"
           >
-          <DrawingPresenter
-            Classes="cmd"
-            Drawing="{StaticResource FluentIcons.sticker_add_regular}" />
+          <Image Classes="cmd">
+            <DrawingImage Drawing="{StaticResource FluentIcons.sticker_add_regular}" />
+          </Image>
         </Button>
 
         <Button Classes="cmd"
@@ -120,10 +124,9 @@
           Background="{StaticResource Cancel}"
           ToolTip.Tip="{DynamicResource TipCmdUndoAll}"
           >
-	        <DrawingPresenter
-            Classes="cmd"
-            Drawing="{StaticResource FluentIconsFilled.backspace_filled}"
-            />
+          <Image Classes="cmd">
+            <DrawingImage Drawing="{StaticResource FluentIconsFilled.backspace_filled}"/>
+          </Image>
         </Button>
         <Button Classes="cmd cmddoit"
           Content="DoIt"
@@ -131,9 +134,9 @@
           IsVisible="{Binding !RunningFotoFixIt}"
           ToolTip.Tip="{DynamicResource TipCmdDoit}"
           >
-          <DrawingPresenter
-            Classes="cmd"
-            Drawing="{StaticResource FluentIcons.camera_switch_regular}" />
+          <Image Classes="cmd">
+            <DrawingImage Drawing="{StaticResource FluentIcons.camera_switch_regular}" />
+          </Image>
         </Button>
         <Button Classes="cmd cmdCancel"
           Command="{Binding CancelDoItCmd}"
@@ -141,9 +144,9 @@
           Background="{StaticResource Cancel}"
           ToolTip.Tip="{DynamicResource TipCmdCancelDoIt}"
           >
-          <DrawingPresenter
-            Classes="cmd"
-            Drawing="{StaticResource FluentIcons.camera_switch_regular}" />
+          <Image Classes="cmd">
+            <DrawingImage Drawing="{StaticResource FluentIcons.camera_switch_regular}" />
+          </Image>
         </Button>
       </StackPanel>
       <StackPanel
@@ -151,25 +154,25 @@
         Orientation="Horizontal"
         HorizontalAlignment="Right"
       >
-        <ContentControl
+        <ContentPresenter
           VerticalAlignment="Center"
           Content="Anzahl der Bilder: "
           />
-        <ContentControl
+        <ContentPresenter
           VerticalAlignment="Center"
           Margin="0,0,5,0"
           >
-          <ContentControl.Content>
+          <ContentPresenter.Content>
             <Binding Path="FotoInfoList.Count" Mode="OneWay" />
-          </ContentControl.Content>
-        </ContentControl>
+          </ContentPresenter.Content>
+        </ContentPresenter>
       </StackPanel>
       <DataGrid
         Name="FotoList"
         Grid.Row="1"
         Grid.ColumnSpan="2"
         AutoGenerateColumns="False"
-        Items="{Binding FotoInfoList}"
+        ItemsSource="{Binding FotoInfoList}"
         SelectedItem="{Binding FotoSelected, Mode=TwoWay}"
         >
         <DataGrid.Columns>
@@ -199,44 +202,47 @@
                   VerticalAlignment="Center"
                   IsVisible="{Binding Action, Converter={StaticResource EActionCompare}, ConverterParameter=copy}"
                   >
-                  <DrawingPresenter 
+                  <Image Classes="cmd"
                     Width="16" Height="16"
-                    Stretch="Fill"
-                    Classes="cmd" 
-                    Drawing="{StaticResource FluentIcons.sticker_add_regular}" />
+                    Stretch="Fill">
+                    <DrawingImage Drawing="{StaticResource FluentIcons.sticker_add_regular}" />
+                  </Image>
                 </Panel>
                 <Panel
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center"
                   IsVisible="{Binding Action, Converter={StaticResource EActionCompare}, ConverterParameter=move}"
                   >
-                  <DrawingPresenter 
+                  <Image Classes="cmd"
                     Width="16" Height="16"
                     Stretch="Fill"
-                    Classes="cmd" 
-                    Drawing="{StaticResource FluentIcons.sticker_regular}" />
+                  >
+                    <DrawingImage Drawing="{StaticResource FluentIcons.sticker_regular}" />
+                  </Image>
                 </Panel>
                 <Panel
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center"
                   IsVisible="{Binding Action, Converter={StaticResource EActionCompare}, ConverterParameter=delete}"
                   >
-                  <DrawingPresenter 
+                  <Image Classes="cmd"
                     Width="16" Height="16"
                     Stretch="Fill"
-                    Classes="cmd" 
-                    Drawing="{StaticResource FluentIcons.delete_off_regular}" />
+                  >
+                    <DrawingImage Drawing="{StaticResource FluentIcons.delete_off_regular}" />
+                  </Image>
                 </Panel>
                 <Panel
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center"
                   IsVisible="{Binding Action, Converter={StaticResource EActionCompare}, ConverterParameter=trash}"
                   >
-                  <DrawingPresenter 
+                  <Image Classes="cmd"
                     Width="16" Height="16"
                     Stretch="Fill"
-                    Classes="cmd" 
-                    Drawing="{StaticResource FluentIcons.delete_regular}" />
+                  >
+                    <DrawingImage Drawing="{StaticResource FluentIcons.delete_regular}" />
+                  </Image>
                 </Panel>
               </StackPanel>
             </DataTemplate>

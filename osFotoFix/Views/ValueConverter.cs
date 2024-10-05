@@ -87,7 +87,7 @@ namespace osFotoFix.Views
       
       try 
       {
-        if( value is string filename && targetType.IsAssignableFrom(typeof(IBitmap)))
+        if( value is string filename && targetType.IsAssignableFrom(typeof(Bitmap)))
         {
           var b = new Bitmap( filename );
           return b;

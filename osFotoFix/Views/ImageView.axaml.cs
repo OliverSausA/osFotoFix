@@ -8,16 +8,11 @@ using Avalonia.Media.Imaging;
 
 namespace osFotoFix.Views
 {
-    public class ImageView : UserControl
+    public partial class ImageView : UserControl
     {
         public ImageView()
         {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
+            // InitializeComponent();
         }
     }
 }

@@ -4,8 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:osFotoFix.ViewModels"
              xmlns:views="clr-namespace:osFotoFix.Views;assembly=osFotoFix"
+             xmlns:viewmodels="clr-namespace:osFotoFix.ViewModels;assembly=osFotoFix"
+             xmlns:models="clr-namespace:osFotoFix.Models;assembly=osFotoFix"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="osFotoFix.Views.SettingsView"
+             x:CompileBindings="True"
+		         x:DataType="viewmodels:SettingsViewModel"
              >
   <UserControl.Resources>
     <views:EFilterStatusCheckedConverter x:Key="EFilterStatusCheckedConverter" />
@@ -25,7 +29,10 @@
           ColumnDefinitions="*,32"
           RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
           >
-          <ContentControl
+          <Image Classes="cmd">
+            <DrawingImage Drawing="{StaticResource FluentIcons.camera_add_regular}" />
+          </Image>
+          <ContentPresenter
             Margin="0,10,0,0"
             Grid.Row="0"
             Content="{DynamicResource SourceDir}" />
@@ -39,7 +46,7 @@
             Content="..." 
             Command="{Binding SelectSourceCmd}"
             />
-          <ContentControl
+          <ContentPresenter
             Margin="0,10,0,0"
             Grid.Row="2"
             Content="{DynamicResource DestinationDir}" />
@@ -52,7 +59,7 @@
             Command="{Binding SelectTargetCmd}"
             Grid.Column="1"
             Content="..." />
-          <ContentControl
+          <ContentPresenter
             Margin="0,10,0,0"
             Grid.Row="4"
             Content="{DynamicResource TrashDir}" />
@@ -158,10 +165,13 @@
             Margin="10,0,10,0"
             Background="{StaticResource Warning}"
             >
-            <DrawingPresenter 
-              Classes="cmd" 
-              Drawing="{StaticResource FluentIcons.delete_regular}" />
+            <Image Classes="cmd">
+              <DrawingImage Drawing="{StaticResource FluentIcons.delete_regular}" />
+            </Image>
           </Panel>
+          <Image>
+            <DrawingImage Drawing="{StaticResource FluentIcons.delete_regular}" />
+          </Image>
           <CheckBox
             Grid.Column="1"
             IsChecked="{Binding TrashCmdActive, Mode=TwoWay}" 
@@ -173,9 +183,9 @@
             Grid.Row="1"
             Background="{StaticResource Alert}"
             >
-            <DrawingPresenter 
-              Classes="cmd" 
-              Drawing="{StaticResource FluentIcons.delete_off_regular}" />
+            <Image Classes="cmd">
+              <DrawingImage Drawing="{StaticResource FluentIcons.delete_off_regular}" />
+            </Image>
           </Panel>
           <CheckBox
             Grid.Row="1"
@@ -188,9 +198,9 @@
             Grid.Row="2"
             Background="{StaticResource OK_Color}"
             >
-            <DrawingPresenter 
-              Classes="cmd" 
-              Drawing="{StaticResource FluentIcons.sticker_regular}" />
+            <Image Classes="cmd">
+              <DrawingImage Drawing="{StaticResource FluentIcons.sticker_regular}" />
+            </Image>
           </Panel>
           <CheckBox 
             Grid.Row="2"
@@ -203,9 +213,9 @@
             Grid.Row="3"
             Background="{StaticResource OK_Color}"
             >
-            <DrawingPresenter 
-              Classes="cmd" 
-              Drawing="{StaticResource FluentIcons.sticker_add_regular}" />
+            <Image Classes="cmd">
+              <DrawingImage Drawing="{StaticResource FluentIcons.sticker_add_regular}" />
+            </Image>
           </Panel> 
           <CheckBox 
             Grid.Row="3"
@@ -224,12 +234,12 @@
           <StackPanel
             Orientation="Horizontal"
             >
-            <ContentControl
-              Content="{DynamicResource Language}"
+            <ContentPresenter
               VerticalAlignment="Center"
+              Content="{DynamicResource Language}"
             />
             <ComboBox 
-              Items="{Binding SupportedLanguages}" 
+              ItemsSource="{Binding SupportedLanguages}" 
               SelectedItem="{Binding CurrentLanguage}"
               HorizontalAlignment="Left"
               Width="120"
@@ -244,13 +254,13 @@
           <StackPanel 
             Orientation="Horizontal" 
             >
-            <ContentControl
+            <ContentPresenter
               Grid.Row="0"
               Content="{DynamicResource FontSize}" 
               VerticalAlignment="Center"
               />
             <ComboBox 
-              Items="{Binding FontSizeList}"
+              ItemsSource="{Binding FontSizeList}"
               SelectedItem="{Binding GeneralFontSize}"
               HorizontalAlignment="Left"
               Width="50"

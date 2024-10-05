@@ -9,10 +9,13 @@ using System.Globalization;
 using osFotoFix.ViewModels;
 using osFotoFix.Views;
 using osFotoFix.Services;
+using Avalonia.Markup.Xaml.Styling;
+using Avalonia.Styling;
+using HarfBuzzSharp;
 
 namespace osFotoFix
 {
-  public class App : Application
+  public partial class App : Application
   {
     public override void Initialize()
     {
@@ -45,44 +48,27 @@ namespace osFotoFix
       var dictionaryList = Application.Current.Resources.MergedDictionaries.ToList();
 
       //Search for the specified culture.     
-      /*****
       string requestedCulture = string.Format("StrRes.{0}.xaml", culture);
       foreach( var r in dictionaryList )
       {
-        var d = r as ResourceInclude;
-        if( d.Source.OriginalString.Contains( requestedCulture ))
+        object language;
+        r.TryGetResource("LanguageID", App.Current.ActualThemeVariant, out language);
+        if (language != null && language.ToString() == culture)
         {
-          Application.Current.Resources.MergedDictionaries.Remove(d);
-          Application.Current.Resources.MergedDictionaries.Add(d);
-          break;
+          Application.Current.Resources.MergedDictionaries.Remove(r);
+          Application.Current.Resources.MergedDictionaries.Add(r);
         }
       }   
-      *****/
-
-      //Search for the specified culture.     
-      string requestedCulture = string.Format("StrRes.{0}.xaml", culture);
-      var resourceDictionary = dictionaryList.
-        Cast<ResourceInclude>().
-        FirstOrDefault(d => d.Source.OriginalString.Contains(requestedCulture));
-
-      //If we have the requested resource, remove it from the list and place at the end.     
-      //Then this language will be our string table to use.      
-      if (resourceDictionary != null)
-      {
-          Application.Current.Resources.MergedDictionaries.Remove(resourceDictionary);
-          Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
-      }
 
       //Inform the threads of the new culture.     
       Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
       Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
-
     }
 
     public static string GetStrRes(string key)
     {
       object res;
-      if( App.Current.Resources.TryGetResource( key, out res ) )
+      if( App.Current.Resources.TryGetResource( key, ThemeVariant.Default, out res ) )
         return res.ToString();
       else
         return key;

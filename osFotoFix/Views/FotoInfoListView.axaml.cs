@@ -3,34 +3,28 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace osFotoFix.Views
+namespace osFotoFix.Views;
+
+using ViewModels;
+
+public partial class FotoInfoListView : UserControl
 {
-    using ViewModels;
+    ///// private DataGrid FotoList;
 
-    public class FotoInfoListView : UserControl
+    public FotoInfoListView()
     {
-        private DataGrid FotoList;
+        InitializeComponent();
+        ///// FotoList = this.FindControl<DataGrid>("FotoList");
+        FotoList.CurrentCellChanged += OnCellChanged;
+    }
 
-        public FotoInfoListView()
-        {
-            InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-
-            FotoList = this.FindControl<DataGrid>("FotoList");
-            FotoList.CurrentCellChanged += OnCellChanged;
-        }
-        private void OnCellChanged( object sender, EventArgs e )
-        {
-          try {
-            var vm = (FotoInfoListViewModel) this.DataContext;
-            FotoList.ScrollIntoView( vm.FotoSelected, null );
-          }
-          catch {
-          }
-        }
+    private void OnCellChanged( object sender, EventArgs e )
+    {
+      try {
+        var vm = (FotoInfoListViewModel) this.DataContext;
+        FotoList.ScrollIntoView( vm.FotoSelected, null );
+      }
+      catch {
+      }
     }
 }

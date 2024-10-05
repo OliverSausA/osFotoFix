@@ -3,8 +3,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:views="clr-namespace:osFotoFix.Views;assembly=osFotoFix"
+             xmlns:viewmodels="clr-namespace:osFotoFix.ViewModels;assembly=osFotoFix"
              xmlns:models="clr-namespace:osFotoFix.Models;assembly=osFotoFix"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:CompileBindings="True"
+		         x:DataType="viewmodels:ImageViewModel"
              x:Class="osFotoFix.Views.ImageView"
              >
   <UserControl.Resources>
@@ -20,7 +23,6 @@
         IsVisible="{Binding UserSettingsVM.ShowFotoInfoDetail}"
         />
       <Image Source="{Binding Foto.Foto.File.FullName, Converter={StaticResource FotoImage}}">
-      <!-- <Image Source="{Binding Foto.Image}"> -->
       </Image>
       <StackPanel
         Grid.Row="1"
@@ -31,17 +33,17 @@
           Command="{Binding PrevImageCmd}"
           ToolTip.Tip="{DynamicResource TipCmdUp}"
           >
-          <DrawingPresenter
-            Classes="cmd"
-            Drawing="{StaticResource FluentIcons.chevron_up_regular}" />
+          <Image Classes="cmd">
+            <DrawingImage Drawing="{StaticResource FluentIcons.chevron_up_regular}" />
+          </Image>
         </Button>
         <Button Classes="cmd cmddown"
           ToolTip.Tip="{DynamicResource TipCmdDown}"
           Command="{Binding NextImageCmd}"
           >
-          <DrawingPresenter
-            Classes="cmd"
-            Drawing="{StaticResource FluentIcons.chevron_down_regular}" />
+          <Image Classes="cmd">
+            <DrawingImage Drawing="{StaticResource FluentIcons.chevron_down_regular}" />
+          </Image>
         </Button>
         <Button Classes="cmd cmdtrash"
           ToolTip.Tip="{DynamicResource TipCmdTrash}"
@@ -50,9 +52,9 @@
           Background="{StaticResource Warning}"
           Command="{Binding TrashImageCmd}"
           >
-          <DrawingPresenter
-            Classes="cmd"
-            Drawing="{StaticResource FluentIcons.delete_regular}" />
+          <Image Classes="cmd">
+            <DrawingImage Drawing="{StaticResource FluentIcons.delete_regular}" />
+          </Image>
         </Button>
         <Button Classes="cmd cmddelete"
           IsEnabled="{Binding UserSettingsVM.DelCmdActive}"
@@ -61,9 +63,9 @@
           Command="{Binding DelImageCmd}"
           ToolTip.Tip="{DynamicResource TipCmdDelete}"
           >
-          <DrawingPresenter
-            Classes="cmd"
-            Drawing="{StaticResource FluentIcons.delete_off_regular}" />
+          <Image Classes="cmd">
+            <DrawingImage Drawing="{StaticResource FluentIcons.delete_off_regular}" />
+          </Image>
         </Button>
         <Button Classes="cmd cmdmove"
           IsEnabled="{Binding UserSettingsVM.MoveCmdActive}"
@@ -72,9 +74,9 @@
           Command="{Binding MoveImageCmd}"
           ToolTip.Tip="{DynamicResource TipCmdMove}"
           >
-          <DrawingPresenter
-            Classes="cmd"
-            Drawing="{StaticResource FluentIcons.sticker_regular}" />
+          <Image Classes="cmd">
+            <DrawingImage Drawing="{StaticResource FluentIcons.sticker_regular}" />
+          </Image>
         </Button>
         <Button Classes="cmd cmdcopy"
           IsEnabled="{Binding UserSettingsVM.CopyCmdActive}"
@@ -83,19 +85,18 @@
           Command="{Binding CopyImageCmd}"
           ToolTip.Tip="{DynamicResource TipCmdCopy}"
           >
-          <DrawingPresenter
-            Classes="cmd"
-            Drawing="{StaticResource FluentIcons.sticker_add_regular}" />
+          <Image Classes="cmd">
+            <DrawingImage Drawing="{StaticResource FluentIcons.sticker_add_regular}" />
+          </Image>
         </Button>
         <Button Classes="cmd"
           Command="{Binding UndoImageCmd}"
           Background="{StaticResource Cancel}"
           ToolTip.Tip="{DynamicResource TipCmdUndo}"
           >
-	        <DrawingPresenter
-            Classes="cmd"
-            Drawing="{StaticResource FluentIconsFilled.backspace_filled}"
-            />
+          <Image Classes="cmd">
+            <DrawingImage Drawing="{StaticResource FluentIconsFilled.backspace_filled}" />
+          </Image>
         </Button>
       </StackPanel>
     </Grid>

@@ -7,20 +7,22 @@
       <Setter Property="Width" Value="30"/>
       <Setter Property="Height" Value="30"/>
     </Style>
-    <Style Selector="DrawingPresenter.cmd">
+    <Style Selector="Image.cmd">
       <Setter Property="Width" Value="28"/>
       <Setter Property="Height" Value="28"/>
     </Style>
-    <!--
+    <!-- 
     <Style Selector="Button.cmdTrash">
       <Setter Property="Background" Value="{StaticResource Warning}"/>
       <Setter Property="Content">
         <Template>
-          <DrawingPresenter>
-            <Setter Property="Width" Value="28"/>
-            <Setter Property="Height" Value="28"/>
-            <Setter Property="Drawing" Value="{StaticResource FluentIcons.delete_regular}"/>
-          </DrawingPresenter>
+          <Image>
+            <DrawingImage>
+              <Setter Property="Width" Value="28"/>
+              <Setter Property="Height" Value="28"/>
+              <Setter Property="Drawing" Value="{StaticResource FluentIcons.delete_regular}"/>
+            </DrawingImage>
+          </Image>
         </Template>
       </Setter>
     </Style>
@@ -31,16 +33,16 @@
       <Setter Property="CornerRadius" Value="10" />
       <Setter Property="Padding" Value="4" />
     </Style>
-    <Style Selector="ToggleButton DrawingPresenter.tbchecked">
+    <Style Selector="ToggleButton Image.tbchecked">
         <Setter Property="IsVisible" Value="false"/>
     </Style>
-    <Style Selector="ToggleButton:checked DrawingPresenter.tbchecked">
+    <Style Selector="ToggleButton:checked Image.tbchecked">
         <Setter Property="IsVisible" Value="true"/>
     </Style>
-    <Style Selector="ToggleButton DrawingPresenter.tbunchecked">
+    <Style Selector="ToggleButton Image.tbunchecked">
         <Setter Property="IsVisible" Value="true"/>
     </Style>
-    <Style Selector="ToggleButton:checked DrawingPresenter.tbunchecked">
+    <Style Selector="ToggleButton:checked Image.tbunchecked">
         <Setter Property="IsVisible" Value="false"/>
     </Style>
 
