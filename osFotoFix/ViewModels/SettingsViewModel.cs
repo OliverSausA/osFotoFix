@@ -13,7 +13,8 @@ using ReactiveUI;
 
 namespace osFotoFix.ViewModels
 {
-  using Models;
+    using Avalonia.Platform.Storage;
+    using Models;
   using Services;
 
   public class SettingsViewModel : ViewModelBase
@@ -83,22 +84,33 @@ namespace osFotoFix.ViewModels
       {
         if( string.IsNullOrEmpty(current) ) 
           current = UserSettingsService.getUserPicturePath();
-        var dlg = new OpenFolderDialog() {
-          Title = "Wo sollen die Bilder hin?",
-          Directory = current
-        };
 
-        var result = await dlg.ShowAsync( GetMainWindow() );
-        if (result != null)
-          return $"{result}";
+        var window = App.Current.GetMainWindow();
+        if (window != null && window.StorageProvider.CanPickFolder)
+        {
+          var opt = new Avalonia.Platform.Storage.FolderPickerOpenOptions() {
+            Title = "Get picture path", // TODO: Translation
+            AllowMultiple = false
+          };
+          Uri uri = new Uri(current);
+          var path = await window.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions());
+          if (path.Count == 1)
+          {
+            string? p = path[0].TryGetLocalPath();
+            if (p != null)
+              current = p;
+          }
+        }
+        return current;
       }
-      //catch (Exception ex)
-      catch
+      catch (Exception ex)
+      //catch
       {
-        //  _serviceProvider.GetService<ILog>().LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+        // _serviceProvider.GetService<ILog>().LogError($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+        ;
+        Console.WriteLine($"{ex.Message}{Environment.NewLine}{ex.StackTrace}");
       }
-
-      return "";    
+      return "";
     }
 
     public void ResetFilterStatistik()

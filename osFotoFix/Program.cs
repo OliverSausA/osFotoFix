@@ -20,6 +20,6 @@ namespace osFotoFix
                 .UsePlatformDetect()
                 .LogToTrace()
                 .WithInterFont()
-                /*.UseReactiveUI()*/;
+                .UseReactiveUI();
     }
 }
