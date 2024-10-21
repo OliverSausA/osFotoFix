@@ -8,7 +8,7 @@ use Time::Piece;
 use Data::Dumper;
 
 my $DEBUG = 1;
-my @BUILD = ( 'win10-x64', 'linux-x64' );
+my @BUILD = ( 'win-x64', 'linux-x64' );
 my $BUILD_PROBS = '../osFotoFix/Directory.Build.props';
 my $NSIS = '/usr/bin/makensis';
 

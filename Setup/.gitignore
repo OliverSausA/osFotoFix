@@ -1,4 +1,2 @@
-linux-x64-deployment/
-linux-x64-setup/
-win10-x64-deployment/
-win10-x64-setup/
+*-deployment/
+*-setup/
