@@ -1,6 +1,6 @@
-<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.8 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.8" pages="4">
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.8 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.8" pages="5">
   <diagram name="Models" id="e7e014a7-5840-1c2e-5031-d8a46d1fe8dd">
-    <mxGraphModel dx="1154" dy="579" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" background="none" math="0" shadow="0">
+    <mxGraphModel dx="819" dy="479" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -13,8 +13,8 @@
         <mxCell id="uD1hSO0c68glrpdvolFQ-43" value="&lt;p style=&quot;margin: 4px 0px 0px; text-align: center;&quot;&gt;&lt;b style=&quot;&quot;&gt;EAction&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;Ignore = -1&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;Copy&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;Move&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;Delete&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;trash&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;done&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;failed&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="730" y="494.5" width="160" height="142" as="geometry" />
         </mxCell>
-        <mxCell id="uD1hSO0c68glrpdvolFQ-44" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Target&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Title: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ IconId: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Path: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Action: EAction&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Enabled: bool&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="540" y="494.5" width="150" height="130" as="geometry" />
+        <mxCell id="uD1hSO0c68glrpdvolFQ-44" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Target&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ Title: string&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ IconId: int&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Path: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Action: EAction&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Enabled: bool&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="540" y="497.88" width="150" height="123.25" as="geometry" />
         </mxCell>
         <mxCell id="uD1hSO0c68glrpdvolFQ-45" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;UserSettings&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Quelle: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Ziel: string&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Papierkorb: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Targets: List&amp;lt;Target&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ FilterDatumExif: EFilterState&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ FilterDatumFilename:EFilterState&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ FilterDatumFilechanged: EFilterState&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ FilterFilenameTrashed: EFilterState&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ FilterDoubles: EFilterState&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ TrashCmdActive: bool&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Del&lt;span style=&quot;background-color: initial;&quot;&gt;CmdActive: bool&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ Move&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;CmdActive: bool&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ Copy&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;CmdActive: bool&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ CultureId: string&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ GeneralFontSize: int&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ ShowFotoInfoDetail: bool&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ Title: string&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ Description: string&lt;/span&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="80" y="400" width="240" height="319" as="geometry" />
@@ -22,16 +22,16 @@
         <mxCell id="uD1hSO0c68glrpdvolFQ-46" value="&lt;p style=&quot;margin: 4px 0px 0px; text-align: center;&quot;&gt;&lt;b style=&quot;&quot;&gt;EFilterState&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;Disable = 0&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;On&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;Off&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="350" y="400" width="160" height="142" as="geometry" />
         </mxCell>
-        <mxCell id="1XJgixSqphcj3S-hZmgd-3" value="Target" style="endArrow=block;endFill=1;html=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=top;rounded=0;" edge="1" parent="1" source="uD1hSO0c68glrpdvolFQ-42" target="uD1hSO0c68glrpdvolFQ-44">
+        <mxCell id="1XJgixSqphcj3S-hZmgd-3" value="Target" style="endArrow=block;endFill=1;html=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=top;rounded=0;" parent="1" source="uD1hSO0c68glrpdvolFQ-42" target="uD1hSO0c68glrpdvolFQ-44" edge="1">
           <mxGeometry x="-1" relative="1" as="geometry">
             <mxPoint x="590" y="330" as="sourcePoint" />
             <mxPoint x="750" y="330" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="1XJgixSqphcj3S-hZmgd-4" value="1" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;" connectable="0" vertex="1" parent="1XJgixSqphcj3S-hZmgd-3">
+        <mxCell id="1XJgixSqphcj3S-hZmgd-4" value="1" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;" parent="1XJgixSqphcj3S-hZmgd-3" connectable="0" vertex="1">
           <mxGeometry x="-1" relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="1XJgixSqphcj3S-hZmgd-5" value="n" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;" edge="1" parent="1" source="uD1hSO0c68glrpdvolFQ-45" target="uD1hSO0c68glrpdvolFQ-44">
+        <mxCell id="1XJgixSqphcj3S-hZmgd-5" value="n" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;" parent="1" source="uD1hSO0c68glrpdvolFQ-45" target="uD1hSO0c68glrpdvolFQ-44" edge="1">
           <mxGeometry x="-1" y="3" relative="1" as="geometry">
             <mxPoint x="590" y="330" as="sourcePoint" />
             <mxPoint x="750" y="330" as="targetPoint" />
@@ -41,12 +41,12 @@
     </mxGraphModel>
   </diagram>
   <diagram id="ft10tGWrJ-fXVkGTrmf_" name="Services">
-    <mxGraphModel dx="1674" dy="839" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1434" dy="839" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="8fsjMcMqGVtb4OOuXkgS-1" value="Services" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="30" y="40" width="1120" height="760" as="geometry" />
+          <mxGeometry x="25" y="50" width="1120" height="760" as="geometry" />
         </mxCell>
         <mxCell id="8fsjMcMqGVtb4OOuXkgS-2" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;FotoInfoService&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ FotoInfoReadEvent: event EventHandler&amp;lt;FotoInfoEventArgs&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ FotoFixedEvent: evant EventHandler&amp;lt;FotoInfoEventArgs&amp;gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ ReadFotoInfos(dir: DirectoryInfo, token: CancellationToken): async Task&amp;lt;bool&amp;gt;&lt;/p&gt;&lt;div&gt;&amp;nbsp;+ FotoFixIt( fotoInfos: IEnumerable&amp;lt;FotoInfo&amp;gt;, token: CancellationToken): async Task&amp;lt;bool&amp;gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp;# FotoFixIt( foto: FotoInfo )&lt;/div&gt;&lt;div&gt;&amp;nbsp;+ GetNewFileName( foto: FotoInfo ): string&lt;/div&gt;&lt;div&gt;&amp;nbsp;+ CopyFoto( foto: FotoInfo ): string&lt;/div&gt;&lt;div&gt;&amp;nbsp;+ MoveFoto( foto: FotoInfo ): string&lt;/div&gt;&lt;div&gt;&amp;nbsp;+ DeleteFoto( foto: FotoInfo )&lt;/div&gt;&lt;div&gt;&amp;nbsp;- CreateFotoInfo( file: FileInfo ): FotoInfo&lt;/div&gt;&lt;div&gt;&amp;nbsp;- IsFileExistsOnTarget( foto: FotoInfo ): bool&lt;/div&gt;&lt;div&gt;&amp;nbsp;- GetDateTimeFromString( text: string, out dt: DateTime ): bool&lt;/div&gt;&lt;div&gt;&amp;nbsp;# CreateNewFileName( foto: FotoInfo ): string&lt;/div&gt;&lt;div&gt;&amp;nbsp;# CreateNewFileName( foto: FotoInfo, idx: int ): string&lt;/div&gt;&lt;div&gt;&amp;nbsp;# CreateNewFileLocation( foto: FotoInfo ): string&lt;/div&gt;&lt;div&gt;&amp;nbsp;- AdjustTimeStamp( file: string, timestamp: DateTime )&lt;/div&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="100" y="80" width="520" height="280" as="geometry" />
@@ -87,17 +87,17 @@
     </mxGraphModel>
   </diagram>
   <diagram id="fHgpP1CppPnAuVJ-M28N" name="UserSettings">
-    <mxGraphModel dx="1674" dy="839" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1395" dy="733" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="PjKjz8aLs0lW3XxlNcTO-1" value="Models" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="550" y="40" width="590" height="390" as="geometry" />
+          <mxGeometry x="560" y="40" width="590" height="510" as="geometry" />
         </mxCell>
         <mxCell id="-iswkI0WFPmdImHBZhLv-2" value="Services" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="40" y="450" width="470" height="350" as="geometry" />
         </mxCell>
-        <mxCell id="-iswkI0WFPmdImHBZhLv-3" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;UserSettingsService&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- userSettings: UserSettings&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;static&amp;gt; GetInstance: UserSettingsService&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ GetUserSettings: UserSettings&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ GetUserHomePath: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ GetUserPicturePath: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&amp;nbsp;SaveUserSettings&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;- ReadUserSettings&lt;/p&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+        <mxCell id="-iswkI0WFPmdImHBZhLv-3" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;UserSettingsService&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- userSettings: UserSettings&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;static&amp;gt; GetInstance: UserSettingsService&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ GetUserSettings: UserSettings&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ GetUserHomePath: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ GetUserPicturePath: string&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;+ AddTarget(target: Target)&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ RemoveTarget(target: Target)&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&amp;nbsp;SaveUserSettings&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;- ReadUserSettings&lt;/p&gt;&lt;div&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;/div&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="60" y="509.5" width="260" height="200" as="geometry" />
         </mxCell>
         <mxCell id="-iswkI0WFPmdImHBZhLv-4" value="ViewModels" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -106,17 +106,142 @@
         <mxCell id="-iswkI0WFPmdImHBZhLv-5" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;SettingsViewModel&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Source: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Target: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Trash: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ FilterDatumExif: EFilterState&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ FilterDatumExifCount: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- supportedLanguageList: List&amp;lt;KeyValuePair&amp;lt;string, string&amp;gt;&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- userSettings: UserSettings&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ GetFolderName: Task&amp;lt;string&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ ResetFilterStatistik&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&amp;nbsp;SaveUserSettings&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;- ReadUserSettings&lt;/p&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="80" y="75.5" width="350" height="319" as="geometry" />
         </mxCell>
-        <mxCell id="I8YjNgbyQJYITwsRGxkt-1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Target&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Title: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ IconId: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Path: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Action: EAction&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Enabled: bool&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="I8YjNgbyQJYITwsRGxkt-1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Target&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Title: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ IconId: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Path: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Action: EAction&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Enabled: bool&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="895" y="75.5" width="150" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="I8YjNgbyQJYITwsRGxkt-2" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;UserSettings&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Quelle: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Ziel: string&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Papierkorb: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Targets: List&amp;lt;Target&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ FilterDatumExif: EFilterState&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ FilterDatumFilename:EFilterState&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ FilterDatumFilechanged: EFilterState&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ FilterFilenameTrashed: EFilterState&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ FilterDoubles: EFilterState&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ TrashCmdActive: bool&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Del&lt;span style=&quot;background-color: initial;&quot;&gt;CmdActive: bool&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ Move&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;CmdActive: bool&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ Copy&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;CmdActive: bool&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ CultureId: string&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ GeneralFontSize: int&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ ShowFotoInfoDetail: bool&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ Title: string&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ Description: string&lt;/span&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="585" y="75.5" width="240" height="319" as="geometry" />
+        <mxCell id="I8YjNgbyQJYITwsRGxkt-2" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;UserSettings&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Quelle: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Ziel: string&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Papierkorb: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Targets: List&amp;lt;Target&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ FilterDatumExif: EFilterState&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ FilterDatumFilename:EFilterState&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ FilterDatumFilechanged: EFilterState&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ FilterFilenameTrashed: EFilterState&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ FilterDoubles: EFilterState&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ TrashCmdActive: bool&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Del&lt;span style=&quot;background-color: initial;&quot;&gt;CmdActive: bool&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ Move&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;CmdActive: bool&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ Copy&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;CmdActive: bool&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ CultureId: string&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ GeneralFontSize: int&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ ShowFotoInfoDetail: bool&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ Title: string&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ Description: string&lt;/span&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="585" y="75.5" width="240" height="344.5" as="geometry" />
         </mxCell>
-        <mxCell id="I8YjNgbyQJYITwsRGxkt-3" value="n" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;" edge="1" parent="1" source="I8YjNgbyQJYITwsRGxkt-2" target="I8YjNgbyQJYITwsRGxkt-1">
+        <mxCell id="I8YjNgbyQJYITwsRGxkt-3" value="n" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;" parent="1" source="I8YjNgbyQJYITwsRGxkt-2" target="I8YjNgbyQJYITwsRGxkt-1" edge="1">
           <mxGeometry x="-1" y="3" relative="1" as="geometry">
             <mxPoint x="505" y="-44.5" as="sourcePoint" />
             <mxPoint x="665" y="-44.5" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="QTfZh6SK6kVnYb6h7kfh" name="UI Target Edit">
+    <mxGraphModel dx="819" dy="479" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="mpqEtqWENxrs4QD9whrE-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="45" y="80" width="520" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-7" value="Speichern" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.buttons.button;strokeColor=#666666;fontColor=#ffffff;mainText=;buttonStyle=round;fontSize=17;fontStyle=1;fillColor=#008cff;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="400" y="300" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-8" value="Abbruch" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.buttons.button;strokeColor=#666666;fontColor=#ffffff;mainText=;buttonStyle=round;fontSize=17;fontStyle=1;fillColor=#008cff;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="240" y="300" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-25" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="50" y="90" width="460" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-10" value="Path" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.text.textBox;fontColor=#666666;align=left;fontSize=17;spacingLeft=4;spacingTop=-3;whiteSpace=wrap;strokeColor=#666666;mainText=" parent="1" vertex="1">
+          <mxGeometry x="140" y="170" width="330" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-11" value="..." style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="470" y="170" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-12" value="ICON" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="60" y="130" width="70" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-13" value="Action" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.text.textBox;fontColor=#666666;align=left;fontSize=17;spacingLeft=4;spacingTop=-3;whiteSpace=wrap;strokeColor=#666666;mainText=" parent="1" vertex="1">
+          <mxGeometry x="310" y="130" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-22" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="470" y="130" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-15" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="mpqEtqWENxrs4QD9whrE-22" vertex="1">
+          <mxGeometry width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-21" value="" style="group" parent="mpqEtqWENxrs4QD9whrE-22" vertex="1" connectable="0">
+          <mxGeometry x="5" y="7" width="20" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-16" value="" style="endArrow=none;html=1;rounded=0;" parent="mpqEtqWENxrs4QD9whrE-21" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="5" y="10" as="sourcePoint" />
+            <mxPoint x="5" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="5" y="10" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-18" value="" style="endArrow=none;html=1;rounded=0;" parent="mpqEtqWENxrs4QD9whrE-21" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="15" y="10" as="sourcePoint" />
+            <mxPoint x="15" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="15" y="10" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-19" value="" style="endArrow=none;html=1;rounded=0;" parent="mpqEtqWENxrs4QD9whrE-21" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="20" y="5" as="sourcePoint" />
+            <mxPoint y="5" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="10" y="15" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-20" value="" style="endArrow=none;html=1;rounded=0;" parent="mpqEtqWENxrs4QD9whrE-21" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="5" as="sourcePoint" />
+            <mxPoint x="15" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-23" value="ON" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.buttons.onOffButton;gradientColor=none;strokeColor=#999999;buttonState=on;fillColor2=#008cff;fontColor=#ffffff;fontSize=17;mainText=;spacingRight=40;fontStyle=1;whiteSpace=wrap;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="1" vertex="1">
+          <mxGeometry x="60" y="100" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-31" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="470" y="95" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-27" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="mpqEtqWENxrs4QD9whrE-31" vertex="1">
+          <mxGeometry width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-30" value="" style="group" parent="mpqEtqWENxrs4QD9whrE-31" vertex="1" connectable="0">
+          <mxGeometry x="5" y="5" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-28" value="" style="endArrow=none;html=1;rounded=1;fillColor=#f8cecc;strokeColor=#ff0000;strokeWidth=2;curved=0;" parent="mpqEtqWENxrs4QD9whrE-30" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="20" as="sourcePoint" />
+            <mxPoint y="20" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-29" value="" style="endArrow=none;html=1;rounded=1;fillColor=#f8cecc;strokeColor=#ff0000;strokeWidth=2;curved=0;" parent="mpqEtqWENxrs4QD9whrE-30" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint as="sourcePoint" />
+            <mxPoint x="20" y="20" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-37" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="470" y="220" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-33" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="mpqEtqWENxrs4QD9whrE-37" vertex="1">
+          <mxGeometry width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-34" value="" style="group;rotation=45;fillColor=none;strokeColor=none;" parent="mpqEtqWENxrs4QD9whrE-37" vertex="1" connectable="0">
+          <mxGeometry x="5" y="5" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-35" value="" style="endArrow=none;html=1;rounded=1;fillColor=#f8cecc;strokeColor=#00FF00;strokeWidth=2;curved=0;" parent="mpqEtqWENxrs4QD9whrE-34" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="24" y="10" as="sourcePoint" />
+            <mxPoint x="-4" y="10" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mpqEtqWENxrs4QD9whrE-36" value="" style="endArrow=none;html=1;rounded=1;fillColor=#f8cecc;strokeColor=#00ff00;strokeWidth=2;curved=0;" parent="mpqEtqWENxrs4QD9whrE-34" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="10" y="-4" as="sourcePoint" />
+            <mxPoint x="10" y="24" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="onka5acoBfE_HBihib0P-1" value="Title" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.text.textBox;fontColor=#666666;align=left;fontSize=17;spacingLeft=4;spacingTop=-3;whiteSpace=wrap;strokeColor=#666666;mainText=" vertex="1" parent="1">
+          <mxGeometry x="140" y="130" width="160" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

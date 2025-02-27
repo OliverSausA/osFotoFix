@@ -12,7 +12,7 @@ namespace osFotoFix.Views
     {
         public ImageView()
         {
-            // InitializeComponent();
+            InitializeComponent();
         }
     }
 }

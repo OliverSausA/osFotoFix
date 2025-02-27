@@ -167,6 +167,31 @@
           </ContentPresenter.Content>
         </ContentPresenter>
       </StackPanel>
+      <!--
+      <ListBox
+        Name="FotoList"
+        Grid.Row="1"
+        Grid.ColumnSpan="2"
+        ItemsSource="{Binding FotoInfoList}"
+        SelectedItem="{Binding FotoSelected, Mode=TwoWay}" >      
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <Grid 
+              ColumnDefinitions="Auto,*"
+              RowDefinitions="Auto,Auto,Auto"
+              ToolTip.Tip="{Binding Foto.Data}"
+              >
+              <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Title}"/>
+              <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Foto.File.Name}"/>
+              <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding NewFileName}"/>
+              <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding Comment}"/>
+              <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Description}"/>
+              <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Target}"/>
+            </Grid>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+      -->
       <DataGrid
         Name="FotoList"
         Grid.Row="1"
@@ -216,7 +241,7 @@
                   <Image Classes="cmd"
                     Width="16" Height="16"
                     Stretch="Fill"
-                  >
+                    >
                     <DrawingImage Drawing="{StaticResource FluentIcons.sticker_regular}" />
                   </Image>
                 </Panel>
@@ -228,7 +253,7 @@
                   <Image Classes="cmd"
                     Width="16" Height="16"
                     Stretch="Fill"
-                  >
+                    >
                     <DrawingImage Drawing="{StaticResource FluentIcons.delete_off_regular}" />
                   </Image>
                 </Panel>
@@ -240,7 +265,7 @@
                   <Image Classes="cmd"
                     Width="16" Height="16"
                     Stretch="Fill"
-                  >
+                    >
                     <DrawingImage Drawing="{StaticResource FluentIcons.delete_regular}" />
                   </Image>
                 </Panel>

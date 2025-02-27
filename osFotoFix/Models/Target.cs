@@ -7,8 +7,10 @@ namespace osFotoFix.Models
   public class Target
   {
     public enum EAction {
-      move,
+      ignore = -1,
       copy,
+      move,
+      delete
     };
 
     [XmlAttribute]

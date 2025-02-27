@@ -8,7 +8,7 @@ namespace osFotoFix.Views
     {
         public FotoPreviewView()
         {
-            // InitializeComponent();
+            InitializeComponent();
         }
     }
 }

@@ -54,6 +54,7 @@ namespace osFotoFix.Models
                      Action == EAction.trash ||
                      Action == EAction.delete ); }
     }
+    public string Data {get;set;}
   }
 
 }

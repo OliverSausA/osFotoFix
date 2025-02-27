@@ -9,7 +9,7 @@ namespace osFotoFix.Views
     {
         public FotoInfoListItemView()
         {
-            // InitializeComponent();
+            InitializeComponent();
         }
 
     }
