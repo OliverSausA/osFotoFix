@@ -96,7 +96,7 @@ namespace osFotoFix.ViewModels
           var path = await window.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions());
           if (path.Count == 1)
           {
-            string? p = path[0].TryGetLocalPath();
+            string p = path[0].TryGetLocalPath();
             if (p != null)
               current = p;
           }

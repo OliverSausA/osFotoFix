@@ -6,12 +6,14 @@ namespace osFotoFix.Models
   
   public class Target
   {
+    /*
     public enum EAction {
       ignore = -1,
       copy,
       move,
       delete
     };
+    */
 
     [XmlAttribute]
     public string Title {get; set;}

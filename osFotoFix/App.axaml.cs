@@ -78,7 +78,7 @@ public partial class App : Application
       return key;
     }
 
-  public Window? GetMainWindow()
+  public Window GetMainWindow()
   {
     if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
       return desktop.MainWindow;
