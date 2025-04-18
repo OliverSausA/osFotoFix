@@ -10,21 +10,36 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="osFotoFix.Views.MainWindow"
         x:CompileBindings="True"
-		    x:DataType="viewmodels:MainWindowViewModel"
+		    x:DataType="viewmodels:DesignMainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="osFotoFix"
         >
-<!--
-      FontSize="{Binding FontSize}"
--->
   <Window.Styles>
    <Style Selector=":is(Window)">
      <Setter Property="FontSize" Value="{Binding SettingsVM.GeneralFontSize}"/>
    </Style>
   </Window.Styles>
+  <Design.DataContext>
+    <viewmodels:DesignMainWindowViewModel/>
+  </Design.DataContext>
   <Grid 
-    ColumnDefinitions="300,Auto,*,Auto,300"
+    ColumnDefinitions="Auto,*"
+    RowDefinitions="30,*"
     >
+    <TextBox Grid.ColumnSpan="2" Text="MainMenu" />
+    <!-- Navigation -->
+    <ListBox Grid.Row="1"
+      ItemsSource="{Binding NavigationList}">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <!-- <Image Width="300" Source="{Binding Thumpnail}"/> -->
+          <TextBox Text="{Binding Title}" />
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+
+    <TextBox Grid.Row="1" Grid.Column="1" Text="MainView" />
+    <!--
     <views:SettingsView 
       Margin="5,5,0,5"
       Grid.Column="0"
@@ -74,6 +89,7 @@
       DockPanel.Dock="Right"
       DataContext="{Binding FotoPreviewListVM}"
       />
+    -->
   </Grid>
 
 </Window>

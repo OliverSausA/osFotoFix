@@ -16,6 +16,8 @@ namespace osFotoFix.ViewModels
   {
     public MainWindowViewModel()
     {
+      CreateNavigation();
+      /*
       FotoInfoService.GetDateTimeFromStringTests();
       SettingsVM = new SettingsViewModel();
       ImageVM = new ImageViewModel( SettingsVM );
@@ -25,7 +27,23 @@ namespace osFotoFix.ViewModels
 
       var alt = Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
       alt.Exit += OnExit;
+      */
     }
+
+    protected void CreateNavigation()
+    {
+      NavigationList = new List<NavigationItemVM>();
+      NavigationList.Add( new NavigationItemVM() {
+        Title = "FotoFix",
+        IconName = "image_library_regular"
+      });
+      NavigationList.Add( new NavigationItemVM() {
+        Title = "Targets",
+        IconName = "target_edit_regular"
+      });
+    }
+
+    public List<NavigationItemVM> NavigationList { get; set; }
 
     private void OnExit( object sender, ControlledApplicationLifetimeExitEventArgs e)
     {
