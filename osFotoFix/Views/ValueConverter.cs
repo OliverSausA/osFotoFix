@@ -186,4 +186,23 @@ namespace osFotoFix.Views
       throw new NotSupportedException();
     }
   }
+  public sealed class IconNameToPath : IValueConverter
+  {
+    public object Convert( object value, Type targetType, object parameter, CultureInfo culture )
+    {
+      if( value is string resourceName )
+      {
+        object iconPath;
+        App.Current.TryFindResource(resourceName, out iconPath);
+        if (iconPath != null)
+          return iconPath;
+      }
+      return new Avalonia.Data.BindingNotification(new InvalidCastException(), Avalonia.Data.BindingErrorType.Error);
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+      throw new NotImplementedException();
+    }
+  }
+ 
 }

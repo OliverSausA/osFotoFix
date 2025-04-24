@@ -10,6 +10,7 @@ using ReactiveUI;
 
 namespace osFotoFix.ViewModels
 {
+  using Microsoft.Extensions.DependencyInjection;
   using Models;
   using Services;
   public partial class MainWindowViewModel : ViewModelBase
@@ -35,11 +36,17 @@ namespace osFotoFix.ViewModels
       NavigationList = new List<NavigationItemVM>();
       NavigationList.Add( new NavigationItemVM() {
         Title = "FotoFix",
-        IconName = "image_library_regular"
+        IconName = "image_library_regular",
+        Command = ReactiveCommand.Create(() => {
+          MainViewModel = App.Current.ServiceProvider.GetRequiredService<MainFotoViewModel>() as ViewModelBase; 
+        }),
       });
       NavigationList.Add( new NavigationItemVM() {
         Title = "Targets",
-        IconName = "target_edit_regular"
+        IconName = "target_edit_regular",
+        Command = ReactiveCommand.Create(() => {
+          MainViewModel = App.Current.ServiceProvider.GetRequiredService<TargetListViewModel>() as ViewModelBase; 
+        }),
       });
     }
 
@@ -60,5 +67,18 @@ namespace osFotoFix.ViewModels
 
     public ImageViewModel ImageVM {get;set;}
 
+    private ViewModelBase mainViewModel;
+    public ViewModelBase MainViewModel
+    {
+      get { return mainViewModel; }
+      set {
+        if (mainViewModel != value) {
+          if(mainViewModel != null)
+            mainViewModel.IsActive = false;
+          this.RaiseAndSetIfChanged(ref mainViewModel, value); }
+          if( mainViewModel != null )
+            mainViewModel.IsActive = true;
+      }
+    }
   }
 }

@@ -11,6 +11,7 @@ using osFotoFix.ViewModels;
 using osFotoFix.Views;
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
@@ -19,6 +20,8 @@ namespace osFotoFix;
 
 public partial class App : Application
 {
+  public IServiceProvider ServiceProvider;
+
   public override void Initialize()
   {
     AvaloniaXamlLoader.Load(this);
@@ -32,6 +35,8 @@ public partial class App : Application
 
   public override void OnFrameworkInitializationCompleted()
   {
+    ServiceProvider = ConfigureServices();
+
     if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
     {
       desktop.MainWindow = new MainWindow
@@ -84,5 +89,19 @@ public partial class App : Application
       return desktop.MainWindow;
     else
       return null;
+  }
+
+  public IServiceProvider ConfigureServices()
+  {
+    var services = new ServiceCollection();
+
+    // Services
+    // services.AddSingleton<IAppSettingsService, AppSettingsService>();
+
+    // ViewModels
+    services.AddTransient<MainFotoViewModel>();
+    services.AddTransient<TargetListViewModel>();
+
+    return services.BuildServiceProvider();
   }
 }
