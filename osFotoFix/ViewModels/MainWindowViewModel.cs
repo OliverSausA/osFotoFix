@@ -17,18 +17,13 @@ namespace osFotoFix.ViewModels
   {
     public MainWindowViewModel()
     {
+      Configure();
       CreateNavigation();
-      /*
-      FotoInfoService.GetDateTimeFromStringTests();
-      SettingsVM = new SettingsViewModel();
-      ImageVM = new ImageViewModel( SettingsVM );
-      FotoInfoDetailVM = new FotoInfoDetailViewModel();
-      FotoPreviewListVM = new FotoPreviewViewModel();
-      FotoInfoListVM = new FotoInfoListViewModel( SettingsVM, ImageVM, FotoPreviewListVM, FotoInfoDetailVM );
+    }
 
-      var alt = Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
-      alt.Exit += OnExit;
-      */
+    protected void Configure()
+    {
+      SettingsVM = new SettingsViewModel();
     }
 
     protected void CreateNavigation()
@@ -52,20 +47,7 @@ namespace osFotoFix.ViewModels
 
     public List<NavigationItemVM> NavigationList { get; set; }
 
-    private void OnExit( object sender, ControlledApplicationLifetimeExitEventArgs e)
-    {
-      SettingsVM.SaveSettings();
-    }
-
     public SettingsViewModel SettingsVM {get;set;}
-
-    public FotoInfoListViewModel FotoInfoListVM {get;set;}
-
-    public FotoInfoDetailViewModel FotoInfoDetailVM {get;set;}
-
-    public FotoPreviewViewModel FotoPreviewListVM {get;set;}
-
-    public ImageViewModel ImageVM {get;set;}
 
     private ViewModelBase mainViewModel;
     public ViewModelBase MainViewModel

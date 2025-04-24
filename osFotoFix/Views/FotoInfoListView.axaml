@@ -8,8 +8,9 @@
              xmlns:models="clr-namespace:osFotoFix.Models;assembly=osFotoFix"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:CompileBindings="True"
+             x:Class="osFotoFix.Views.FotoInfoListView"
 		         x:DataType="viewmodels:FotoInfoListViewModel"
-             x:Class="osFotoFix.Views.FotoInfoListView">
+             >
   <UserControl.Resources>
     <views:BitmapFileValueConverter x:Key="FotoImage" />
     <views:EActionCompareConverter x:Key="EActionCompare" />

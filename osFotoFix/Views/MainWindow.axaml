@@ -60,57 +60,7 @@
     <ContentControl 
       Grid.Column="1" Grid.Row="1"
       Content="{Binding MainViewModel}" />
-    <!--
-    <views:SettingsView 
-      Margin="5,5,0,5"
-      Grid.Column="0"
-      DockPanel.Dock="Left"
-      DataContext="{Binding SettingsVM}"
-      />
-    <GridSplitter 
-      Grid.Column="1"
-      VerticalAlignment="Stretch"
-      HorizontalAlignment="Center"
-      Background="Green" 
-      Width="3"       
-      />
-    <Grid
-      Grid.Column="2"
-      RowDefinitions="*,Auto,*"
-      >
-      <views:FotoInfoListView
-        Margin="0,5,5,0"
-        Grid.Row="0"
-        DockPanel.Dock="Bottom"
-        DataContext="{Binding FotoInfoListVM}"
-        />
-      <GridSplitter 
-        Grid.Row="1"
-        VerticalAlignment="Center"
-        HorizontalAlignment="Stretch"
-        Background="Green" 
-        Height="3"       
-        />
-      <views:ImageView
-        Margin="0,0,5,5"
-        Grid.Row="2"
-        DataContext="{Binding ImageVM}"
-        />
-    </Grid>
-    <GridSplitter 
-      Grid.Column="3"
-      VerticalAlignment="Stretch"
-      HorizontalAlignment="Center"
-      Background="Green" 
-      Width="3"       
-      />
-    <views:FotoPreviewView 
-      Margin="5,5,0,5"
-      Grid.Column="4"
-      DockPanel.Dock="Right"
-      DataContext="{Binding FotoPreviewListVM}"
-      />
-    -->
+
   </Grid>
 
 </Window>
