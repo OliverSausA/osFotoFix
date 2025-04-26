@@ -21,10 +21,12 @@ namespace osFotoFix.ViewModels
   {
     private List<KeyValuePair<string,string>> SupportedLanguageList;
     private UserSettings userSettings;
+    private UserSettingsService settingsService;
 
-    public SettingsViewModel() : base()
+    public SettingsViewModel(UserSettingsService settingsService) : base()
     {
-      userSettings = UserSettingsService.GetInstance.GetUserSettings;
+      this.settingsService = settingsService;
+      userSettings = settingsService.GetUserSettings;
       Read();
       SelectSourceCmd = ReactiveCommand.Create( OnSelectSource );
       SelectTargetCmd = ReactiveCommand.Create( OnSelectTarget );
@@ -83,7 +85,7 @@ namespace osFotoFix.ViewModels
       try
       {
         if( string.IsNullOrEmpty(current) ) 
-          current = UserSettingsService.getUserPicturePath();
+          current = settingsService.getUserPicturePath();
 
         var window = App.Current.GetMainWindow();
         if (window != null && window.StorageProvider.CanPickFolder)

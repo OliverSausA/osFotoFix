@@ -26,6 +26,7 @@ namespace osFotoFix.Models
       CopyCmdActive = true;
       CultureId = "DE-de";
       GeneralFontSize = 12;
+      Targets = new List<Target>();
     }
 
     [XmlAttribute]

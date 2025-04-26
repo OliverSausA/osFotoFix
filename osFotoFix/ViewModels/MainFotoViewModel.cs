@@ -2,6 +2,7 @@
 
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
+using Microsoft.Extensions.DependencyInjection;
 
 using osFotoFix.Services;
 using osFotoFix.Models;
@@ -13,7 +14,8 @@ public class MainFotoViewModel : ViewModelBase
   public MainFotoViewModel()
   {
     FotoInfoService.GetDateTimeFromStringTests();
-    SettingsVM = new SettingsViewModel();
+    var settingsService = App.Current.ServiceProvider.GetRequiredService<UserSettingsService>();
+    SettingsVM = new SettingsViewModel(settingsService);
     ImageVM = new ImageViewModel( SettingsVM );
     FotoInfoDetailVM = new FotoInfoDetailViewModel();
     FotoPreviewListVM = new FotoPreviewViewModel();

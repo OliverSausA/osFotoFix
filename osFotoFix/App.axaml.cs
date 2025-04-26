@@ -25,10 +25,6 @@ public partial class App : Application
   public override void Initialize()
   {
     AvaloniaXamlLoader.Load(this);
-
-    var settings = UserSettingsService.GetInstance.GetUserSettings;
-    SelectLanguage(settings.CultureId);
-
   }  
   
   public new static App Current => (App)(Application.Current ?? throw new InvalidOperationException());
@@ -36,6 +32,10 @@ public partial class App : Application
   public override void OnFrameworkInitializationCompleted()
   {
     ServiceProvider = ConfigureServices();
+
+    var settingsService = App.Current.ServiceProvider.GetRequiredService<UserSettingsService>();
+    var settings = settingsService.GetUserSettings;
+    SelectLanguage(settings.CultureId);
 
     if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
     {
@@ -96,7 +96,7 @@ public partial class App : Application
     var services = new ServiceCollection();
 
     // Services
-    // services.AddSingleton<IAppSettingsService, AppSettingsService>();
+    services.AddSingleton<UserSettingsService>();
 
     // ViewModels
     services.AddTransient<MainFotoViewModel>();

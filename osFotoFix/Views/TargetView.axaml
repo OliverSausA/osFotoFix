@@ -6,7 +6,7 @@
              xmlns:viewmodels="clr-namespace:osFotoFix.ViewModels;assembly=osFotoFix"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="120"
              x:CompileBindings="True"
-		         x:DataType="viewmodels:DesignTargetVM"
+		         x:DataType="viewmodels:TargetVM"
              x:Class="osFotoFix.Views.TargetView">
   <UserControl.Resources>
     <views:BitmapFileValueConverter x:Key="FotoImage" />

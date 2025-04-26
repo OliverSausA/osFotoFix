@@ -6,15 +6,15 @@ using System.IO;
 namespace osFotoFix.Services
 {
   using Models;
-  public class UserSettingsService
+  public class UserSettingsService /* : IUserSettingsService*/
   {
-    private UserSettingsService() {
+    public UserSettingsService() {
       ReadUserSettings();
     }
-
     private static UserSettingsService instance = null;
     private const string CONF = "osFotoFix.config";
-    private UserSettings userSettings;
+    protected UserSettings userSettings;
+
 
     public static UserSettingsService GetInstance {
       get { 
@@ -27,7 +27,7 @@ namespace osFotoFix.Services
       get { return userSettings; }
     }
 
-    private void ReadUserSettings()
+    protected void ReadUserSettings()
     {
       if( userSettings != null )
         return ;
@@ -68,13 +68,13 @@ namespace osFotoFix.Services
       }
     }
 
-    public static string getUserHomePath()
+    public string getUserHomePath()
     {
       return Environment.GetFolderPath(
                 Environment.SpecialFolder.ApplicationData);
     }
 
-    public static string getUserPicturePath()
+    public string getUserPicturePath()
     {
       return Environment.GetFolderPath(
                 Environment.SpecialFolder.MyPictures);

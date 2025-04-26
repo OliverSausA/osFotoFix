@@ -6,11 +6,11 @@ using System.Text;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 
 namespace osFotoFix.ViewModels
 {
-  using Microsoft.Extensions.DependencyInjection;
   using Models;
   using Services;
   public partial class MainWindowViewModel : ViewModelBase
@@ -23,7 +23,8 @@ namespace osFotoFix.ViewModels
 
     protected void Configure()
     {
-      SettingsVM = new SettingsViewModel();
+      var settingsService = App.Current.ServiceProvider.GetRequiredService<UserSettingsService>();
+      SettingsVM = new SettingsViewModel(settingsService);
     }
 
     protected void CreateNavigation()

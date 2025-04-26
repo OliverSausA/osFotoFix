@@ -2,7 +2,56 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="clr-namespace:osFotoFix.Views;assembly=osFotoFix"
+             xmlns:viewmodels="clr-namespace:osFotoFix.ViewModels;assembly=osFotoFix"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:CompileBindings="True"
+		         x:DataType="viewmodels:TargetListViewModel"
              x:Class="osFotoFix.Views.TargetListView">
-  TargetListView
+  <Design.DataContext>
+    <viewmodels:DesignTargetListViewModel/>
+  </Design.DataContext>
+  <StackPanel Orientation="Vertical">
+    <ListBox
+      ItemsSource="{Binding Targets}"
+      SelectedItem="{Binding SelectedTarget}"
+      >
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <Border 
+            BorderBrush="Gray" 
+            BorderThickness="0">
+            <views:TargetView  
+              Margin="0,0,30,0" />
+          </Border>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+    <StackPanel 
+      Margin="30,10"
+      Orientation="Horizontal" 
+      HorizontalAlignment="Right">
+      <Button 
+        Width="80"
+        Command="{Binding AddCmd}">
+        <TextBlock 
+          Text="Add"
+          HorizontalAlignment="Center" />
+      </Button>
+      <Button 
+        Width="80"
+        Command="{Binding DelCmd}">
+        <TextBlock 
+          Text="Del"
+          HorizontalAlignment="Center" />
+      </Button>
+      <Button 
+        Width="80"
+        Command="{Binding SaveCmd}">
+        <TextBlock 
+          Text="Save"
+          HorizontalAlignment="Center" />
+      </Button>
+    </StackPanel>
+  </StackPanel>
 </UserControl>
