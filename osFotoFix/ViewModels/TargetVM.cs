@@ -13,7 +13,7 @@ namespace osFotoFix.ViewModels
 
     public class TargetVM : ViewModelBase
   {
-    public TargetVM( Target target )
+    public TargetVM(Target target)
     {
       Target = target;
       /*
@@ -29,15 +29,21 @@ namespace osFotoFix.ViewModels
         new ActionItem() { Value = EAction.move, Title = "Move"},
         new ActionItem() { Value = EAction.delete, Title = "Delete"},
       };
+      action = ActionList.Find(x => x.Value == target.Action);
     }
 
     public Target Target {get;set;}
 
     // public List<(EAction Action,string Title)> ActionList {get;}
     public List<ActionItem> ActionList {get;}
+
+    private ActionItem action;
     public ActionItem Action {
-      get { return new ActionItem(); } 
-      set { Target.Action = value.Value; }
+      get { return action; }
+      set {
+        action = value;
+        Target.Action = value.Value;
+      }
     }
   }
 
