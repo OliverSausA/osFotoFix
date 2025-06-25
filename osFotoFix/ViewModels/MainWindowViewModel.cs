@@ -32,14 +32,14 @@ namespace osFotoFix.ViewModels
       NavigationList = new List<NavigationItemVM>();
       NavigationList.Add( new NavigationItemVM() {
         Title = "FotoFix",
-        IconName = "image_library_regular",
+        IconName = "FluentIcons.image_library_regular",
         Command = ReactiveCommand.Create(() => {
           MainViewModel = App.Current.ServiceProvider.GetRequiredService<MainFotoViewModel>() as ViewModelBase; 
         }),
       });
       NavigationList.Add( new NavigationItemVM() {
         Title = "Targets",
-        IconName = "target_edit_regular",
+        IconName = "FluentIcons.target_edit_regular",
         Command = ReactiveCommand.Create(() => {
           MainViewModel = App.Current.ServiceProvider.GetRequiredService<TargetListViewModel>() as ViewModelBase; 
         }),

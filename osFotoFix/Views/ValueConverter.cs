@@ -192,10 +192,11 @@ namespace osFotoFix.Views
     {
       if( value is string resourceName )
       {
-        object iconPath;
-        App.Current.TryFindResource(resourceName, out iconPath);
-        if (iconPath != null)
-          return iconPath;
+        if (App.Current.TryFindResource(resourceName, out var iconPath))
+        {
+          var icon = iconPath as DrawingGroup;
+          return icon;
+        }
       }
       return new Avalonia.Data.BindingNotification(new InvalidCastException(), Avalonia.Data.BindingErrorType.Error);
     }
