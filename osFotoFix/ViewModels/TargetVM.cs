@@ -16,14 +16,6 @@ namespace osFotoFix.ViewModels
     public TargetVM(Target target)
     {
       Target = target;
-      /*
-      ActionList = new List<(EAction Action, string Title)>
-      {
-        (EAction.copy,   "Copy"),
-        (EAction.move,   "Move"),
-        (EAction.delete, "Delete"),
-      };
-      */
       ActionList = new List<ActionItem>() {
         new ActionItem() { Value = EAction.copy, Title = "Copy"},
         new ActionItem() { Value = EAction.move, Title = "Move"},
@@ -33,8 +25,12 @@ namespace osFotoFix.ViewModels
     }
 
     public Target Target {get;set;}
+    public string IconName
+    {
+      get { return Target.IconName; }
+      set { Target.IconName = value; }
+    }
 
-    // public List<(EAction Action,string Title)> ActionList {get;}
     public List<ActionItem> ActionList {get;}
 
     private ActionItem action;

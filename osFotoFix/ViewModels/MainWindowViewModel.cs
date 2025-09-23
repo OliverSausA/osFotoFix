@@ -19,6 +19,8 @@ namespace osFotoFix.ViewModels
     {
       Configure();
       CreateNavigation();
+      if (NavigationList.Count > 0)
+        NavigationList[0].Command.Execute(null);
     }
 
     protected void Configure()

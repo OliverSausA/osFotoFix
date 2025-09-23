@@ -13,17 +13,23 @@
     <views:EActionCompareConverter x:Key="EActionCompare" />
     <views:ActionColorValueConverter x:Key="ActionColor" />
     <views:ActionBitmapValueConverter x:Key="ActionImage" />
+    <views:IconNameToPath x:Key="IconNameToPath" />
   </UserControl.Resources>
   <Design.DataContext>
     <viewmodels:DesignTargetVM/>
   </Design.DataContext>
   <Grid 
       RowDefinitions="Auto,Auto,Auto"
-      ColumnDefinitions="Auto,*,Auto,Auto">
+      ColumnDefinitions="50,*,Auto,Auto">
     <CheckBox 
         Grid.ColumnSpan="2"
         Content="Active"
         IsChecked="{Binding Target.Enabled}"/>
+    <Image Width="20" Grid.RowSpan="2"
+      Grid.Row="1" Grid.Column="0">
+      <DrawingImage
+        Drawing="{Binding IconName, Converter={StaticResource IconNameToPath}}" />
+    </Image>
     <TextBox 
         Grid.Row="1" Grid.Column="1"
         Watermark="Title"

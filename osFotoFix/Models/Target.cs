@@ -19,7 +19,7 @@ namespace osFotoFix.Models
     public string Title {get; set;}
 
     [XmlAttribute]
-    public int IconId {get; set;}
+    public string IconName {get; set;}
 
     [XmlAttribute]
     public string Path {get; set;}
