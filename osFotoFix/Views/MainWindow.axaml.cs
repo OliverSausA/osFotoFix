@@ -1,14 +1,13 @@
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
+using Avalonia.Data;
 
-namespace osFotoFix.Views
+namespace osFotoFix.Views;
+
+public partial class MainWindow : Window
 {
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

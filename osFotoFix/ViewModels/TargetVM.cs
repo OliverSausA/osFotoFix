@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using Avalonia.Media.Imaging;
-using ReactiveUI;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 

@@ -15,16 +15,18 @@ public partial class FotoInfoListView : UserControl
     {
         InitializeComponent();
         ///// FotoList = this.FindControl<DataGrid>("FotoList");
-        FotoList.CurrentCellChanged += OnCellChanged;
+        ///// FotoList.CurrentCellChanged += OnCellChanged;
     }
 
     private void OnCellChanged( object sender, EventArgs e )
     {
+      /*****
       try {
         var vm = (FotoInfoListViewModel) this.DataContext;
         FotoList.ScrollIntoView( vm.FotoSelected, null );
       }
       catch {
       }
+      *****/
     }
 }

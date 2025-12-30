@@ -1,26 +1,30 @@
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Markup.Xaml;
-using Avalonia.Markup.Xaml.MarkupExtensions;
-using Avalonia.Markup.Xaml.Styling;
-using Avalonia.Styling;
-using HarfBuzzSharp;
-using osFotoFix.Services;
-using osFotoFix.ViewModels;
-using osFotoFix.Views;
 using System;
-using System.Collections.Generic;
-using Microsoft.Extensions.DependencyInjection;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
+using Microsoft.Extensions.DependencyInjection;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Data.Core;
+using Avalonia.Data.Core.Plugins;
+using Avalonia.Markup.Xaml;
+using Avalonia.Styling;
 
 namespace osFotoFix;
 
-public partial class App : Application
+using osFotoFix.Services;
+using osFotoFix.ViewModels;
+using osFotoFix.Views;
+
+public sealed partial class App : Application
 {
-  public IServiceProvider ServiceProvider;
+  public IServiceProvider Services { get; private set; }
+
+  public App()
+  {
+    Services = ConfigureServices();
+  }
 
   public override void Initialize()
   {
@@ -31,14 +35,17 @@ public partial class App : Application
 
   public override void OnFrameworkInitializationCompleted()
   {
-    ServiceProvider = ConfigureServices();
-
-    var settingsService = App.Current.ServiceProvider.GetRequiredService<UserSettingsService>();
+    /*****
+    var settingsService = App.Current.Services.GetRequiredService<UserSettingsService>();
     var settings = settingsService.GetUserSettings;
     SelectLanguage(settings.CultureId);
+    *****/
 
     if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
     {
+      // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
+      // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
+      DisableAvaloniaDataAnnotationValidation();
       desktop.MainWindow = new MainWindow
       {
         DataContext = new MainWindowViewModel(),
@@ -48,8 +55,22 @@ public partial class App : Application
     base.OnFrameworkInitializationCompleted();
   }
 
+  private void DisableAvaloniaDataAnnotationValidation()
+  {
+    // Get an array of plugins to remove
+    var dataValidationPluginsToRemove =
+        BindingPlugins.DataValidators.OfType<DataAnnotationsValidationPlugin>().ToArray();
+
+    // remove each entry found
+    foreach (var plugin in dataValidationPluginsToRemove)
+    {
+      BindingPlugins.DataValidators.Remove(plugin);
+    }
+  }
+
   public static void SelectLanguage(string culture)
   {
+    /*****
     if( string.IsNullOrEmpty(culture))
       return;
     
@@ -72,6 +93,7 @@ public partial class App : Application
     //Inform the threads of the new culture.     
     Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
     Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
+    *****/
   }
 
   public static string GetStrRes(string key)

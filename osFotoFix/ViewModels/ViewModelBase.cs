@@ -1,32 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
-using ReactiveUI;
+﻿using System.Runtime.CompilerServices;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace osFotoFix.ViewModels;
-public class ViewModelBase : ReactiveObject
+
+public abstract partial class ViewModelBase : ObservableObject
 {
-  protected Window GetMainWindow()
+  
+  [ObservableProperty]
+  private bool isActive = false;
+  partial void OnIsActiveChanged(bool value)
   {
-    var alt = Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
-    return alt?.MainWindow;
+    if (value)
+      OnActivated();
+    else
+      OnDeactivated();
   }
 
-  private bool isActive = false;
-  public bool IsActive { 
-    get { return isActive; } 
-    set { 
-      this.RaiseAndSetIfChanged(ref isActive, value);
-      if( isActive )
-        OnActivated();
-      else
-        OnDeactivated();
-     } 
-  }
   protected virtual void OnActivated() {}
   protected virtual void OnDeactivated() {}
 }

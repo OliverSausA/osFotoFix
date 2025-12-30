@@ -1,19 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Reactive;
-using ReactiveUI;
 
 namespace osFotoFix.ViewModels
 {
+  using CommunityToolkit.Mvvm.ComponentModel;
   using Models;
 
-  public class FotoPreviewViewModel : ViewModelBase
+  public partial class FotoPreviewViewModel : ViewModelBase
   {
-    private ObservableCollection<FotoInfoVM> fotoList = new ObservableCollection<FotoInfoVM>();
-    public ObservableCollection<FotoInfoVM> FotoList {
-      get { return fotoList; }
-      set { this.RaiseAndSetIfChanged(ref fotoList, value); }
-    }
+    [ObservableProperty]
+    private ObservableCollection<FotoInfoVM> fotoList = new();
   }
 }

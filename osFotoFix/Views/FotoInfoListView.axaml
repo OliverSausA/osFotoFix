@@ -18,6 +18,7 @@
     <views:ActionBitmapValueConverter x:Key="ActionImage" />
   </UserControl.Resources>
   <Border Classes="View">
+    <!--
     <Grid 
       RowDefinitions="Auto,*"
       ColumnDefinitions="*,Auto"
@@ -66,7 +67,7 @@
           Watermark="{DynamicResource Description}"
           ToolTip.Tip="{DynamicResource TipDescription}"
           />
-        <!--
+        < ! - -
         <Button Classes="cmdTrash"
           ToolTip.Tip="Ab in den Papierkorb"
           IsEnabled="{Binding UserSettingsVM.TrashCmdActive}"
@@ -74,7 +75,7 @@
           Command="{Binding TrashAllCmd}"
         >
         </Button>
-        -->
+        - - >
         <Button Classes="cmd"
           IsEnabled="{Binding UserSettingsVM.TrashCmdActive}"
           IsVisible="{Binding UserSettingsVM.TrashCmdActive}"
@@ -168,7 +169,7 @@
           </ContentPresenter.Content>
         </ContentPresenter>
       </StackPanel>
-      <!--
+      < ! - -
       <ListBox
         Name="FotoList"
         Grid.Row="1"
@@ -192,7 +193,7 @@
           </DataTemplate>
         </ListBox.ItemTemplate>
       </ListBox>
-      -->
+      - - >
       <DataGrid
         Name="FotoList"
         Grid.Row="1"
@@ -297,5 +298,6 @@
         </DataGrid.Columns>
       </DataGrid>
     </Grid>
+    -->
   </Border>
 </UserControl>

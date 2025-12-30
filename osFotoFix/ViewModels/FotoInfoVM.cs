@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using Avalonia.Media.Imaging;
-using ReactiveUI;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 
@@ -23,43 +22,43 @@ namespace osFotoFix.ViewModels
     public string Comment {
       get { return Foto.Comment; }
       set { Foto.Comment = value;
-            this.RaisePropertyChanged(); }
+            OnPropertyChanged(); }
     }
 
     public string Target {
       get {return Foto.Target; }
       set { Foto.Target = value;
-            this.RaisePropertyChanged(); }
+            OnPropertyChanged(); }
     }
 
     public string Title {
       get { return Foto.Title; }
       set { Foto.Title = value;
-            this.RaisePropertyChanged(); }
+            OnPropertyChanged(); }
     }
 
     public string Description {
       get { return Foto.Description; }
       set { Foto.Description = value;
-            this.RaisePropertyChanged(); }
+            OnPropertyChanged(); }
     }
 
     public string NewFileName {
       get { return Foto.NewFileName; }
       set { Foto.NewFileName = value;
-            this.RaisePropertyChanged(); }
+            OnPropertyChanged(); }
     }
 
     public bool FileExistsOnTarget {
       get { return Foto.FileExistsOnTarget; }
       set { Foto.FileExistsOnTarget = value;
-            this.RaisePropertyChanged(); }
+            OnPropertyChanged(); }
     }
 
     public EAction Action {
       get { return Foto.Action; }
       set { Foto.Action = value;
-            this.RaisePropertyChanged(); }
+            OnPropertyChanged(); }
     }
 
     private Bitmap thumpnail;
@@ -89,13 +88,13 @@ namespace osFotoFix.ViewModels
 
     public void UpdateView()
     {
-      this.RaisePropertyChanged(nameof(Comment));
-      this.RaisePropertyChanged(nameof(Target));
-      this.RaisePropertyChanged(nameof(Title));
-      this.RaisePropertyChanged(nameof(Description));
-      this.RaisePropertyChanged(nameof(NewFileName));
-      this.RaisePropertyChanged(nameof(FileExistsOnTarget));
-      this.RaisePropertyChanged(nameof(Action));
+      OnPropertyChanged(nameof(Comment));
+      OnPropertyChanged(nameof(Target));
+      OnPropertyChanged(nameof(Title));
+      OnPropertyChanged(nameof(Description));
+      OnPropertyChanged(nameof(NewFileName));
+      OnPropertyChanged(nameof(FileExistsOnTarget));
+      OnPropertyChanged(nameof(Action));
     }
   }
 }

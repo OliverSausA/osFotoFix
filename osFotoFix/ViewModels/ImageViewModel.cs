@@ -1,35 +1,33 @@
 using System;
-using System.Reactive;
-using ReactiveUI;
+using CommunityToolkit.Mvvm.Input;
 
 namespace osFotoFix.ViewModels
 {
+  using System.Windows.Input;
+  using CommunityToolkit.Mvvm.ComponentModel;
   using Models;
-  public class ImageViewModel : ViewModelBase
+  public partial class ImageViewModel : ViewModelBase
   {
 
     public ImageViewModel( SettingsViewModel UserSettingsVM ) {
       this.UserSettingsVM = UserSettingsVM;
 
-      UndoImageCmd = ReactiveCommand.Create( OnUndoImage );
-      NextImageCmd = ReactiveCommand.Create( OnNextImage );
-      PrevImageCmd = ReactiveCommand.Create( OnPrevImage );
-      DelImageCmd = ReactiveCommand.Create( OnDelImage );
-      CopyImageCmd = ReactiveCommand.Create( OnCopyImage );
-      TrashImageCmd = ReactiveCommand.Create( OnTrashImage );
-      MoveImageCmd = ReactiveCommand.Create( OnMoveImage );
-      CopyImageCmd = ReactiveCommand.Create( OnCopyImage );
+      UndoImageCmd = new RelayCommand( OnUndoImage );
+      NextImageCmd = new RelayCommand( OnNextImage );
+      PrevImageCmd = new RelayCommand( OnPrevImage );
+      DelImageCmd = new RelayCommand( OnDelImage );
+      CopyImageCmd = new RelayCommand( OnCopyImage );
+      TrashImageCmd = new RelayCommand( OnTrashImage );
+      MoveImageCmd = new RelayCommand( OnMoveImage );
+      CopyImageCmd = new RelayCommand( OnCopyImage );
     }
 
     public SettingsViewModel UserSettingsVM { get;set; }
 
+    [ObservableProperty]
     private FotoInfoVM foto;
-    public FotoInfoVM Foto {
-      get => foto;
-      set => this.RaiseAndSetIfChanged( ref foto, value );
-    }
 
-    public ReactiveCommand<Unit, Unit> UndoImageCmd { get; }
+    public ICommand UndoImageCmd { get; }
     public void OnUndoImage() {
       if( UndoImageEvent != null )
         UndoImageEvent();
@@ -37,7 +35,7 @@ namespace osFotoFix.ViewModels
     public delegate void UndoImage();
     public UndoImage UndoImageEvent;
 
-    public ReactiveCommand<Unit, Unit> NextImageCmd { get; }
+    public ICommand NextImageCmd { get; }
     public void OnNextImage() {
       if( NextImageEvent != null )
         NextImageEvent();
@@ -45,7 +43,7 @@ namespace osFotoFix.ViewModels
     public delegate void NextImage();
     public NextImage NextImageEvent;
 
-    public ReactiveCommand<Unit, Unit> PrevImageCmd { get; }
+    public ICommand PrevImageCmd { get; }
     public void OnPrevImage() {
       if( PrevImageEvent != null )
         PrevImageEvent();
@@ -53,7 +51,7 @@ namespace osFotoFix.ViewModels
     public delegate void PrevImage();
     public PrevImage PrevImageEvent;
 
-    public ReactiveCommand<Unit, Unit> TrashImageCmd { get; }
+    public ICommand TrashImageCmd { get; }
     public void OnTrashImage() {
       if( TrashImageEvent != null )
         TrashImageEvent();
@@ -61,7 +59,7 @@ namespace osFotoFix.ViewModels
     public delegate void TrashImage();
     public TrashImage TrashImageEvent;
 
-    public ReactiveCommand<Unit, Unit> DelImageCmd { get; }
+    public ICommand DelImageCmd { get; }
     public void OnDelImage() {
       if( DelImageEvent != null )
         DelImageEvent();
@@ -69,7 +67,7 @@ namespace osFotoFix.ViewModels
     public delegate void DelImage();
     public DelImage DelImageEvent;
 
-    public ReactiveCommand<Unit, Unit> MoveImageCmd { get; }
+    public ICommand MoveImageCmd { get; }
     public void OnMoveImage() {
       if( MoveImageEvent != null )
         MoveImageEvent();
@@ -77,7 +75,7 @@ namespace osFotoFix.ViewModels
     public delegate void MoveImage();
     public MoveImage MoveImageEvent;
 
-    public ReactiveCommand<Unit, Unit> CopyImageCmd { get; }
+    public ICommand CopyImageCmd { get; }
     public void OnCopyImage() {
       if( CopyImageEvent != null )
         CopyImageEvent();

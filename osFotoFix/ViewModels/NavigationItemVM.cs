@@ -1,11 +1,20 @@
 using System.Windows.Input;
 using Avalonia.Controls;
-using ReactiveUI;
+using CommunityToolkit.Mvvm.ComponentModel;
 
-public class NavigationItemVM : ReactiveObject
+namespace osFotoFix.Models;
+
+public partial class NavigationItemVM : ObservableObject
 {
-  public string Title { get; set; }
-  public string IconName { get; set; }
-  public UserControl View { get; set; }
-  public ICommand Command { get; set; }
+  [ObservableProperty]
+  private string title = string.Empty;
+
+  [ObservableProperty]
+  private string iconName = string.Empty;
+
+  [ObservableProperty]
+  private UserControl? view;
+
+  [ObservableProperty]
+  private ICommand? command;
 }

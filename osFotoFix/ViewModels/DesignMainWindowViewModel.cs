@@ -1,17 +1,19 @@
 using System.Collections.Generic;
 
 namespace osFotoFix.ViewModels;
+using osFotoFix.Models;
 
 public class DesignMainWindowViewModel : MainWindowViewModel
 {
-  protected new void Configure()
+  public DesignMainWindowViewModel()
   {
-
+    Greeting = "Welcome to Avalonia! (Design)";
+    ///// MainViewModel = new MainFotoViewModel();
   }
 
   protected new void CreateNavigation()
   {
-    NavigationList = new List<NavigationItemVM>();
+    NavigationList.Clear();
     NavigationList.Add( new NavigationItemVM() {
       Title = "FotoFix",
       IconName = "FluentIcons.image_library_regular",
@@ -21,4 +23,5 @@ public class DesignMainWindowViewModel : MainWindowViewModel
       IconName = "FluentIcons.target_edit_regular",
     });
   }
+ 
 }

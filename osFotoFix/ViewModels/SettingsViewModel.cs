@@ -1,23 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Reactive;
 
 using Avalonia;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Controls;
-using Avalonia.Dialogs;
 using Avalonia.Controls.ApplicationLifetimes;
-using ReactiveUI;
+using Avalonia.Dialogs;
+using Avalonia.Platform.Storage;
+using CommunityToolkit.Mvvm.Input;
 
 namespace osFotoFix.ViewModels
 {
-    using Avalonia.Platform.Storage;
-    using Models;
+  using CommunityToolkit.Mvvm.ComponentModel;
+  using Models;
   using Services;
 
-  public class SettingsViewModel : ViewModelBase
+  public partial class SettingsViewModel : ViewModelBase
   {
     private List<KeyValuePair<string,string>> SupportedLanguageList;
     private UserSettings userSettings;
@@ -28,9 +28,9 @@ namespace osFotoFix.ViewModels
       this.settingsService = settingsService;
       userSettings = settingsService.GetUserSettings;
       Read();
-      SelectSourceCmd = ReactiveCommand.Create( OnSelectSource );
-      SelectTargetCmd = ReactiveCommand.Create( OnSelectTarget );
-      SelectTrashCmd  = ReactiveCommand.Create( OnSelectTrash );
+      SelectSourceCmd = new AsyncRelayCommand( OnSelectSource );
+      SelectTargetCmd = new AsyncRelayCommand( OnSelectTarget );
+      SelectTrashCmd  = new AsyncRelayCommand( OnSelectTrash );
 
       SupportedLanguageList = new List<KeyValuePair<string, string>>(){
         new KeyValuePair<string, string>("de-DE", App.GetStrRes("de-DE") ),
@@ -43,40 +43,39 @@ namespace osFotoFix.ViewModels
       Write();
     }
 
-    private string source;
-    public string Source { 
-      get { return source; }
-      set { 
-        this.RaiseAndSetIfChanged( ref source, value ); 
-        NewSourceSelectedEvent?.Invoke( source );
-      } 
+    [ObservableProperty]
+    private string source = string.Empty;
+    private void OnNewSourceSelected( string source )
+    {
+      NewSourceSelectedEvent?.Invoke( source );
     }
     public delegate void NewSourceSelected( string source );
-    public NewSourceSelected NewSourceSelectedEvent;
+    public NewSourceSelected? NewSourceSelectedEvent;
 
-    public ReactiveCommand<Unit, Unit> SelectSourceCmd { get; }
-    public async void OnSelectSource() {
-      Source = await GetFolderName( source );
-    }
-
-    private string target;
-    public string Target { 
-      get { return target; }
-      set { this.RaiseAndSetIfChanged( ref target, value ); } 
-    }
-    public ReactiveCommand<Unit, Unit> SelectTargetCmd { get; }
-    public async void OnSelectTarget() {
-      Target = await GetFolderName( target );
+    public AsyncRelayCommand SelectSourceCmd { get; }
+    public async Task OnSelectSource() {
+      Source = await GetFolderName( Source );
     }
 
-    private string trash;
-    public string Trash { 
-      get { return trash; }
-      set { this.RaiseAndSetIfChanged( ref trash, value ); } 
+    [ObservableProperty]
+    private string target = string.Empty;
+    private void OnNewTargetSelected( string target )
+    {
+      NewTargetSelectedEvent?.Invoke( target );
     }
-    public ReactiveCommand<Unit, Unit> SelectTrashCmd { get; }
-    public async void OnSelectTrash() {
-      Trash = await GetFolderName( trash );
+    public delegate void NewTargetSelected( string target );
+    public NewTargetSelected? NewTargetSelectedEvent;
+    public AsyncRelayCommand SelectTargetCmd { get; }
+    public async Task OnSelectTarget() {
+      Target = await GetFolderName( Target );
+    }
+
+    [ObservableProperty]
+    private string trash = string.Empty;
+    
+    public AsyncRelayCommand SelectTrashCmd { get; }
+    public async Task OnSelectTrash() {
+      Trash = await GetFolderName( Trash );
     }
 
     
@@ -98,7 +97,7 @@ namespace osFotoFix.ViewModels
           var path = await window.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions());
           if (path.Count == 1)
           {
-            string p = path[0].TryGetLocalPath();
+            string? p = path[0].TryGetLocalPath();
             if (p != null)
               current = p;
           }
@@ -130,18 +129,14 @@ namespace osFotoFix.ViewModels
         if( userSettings.FilterDatumExif != value )
         {
           userSettings.FilterDatumExif = value;
-          this.RaisePropertyChanged( nameof( FilterDatumExif ) );
+          ///// this.RaisePropertyChanged( nameof( FilterDatumExif ) );
+          OnPropertyChanged();
           FilterChangedEvent?.Invoke();
         }
       }
     }
+    [ObservableProperty]
     private int filterDatumExifCount;
-    public int FilterDatumExifCount {
-      get { return filterDatumExifCount; }
-      set {
-        this.RaiseAndSetIfChanged( ref filterDatumExifCount, value );
-      }
-    }
 
     public EFilterState FilterDatumFilename {
       get { return userSettings.FilterDatumFilename; }
@@ -149,18 +144,14 @@ namespace osFotoFix.ViewModels
         if( userSettings.FilterDatumFilename != value )
         {
           userSettings.FilterDatumFilename = value;
-          this.RaisePropertyChanged( nameof( FilterDatumFilename ) );
+          ///// this.RaisePropertyChanged( nameof( FilterDatumFilename ) );
+          OnPropertyChanged();
           FilterChangedEvent?.Invoke();
         }
       }
     }
+    [ObservableProperty]
     private int filterDatumFilenameCount;
-    public int FilterDatumFilenameCount {
-      get { return filterDatumFilenameCount; }
-      set {
-        this.RaiseAndSetIfChanged( ref filterDatumFilenameCount, value );
-      }
-    }
 
     public EFilterState FilterDatumFilechanged {
       get { return userSettings.FilterDatumFilechanged; }
@@ -168,18 +159,14 @@ namespace osFotoFix.ViewModels
         if( userSettings.FilterDatumFilechanged != value )
         {
           userSettings.FilterDatumFilechanged = value;
-          this.RaisePropertyChanged( nameof( FilterDatumFilechanged ) );
+          ///// this.RaisePropertyChanged( nameof( FilterDatumFilechanged ) );
+          OnPropertyChanged();
           FilterChangedEvent?.Invoke();
         }
       }
     }
+    [ObservableProperty]
     private int filterDatumFilechangedCount;
-    public int FilterDatumFilechangedCount {
-      get { return filterDatumFilechangedCount; }
-      set {
-        this.RaiseAndSetIfChanged( ref filterDatumFilechangedCount, value );
-      }
-    }
 
     public EFilterState FilterFilenameTrashed {
       get { return userSettings.FilterFilenameTrashed; }
@@ -187,18 +174,15 @@ namespace osFotoFix.ViewModels
         if( userSettings.FilterFilenameTrashed != value )
         {
           userSettings.FilterFilenameTrashed = value;
-          this.RaisePropertyChanged( nameof( FilterFilenameTrashed ) );
+          ////// this.RaisePropertyChanged( nameof( FilterFilenameTrashed ) );
+          OnPropertyChanged();
           FilterChangedEvent?.Invoke();
         }
       }
     }
+
+    [ObservableProperty]
     private int filterFilenameTrashedCount;
-    public int FilterFilenameTrashedCount {
-      get { return filterFilenameTrashedCount; }
-      set {
-        this.RaiseAndSetIfChanged( ref filterFilenameTrashedCount, value );
-      }
-    }
 
     public EFilterState FilterDoubles 
     {
@@ -207,63 +191,48 @@ namespace osFotoFix.ViewModels
         if( userSettings.FilterDoubles != value )
         {
           userSettings.FilterDoubles = value;
-          this.RaisePropertyChanged(nameof(FilterDoubles));
+          ///// this.RaisePropertyChanged(nameof(FilterDoubles));
+          OnPropertyChanged();
           FilterChangedEvent?.Invoke();
         }
       }
     }
 
+    [ObservableProperty]
     private int filterDoublesCount;
-    public int FilterDoublesCount {
-      get { return filterDoublesCount; }
-      set {
-        this.RaiseAndSetIfChanged( ref filterDoublesCount, value );
-      }
-    }
+
     public delegate void FilterChanged();
-    public FilterChanged FilterChangedEvent;
+    public FilterChanged? FilterChangedEvent;
 
+    [ObservableProperty]
     private bool trashCmdActive;
-    public bool TrashCmdActive {
-      get { return trashCmdActive; }
-      set { this.RaiseAndSetIfChanged( ref trashCmdActive, value ); }
-    }
 
+    [ObservableProperty]
     private bool delCmdActive;
-    public bool DelCmdActive {
-      get { return delCmdActive; }
-      set { this.RaiseAndSetIfChanged( ref delCmdActive, value ); }
-    }
 
+    [ObservableProperty]
     private bool moveCmdActive;
-    public bool MoveCmdActive {
-      get { return moveCmdActive; }
-      set { this.RaiseAndSetIfChanged( ref moveCmdActive, value ); }
-    }
 
+    [ObservableProperty]
     private bool copyCmdActive;
-    public bool CopyCmdActive {
-      get { return copyCmdActive; }
-      set { this.RaiseAndSetIfChanged( ref copyCmdActive, value ); }
-    }
 
+    [ObservableProperty]
     private int generalFontSize;
+    /*****
     public string GeneralFontSize {
       get { return generalFontSize.ToString(); }
       set { 
         int size = int.Parse( value );
         this.RaiseAndSetIfChanged( ref generalFontSize, size ); }
     }
+    *****/
 
     public List<string> FontSizeList {
       get { return new List<string>() { "10", "12", "14", "16", "20", "24", "30" }; }
     }
 
-    private string cultureId;
-    public string CultureId {
-      get { return cultureId; }
-      set { cultureId = value; }
-    }
+    [ObservableProperty]
+    private string cultureId = string.Empty;
 
     public List<KeyValuePair<string,string>> SupportedLanguages
     {
@@ -280,24 +249,14 @@ namespace osFotoFix.ViewModels
       }
     }
 
+    [ObservableProperty]
     private bool showFotoInfoDetail;
-    public bool ShowFotoInfoDetail { 
-      get {return showFotoInfoDetail; }
-      set { this.RaiseAndSetIfChanged( ref showFotoInfoDetail, value ); }
-    }
 
-    private string title;
-    public string Title {
-      get { return title; }
-      set { this.RaiseAndSetIfChanged( ref title, value ); }
-    }
+    [ObservableProperty]
+    private string title = string.Empty;
 
-    private string description;
-    public string Description {
-      get { return description; }
-      set { this.RaiseAndSetIfChanged( ref description, value ); }
-    }
-
+    [ObservableProperty]
+    private string description = string.Empty;
 
     private void Read()
     {
@@ -312,7 +271,7 @@ namespace osFotoFix.ViewModels
       CopyCmdActive  = settings.CopyCmdActive;
       
       CultureId = settings.CultureId;
-      GeneralFontSize = settings.GeneralFontSize.ToString();
+      GeneralFontSize = settings.GeneralFontSize;
       ShowFotoInfoDetail = settings.ShowFotoInfoDetail;
 
       Description = settings.Description;
@@ -331,7 +290,7 @@ namespace osFotoFix.ViewModels
       settings.CopyCmdActive  = CopyCmdActive;
 
       settings.CultureId = CultureId;
-      settings.GeneralFontSize = int.Parse(GeneralFontSize);
+      settings.GeneralFontSize = GeneralFontSize;
       settings.ShowFotoInfoDetail = ShowFotoInfoDetail;
 
       settings.Title = Title;

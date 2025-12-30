@@ -3,19 +3,20 @@ using System.Linq;
 using System.IO;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Reactive;
 using System.Threading;
 using System.Threading.Tasks;
 
 using Avalonia.Threading;
-using ReactiveUI;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace osFotoFix.ViewModels
 {
+  using System.Windows.Input;
   using Models;
   using Services;
 
-  public class FotoInfoListViewModel : ViewModelBase
+  public partial class FotoInfoListViewModel : ViewModelBase
   {
     private FotoInfoService service;
     private FotoPreviewViewModel FotoPreviewVM;
@@ -45,15 +46,15 @@ namespace osFotoFix.ViewModels
       this.ImageVM.CopyImageEvent += CopyFoto;
       this.ImageVM.MoveImageEvent += MoveFoto;
 
-      RefreshCmd = ReactiveCommand.Create( OnRefresh );
-      CancelCmd = ReactiveCommand.Create( OnCancel );
-      UndoAllCmd = ReactiveCommand.Create( OnUndoAll );
-      TrashAllCmd = ReactiveCommand.Create( OnTrashAll );
-      DelAllCmd = ReactiveCommand.Create( OnDelAll );
-      CopyAllCmd = ReactiveCommand.Create( OnCopyAll );
-      MoveAllCmd = ReactiveCommand.Create( OnMoveAll );
-      DoItCmd = ReactiveCommand.Create( OnDoIt );
-      CancelDoItCmd = ReactiveCommand.Create( OnCancelDoIt );
+      RefreshCmd = new RelayCommand( OnRefresh );
+      CancelCmd = new RelayCommand( OnCancel );
+      UndoAllCmd = new RelayCommand( OnUndoAll );
+      TrashAllCmd = new RelayCommand( OnTrashAll );
+      DelAllCmd = new RelayCommand( OnDelAll );
+      CopyAllCmd = new RelayCommand( OnCopyAll );
+      MoveAllCmd = new RelayCommand( OnMoveAll );
+      DoItCmd = new RelayCommand( OnDoIt );
+      CancelDoItCmd = new RelayCommand( OnCancelDoIt );
       
       this.FotoPreviewVM = FotoPreviewVM;
       this.FotoInfoDetailVM = FotoInfoDetailVM;
@@ -70,7 +71,7 @@ namespace osFotoFix.ViewModels
     public FotoInfoVM FotoSelected { 
       get { return fotoSelected; } 
       set { 
-        this.RaiseAndSetIfChanged( ref fotoSelected, value );
+        SetProperty( ref fotoSelected, value );
         fotoSelected = value;
         ImageVM.Foto = value;
         FotoInfoDetailVM.Foto = value;
@@ -98,11 +99,8 @@ namespace osFotoFix.ViewModels
       Task.Run( () => ReadFotoInfos( source ) );
     }
 
+    [ObservableProperty]
     private bool runningReadFoto;
-    public bool RunningReadFoto {
-      get { return runningReadFoto; }
-      set { this.RaiseAndSetIfChanged( ref runningReadFoto, value ); }
-    }
     private CancellationTokenSource CancelReadFotoInfos;
     private async void ReadFotoInfos( string source )
     {
@@ -142,7 +140,7 @@ namespace osFotoFix.ViewModels
       if( fotoInfo.Foto.Action == EAction.done )
         bMatch = false;
 
-      if( fotoInfo.Foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Exif ) {
+      if( fotoInfo.Foto.TypeOfCreationDate == ETypeOfCreationDate.Exif ) {
         UserSettingsVM.FilterDatumExifCount++;
         if( UserSettingsVM.FilterDatumExif == EFilterState.eOff )
           bMatch = false;
@@ -153,7 +151,7 @@ namespace osFotoFix.ViewModels
           bMatch = false;
       }
 
-      if( fotoInfo.Foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Filename ) {
+      if( fotoInfo.Foto.TypeOfCreationDate == ETypeOfCreationDate.Filename ) {
         UserSettingsVM.FilterDatumFilenameCount++;
         if( UserSettingsVM.FilterDatumFilename == EFilterState.eOff )
           bMatch = false;
@@ -164,7 +162,7 @@ namespace osFotoFix.ViewModels
           bMatch = false;
       }
 
-      if( fotoInfo.Foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Filesystem ) {
+      if( fotoInfo.Foto.TypeOfCreationDate == ETypeOfCreationDate.Filesystem ) {
         UserSettingsVM.FilterDatumFilechangedCount++;
         if( UserSettingsVM.FilterDatumFilechanged == EFilterState.eOff )
           bMatch = false;
@@ -249,12 +247,12 @@ namespace osFotoFix.ViewModels
         FotoSelected = FotoInfoList[ idx ];
     }
 
-    public ReactiveCommand<Unit, Unit> RefreshCmd { get; }
+    public ICommand RefreshCmd { get; }
     public void OnRefresh() {
       OnNewSourceSelected( UserSettingsVM.Source );
     }
 
-    public ReactiveCommand<Unit, Unit> CancelCmd { get; }
+    public ICommand CancelCmd { get; }
     public void OnCancel() {
       if( CancelReadFotoInfos != null )
       {
@@ -263,43 +261,40 @@ namespace osFotoFix.ViewModels
       }
     }
 
-    public ReactiveCommand<Unit, Unit> UndoAllCmd { get; }
+    public ICommand UndoAllCmd { get; }
     public void OnUndoAll() {
       foreach( var foto in FotoInfoList )
         UndoFoto( foto );
     }
 
-    public ReactiveCommand<Unit, Unit> TrashAllCmd { get; }
+    public ICommand TrashAllCmd { get; }
     public void OnTrashAll() {
       foreach( var foto in FotoInfoList )
         TrashFoto( foto );
     }
 
-    public ReactiveCommand<Unit, Unit> DelAllCmd { get; }
+    public ICommand DelAllCmd { get; }
     public void OnDelAll() {
       foreach( var foto in FotoInfoList )
         DelFoto( foto );
     }
 
-    public ReactiveCommand<Unit, Unit> CopyAllCmd { get; }
+    public ICommand CopyAllCmd { get; }
     public void OnCopyAll() {
       foreach( var foto in FotoInfoList )
         CopyFoto( foto );
     }
 
-    public ReactiveCommand<Unit, Unit> MoveAllCmd { get; }
+    public ICommand MoveAllCmd { get; }
     public void OnMoveAll() {
       foreach( var foto in FotoInfoList )
         MoveFoto( foto );
     }
 
+    [ObservableProperty]
     private bool runningFotoFixIt;
-    public bool RunningFotoFixIt {
-      get { return runningFotoFixIt; }
-      set { this.RaiseAndSetIfChanged( ref runningFotoFixIt, value ); }
-    }
 
-    public ReactiveCommand<Unit, Unit> DoItCmd { get; }
+    public ICommand DoItCmd { get; }
     private CancellationTokenSource CancelFotoFixIt;
     public void OnDoIt()
     {
@@ -314,7 +309,7 @@ namespace osFotoFix.ViewModels
       RunningFotoFixIt = false;
       CancelFotoFixIt = null;
     }
-    public ReactiveCommand<Unit, Unit> CancelDoItCmd { get; }
+    public ICommand CancelDoItCmd { get; }
     public void OnCancelDoIt()
     {
       if( CancelFotoFixIt != null )

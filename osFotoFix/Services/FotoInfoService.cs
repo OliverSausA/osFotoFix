@@ -169,15 +169,15 @@ namespace osFotoFix.Services
         */
         DateTime? d = ExifService.ReadCreationTime( file.FullName );
         if( d.HasValue )
-          return new FotoInfo( file, d.Value, FotoInfo.ETypeOfCreationDate.Exif );
+          return new FotoInfo( file, d.Value, ETypeOfCreationDate.Exif );
       }
       catch { }
 
       DateTime dt;
       if( GetDateTimeFromString( file.Name, out dt ) )
-        return new FotoInfo( file, dt, FotoInfo.ETypeOfCreationDate.Filename );
+        return new FotoInfo( file, dt, ETypeOfCreationDate.Filename );
       
-      return new FotoInfo( file, file.CreationTime, FotoInfo.ETypeOfCreationDate.Filesystem );
+      return new FotoInfo( file, file.CreationTime, ETypeOfCreationDate.Filesystem );
     }
 
     private bool IsFileExistsOnTarget( FotoInfo foto )

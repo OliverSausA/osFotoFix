@@ -16,8 +16,9 @@ public class MainFotoViewModel : ViewModelBase
 {
   public MainFotoViewModel()
   {
+    /*****
     FotoInfoService.GetDateTimeFromStringTests();
-    var settingsService = App.Current.ServiceProvider.GetRequiredService<UserSettingsService>();
+    var settingsService = App.Current.Services.GetRequiredService<UserSettingsService>();
     SettingsVM = new SettingsViewModel(settingsService);
     ImageVM = new ImageViewModel(SettingsVM);
     FotoInfoDetailVM = new FotoInfoDetailViewModel();
@@ -26,6 +27,7 @@ public class MainFotoViewModel : ViewModelBase
 
     var alt = Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
     alt.Exit += OnExit;
+    *****/
   }
 
   public SettingsViewModel SettingsVM { get; set; }

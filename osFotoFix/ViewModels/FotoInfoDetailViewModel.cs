@@ -1,5 +1,4 @@
 using System;
-using ReactiveUI;
 
 namespace osFotoFix.ViewModels
 {
