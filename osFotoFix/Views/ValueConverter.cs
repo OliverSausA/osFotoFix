@@ -13,33 +13,28 @@ namespace osFotoFix.Views
 
   public class EFilterStatusCheckedConverter : IValueConverter
   {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture )
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture )
     {
       bool? ret = null;
-
-      try{
-        EFilterState state = (EFilterState) value;
+      if (value is EFilterState state)
+      {
         if( state == EFilterState.eOn )
           ret = true;
         else if ( state == EFilterState.eOff )
           ret = false;
       }
-      catch { }
       return ret;
     }
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture )
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture )
     {
       EFilterState ret = EFilterState.eDisable;
-      try {
-        if ( value != null )
-        {
-          if( (bool)value )
-            ret = EFilterState.eOn;
-          else 
-            ret = EFilterState.eOff;
-        }
+      if (value is bool bOn)
+      {
+        if( bOn )
+          ret = EFilterState.eOn;
+        else 
+          ret = EFilterState.eOff;
       }
-      catch {}
       return ret;
     }
   }
@@ -48,22 +43,22 @@ namespace osFotoFix.Views
   {
     public static EActionCompareConverter Instance = new EActionCompareConverter();
 
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture )
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture )
     {
       if( value == null || parameter == null )
         return null;
       
       try 
       {
-        string sValue = Enum.GetName( typeof(EAction), value );
-        return sValue == parameter.ToString();
+        ///// string sValue = Enum.GetName( typeof(EAction), value );
+        return parameter.ToString();
       }
       catch {
       }
       return null;
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture )
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture )
     {
       if( value == null || parameter == null )
         return null;
@@ -80,7 +75,7 @@ namespace osFotoFix.Views
   {
     public static BitmapFileValueConverter Instance = new BitmapFileValueConverter();
 
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture )
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture )
     {
       if( value == null)
         return null;
@@ -98,7 +93,7 @@ namespace osFotoFix.Views
       return null;
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture )
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture )
     {
       throw new NotSupportedException();
     }
@@ -114,7 +109,7 @@ namespace osFotoFix.Views
     */
     public static ActionColorValueConverter Instance = new ActionColorValueConverter();
 
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture )
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture )
     {
       if( value == null)
         return null;
@@ -140,7 +135,7 @@ namespace osFotoFix.Views
       return null;
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture )
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture )
     {
       throw new NotSupportedException();
     }
@@ -155,7 +150,7 @@ namespace osFotoFix.Views
     */
     public static ActionBitmapValueConverter Instance = new ActionBitmapValueConverter();
 
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture )
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture )
     {
       if( value == null)
         return null;
@@ -181,14 +176,14 @@ namespace osFotoFix.Views
       return null;
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture )
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture )
     {
       throw new NotSupportedException();
     }
   }
   public sealed class IconNameToPath : IValueConverter
   {
-    public object Convert( object value, Type targetType, object parameter, CultureInfo culture )
+    public object? Convert( object? value, Type targetType, object? parameter, CultureInfo culture )
     {
       if( value is string resourceName )
       {
@@ -201,7 +196,7 @@ namespace osFotoFix.Views
       return new Avalonia.Data.BindingNotification(new InvalidCastException(), Avalonia.Data.BindingErrorType.Error);
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) {
       throw new NotImplementedException();
     }
   }

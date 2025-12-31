@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace osFotoFix.ViewModels
 {
+  using System.Linq;
   using Models;
   using Services;
   public partial class MainWindowViewModel : ViewModelBase
@@ -13,8 +14,7 @@ namespace osFotoFix.ViewModels
     {
       Configure();
       CreateNavigation();
-      if (NavigationList.Count > 0)
-        NavigationList[0].Command.Execute(null);
+      NavigationList?.FirstOrDefault()?.Command?.Execute(null);
     }
 
     protected void Configure()
@@ -30,7 +30,7 @@ namespace osFotoFix.ViewModels
     private List<NavigationItemVM> navigationList = new();
 
     [ObservableProperty]
-    private SettingsViewModel settingsVM;
+    private SettingsViewModel? settingsVM;
 
     protected void CreateNavigation()
     {

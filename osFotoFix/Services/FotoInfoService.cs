@@ -14,10 +14,10 @@ namespace osFotoFix.Services
 
   public class FotoInfoEventArgs : EventArgs
   {
-    public FotoInfoEventArgs( FotoInfo info ) {
+    public FotoInfoEventArgs( FotoInfo? info ) {
       FotoInfo = info;
     }
-    public FotoInfo FotoInfo { get; private set; }
+    public FotoInfo? FotoInfo { get; private set; }
   }
 
   public class FotoInfoService
@@ -28,7 +28,7 @@ namespace osFotoFix.Services
 
     }
 
-    public event EventHandler<FotoInfoEventArgs> FotoInfoReadEvent;
+    public event EventHandler<FotoInfoEventArgs>? FotoInfoReadEvent;
     public async Task<bool> ReadFotoInfos( DirectoryInfo dir, CancellationToken token )
     {
       if(!dir.Exists) return true;
@@ -56,7 +56,7 @@ namespace osFotoFix.Services
       return true;
 
     }
-    public event EventHandler<FotoInfoEventArgs> FotoFixedEvent;
+    public event EventHandler<FotoInfoEventArgs>? FotoFixedEvent;
     public async Task<bool> FotoFixIt( IEnumerable<FotoInfo> fotoInfos, CancellationToken token )
     {
       foreach( var foto in fotoInfos )

@@ -25,7 +25,7 @@ namespace osFotoFix.ViewModels
     public SettingsViewModel UserSettingsVM { get;set; }
 
     [ObservableProperty]
-    private FotoInfoVM foto;
+    private FotoInfoVM? foto;
 
     public ICommand UndoImageCmd { get; }
     public void OnUndoImage() {
@@ -33,7 +33,7 @@ namespace osFotoFix.ViewModels
         UndoImageEvent();
     }
     public delegate void UndoImage();
-    public UndoImage UndoImageEvent;
+    public UndoImage? UndoImageEvent;
 
     public ICommand NextImageCmd { get; }
     public void OnNextImage() {
@@ -41,7 +41,7 @@ namespace osFotoFix.ViewModels
         NextImageEvent();
     }
     public delegate void NextImage();
-    public NextImage NextImageEvent;
+    public NextImage? NextImageEvent;
 
     public ICommand PrevImageCmd { get; }
     public void OnPrevImage() {
@@ -49,7 +49,7 @@ namespace osFotoFix.ViewModels
         PrevImageEvent();
     }
     public delegate void PrevImage();
-    public PrevImage PrevImageEvent;
+    public PrevImage? PrevImageEvent;
 
     public ICommand TrashImageCmd { get; }
     public void OnTrashImage() {
@@ -57,7 +57,7 @@ namespace osFotoFix.ViewModels
         TrashImageEvent();
     }
     public delegate void TrashImage();
-    public TrashImage TrashImageEvent;
+    public TrashImage? TrashImageEvent;
 
     public ICommand DelImageCmd { get; }
     public void OnDelImage() {
@@ -65,7 +65,7 @@ namespace osFotoFix.ViewModels
         DelImageEvent();
     }
     public delegate void DelImage();
-    public DelImage DelImageEvent;
+    public DelImage? DelImageEvent;
 
     public ICommand MoveImageCmd { get; }
     public void OnMoveImage() {
@@ -73,7 +73,7 @@ namespace osFotoFix.ViewModels
         MoveImageEvent();
     }
     public delegate void MoveImage();
-    public MoveImage MoveImageEvent;
+    public MoveImage? MoveImageEvent;
 
     public ICommand CopyImageCmd { get; }
     public void OnCopyImage() {
@@ -81,7 +81,7 @@ namespace osFotoFix.ViewModels
         CopyImageEvent();
     }
     public delegate void CopyImage();
-    public CopyImage CopyImageEvent;
+    public CopyImage? CopyImageEvent;
 
   }
 }

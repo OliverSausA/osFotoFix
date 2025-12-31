@@ -15,13 +15,13 @@ public class Target
   */
 
   [XmlAttribute]
-  public string Title {get; set;}
+  public string Title {get; set;} = string.Empty;
 
   [XmlAttribute]
-  public string IconName {get; set;}
+  public string IconName {get; set;} = string.Empty;
 
   [XmlAttribute]
-  public string Path {get; set;}
+  public string Path {get; set;} = string.Empty;
 
   [XmlAttribute]
   public EAction Action {get; set;}

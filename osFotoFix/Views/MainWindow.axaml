@@ -5,6 +5,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         xmlns:vm="clr-namespace:osFotoFix.ViewModels"
         xmlns:views="clr-namespace:osFotoFix.Views;assembly=osFotoFix"
+        xmlns:ic="using:FluentIcons.Avalonia"
         x:Class="osFotoFix.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
@@ -36,6 +37,7 @@
                 <StackPanel 
                     Orientation="Horizontal"
                     Width="100" Height="30">
+                    <ic:FluentIcon Icon="ArrowRight" IconSize="16" />
                     <Image>
                     <DrawingImage
                         Drawing="{Binding IconName, Converter={StaticResource IconNameToPath}}" />

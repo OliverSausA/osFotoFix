@@ -61,8 +61,8 @@ namespace osFotoFix.ViewModels
             OnPropertyChanged(); }
     }
 
-    private Bitmap thumpnail;
-    public Bitmap Thumpnail {
+    private Bitmap? thumpnail;
+    public Bitmap? Thumpnail {
       get {
         if( thumpnail == null )
         {

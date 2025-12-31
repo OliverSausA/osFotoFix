@@ -29,13 +29,13 @@ public class UserSettings
   }
 
   [XmlAttribute]
-  public string Quelle {get;set;}
+  public string Quelle {get;set;} = string.Empty;
   [XmlAttribute]
-  public string Ziel {get;set;}
+  public string Ziel {get;set;} = string.Empty;
   [XmlAttribute]
-  public string Papierkorb {get;set;}
+  public string Papierkorb {get;set;} = string.Empty;
   [XmlArray]
-  public List<Target> Targets {get; set;}
+  public List<Target> Targets {get; set;} = new();
 
   [XmlAttribute]
   public EFilterState FilterDatumExif {get;set;}
@@ -51,21 +51,21 @@ public class UserSettings
   [XmlAttribute]
   public bool TrashCmdActive {get;set;}
   [XmlAttribute]
-  public bool DelCmdActive {get;set;}
+  public bool DelCmdActive {get;set;} 
   [XmlAttribute]
   public bool MoveCmdActive {get;set;}
   [XmlAttribute]
   public bool CopyCmdActive {get;set;}
 
   [XmlAttribute]
-  public string CultureId {get;set;}
+  public string CultureId {get;set;} = string.Empty;
   [XmlAttribute]
   public int GeneralFontSize {get;set;}
   [XmlAttribute]
   public bool ShowFotoInfoDetail {get;set;}
 
   [XmlAttribute]
-  public string Title {get;set;}
+  public string Title {get;set;} = string.Empty;
   [XmlAttribute]
-  public string Description {get;set;}
+  public string Description {get;set;} = string.Empty;
 }

@@ -67,8 +67,8 @@ namespace osFotoFix.ViewModels
     public SettingsViewModel UserSettingsVM { get;set; }
     public ObservableCollection<FotoInfoVM> FotoInfoList { get; set; }
 
-    private FotoInfoVM fotoSelected;
-    public FotoInfoVM FotoSelected { 
+    private FotoInfoVM? fotoSelected;
+    public FotoInfoVM? FotoSelected { 
       get { return fotoSelected; } 
       set { 
         SetProperty( ref fotoSelected, value );
@@ -101,7 +101,7 @@ namespace osFotoFix.ViewModels
 
     [ObservableProperty]
     private bool runningReadFoto;
-    private CancellationTokenSource CancelReadFotoInfos;
+    private CancellationTokenSource? CancelReadFotoInfos;
     private async void ReadFotoInfos( string source )
     {
       if ( CancelReadFotoInfos != null ) return;
@@ -119,9 +119,10 @@ namespace osFotoFix.ViewModels
       CancelReadFotoInfos = null;
     }
 
-    private void OnFotoInfoRead( object sender, FotoInfoEventArgs args )
+    private void OnFotoInfoRead( object? sender, FotoInfoEventArgs args )
     {
       Dispatcher.UIThread.InvokeAsync( () => {
+        if (args.FotoInfo == null) return;
         var fotoInfo = new FotoInfoVM( args.FotoInfo );
         AllFotoInfos.Add( fotoInfo );
         if( FilterMatch( fotoInfo ) )
@@ -210,7 +211,7 @@ namespace osFotoFix.ViewModels
         SelectFirstFoto();
     }
 
-    private void OnFotoFixed( object sender, FotoInfoEventArgs args )
+    private void OnFotoFixed( object? sender, FotoInfoEventArgs args )
     {
       Dispatcher.UIThread.InvokeAsync( () => {
         if( args.FotoInfo != null )
@@ -295,7 +296,7 @@ namespace osFotoFix.ViewModels
     private bool runningFotoFixIt;
 
     public ICommand DoItCmd { get; }
-    private CancellationTokenSource CancelFotoFixIt;
+    private CancellationTokenSource? CancelFotoFixIt;
     public void OnDoIt()
     {
       Task.Run( () => DoIt() );
@@ -321,6 +322,7 @@ namespace osFotoFix.ViewModels
 
     protected void UndoFoto()
     {
+      if (fotoSelected == null) return;
       UndoFoto( fotoSelected );
       SelectNextFoto();
     }
@@ -339,6 +341,7 @@ namespace osFotoFix.ViewModels
 
     protected void DelFoto()
     {
+      if (fotoSelected == null) return;
       DelFoto( fotoSelected );
       SelectNextFoto();
     }
@@ -352,6 +355,7 @@ namespace osFotoFix.ViewModels
 
     protected void CopyFoto()
     {
+      if (fotoSelected == null) return;
       CopyFoto( fotoSelected );
       SelectNextFoto();
     }
@@ -369,6 +373,7 @@ namespace osFotoFix.ViewModels
 
     protected void MoveFoto()
     {
+      if (fotoSelected == null) return;
       MoveFoto( fotoSelected );
       SelectNextFoto();
     }
@@ -386,6 +391,7 @@ namespace osFotoFix.ViewModels
 
     protected void TrashFoto()
     {
+      if (fotoSelected == null) return;
       TrashFoto( fotoSelected );
       SelectNextFoto();
     }

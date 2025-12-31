@@ -98,14 +98,14 @@ public sealed partial class App : Application
 
   public static string GetStrRes(string key)
   {
-    object res;
-    if( App.Current.Resources.TryGetResource( key, ThemeVariant.Default, out res ) )
-      return res.ToString();
+    object? res;
+    if( App.Current.Resources.TryGetResource( key, ThemeVariant.Default, out res ))
+      return res?.ToString() ?? key;
     else
       return key;
     }
 
-  public Window GetMainWindow()
+  public Window? GetMainWindow()
   {
     if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
       return desktop.MainWindow;

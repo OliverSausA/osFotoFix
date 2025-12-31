@@ -11,9 +11,9 @@ namespace osFotoFix.Services
     public UserSettingsService() {
       ReadUserSettings();
     }
-    private static UserSettingsService instance = null;
+    private static UserSettingsService? instance = null;
     private const string CONF = "osFotoFix.config";
-    protected UserSettings userSettings;
+    protected UserSettings userSettings = new();
 
 
     public static UserSettingsService GetInstance {
@@ -29,10 +29,6 @@ namespace osFotoFix.Services
 
     protected void ReadUserSettings()
     {
-      if( userSettings != null )
-        return ;
-
-      userSettings = new UserSettings();
       try
       {
         string filePath = Path.Combine( getUserHomePath(), CONF );
@@ -40,7 +36,9 @@ namespace osFotoFix.Services
           using ( var reader = XmlReader.Create( filePath ) )
           {
             XmlSerializer serializier = new XmlSerializer( typeof( UserSettings ) );
-            userSettings = (UserSettings) serializier.Deserialize( reader );
+            var data = serializier.Deserialize( reader );
+            if (data is UserSettings)
+              userSettings = (UserSettings)data;
           }
         }
       }

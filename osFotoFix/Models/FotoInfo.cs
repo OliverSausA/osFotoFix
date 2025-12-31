@@ -40,19 +40,19 @@ public class FotoInfo {
 
   public int ID { get; private set; }
   public EAction Action {get;set;}
-  public string Target {get;set;}
-  public string Title {get;set;}
-  public string Description {get;set;}
+  public string Target {get;set;} = string.Empty;
+  public string Title {get;set;} = string.Empty;
+  public string Description {get;set;} = string.Empty;
 
-  public string NewFileName {get;set;}
+  public string NewFileName {get;set;} = string.Empty;
   public bool FileExistsOnTarget {get;set;}
 
-  public string Comment {get;set;}
+  public string Comment {get;set;} = string.Empty;
   public bool ActionRequiered {
     get { return ( Action == EAction.copy ||
                     Action == EAction.move ||
                     Action == EAction.trash ||
                     Action == EAction.delete ); }
   }
-  public string Data {get;set;}
+  public string Data {get;set;} = string.Empty;
 }
