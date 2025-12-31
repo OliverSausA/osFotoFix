@@ -20,9 +20,9 @@ public class ViewLocator : IDataTemplate
             return null;
         
         string name = param.GetType().FullName ?? string.Empty;
-        if (name.StartsWith("Design", StringComparison.Ordinal))
+        if (name.Contains("Design", StringComparison.Ordinal))
         {
-            name = name.Substring("Design".Length);
+            name = name.Replace("Design", "", StringComparison.Ordinal);
         }
         if (name.EndsWith("ViewModel", StringComparison.Ordinal))
         {

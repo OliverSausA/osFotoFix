@@ -1,10 +1,13 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace osFotoFix.ViewModels;
 
 public abstract partial class ViewModelBase : ObservableObject
 {
+  [ObservableProperty]
+  private ObservableCollection<MainMenuItemVM> mainMenuItems = new();
   
   [ObservableProperty]
   private bool isActive = false;

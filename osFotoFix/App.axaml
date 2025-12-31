@@ -9,11 +9,10 @@
 
     <Application.Styles>
       <FluentTheme />
-      <!--
+      <!-- -->
       <StyleInclude Source='/Assets/Modern.xaml'/>
       <StyleInclude Source='/Assets/FluentUiIcons_Filled.xaml'/>
       <StyleInclude Source='/Assets/FluentUiIcons_Regular.xaml'/>
-      -->
       <StyleInclude Source='/Assets/Custom.xaml'/>
     </Application.Styles>
     <Application.Resources>

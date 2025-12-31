@@ -14,7 +14,6 @@ namespace osFotoFix.ViewModels
     {
       Configure();
       CreateNavigation();
-      NavigationList?.FirstOrDefault()?.Command?.Execute(null);
     }
 
     protected void Configure()
@@ -49,6 +48,7 @@ namespace osFotoFix.ViewModels
           MainViewModel = App.Current?.Services.GetRequiredService<TargetListViewModel>() as ViewModelBase; 
         }),
       });
+      NavigationList?.FirstOrDefault()?.Command?.Execute(null);
     }
 
     [ObservableProperty]

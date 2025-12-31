@@ -37,11 +37,7 @@
                 <StackPanel 
                     Orientation="Horizontal"
                     Width="100" Height="30">
-                    <ic:FluentIcon Icon="ArrowRight" IconSize="16" />
-                    <Image>
-                    <DrawingImage
-                        Drawing="{Binding IconName, Converter={StaticResource IconNameToPath}}" />
-                    </Image>
+                    <ic:FluentIcon Icon="{Binding IconName}" IconSize="16" />
                     <TextBlock 
                     Padding="5,0,0,0"
                     VerticalAlignment="Center"
@@ -53,11 +49,35 @@
         </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <!--
+        <!-- MenuItems -->
+        <ItemsControl Grid.Column="1"
+                    ItemsSource="{Binding MainViewModel.MainMenuItems}">
+            <ItemsControl.ItemTemplate>
+            <DataTemplate>
+            <Border 
+                CornerRadius="5"
+                Background="yellow"
+                BorderBrush="Gray">
+                <Button
+                Command="{Binding Command}" >
+                <StackPanel 
+                    Orientation="Vertical"
+                    Width="100" Height="30">
+                    <ic:FluentIcon Icon="{Binding IconName}" IconSize="16" />
+                    <TextBlock 
+                    Padding="5,0,0,0"
+                    VerticalAlignment="Center"
+                    Text="{Binding Title}" />
+                </StackPanel>
+                </Button>
+            </Border>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
         <ContentControl 
             Grid.Column="1" Grid.Row="1"
             Content="{Binding MainViewModel}" />
-        -->
     </Grid>
 
 </Window>
