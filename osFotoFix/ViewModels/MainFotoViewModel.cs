@@ -17,7 +17,7 @@ public class MainFotoViewModel : ViewModelBase
   public MainFotoViewModel()
   {
     FotoInfoService.GetDateTimeFromStringTests();
-    var settingsService = App.Current.Services.GetRequiredService<UserSettingsService>();
+    var settingsService = UserSettingsService.GetInstance;
     SettingsVM = new SettingsViewModel(settingsService);
     ImageVM = new ImageViewModel(SettingsVM);
     FotoInfoDetailVM = new FotoInfoDetailViewModel();
