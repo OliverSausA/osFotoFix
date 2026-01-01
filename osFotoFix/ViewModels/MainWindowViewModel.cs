@@ -31,7 +31,7 @@ namespace osFotoFix.ViewModels
     [ObservableProperty]
     private SettingsViewModel? settingsVM;
 
-    protected void CreateNavigation()
+    protected virtual void CreateNavigation()
     {
       NavigationList.Clear();
       NavigationList.Add( new NavigationItemVM() {
@@ -44,6 +44,13 @@ namespace osFotoFix.ViewModels
       NavigationList.Add( new NavigationItemVM() {
         Title = "Targets",
         IconName = "FluentIcons.target_edit_regular",
+        Command = new RelayCommand(() => {
+          MainViewModel = App.Current?.Services.GetRequiredService<TargetListViewModel>() as ViewModelBase; 
+        }),
+      });
+      NavigationList.Add( new NavigationItemVM() {
+        Title = "Settings",
+        IconName = "Settings",
         Command = new RelayCommand(() => {
           MainViewModel = App.Current?.Services.GetRequiredService<TargetListViewModel>() as ViewModelBase; 
         }),

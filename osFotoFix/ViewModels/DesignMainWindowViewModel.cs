@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace osFotoFix.ViewModels;
 using osFotoFix.Models;
 
-public class DesignMainWindowViewModel : MainWindowViewModel
+public partial class DesignMainWindowViewModel : MainWindowViewModel
 {
   public DesignMainWindowViewModel()
   {
@@ -11,11 +11,11 @@ public class DesignMainWindowViewModel : MainWindowViewModel
     MainViewModel = new DesignMainFotoViewModel();
   }
 
-  protected new void CreateNavigation()
+  protected override void CreateNavigation()
   {
     NavigationList.Clear();
     NavigationList.Add( new NavigationItemVM() {
-      Title = "FotoFix",
+      Title = "osFotoFix",
       IconName = "ImageBorder",
     });
     NavigationList.Add( new NavigationItemVM() {

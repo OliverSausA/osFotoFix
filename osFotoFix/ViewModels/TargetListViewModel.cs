@@ -3,7 +3,6 @@ using System.Data;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-/// using DynamicData.Alias;
 using System.Collections.ObjectModel;
 
 namespace osFotoFix.ViewModels;
@@ -16,33 +15,49 @@ public class TargetListViewModel : ViewModelBase
   private UserSettingsService settings;
   public TargetListViewModel( UserSettingsService settings )
   {
+    MainMenuItems.Add(new MainMenuItemVM() { 
+      Title = "Save", 
+      IconName = "Save",
+      Command = new RelayCommand( OnSaveCmd ) 
+    } );
+
+    MainMenuItems.Add(new MainMenuItemVM() { 
+      Title = "Add", 
+      IconName = "AddSquare",
+      Command = new RelayCommand( () => { 
+        AddTarget( new Target()  ); 
+      } )
+    } );
+
     this.settings = settings;
     Targets = new ObservableCollection<TargetVM>();
     foreach(var item in settings.GetUserSettings.Targets)
-      Targets.Add(new TargetVM(item));
-
-    AddCmd = new RelayCommand(() => {
-      Targets.Add(new TargetVM(new Target()));
-    });
-    DelCmd = new RelayCommand(() => {
-      if (SelectedTarget != null )
-        Targets.Remove(SelectedTarget);
-      SelectedTarget = null;
-
-    });
-    SaveCmd = new RelayCommand(() => {
-      settings.GetUserSettings.Targets = new List<Target>();
-      foreach( var item in Targets)
-        settings.GetUserSettings.Targets.Add(item.Target);
-      settings.SaveUserSettings();
-    });
+      AddTarget(item);
   }
 
   public ObservableCollection<TargetVM> Targets { get; set; }
 
   public TargetVM? SelectedTarget { get; set; }
 
-  public ICommand AddCmd { get; set; }
-  public ICommand DelCmd { get; set; }
-  public ICommand SaveCmd { get; set; }
+  private void AddTarget( Target target )
+  {
+    var targetVM = new TargetVM(target);
+    Targets.Add(targetVM);
+    targetVM.RemoveThisItemEvent += (target) => {
+      System.Diagnostics.Debug.WriteLine("Remove TargetVM from TargetListViewModel");
+      if( SelectedTarget == target )
+        SelectedTarget = null;    
+
+      if (target != null)
+        Targets.Remove(target);
+    };
+  }
+
+  private void OnSaveCmd()
+  {
+    settings.GetUserSettings.Targets = new List<Target>();
+    foreach (var item in Targets)
+      settings.GetUserSettings.Targets.Add(item.Target);
+    settings.SaveUserSettings();
+  }
 }

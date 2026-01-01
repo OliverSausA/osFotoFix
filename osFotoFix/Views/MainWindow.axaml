@@ -20,7 +20,7 @@
     </Design.DataContext>
     <Grid 
     ColumnDefinitions="Auto,*"
-    RowDefinitions="30,*"
+    RowDefinitions="Auto,*"
     >
         <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <!-- Navigation -->
@@ -51,28 +51,28 @@
 
         <!-- MenuItems -->
         <ItemsControl Grid.Column="1"
-                    ItemsSource="{Binding MainViewModel.MainMenuItems}">
+            ItemsSource="{Binding MainViewModel.MainMenuItems}">
+            <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                </StackPanel>
+            </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
             <DataTemplate>
-            <Border 
-                CornerRadius="5"
-                Background="yellow"
-                BorderBrush="Gray">
-                <Button
-                Command="{Binding Command}" >
-                <StackPanel 
-                    Orientation="Vertical"
-                    Width="100" Height="30">
-                    <ic:FluentIcon Icon="{Binding IconName}" IconSize="16" />
-                    <TextBlock 
-                    Padding="5,0,0,0"
-                    VerticalAlignment="Center"
-                    Text="{Binding Title}" />
-                </StackPanel>
-                </Button>
-            </Border>
+                <Border 
+                    CornerRadius="2"
+                    Background="yellow"
+                    BorderBrush="Gray">
+                    <Button
+                    Width="40"
+                    Command="{Binding Command}"
+                    ToolTip.Tip="{Binding Title}">
+                        <ic:FluentIcon Icon="{Binding IconName}" IconSize="32" />
+                    </Button>
+                </Border>
             </DataTemplate>
-        </ItemsControl.ItemTemplate>
+            </ItemsControl.ItemTemplate>
         </ItemsControl>
 
         <ContentControl 
