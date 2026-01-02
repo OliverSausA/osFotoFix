@@ -3,22 +3,153 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:views="clr-namespace:osFotoFix.Views;assembly=osFotoFix"
-             xmlns:viewmodels="clr-namespace:osFotoFix.ViewModels;assembly=osFotoFix"
+             xmlns:vm="clr-namespace:osFotoFix.ViewModels;assembly=osFotoFix"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="osFotoFix.Views.MainFotoView"
-             x:DataType="viewmodels:MainFotoViewModel"
+             x:DataType="vm:MainFotoViewModel"
              x:CompileBindings="True"
              >
+  <Design.DataContext>
+    <vm:DesignMainFotoViewModel/>
+  </Design.DataContext>
   <Grid
-    ColumnDefinitions="*,Auto,*">
-    <Grid
-      RowDefinitions="*,Auto,*"
-      >
+    RowDefinitions="Auto"
+    ColumnDefinitions="Auto">
+      <!--
       <views:FotoInfoListView
         Margin="0,5,5,0"
         Grid.Row="0"
         DataContext="{Binding FotoInfoListVM}"
         />
+      -->
+      <Label Content="{Binding FotoSelected.Foto.File.Name}" />
+      <ListBox
+          Grid.Row="1" Grid.Column="0"
+          ScrollViewer.VerticalScrollBarVisibility="Auto"
+          ItemsSource="{Binding FotoInfoList}">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <Border 
+                Background="Gainsboro"
+                BorderBrush="Gray" 
+                BorderThickness="2"
+                BoxShadow="5 5 10 0 DarkGray"
+                CornerRadius="3"
+                Padding="5"
+                Margin="0,0,0,-5"
+                >
+                <views:FotoInfoView />
+              </Border>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+      </ListBox>
+      <!--
+      <DataGrid
+        Name="FotoList"
+        Grid.Row="1"
+        Grid.Column="0"
+        AutoGenerateColumns="False"
+        ItemsSource="{Binding FotoInfoList}"
+        SelectedItem="{Binding FotoSelected, Mode=TwoWay}"
+        >
+        <DataGrid.Columns>
+        <DataGridTextColumn
+          Header="{StaticResource TabColDirectorie}"
+          Binding="{Binding File.DirectoryName}"
+        />
+          Header="{StaticResource TabColOrgName}"
+        <DataGridTextColumn
+          Header="Name"
+          Binding="{Binding File.Name}"
+        />
+        <DataGridTextColumn
+          Header="{StaticResource TabColTitle}"
+          Binding="{Binding Title}"
+        />
+        <DataGridTextColumn
+          Header="{StaticResource TabColDescription}"
+          Binding="{Binding Description}"
+        />
+        <DataGridTemplateColumn
+          Header="Action">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel>
+                <Panel
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  IsVisible="{Binding Action, Converter={StaticResource EActionCompare}, ConverterParameter=copy}"
+                  >
+                  <Image Classes="cmd"
+                    Width="16" Height="16"
+                    Stretch="Fill">
+                    <DrawingImage Drawing="{StaticResource FluentIcons.sticker_add_regular}" />
+                  </Image>
+                </Panel>
+                <Panel
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  IsVisible="{Binding Action, Converter={StaticResource EActionCompare}, ConverterParameter=move}"
+                  >
+                  <Image Classes="cmd"
+                    Width="16" Height="16"
+                    Stretch="Fill"
+                    >
+                    <DrawingImage Drawing="{StaticResource FluentIcons.sticker_regular}" />
+                  </Image>
+                </Panel>
+                <Panel
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  IsVisible="{Binding Action, Converter={StaticResource EActionCompare}, ConverterParameter=delete}"
+                  >
+                  <Image Classes="cmd"
+                    Width="16" Height="16"
+                    Stretch="Fill"
+                    >
+                    <DrawingImage Drawing="{StaticResource FluentIcons.delete_off_regular}" />
+                  </Image>
+                </Panel>
+                <Panel
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  IsVisible="{Binding Action, Converter={StaticResource EActionCompare}, ConverterParameter=trash}"
+                  >
+                  <Image Classes="cmd"
+                    Width="16" Height="16"
+                    Stretch="Fill"
+                    >
+                    <DrawingImage Drawing="{StaticResource FluentIcons.delete_regular}" />
+                  </Image>
+                </Panel>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTextColumn
+          Header="{StaticResource TabColExif}"
+          Binding="{Binding TypeOfCreationDate}"
+          />
+        <DataGridTextColumn
+          Header="{StaticResource TabColDouble}"
+          Binding="{Binding FileExistsOnTarget}"
+          />
+        <DataGridTextColumn
+          Header="{StaticResource TabColCreationDate}"
+          Binding="{Binding Created}"
+          />
+        <DataGridTextColumn
+          Header="{StaticResource TabColComment}"
+          Binding="{Binding Comment}"
+          />
+        <DataGridTextColumn
+          Header="{StaticResource TabColFile}"
+          Binding="{Binding NewFileName}"
+        />
+        </DataGrid.Columns>
+      </DataGrid>
+      -->
+      <!--
       <GridSplitter 
         Grid.Row="1"
         VerticalAlignment="Center"
@@ -31,7 +162,8 @@
         Grid.Row="2"
         DataContext="{Binding ImageVM}"
         />
-    </Grid>
+      -->
+    <!--
     <GridSplitter 
       Grid.Column="1"
       VerticalAlignment="Stretch"
@@ -45,5 +177,6 @@
       DockPanel.Dock="Right"
       DataContext="{Binding FotoPreviewListVM}"
       />
+    -->
   </Grid>
 </UserControl>

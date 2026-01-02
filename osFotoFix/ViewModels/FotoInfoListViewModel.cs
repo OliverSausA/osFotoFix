@@ -22,15 +22,15 @@ namespace osFotoFix.ViewModels
     private FotoPreviewViewModel FotoPreviewVM;
     private FotoInfoDetailViewModel FotoInfoDetailVM;
     private ImageViewModel ImageVM;
-    private List<FotoInfoVM> AllFotoInfos;
+    private List<FotoInfoViewModel> AllFotoInfos;
     public FotoInfoListViewModel( 
               SettingsViewModel UserSettingsVM,
               ImageViewModel ImageVM, 
               FotoPreviewViewModel FotoPreviewVM,
               FotoInfoDetailViewModel FotoInfoDetailVM )
     {
-      AllFotoInfos = new List<FotoInfoVM>();
-      FotoInfoList = new ObservableCollection<FotoInfoVM>();
+      AllFotoInfos = new List<FotoInfoViewModel>();
+      FotoInfoList = new ObservableCollection<FotoInfoViewModel>();
       this.UserSettingsVM = UserSettingsVM;
 
       service = new FotoInfoService();
@@ -65,10 +65,10 @@ namespace osFotoFix.ViewModels
     }
     
     public SettingsViewModel UserSettingsVM { get;set; }
-    public ObservableCollection<FotoInfoVM> FotoInfoList { get; set; }
+    public ObservableCollection<FotoInfoViewModel> FotoInfoList { get; set; }
 
-    private FotoInfoVM? fotoSelected;
-    public FotoInfoVM? FotoSelected { 
+    private FotoInfoViewModel? fotoSelected;
+    public FotoInfoViewModel? FotoSelected { 
       get { return fotoSelected; } 
       set { 
         SetProperty( ref fotoSelected, value );
@@ -123,7 +123,7 @@ namespace osFotoFix.ViewModels
     {
       Dispatcher.UIThread.InvokeAsync( () => {
         if (args.FotoInfo == null) return;
-        var fotoInfo = new FotoInfoVM( args.FotoInfo );
+        var fotoInfo = new FotoInfoViewModel( args.FotoInfo );
         AllFotoInfos.Add( fotoInfo );
         if( FilterMatch( fotoInfo ) )
         {
@@ -134,7 +134,7 @@ namespace osFotoFix.ViewModels
         }
       });
     }
-    private bool FilterMatch( FotoInfoVM fotoInfo ) 
+    private bool FilterMatch( FotoInfoViewModel fotoInfo ) 
     {
       bool bMatch = true;
 
@@ -326,7 +326,7 @@ namespace osFotoFix.ViewModels
       UndoFoto( fotoSelected );
       SelectNextFoto();
     }
-    protected void UndoFoto( FotoInfoVM foto )
+    protected void UndoFoto( FotoInfoViewModel foto )
     {
       if( foto == null ) return;
       if( foto.Action == EAction.done ) return;
@@ -345,7 +345,7 @@ namespace osFotoFix.ViewModels
       DelFoto( fotoSelected );
       SelectNextFoto();
     }
-    protected void DelFoto( FotoInfoVM foto )
+    protected void DelFoto( FotoInfoViewModel foto )
     {
       if( foto == null ) return;
       if( foto.Action == EAction.done ) return;
@@ -359,7 +359,7 @@ namespace osFotoFix.ViewModels
       CopyFoto( fotoSelected );
       SelectNextFoto();
     }
-    protected void CopyFoto( FotoInfoVM foto )
+    protected void CopyFoto( FotoInfoViewModel foto )
     {
       if( foto == null ) return;
       if( foto.Action == EAction.done ) return;
@@ -377,7 +377,7 @@ namespace osFotoFix.ViewModels
       MoveFoto( fotoSelected );
       SelectNextFoto();
     }
-    protected void MoveFoto( FotoInfoVM foto )
+    protected void MoveFoto( FotoInfoViewModel foto )
     {
       if( foto == null ) return;
       if( foto.Action == EAction.done ) return;
@@ -395,7 +395,7 @@ namespace osFotoFix.ViewModels
       TrashFoto( fotoSelected );
       SelectNextFoto();
     }
-    protected void TrashFoto( FotoInfoVM foto )
+    protected void TrashFoto( FotoInfoViewModel foto )
     {
       if( foto == null ) return;
       if( foto.Action == EAction.done ) return;
@@ -408,7 +408,7 @@ namespace osFotoFix.ViewModels
     }
 
     /*****
-    protected void DoIt( FotoInfoVM foto )
+    protected void DoIt( FotoInfoViewModel foto )
     {
       try
       {

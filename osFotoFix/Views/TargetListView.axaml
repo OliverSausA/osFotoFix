@@ -19,10 +19,15 @@
       <ListBox.ItemTemplate>
         <DataTemplate x:DataType="vm:TargetVM">
           <Border 
+            Background="Gainsboro"
             BorderBrush="Gray" 
-            BorderThickness="0">
-            <views:TargetView  
-              Margin="0,0,30,0" />
+            BorderThickness="2"
+            BoxShadow="5 5 10 0 DarkGray"
+            CornerRadius="3"
+            Padding="5"
+            Margin="0,0,0,-5"
+            >
+            <views:TargetView />
           </Border>
         </DataTemplate>
       </ListBox.ItemTemplate>

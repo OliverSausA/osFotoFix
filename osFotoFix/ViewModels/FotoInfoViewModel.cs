@@ -8,9 +8,9 @@ namespace osFotoFix.ViewModels
 {
   using Models;
 
-  public class FotoInfoVM : ViewModelBase
+  public class FotoInfoViewModel : ViewModelBase
   {
-    public FotoInfoVM( FotoInfo foto )
+    public FotoInfoViewModel( FotoInfo foto )
     {
       Foto = foto;
     }

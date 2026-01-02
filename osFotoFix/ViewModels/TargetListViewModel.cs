@@ -12,8 +12,7 @@ using osFotoFix.Services;
 
 public class TargetListViewModel : ViewModelBase
 {
-  private UserSettingsService settings;
-  public TargetListViewModel( UserSettingsService settings )
+  public TargetListViewModel()
   {
     MainMenuItems.Add(new MainMenuItemVM() { 
       Title = "Save", 
@@ -29,8 +28,8 @@ public class TargetListViewModel : ViewModelBase
       } )
     } );
 
-    this.settings = settings;
     Targets = new ObservableCollection<TargetVM>();
+    var settings = UserSettingsService.GetInstance;
     foreach(var item in settings.GetUserSettings.Targets)
       AddTarget(item);
   }
@@ -55,6 +54,7 @@ public class TargetListViewModel : ViewModelBase
 
   private void OnSaveCmd()
   {
+    var settings = UserSettingsService.GetInstance;
     settings.GetUserSettings.Targets = new List<Target>();
     foreach (var item in Targets)
       settings.GetUserSettings.Targets.Add(item.Target);

@@ -10,6 +10,6 @@ namespace osFotoFix.ViewModels
   public partial class FotoPreviewViewModel : ViewModelBase
   {
     [ObservableProperty]
-    private ObservableCollection<FotoInfoVM> fotoList = new();
+    private ObservableCollection<FotoInfoViewModel> fotoList = new();
   }
 }

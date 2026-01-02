@@ -25,7 +25,7 @@ namespace osFotoFix.ViewModels
     public SettingsViewModel UserSettingsVM { get;set; }
 
     [ObservableProperty]
-    private FotoInfoVM? foto;
+    private FotoInfoViewModel? foto;
 
     public ICommand UndoImageCmd { get; }
     public void OnUndoImage() {

@@ -52,7 +52,7 @@ namespace osFotoFix.ViewModels
         Title = "Settings",
         IconName = "Settings",
         Command = new RelayCommand(() => {
-          MainViewModel = App.Current?.Services.GetRequiredService<TargetListViewModel>() as ViewModelBase; 
+          MainViewModel = App.Current?.Services.GetRequiredService<SettingsViewModel>() as ViewModelBase; 
         }),
       });
       NavigationList?.FirstOrDefault()?.Command?.Execute(null);

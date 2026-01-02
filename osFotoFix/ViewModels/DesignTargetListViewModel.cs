@@ -19,7 +19,7 @@ public class DesignUserSettingsService : UserSettingsService
 }
 public class DesignTargetListViewModel : TargetListViewModel
 {
-  public DesignTargetListViewModel() : base(new DesignUserSettingsService() )
+  public DesignTargetListViewModel() // : base(new DesignUserSettingsService() )
   {
     Targets.Add(
       new TargetVM(new Target() { Title = "Target Title 2", Path = "target/path", Enabled = true, Action = EAction.copy }));
