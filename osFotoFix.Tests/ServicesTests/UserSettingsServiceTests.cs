@@ -7,7 +7,7 @@ namespace osFotoFix.Tests.ServicesTests
     [Fact]
     public void GetServiceInstance()
     {
-      var service = UserSettingsService.GetInstance;
+      ///// var service = UserSettingsService.GetInstance;
       
     }
   }

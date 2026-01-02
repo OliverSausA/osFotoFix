@@ -35,7 +35,7 @@ public sealed partial class App : Application
 
   public override void OnFrameworkInitializationCompleted()
   {
-    var settings = UserSettingsService.GetInstance.GetUserSettings;
+    var settings = App.Current.Services.GetService<UserSettingsService>()!.GetUserSettings;
     SelectLanguage(settings.CultureId);
 
     if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
@@ -115,11 +115,14 @@ public sealed partial class App : Application
     var services = new ServiceCollection();
 
     // Services
-    ///// services.AddSingleton<UserSettingsService>();
+    services.AddSingleton<ExifService>();
+    services.AddSingleton<FotoInfoService>();
+    services.AddSingleton<UserSettingsService>();
 
     // ViewModels
     services.AddTransient<MainFotoViewModel>();
     services.AddTransient<TargetListViewModel>();
+    services.AddTransient<SettingsViewModel>();
 
     return services.BuildServiceProvider();
   }

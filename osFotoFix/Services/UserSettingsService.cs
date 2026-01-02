@@ -11,11 +11,12 @@ namespace osFotoFix.Services
     public UserSettingsService() {
       ReadUserSettings();
     }
-    private static UserSettingsService? instance = null;
+    ///// private static UserSettingsService? instance = null;
     private const string CONF = "osFotoFix.config";
     protected UserSettings userSettings = new();
 
 
+    /*****
     public static UserSettingsService GetInstance {
       get { 
         if (instance == null )
@@ -23,6 +24,7 @@ namespace osFotoFix.Services
         return instance;
       }
     }
+    *****/
     public UserSettings GetUserSettings {
       get { return userSettings; }
     }

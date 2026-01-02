@@ -31,10 +31,9 @@ public partial class MainFotoViewModel : ViewModelBase
     fotoInfoService.FotoFixedEvent += OnFotoFixed;
 
     FotoInfoService.GetDateTimeFromStringTests();
-    // var settingsService = App.Current.Services.GetRequiredService<UserSettingsService>();
+    var settingsService = App.Current.Services.GetRequiredService<UserSettingsService>();
     // SettingsVM = new SettingsViewModel(settingsService);
 
-    var settingsService = UserSettingsService.GetInstance;
     OnNewSourceSelected( settingsService.GetUserSettings.Quelle);
     /*
     FileInfo fileInfo = new FileInfo("Test.jpg");

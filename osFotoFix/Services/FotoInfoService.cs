@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace osFotoFix.Services
 {
+  using Microsoft.Extensions.DependencyInjection;
   using Models;
 
   public class FotoInfoEventArgs : EventArgs
@@ -183,10 +184,11 @@ namespace osFotoFix.Services
     private bool IsFileExistsOnTarget( FotoInfo foto )
     {
       bool ret = false;
+      var settings = App.Current.Services.GetRequiredService<UserSettingsService>();
       try
       {
         string path = Path.Combine(
-                UserSettingsService.GetInstance.GetUserSettings.Ziel,
+                settings.GetUserSettings.Ziel,
                 foto.Created.ToString("yyyy"));
         if( !Directory.Exists( path ) )
           return false;

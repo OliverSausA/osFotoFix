@@ -260,7 +260,7 @@ namespace osFotoFix.ViewModels
 
     private void Read()
     {
-      var settings = UserSettingsService.GetInstance.GetUserSettings;
+      var settings = settingsService.GetUserSettings;
       Source = settings.Quelle;
       Target = settings.Ziel;
       Trash  = settings.Papierkorb;
@@ -279,7 +279,7 @@ namespace osFotoFix.ViewModels
     }
     private void Write()
     {
-      var settings = UserSettingsService.GetInstance.GetUserSettings;
+      var settings = settingsService.GetUserSettings;
       settings.Quelle = Source;
       settings.Ziel = Target;
       settings.Papierkorb = Trash;
@@ -296,7 +296,7 @@ namespace osFotoFix.ViewModels
       settings.Title = Title;
       settings.Description = Description;
 
-      UserSettingsService.GetInstance.SaveUserSettings();
+      settingsService.SaveUserSettings();
     }
 
 		public static string VersionInfo
