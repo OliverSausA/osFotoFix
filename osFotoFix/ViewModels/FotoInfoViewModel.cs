@@ -13,6 +13,7 @@ namespace osFotoFix.ViewModels
     public FotoInfoViewModel( FotoInfo foto )
     {
       Foto = foto;
+      CreateNewFileName();
     }
 
     public FotoInfo Foto {get;set;}
@@ -22,6 +23,7 @@ namespace osFotoFix.ViewModels
     public string Comment {
       get { return Foto.Comment; }
       set { Foto.Comment = value;
+            CreateNewFileName();
             OnPropertyChanged(); }
     }
 
@@ -40,6 +42,7 @@ namespace osFotoFix.ViewModels
     public string Description {
       get { return Foto.Description; }
       set { Foto.Description = value;
+            CreateNewFileName();
             OnPropertyChanged(); }
     }
 
@@ -59,6 +62,15 @@ namespace osFotoFix.ViewModels
       get { return Foto.Action; }
       set { Foto.Action = value;
             OnPropertyChanged(); }
+    }
+
+    private void CreateNewFileName()
+    {
+      NewFileName = string.Format("{0}_{1}_{2}{3}",
+        Foto.Created.ToString("yyyyMMdd_HHmmss"),
+        Foto.Comment,
+        Foto.Description,
+        Foto.File.Extension );
     }
 
     private Bitmap? thumpnail;

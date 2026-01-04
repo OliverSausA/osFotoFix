@@ -13,19 +13,12 @@
     <vm:DesignMainFotoViewModel/>
   </Design.DataContext>
   <Grid
-    RowDefinitions="Auto"
-    ColumnDefinitions="Auto">
-      <!--
-      <views:FotoInfoListView
-        Margin="0,5,5,0"
-        Grid.Row="0"
-        DataContext="{Binding FotoInfoListVM}"
-        />
-      -->
-      <Label Content="{Binding FotoSelected.Foto.File.Name}" />
+    RowDefinitions="Auto,*"
+    ColumnDefinitions="*">
+      <TextBox Text="{Binding SourcePath}" />
       <ListBox
           Grid.Row="1" Grid.Column="0"
-          ScrollViewer.VerticalScrollBarVisibility="Auto"
+          ScrollViewer.VerticalScrollBarVisibility="Visible"
           ItemsSource="{Binding FotoInfoList}">
           <ListBox.ItemTemplate>
             <DataTemplate>

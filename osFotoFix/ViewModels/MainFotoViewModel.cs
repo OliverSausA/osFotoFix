@@ -34,7 +34,7 @@ public partial class MainFotoViewModel : ViewModelBase
     var settingsService = App.Current.Services.GetRequiredService<UserSettingsService>();
     // SettingsVM = new SettingsViewModel(settingsService);
 
-    OnNewSourceSelected( settingsService.GetUserSettings.Quelle);
+    SourcePath = settingsService.GetUserSettings.Quelle;
     /*
     FileInfo fileInfo = new FileInfo("Test.jpg");
     var fotoInfo = new FotoInfo(fileInfo, DateTime.Now, ETypeOfCreationDate.Filesystem);
@@ -54,6 +54,17 @@ public partial class MainFotoViewModel : ViewModelBase
   }
 
   private FotoInfoService fotoInfoService;
+
+  [ObservableProperty]
+  private string sourcePath = string.Empty;
+
+  partial void OnSourcePathChanged( string value )
+  {
+    FotoInfoList.Clear();
+    FotoSelected = null;
+    // UserSettingsVM.ResetFilterStatistik();
+    Task.Run( () => ReadFotoInfos( value ) );
+  }
 
   [ObservableProperty]
   private ObservableCollection<FotoInfoViewModel> fotoInfoList = new();
@@ -87,14 +98,6 @@ public partial class MainFotoViewModel : ViewModelBase
 
     RunningReadFoto = false;
     CancelReadFotoInfos = null;
-  }
-
-  private void OnNewSourceSelected( string source ) 
-  {
-    FotoInfoList.Clear();
-    FotoSelected = null;
-    // UserSettingsVM.ResetFilterStatistik();
-    Task.Run( () => ReadFotoInfos( source ) );
   }
 
   private void OnFotoInfoRead( object? sender, FotoInfoEventArgs args )

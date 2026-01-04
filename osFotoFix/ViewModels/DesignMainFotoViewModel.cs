@@ -8,6 +8,7 @@ public class DesignMainFotoViewModel : MainFotoViewModel
 {
   public DesignMainFotoViewModel()
   {
+    SourcePath = "Source/Path/To/Fotos";
     MainMenuItems.Add(new MainMenuItemVM() { Title="Save", IconName="Save" } );
     MainMenuItems.Add(new MainMenuItemVM() { Title="Trash", IconName="Delete" } );
 

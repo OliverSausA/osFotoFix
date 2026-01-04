@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:views="clr-namespace:osFotoFix.Views;assembly=osFotoFix"
              xmlns:vm="clr-namespace:osFotoFix.ViewModels;assembly=osFotoFix"
-             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="120"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="220"
              x:CompileBindings="True"
 		         x:DataType="vm:FotoInfoViewModel"
              x:Class="osFotoFix.Views.FotoInfoView">
@@ -19,15 +19,18 @@
     <vm:DesignFotoInfoViewModel/>
   </Design.DataContext>
   <Grid 
-      RowDefinitions="Auto,Auto,Auto"
-      ColumnDefinitions="Auto,*,Auto,Auto">
-    <Image  Grid.RowSpan="3" 
-            Width="200" Source="{Binding Thumpnail}"/>
-    <TextBox Grid.Row="0" Grid.Column="1"
-        Text="{Binding Foto.File.Name}" />
-    <TextBox Grid.Row="0" Grid.Column="2"
-        Text="{Binding NewFileName}" />
-    <TextBox Grid.Row="1" Grid.Column="1"
-        Text="{Binding Title}" />
+      ColumnDefinitions="300,*,40">
+    <Image Width="300" Source="{Binding Thumpnail}"/>
+    <StackPanel Grid.Column="1"> 
+      <Label Content="{Binding Foto.File.Name}" />
+      <Label Content="{Binding Foto.Created}" />
+      <TextBox Text="{Binding Title}" Watermark="Title" />
+      <TextBox Text="{Binding Comment}" Watermark="Comment" />
+      <TextBox Text="{Binding Description}" Watermark="Description" />
+      <Label Content="{Binding NewFileName}" />
+    </StackPanel>
+    <StackPanel Grid.Column="2"> 
+      <Label Content="{Binding Index}" HorizontalAlignment="Right" />
+    </StackPanel>
   </Grid>
 </UserControl>
