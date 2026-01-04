@@ -6,9 +6,9 @@ namespace osFotoFix.ViewModels;
 
 using Models;
 
-public class TargetVM : ViewModelBase
+public class TargetViewModel : ViewModelBase
 {
-  public TargetVM(Target target)
+  public TargetViewModel(Target target)
   {
     Target = target;
     ActionList = new List<ActionItem>() {
@@ -19,7 +19,7 @@ public class TargetVM : ViewModelBase
     action = ActionList.Find(x => x.Value == target.Action);
 
     RemoveCommand = new RelayCommand( () => {
-      System.Diagnostics.Debug.WriteLine("Remove this TargetVM");
+      System.Diagnostics.Debug.WriteLine("Remove this TargetViewModel");
       if( RemoveThisItemEvent != null )
         RemoveThisItemEvent(this);
     });
@@ -43,7 +43,7 @@ public class TargetVM : ViewModelBase
     }
   }
   public RelayCommand RemoveCommand { get; }
-  public delegate void RemoveThisItem(TargetVM target);
+  public delegate void RemoveThisItem(TargetViewModel target);
   public RemoveThisItem? RemoveThisItemEvent;
 }
 

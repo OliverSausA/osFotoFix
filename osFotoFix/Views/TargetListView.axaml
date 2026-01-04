@@ -17,7 +17,7 @@
       SelectedItem="{Binding SelectedTarget}"
       >
       <ListBox.ItemTemplate>
-        <DataTemplate x:DataType="vm:TargetVM">
+        <DataTemplate x:DataType="vm:TargetViewModel">
           <Border 
             Background="Gainsboro"
             BorderBrush="Gray" 

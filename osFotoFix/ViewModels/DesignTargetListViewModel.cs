@@ -22,8 +22,8 @@ public class DesignTargetListViewModel : TargetListViewModel
   public DesignTargetListViewModel() : base(new DesignUserSettingsService() )
   {
     Targets.Add(
-      new TargetVM(new Target() { Title = "Target Title 2", Path = "target/path", Enabled = true, Action = EAction.copy }));
+      new TargetViewModel(new Target() { Title = "Target Title 2", Path = "target/path", Enabled = true, Action = EAction.copy }));
     Targets.Add(
-      new TargetVM(new Target() { Title = "another Title 2", Path = "target/other/path", Enabled = false, Action = EAction.move }));
+      new TargetViewModel(new Target() { Title = "another Title 2", Path = "target/other/path", Enabled = false, Action = EAction.move }));
   }
 }

@@ -31,22 +31,22 @@ public class TargetListViewModel : ViewModelBase
       } )
     } );
 
-    Targets = new ObservableCollection<TargetVM>();
+    Targets = new ObservableCollection<TargetViewModel>();
     var settings = userSettingsService.GetUserSettings;
     foreach(var item in settings.Targets)
       AddTarget(item);
   }
 
-  public ObservableCollection<TargetVM> Targets { get; set; }
+  public ObservableCollection<TargetViewModel> Targets { get; set; }
 
-  public TargetVM? SelectedTarget { get; set; }
+  public TargetViewModel? SelectedTarget { get; set; }
 
   private void AddTarget( Target target )
   {
-    var targetVM = new TargetVM(target);
-    Targets.Add(targetVM);
-    targetVM.RemoveThisItemEvent += (target) => {
-      System.Diagnostics.Debug.WriteLine("Remove TargetVM from TargetListViewModel");
+    var TargetViewModel = new TargetViewModel(target);
+    Targets.Add(TargetViewModel);
+    TargetViewModel.RemoveThisItemEvent += (target) => {
+      System.Diagnostics.Debug.WriteLine("Remove TargetViewModel from TargetListViewModel");
       if( SelectedTarget == target )
         SelectedTarget = null;    
 
