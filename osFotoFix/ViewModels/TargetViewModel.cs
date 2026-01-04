@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
+using Avalonia.Media;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace osFotoFix.ViewModels;
 
-using Avalonia.Media;
 using Models;
 
-public class TargetViewModel : ViewModelBase
+public class TargetViewModel : ObservableObject
 {
   public TargetViewModel(Target target)
   {
@@ -18,6 +19,14 @@ public class TargetViewModel : ViewModelBase
       new ActionItem() { Value = EAction.delete, Title = "Delete"},
     };
     action = ActionList.Find(x => x.Value == target.Action);
+
+    SelectPathCommand = new AsyncRelayCommand( async () => {
+      var directoryPicker = new Services.DirectoryPicker();
+      string path = await directoryPicker.GetFolderName( Target.Path );
+      if( path != string.Empty ) {
+        Path = path;
+      }
+    });
 
     RemoveCommand = new RelayCommand( () => {
       System.Diagnostics.Debug.WriteLine("Remove this TargetViewModel");
@@ -35,6 +44,16 @@ public class TargetViewModel : ViewModelBase
       OnPropertyChanged();
     }
   }
+
+  public string Path
+  {
+    get { return Target.Path; }
+    set {
+      Target.Path = value;
+      OnPropertyChanged();
+    }
+  }
+
   public HsvColor IconColor
   {
     get {
@@ -59,6 +78,9 @@ public class TargetViewModel : ViewModelBase
       Target.Action = value.Value;
     }
   }
+
+  public AsyncRelayCommand SelectPathCommand { get; }
+
   public RelayCommand RemoveCommand { get; }
   public delegate void RemoveThisItem(TargetViewModel target);
   public RemoveThisItem? RemoveThisItemEvent;

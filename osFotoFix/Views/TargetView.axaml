@@ -43,7 +43,7 @@
     <TextBox 
         Grid.Row="3" Grid.Column="0"
         Watermark="Icon"
-        Text="{Binding Target.IconName}"
+        Text="{Binding IconName}"
         />
     <TextBox 
         Grid.Row="1" Grid.Column="1"
@@ -71,10 +71,11 @@
         Grid.Row="3" Grid.Column="1"
         Grid.ColumnSpan="2" 
         Watermark="Path"
-        Text="{Binding Target.Path}"
+        Text="{Binding Path}"
         />
     <Button
         Grid.Row="3" Grid.Column="4"
-        Content="..."/>
+        Content="..."
+        Command="{Binding SelectPathCommand}"/>
   </Grid>
 </UserControl>
