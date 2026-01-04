@@ -14,6 +14,7 @@
       <StyleInclude Source='/Assets/FluentUiIcons_Filled.xaml'/>
       <StyleInclude Source='/Assets/FluentUiIcons_Regular.xaml'/>
       <StyleInclude Source='/Assets/Custom.xaml'/>
+      <StyleInclude Source='avares://Avalonia.Controls.ColorPicker/Themes/Fluent/Fluent.xaml'/>
     </Application.Styles>
     <Application.Resources>
       <ResourceDictionary>

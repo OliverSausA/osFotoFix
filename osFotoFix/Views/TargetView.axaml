@@ -2,9 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ic="using:FluentIcons.Avalonia"
              xmlns:views="clr-namespace:osFotoFix.Views"
              xmlns:vm="clr-namespace:osFotoFix.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="120"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="140"
              x:CompileBindings="True"
 		         x:DataType="vm:TargetViewModel"
              x:Class="osFotoFix.Views.TargetView">
@@ -14,22 +15,36 @@
     <views:ActionColorValueConverter x:Key="ActionColor" />
     <views:ActionBitmapValueConverter x:Key="ActionImage" />
     <views:IconNameToPath x:Key="IconNameToPath" />
+    <views:HsvColorToBrushConverter x:Key="HsvToBrush"/>
   </UserControl.Resources>
   <Design.DataContext>
     <vm:DesignTargetViewModel/>
   </Design.DataContext>
   <Grid 
-      RowDefinitions="Auto,Auto,Auto"
-      ColumnDefinitions="50,*,Auto,Auto">
+      RowDefinitions="Auto,Auto,Auto,Auto"
+      ColumnDefinitions="Auto,*,Auto,Auto">
     <CheckBox 
         Grid.ColumnSpan="2"
         Content="Active"
         IsChecked="{Binding Target.Enabled}"/>
-    <Image Width="20" Grid.RowSpan="2"
-      Grid.Row="1" Grid.Column="0">
-      <DrawingImage
-        Drawing="{Binding IconName, Converter={StaticResource IconNameToPath}}" />
-    </Image>
+    <Button
+        Grid.Row="0" Grid.Column="4"
+        Content="X"
+        Command="{Binding RemoveCommand}" />
+    <ic:FluentIcon 
+        Grid.Row="1" Grid.Column="0"
+        IconSize="Size32"
+        Icon="{Binding IconName}" 
+        Background="{Binding IconColor, Converter={StaticResource HsvToBrush}}"
+        />
+    <ColorPicker
+        Grid.Row="2"
+        HsvColor="{Binding IconColor}" />
+    <TextBox 
+        Grid.Row="3" Grid.Column="0"
+        Watermark="Icon"
+        Text="{Binding Target.IconName}"
+        />
     <TextBox 
         Grid.Row="1" Grid.Column="1"
         Watermark="Title"
@@ -49,15 +64,17 @@
     <TextBox 
         Grid.Row="2" Grid.Column="1"
         Grid.ColumnSpan="2" 
+        Watermark="Description"
+        Text="{Binding Target.Description}"
+        />
+    <TextBox 
+        Grid.Row="3" Grid.Column="1"
+        Grid.ColumnSpan="2" 
         Watermark="Path"
         Text="{Binding Target.Path}"
         />
     <Button
-        Grid.Row="0" Grid.Column="4"
-        Content="X"
-        Command="{Binding RemoveCommand}" />
-    <Button
-        Grid.Row="2" Grid.Column="4"
+        Grid.Row="3" Grid.Column="4"
         Content="..."/>
   </Grid>
 </UserControl>

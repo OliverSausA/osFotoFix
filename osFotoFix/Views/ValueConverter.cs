@@ -11,6 +11,33 @@ namespace osFotoFix.Views
 {
   using Models;
 
+  public class HsvColorToBrushConverter : IValueConverter
+  {
+    public static readonly HsvColorToBrushConverter Instance = new();
+
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is HsvColor hsv)
+        {
+            return new SolidColorBrush(hsv.ToRgb());
+        }
+
+        return AvaloniaProperty.UnsetValue;
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+      /*
+        if (value is SolidColorBrush brush)
+        {
+            return HsvColor.FromRgb(brush.Color);
+        }
+
+      */
+      return AvaloniaProperty.UnsetValue;
+    }
+  }
+
   public class EFilterStatusCheckedConverter : IValueConverter
   {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture )

@@ -8,6 +8,7 @@ namespace osFotoFix.ViewModels
     public DesignTargetViewModel() : base(new Target(){
       Title = "Title of the target item",
       Path = "/home/user/pictures/somewhere",
+      IconName = "Target",
       Action = EAction.copy,
       Enabled = true,
     })

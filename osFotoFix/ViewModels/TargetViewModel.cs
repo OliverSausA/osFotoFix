@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace osFotoFix.ViewModels;
 
+using Avalonia.Media;
 using Models;
 
 public class TargetViewModel : ViewModelBase
@@ -29,7 +30,23 @@ public class TargetViewModel : ViewModelBase
   public string IconName
   {
     get { return Target.IconName; }
-    set { Target.IconName = value; }
+    set { 
+      Target.IconName = value; 
+      OnPropertyChanged();
+    }
+  }
+  public HsvColor IconColor
+  {
+    get {
+      if( Target.IconColor == string.Empty )
+        return new HsvColor(0,0,0,0);
+      return HsvColor.Parse(Target.IconColor);
+    }
+    set {
+      Target.IconColor = value.ToString();
+      OnPropertyChanged(nameof(IconName));
+      OnPropertyChanged();
+    }
   }
 
   public List<ActionItem> ActionList {get;}

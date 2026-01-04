@@ -1,5 +1,6 @@
 using System;
 using System.Xml.Serialization;
+using Avalonia.Media;
 
 namespace osFotoFix.Models;
   
@@ -18,7 +19,13 @@ public class Target
   public string Title {get; set;} = string.Empty;
 
   [XmlAttribute]
+  public string Description {get; set;} = string.Empty;
+
+  [XmlAttribute]
   public string IconName {get; set;} = string.Empty;
+
+  [XmlAttribute]
+  public string IconColor {get; set;} = string.Empty;
 
   [XmlAttribute]
   public string Path {get; set;} = string.Empty;
