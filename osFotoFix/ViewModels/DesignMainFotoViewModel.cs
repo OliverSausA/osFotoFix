@@ -3,10 +3,11 @@ using System.IO;
 namespace osFotoFix.ViewModels;
 
 using osFotoFix.Models;
+using osFotoFix.Services;
 
 public class DesignMainFotoViewModel : MainFotoViewModel
 {
-  public DesignMainFotoViewModel()
+  public DesignMainFotoViewModel() : base( new FotoInfoService() )
   {
     SourcePath = "Source/Path/To/Fotos";
     MainMenuItems.Add(new MainMenuItemVM() { Title="Save", IconName="Save" } );

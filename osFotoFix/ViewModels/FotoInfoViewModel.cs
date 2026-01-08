@@ -36,6 +36,7 @@ namespace osFotoFix.ViewModels
     public string Title {
       get { return Foto.Title; }
       set { Foto.Title = value;
+            CreateNewFileName();
             OnPropertyChanged(); }
     }
 
@@ -66,11 +67,23 @@ namespace osFotoFix.ViewModels
 
     private void CreateNewFileName()
     {
-      NewFileName = string.Format("{0}_{1}_{2}{3}",
-        Foto.Created.ToString("yyyyMMdd_HHmmss"),
-        Foto.Comment,
-        Foto.Description,
-        Foto.File.Extension );
+      string subpath = string.Format("{0}",
+        Foto.Created.ToString("yyyy_MM"));
+      if (!string.IsNullOrEmpty(Foto.Title))
+        subpath += "-" + Foto.Title;
+
+      string filename = string.Format("{0}",
+        Foto.Created.ToString("yyyyMMdd_HHmmss"));
+      if (!string.IsNullOrEmpty(Foto.Description))
+        filename += "_" + Foto.Description;
+      if (!string.IsNullOrEmpty(Foto.Comment))
+        filename += "_" + Foto.Comment;
+      filename += Foto.File.Extension;
+
+      NewFileName = Path.Combine( 
+        Foto.Created.ToString("yyyy"), 
+        subpath,
+        filename );
     }
 
     private Bitmap? thumpnail;

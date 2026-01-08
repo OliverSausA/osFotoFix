@@ -14,19 +14,19 @@ using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Extensions.DependencyInjection;
 
+namespace osFotoFix.ViewModels;
+
 using osFotoFix.Models;
 using osFotoFix.Services;
-
-namespace osFotoFix.ViewModels;
 
 /// <summary>
 /// TODO: Hier wird die FotoInfoList und das FotoSelected verwaltet. Damit ist dieses ViewModel der Zentrale Kern.
 /// </summary>
 public partial class MainFotoViewModel : ViewModelBase
 {
-  public MainFotoViewModel()
+  public MainFotoViewModel( FotoInfoService fotoInfoService )
   {
-    fotoInfoService = new FotoInfoService();
+    this.fotoInfoService = fotoInfoService;
     fotoInfoService.FotoInfoReadEvent += OnFotoInfoRead;
     fotoInfoService.FotoFixedEvent += OnFotoFixed;
 
