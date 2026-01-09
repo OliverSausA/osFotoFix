@@ -16,6 +16,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace osFotoFix.ViewModels;
 
+using Avalonia.Media;
+using CommunityToolkit.Mvvm.Input;
 using osFotoFix.Models;
 using osFotoFix.Services;
 
@@ -32,9 +34,10 @@ public partial class MainFotoViewModel : ViewModelBase
 
     FotoInfoService.GetDateTimeFromStringTests();
     var settingsService = App.Current.Services.GetRequiredService<UserSettingsService>();
-    // SettingsVM = new SettingsViewModel(settingsService);
-
     SourcePath = settingsService.GetUserSettings.Quelle;
+
+    CreateMenuItems();
+
     /*
     FileInfo fileInfo = new FileInfo("Test.jpg");
     var fotoInfo = new FotoInfo(fileInfo, DateTime.Now, ETypeOfCreationDate.Filesystem);
@@ -53,6 +56,27 @@ public partial class MainFotoViewModel : ViewModelBase
     if (alt != null) alt.Exit += OnExit;
   }
 
+  protected virtual void CreateMenuItems()
+  {
+    var settingsService = App.Current.Services.GetRequiredService<UserSettingsService>();
+    foreach( var target in settingsService.GetUserSettings.Targets)
+    {
+      MainMenuItems.Add( new MainMenuItemVM()
+      {
+        Title = target.Title,
+        IconName = target.IconName,
+        IconColor = target.IconColor,
+        Command = new RelayCommand( () =>
+        {
+          if( FotoSelected != null )
+          {
+            OnTargetCommand( FotoSelected, target );
+          }
+        } )
+      } );
+    }
+  }
+
   private FotoInfoService fotoInfoService;
 
   [ObservableProperty]
@@ -64,6 +88,18 @@ public partial class MainFotoViewModel : ViewModelBase
     FotoSelected = null;
     // UserSettingsVM.ResetFilterStatistik();
     Task.Run( () => ReadFotoInfos( value ) );
+  }
+
+  private void OnTargetCommand( FotoInfoViewModel foto, Target target )
+  {
+    if( foto != null && target != null ) {
+      foto.Title = target.Title;
+      foto.Description = target.Description;
+      foto.Target = target.Path;
+      foto.Action = target.Action;
+      foto.IconName = target.IconName;
+      foto.IconColor = target.IconColor;
+    }
   }
 
   [ObservableProperty]

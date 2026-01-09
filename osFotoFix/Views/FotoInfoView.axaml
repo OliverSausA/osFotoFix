@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ic="using:FluentIcons.Avalonia"
              xmlns:views="clr-namespace:osFotoFix.Views;assembly=osFotoFix"
              xmlns:vm="clr-namespace:osFotoFix.ViewModels;assembly=osFotoFix"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="220"
@@ -31,6 +32,12 @@
     </StackPanel>
     <StackPanel Grid.Column="2"> 
       <Label Content="{Binding Index}" HorizontalAlignment="Right" />
+      <ic:FluentIcon 
+          Grid.Row="1" Grid.Column="0"
+          IconSize="Size32"
+          Icon="{Binding IconName}" 
+          Background="{Binding IconColor}"
+          />
     </StackPanel>
   </Grid>
 </UserControl>

@@ -54,17 +54,28 @@ public class TargetViewModel : ObservableObject
     }
   }
 
-  public HsvColor IconColor
+  public string IconColor
   {
-    get {
-      if( Target.IconColor == string.Empty )
-        return new HsvColor(0,0,0,0);
-      return HsvColor.Parse(Target.IconColor);
-    }
+    get { return Target.IconColor; }
     set {
-      Target.IconColor = value.ToString();
+      Target.IconColor = value;
       OnPropertyChanged(nameof(IconName));
       OnPropertyChanged();
+    }
+  }
+
+  public HsvColor HsvColor
+  {
+    get {
+      if (string.IsNullOrEmpty( Target.IconColor ))
+        return new HsvColor();
+      var color = Color.Parse( Target.IconColor );
+      return color.ToHsv();
+    }
+    set {
+      var color = value.ToRgb();
+      Target.IconColor = color.ToString();
+      OnPropertyChanged(nameof(IconColor));
     }
   }
 

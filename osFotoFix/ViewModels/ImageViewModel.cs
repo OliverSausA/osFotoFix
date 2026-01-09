@@ -1,10 +1,10 @@
 using System;
+using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace osFotoFix.ViewModels
 {
-  using System.Windows.Input;
-  using CommunityToolkit.Mvvm.ComponentModel;
   using Models;
   public partial class ImageViewModel : ViewModelBase
   {

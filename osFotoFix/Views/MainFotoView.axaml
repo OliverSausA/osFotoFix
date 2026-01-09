@@ -19,6 +19,7 @@
       <ListBox
           Grid.Row="1" Grid.Column="0"
           ScrollViewer.VerticalScrollBarVisibility="Visible"
+          SelectedItem="{Binding FotoSelected, Mode=TwoWay}"
           ItemsSource="{Binding FotoInfoList}">
           <ListBox.ItemTemplate>
             <DataTemplate>

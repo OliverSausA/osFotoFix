@@ -13,6 +13,13 @@
     <Window.Resources>
         <views:IconNameToPath x:Key="IconNameToPath" />
     </Window.Resources>
+    <!--
+    <Window.Styles>
+        <Style Selector="Button">
+            <Setter Property="Foreground" Value="Red"/>
+        </Style>
+    </Window.Styles>
+    -->
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
@@ -30,8 +37,8 @@
             <DataTemplate>
             <Border 
                 CornerRadius="5"
-                Background="yellow"
-                BorderBrush="Gray">
+                Background="Transparent"
+                BorderBrush="yellow">
                 <Button
                 Command="{Binding Command}" >
                 <StackPanel 
@@ -53,19 +60,20 @@
         <ItemsControl Grid.Column="1"
             ItemsSource="{Binding MainViewModel.MainMenuItems}">
             <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                </StackPanel>
-            </ItemsPanelTemplate>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    </StackPanel>
+                </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
             <DataTemplate>
                 <Border 
                     CornerRadius="2"
-                    Background="yellow"
-                    BorderBrush="Gray">
+                    Background="{Binding IconColor}"
+                    BorderBrush="{Binding IconColor}">
                     <Button
                     Width="40"
+                    Background="Transparent"
                     Command="{Binding Command}"
                     ToolTip.Tip="{Binding Title}">
                         <ic:FluentIcon Icon="{Binding IconName}" IconSize="32" />

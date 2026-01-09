@@ -9,6 +9,7 @@ using Avalonia.Media.Imaging;
 
 namespace osFotoFix.Views
 {
+  using Avalonia.Controls.Converters;
   using Models;
 
   public class HsvColorToBrushConverter : IValueConverter

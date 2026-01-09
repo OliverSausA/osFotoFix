@@ -1,5 +1,6 @@
 using System.Windows.Input;
 using Avalonia.Controls;
+using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace osFotoFix.ViewModels;
@@ -11,6 +12,9 @@ public partial class MainMenuItemVM : ObservableObject
 
   [ObservableProperty]
   private string iconName = string.Empty;
+
+  [ObservableProperty]
+  private string iconColor = "#FF808080";
 
   [ObservableProperty]
   private ICommand? command;

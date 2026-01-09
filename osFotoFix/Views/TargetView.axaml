@@ -15,7 +15,6 @@
     <views:ActionColorValueConverter x:Key="ActionColor" />
     <views:ActionBitmapValueConverter x:Key="ActionImage" />
     <views:IconNameToPath x:Key="IconNameToPath" />
-    <views:HsvColorToBrushConverter x:Key="HsvToBrush"/>
   </UserControl.Resources>
   <Design.DataContext>
     <vm:DesignTargetViewModel/>
@@ -35,11 +34,11 @@
         Grid.Row="1" Grid.Column="0"
         IconSize="Size32"
         Icon="{Binding IconName}" 
-        Background="{Binding IconColor, Converter={StaticResource HsvToBrush}}"
+        Background="{Binding IconColor}"
         />
     <ColorPicker
         Grid.Row="2"
-        HsvColor="{Binding IconColor}" />
+        HsvColor="{Binding HsvColor}" />
     <TextBox 
         Grid.Row="3" Grid.Column="0"
         Watermark="Icon"

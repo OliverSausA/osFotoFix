@@ -25,7 +25,7 @@ public class Target
   public string IconName {get; set;} = string.Empty;
 
   [XmlAttribute]
-  public string IconColor {get; set;} = string.Empty;
+  public string IconColor {get; set;} = "#FF000000";
 
   [XmlAttribute]
   public string Path {get; set;} = string.Empty;

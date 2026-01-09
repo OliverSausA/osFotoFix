@@ -3,12 +3,16 @@ using System.IO;
 using Avalonia.Media.Imaging;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+
+
 
 namespace osFotoFix.ViewModels
 {
   using Models;
 
-  public class FotoInfoViewModel : ViewModelBase
+  public partial class FotoInfoViewModel : ViewModelBase
   {
     public FotoInfoViewModel( FotoInfo foto )
     {
@@ -46,6 +50,12 @@ namespace osFotoFix.ViewModels
             CreateNewFileName();
             OnPropertyChanged(); }
     }
+
+    [ObservableProperty]
+    private string iconName = string.Empty;
+
+    [ObservableProperty]
+    private string iconColor = string.Empty;
 
     public string NewFileName {
       get { return Foto.NewFileName; }
