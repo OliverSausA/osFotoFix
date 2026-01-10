@@ -40,7 +40,7 @@ public class FotoInfo {
 
   public int ID { get; private set; }
   public EAction Action {get;set;}
-  public string Target {get;set;} = string.Empty;
+  public string TargetPath {get;set;} = string.Empty;
   public string Title {get;set;} = string.Empty;
   public string Description {get;set;} = string.Empty;
 

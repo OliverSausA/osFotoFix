@@ -110,7 +110,7 @@ namespace osFotoFix.ViewModels
       if( !baseDir.Exists ) return;
 
       CancelReadFotoInfos = new CancellationTokenSource();
-      RunningReadFoto = true;
+      RunningReadFoto = true;;
 
       FotoSelected = null;
       await service.ReadFotoInfos( baseDir, CancelReadFotoInfos.Token );
@@ -331,7 +331,7 @@ namespace osFotoFix.ViewModels
       if( foto == null ) return;
       if( foto.Action == EAction.done ) return;
       foto.Action = EAction.ignore;
-      foto.Target = "";
+      // foto.Target = "";
       foto.Title = "";
       foto.Description = "";
       foto.NewFileName = "";
@@ -364,7 +364,7 @@ namespace osFotoFix.ViewModels
       if( foto == null ) return;
       if( foto.Action == EAction.done ) return;
       foto.Action = EAction.copy;
-      foto.Target = UserSettingsVM.Target;
+      // foto.Target = UserSettingsVM.Target;
       foto.Title = UserSettingsVM.Title;
       foto.Description = UserSettingsVM.Description;
       foto.NewFileName = service.GetNewFileName( foto.Foto );
@@ -382,7 +382,7 @@ namespace osFotoFix.ViewModels
       if( foto == null ) return;
       if( foto.Action == EAction.done ) return;
       foto.Action = EAction.move;
-      foto.Target = UserSettingsVM.Target;
+      // foto.Target = UserSettingsVM.Target;
       foto.Title = UserSettingsVM.Title;
       foto.Description = UserSettingsVM.Description;
       foto.NewFileName = service.GetNewFileName( foto.Foto );
@@ -400,7 +400,7 @@ namespace osFotoFix.ViewModels
       if( foto == null ) return;
       if( foto.Action == EAction.done ) return;
       foto.Action = EAction.trash;
-      foto.Target = UserSettingsVM.Trash;
+      // foto.Target = UserSettingsVM.Trash;
       foto.Title = UserSettingsVM.Title;
       foto.Description = UserSettingsVM.Description;
       foto.NewFileName = service.GetNewFileName( foto.Foto );

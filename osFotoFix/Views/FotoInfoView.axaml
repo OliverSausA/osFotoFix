@@ -35,8 +35,8 @@
       <ic:FluentIcon 
           Grid.Row="1" Grid.Column="0"
           IconSize="Size32"
-          Icon="{Binding IconName}" 
-          Background="{Binding IconColor}"
+          Icon="{Binding Target.IconName}" 
+          Background="{Binding Target.IconColor}"
           />
     </StackPanel>
   </Grid>

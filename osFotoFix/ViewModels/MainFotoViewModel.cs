@@ -92,13 +92,8 @@ public partial class MainFotoViewModel : ViewModelBase
 
   private void OnTargetCommand( FotoInfoViewModel foto, Target target )
   {
-    if( foto != null && target != null ) {
-      foto.Title = target.Title;
-      foto.Description = target.Description;
-      foto.Target = target.Path;
-      foto.Action = target.Action;
-      foto.IconName = target.IconName;
-      foto.IconColor = target.IconColor;
+    if( foto != null ) {
+      foto.Target = target;
     }
   }
 
@@ -142,9 +137,10 @@ public partial class MainFotoViewModel : ViewModelBase
       if (args.FotoInfo == null) return;
       var fotoInfo = new FotoInfoViewModel( args.FotoInfo );
       FotoInfoList.Add(fotoInfo);
+      fotoInfo.Index = FotoInfoList.Count;
       OnPropertyChanged(nameof(FotoInfoList));
-      /*
 
+      /*
       var fotoInfo = new FotoInfoViewModel( args.FotoInfo );
       AllFotoInfos.Add( fotoInfo );
       if( FilterMatch( fotoInfo ) )

@@ -22,6 +22,19 @@ namespace osFotoFix.ViewModels
 
     public FotoInfo Foto {get;set;}
 
+    [ObservableProperty]
+    private Target? target = null;
+    partial void OnTargetChanged(Target? value)
+    {
+      if( value != null )
+      {
+        Title = value.Title;
+        Description = value.Description;
+        TargetPath = value.Path;
+        Action = value.Action;
+      }
+    }
+
     public int Index { get; set; }
 
     public string Comment {
@@ -31,9 +44,9 @@ namespace osFotoFix.ViewModels
             OnPropertyChanged(); }
     }
 
-    public string Target {
-      get {return Foto.Target; }
-      set { Foto.Target = value;
+    public string TargetPath {
+      get {return Foto.TargetPath; }
+      set { Foto.TargetPath = value;
             OnPropertyChanged(); }
     }
 
@@ -50,12 +63,6 @@ namespace osFotoFix.ViewModels
             CreateNewFileName();
             OnPropertyChanged(); }
     }
-
-    [ObservableProperty]
-    private string iconName = string.Empty;
-
-    [ObservableProperty]
-    private string iconColor = string.Empty;
 
     public string NewFileName {
       get { return Foto.NewFileName; }

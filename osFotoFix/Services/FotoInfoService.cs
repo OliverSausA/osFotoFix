@@ -109,7 +109,7 @@ namespace osFotoFix.Services
     public string GetNewFileName( FotoInfo foto )
     {
       return Path.Combine(
-          foto.Target,
+          foto.TargetPath,
           CreateNewFileLocation(foto),
           CreateNewFileName(foto) );
     }
@@ -117,7 +117,7 @@ namespace osFotoFix.Services
     public string CopyFoto( FotoInfo foto )
     {
       var dir = new DirectoryInfo( Path.Combine(
-        foto.Target,
+        foto.TargetPath,
         CreateNewFileLocation( foto )));
       dir.Create();
 
@@ -129,7 +129,7 @@ namespace osFotoFix.Services
     public string MoveFoto( FotoInfo foto )
     {
       var dir = new DirectoryInfo( Path.Combine(
-        foto.Target,
+        foto.TargetPath,
         CreateNewFileLocation( foto )));
       dir.Create();
       foto.NewFileName = GetNewFileName( foto );
@@ -269,7 +269,7 @@ namespace osFotoFix.Services
       do
       {
         name = CreateNewFileName( foto, idx++ );
-        fileInfo = new FileInfo( Path.Combine( foto.Target, CreateNewFileLocation(foto), name ) );
+        fileInfo = new FileInfo( Path.Combine( foto.TargetPath, CreateNewFileLocation(foto), name ) );
         if( fileInfo.Exists && fileInfo.Length == foto.File.Length )
           foto.FileExistsOnTarget = true;
       }
