@@ -75,7 +75,7 @@ namespace osFotoFix.ViewModels
         fotoSelected = value;
         ImageVM.Foto = value;
         FotoInfoDetailVM.Foto = value;
-        FotoPreviewVM.FotoList.Clear();
+        /* FotoPreviewVM.FotoList.Clear();
         if(fotoSelected != null)
         {
           if( fotoSelected.Index >= 2)
@@ -87,6 +87,7 @@ namespace osFotoFix.ViewModels
           if( FotoInfoList.Count - fotoSelected.Index > 2)
             FotoPreviewVM.FotoList.Add(FotoInfoList[fotoSelected.Index +2]);
         }
+        */
       } 
     }
 

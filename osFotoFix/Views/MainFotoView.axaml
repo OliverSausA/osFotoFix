@@ -20,7 +20,9 @@
           Grid.Row="1" Grid.Column="0"
           ScrollViewer.VerticalScrollBarVisibility="Visible"
           SelectedItem="{Binding FotoSelected, Mode=TwoWay}"
-          ItemsSource="{Binding FotoInfoList}">
+          ItemsSource="{Binding FotoInfoList}"
+          DoubleTapped="ListBox_DoubleTapped"
+          >
           <ListBox.ItemTemplate>
             <DataTemplate>
               <Border 

@@ -4,7 +4,7 @@ using Avalonia.Markup.Xaml;
 
 namespace osFotoFix.Views
 {
-    public partial class FotoPreviewView : UserControl
+    public partial class FotoPreviewView : Window
     {
         public FotoPreviewView()
         {
