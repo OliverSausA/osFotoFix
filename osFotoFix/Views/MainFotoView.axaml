@@ -13,11 +13,18 @@
     <vm:DesignMainFotoViewModel/>
   </Design.DataContext>
   <Grid
-    RowDefinitions="Auto,*"
+    RowDefinitions="Auto,Auto,*"
     ColumnDefinitions="*">
       <TextBox Text="{Binding SourcePath}" />
+      <ProgressBar 
+        Grid.Row="1"
+        Minimum="0" Maximum="100"
+        Value="{Binding Progress}" 
+        Height="10"
+        Margin="0,2,0,2"
+        />
       <ListBox
-          Grid.Row="1" Grid.Column="0"
+          Grid.Row="2" Grid.Column="0"
           ScrollViewer.VerticalScrollBarVisibility="Visible"
           SelectedItem="{Binding FotoSelected, Mode=TwoWay}"
           ItemsSource="{Binding FotoInfoList}"
