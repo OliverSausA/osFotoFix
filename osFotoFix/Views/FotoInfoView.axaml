@@ -28,6 +28,7 @@
       <TextBox Text="{Binding Title}" Watermark="Title" />
       <TextBox Text="{Binding Description}" Watermark="Description" />
       <TextBox Text="{Binding Comment}" Watermark="Comment" />
+      <Label Content="{Binding Target.Path}" />
       <Label Content="{Binding NewFileName}" />
     </StackPanel>
     <StackPanel Grid.Column="2"> 
