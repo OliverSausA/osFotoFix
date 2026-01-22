@@ -75,6 +75,9 @@ namespace osFotoFix.Services
             foto.TargetPath,
             foto.NewFileName
         );
+        var targetDir = Path.GetDirectoryName( targetFile );
+        if( targetDir != null )
+          Directory.CreateDirectory( targetDir );
         await using var target = File.Create( targetFile );
 
         var buffer = new byte[81920];
@@ -85,6 +88,11 @@ namespace osFotoFix.Services
           done += bytesRead;
           progress?.Report( (double)done / total * 100.0 );
         }
+
+        if (foto.Action == EAction.move) {
+          File.Delete(foto.File.FullName);
+        }
+        foto.Action = EAction.done;
       }
     }
     protected void FotoFixIt( FotoInfo foto )
