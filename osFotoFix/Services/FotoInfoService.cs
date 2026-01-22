@@ -58,17 +58,34 @@ namespace osFotoFix.Services
 
     }
     public event EventHandler<FotoInfoEventArgs>? FotoFixedEvent;
-    public async Task<bool> FotoFixIt( IEnumerable<FotoInfo> fotoInfos, CancellationToken token )
+    public async Task FotoFixItAsync( 
+        IEnumerable<FotoInfo> fotoInfos, 
+        IProgress<double>? progress,
+        CancellationToken token )
     {
+      long total = fotoInfos.Sum( f => f.File.Length );
+      long done = 0;
+
       foreach( var foto in fotoInfos )
       {
-        if( token.IsCancellationRequested ) return false;
+        token.ThrowIfCancellationRequested();
+        await using var source = File.OpenRead( foto.File.FullName );
 
-        await Task.Run( () => FotoFixIt( foto ) );
-        FotoFixedEvent?.Invoke( this, new FotoInfoEventArgs( foto ) );
+        var targetFile = Path.Combine(
+            foto.TargetPath,
+            foto.NewFileName
+        );
+        await using var target = File.Create( targetFile );
+
+        var buffer = new byte[81920];
+        int bytesRead;
+        while( ( bytesRead = await source.ReadAsync( buffer, token ) ) > 0 )
+        {
+          await target.WriteAsync( buffer.AsMemory(0, bytesRead), token );
+          done += bytesRead;
+          progress?.Report( (double)done / total * 100.0 );
+        }
       }
-      FotoFixedEvent?.Invoke( this, new FotoInfoEventArgs( null ) );
-      return true;
     }
     protected void FotoFixIt( FotoInfo foto )
     {
@@ -103,8 +120,44 @@ namespace osFotoFix.Services
         foto.Action = EAction.failed;
         foto.Comment = e.Message;
       }
-
     }
+
+    /*
+    protected async Task FotoFixItAsync( FotoInfo foto, CancellationToken token )
+    {
+      try
+      {
+        / ***** Evtl. per Option auswähbar 
+        if( (foto.TypeOfCreationDate == FotoInfo.ETypeOfCreationDate.Filesystem) )
+        {
+          foto.Comment = "Exif Infomation ist ungültig!";
+          foto.Action = EAction.failed;
+        }
+        else ***** /
+        if( foto.Action == EAction.copy ) {
+          foto.NewFileName = CopyFoto( foto );
+          foto.Action = EAction.done;
+        }
+        else if( foto.Action == EAction.move ) {
+          foto.NewFileName = MoveFoto( foto );
+          foto.Action = EAction.done;
+        }
+        else if( foto.Action == EAction.trash ) {
+          foto.NewFileName = MoveFoto( foto );
+          foto.Action = EAction.done;
+        }
+        else if( foto.Action == EAction.delete ) {
+          DeleteFoto( foto );
+          foto.Action = EAction.done;
+        }
+      }
+      catch ( Exception e )
+      {
+        foto.Action = EAction.failed;
+        foto.Comment = e.Message;
+      }
+    }
+    */
 
     public string GetNewFileName( FotoInfo foto )
     {

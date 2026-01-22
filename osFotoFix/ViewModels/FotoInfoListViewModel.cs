@@ -303,6 +303,7 @@ namespace osFotoFix.ViewModels
       Task.Run( () => DoIt() );
     }
     public async void DoIt() {
+      /*
       if( CancelFotoFixIt != null ) return;
       CancelFotoFixIt = new CancellationTokenSource();
       RunningFotoFixIt = true;
@@ -310,6 +311,7 @@ namespace osFotoFix.ViewModels
       var ok = await service.FotoFixIt( list, CancelFotoFixIt.Token );
       RunningFotoFixIt = false;
       CancelFotoFixIt = null;
+      */
     }
     public ICommand CancelDoItCmd { get; }
     public void OnCancelDoIt()

@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace osFotoFix.ViewModels;
 
+using System.Linq;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.Input;
 using osFotoFix.Models;
@@ -58,6 +59,25 @@ public partial class MainFotoViewModel : ViewModelBase
 
   protected virtual void CreateMenuItems()
   {
+    MainMenuItems.Add(new MainMenuItemVM()
+    {
+      Title = "DoIt",
+      IconName = "Save",
+      IconColor = "Green",
+      Command = new AsyncRelayCommand( async () => {
+        await OnDoItAsync();
+      })
+    });
+    MainMenuItems.Add(new MainMenuItemVM()
+    {
+      Title = "Cancel",
+      IconName = "Cancel",
+      IconColor = "Red",
+      Command = new AsyncRelayCommand( async () => {
+        await OnDoItAsync();
+      })
+    });
+
     var settingsService = App.Current.Services.GetRequiredService<UserSettingsService>();
     foreach( var target in settingsService.GetUserSettings.Targets)
     {
@@ -68,8 +88,7 @@ public partial class MainFotoViewModel : ViewModelBase
         IconColor = target.IconColor,
         Command = new RelayCommand( () =>
         {
-          if( FotoSelected != null )
-          {
+          if( FotoSelected != null ) {
             OnTargetCommand( FotoSelected, target );
           }
         } )
@@ -78,6 +97,7 @@ public partial class MainFotoViewModel : ViewModelBase
   }
 
   private FotoInfoService fotoInfoService;
+  private CancellationTokenSource? doItCTS;
 
   [ObservableProperty]
   private string sourcePath = string.Empty;
@@ -96,6 +116,42 @@ public partial class MainFotoViewModel : ViewModelBase
       foto.Target = target;
     }
   }
+
+  private async Task OnDoItAsync()
+  {
+    RunningDoIt = true;
+    Progress = 0;
+    var progress = new Progress<double>( value => {
+      Progress = value;
+    } );
+
+    doItCTS = new CancellationTokenSource();
+
+    try
+    {
+      var fotoList = FotoInfoList.Select( f => f.Foto ).Where( f => f.ActionRequiered ).ToList();
+
+      await fotoInfoService.FotoFixItAsync( 
+        fotoList,
+        progress,
+        doItCTS.Token );
+    }
+    catch( OperationCanceledException )
+    {
+      // Ignore
+    }
+    finally
+    {
+      RunningDoIt = false;
+      doItCTS = null;
+    }
+  }
+
+  [ObservableProperty]
+  private bool runningDoIt;
+
+  [ObservableProperty]
+  private double progress;
 
   [ObservableProperty]
   private ObservableCollection<FotoInfoViewModel> fotoInfoList = new();
