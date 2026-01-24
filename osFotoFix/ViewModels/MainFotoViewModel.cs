@@ -81,6 +81,9 @@ public partial class MainFotoViewModel : ViewModelBase
     var settingsService = App.Current.Services.GetRequiredService<UserSettingsService>();
     foreach( var target in settingsService.GetUserSettings.Targets)
     {
+      if (!target.Enabled)
+        continue;
+
       MainMenuItems.Add( new MainMenuItemVM()
       {
         Title = target.Title,
