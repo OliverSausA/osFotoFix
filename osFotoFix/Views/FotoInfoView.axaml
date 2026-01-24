@@ -11,17 +11,16 @@
              x:Class="osFotoFix.Views.FotoInfoView">
   <UserControl.Resources>
     <views:BitmapFileValueConverter x:Key="FotoImage" />
-    <views:EActionCompareConverter x:Key="EActionCompare" />
-    <views:ActionColorValueConverter x:Key="ActionColor" />
-    <views:ActionBitmapValueConverter x:Key="ActionImage" />
+    <views:ActionIconValueConverter x:Key="ActionIcon" />
     <views:IconNameToPath x:Key="IconNameToPath" />
   </UserControl.Resources>
   <Design.DataContext>
     <vm:DesignFotoInfoViewModel/>
   </Design.DataContext>
   <Grid 
-      ColumnDefinitions="300,*,40">
-    <Image Width="300" Source="{Binding Thumpnail}"/>
+    ColumnDefinitions="300,*,40">
+    <Image Width="300" 
+      Source="{Binding Thumpnail}"/>
     <StackPanel Grid.Column="1"> 
       <Label Content="{Binding Foto.File.Name}" />
       <Label Content="{Binding Foto.Created}" />
@@ -32,13 +31,19 @@
       <Label Content="{Binding NewFileName}" />
     </StackPanel>
     <StackPanel Grid.Column="2"> 
-      <Label Content="{Binding Index}" HorizontalAlignment="Right" />
       <ic:FluentIcon 
           Grid.Row="1" Grid.Column="0"
           IconSize="Size32"
           Icon="{Binding Target.IconName}" 
           Background="{Binding Target.IconColor}"
           />
+      <ic:FluentIcon 
+          Grid.Row="1" Grid.Column="0"
+          IconSize="Size32"
+          Icon="{Binding Action, Converter={StaticResource ActionIcon}}" 
+          Background="{Binding Target.IconColor}"
+          />
+      <Label Content="{Binding Index}" HorizontalAlignment="Right" />
     </StackPanel>
   </Grid>
 </UserControl>

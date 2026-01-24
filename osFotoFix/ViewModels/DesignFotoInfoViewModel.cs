@@ -11,7 +11,18 @@ namespace osFotoFix.ViewModels
 
     public DesignFotoInfoViewModel() : base(new FotoInfo( new FileInfo(testFotoPath), System.DateTime.Now, ETypeOfCreationDate.Filename))
     {
-      Title = "Title of the FotoInfo item";
+      // Title = "Title of the FotoInfo item";
+      // Description = "Description of the FotoInfo item";
+      Comment = "This is a comment for the foto info item.";
+      Target = new Target()
+      {
+        Title = "Target Title",
+        Description = "Target Description",
+        Path = "/path/to/target/folder",
+        IconColor = "#FF5733",
+        IconName = "Folder",
+        Action = EAction.copy
+      };
     }
   }
 }

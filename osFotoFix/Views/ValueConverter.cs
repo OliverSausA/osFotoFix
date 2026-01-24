@@ -209,6 +209,34 @@ namespace osFotoFix.Views
       throw new NotSupportedException();
     }
   }
+
+  public sealed class ActionIconValueConverter : IValueConverter
+  {
+    public object? Convert( object? value, Type targetType, object? parameter, CultureInfo culture )
+    {
+      if( value is EAction action )
+      {
+        string resourceName = action switch
+        {
+          EAction.copy => "ImageAdd",
+          EAction.move => "ImageArrowForward",
+          EAction.trash => "ImageOff",
+          EAction.delete => "Delete",
+          EAction.done => "Checked",
+          EAction.failed => "ShieldError",
+          _ => "CheckboxUnchecked",
+        };
+
+        if (!string.IsNullOrEmpty(resourceName))
+          return resourceName;
+      }
+      return new Avalonia.Data.BindingNotification(new InvalidCastException(), Avalonia.Data.BindingErrorType.Error);
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) {
+      throw new NotImplementedException();
+    }
+  }
   public sealed class IconNameToPath : IValueConverter
   {
     public object? Convert( object? value, Type targetType, object? parameter, CultureInfo culture )
