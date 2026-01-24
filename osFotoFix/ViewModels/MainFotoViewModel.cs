@@ -117,6 +117,9 @@ public partial class MainFotoViewModel : ViewModelBase
   {
     if( foto != null ) {
       foto.Target = target;
+      var index = FotoInfoList.IndexOf( foto) +1;
+      if ( index < FotoInfoList.Count )
+      FotoSelected = FotoInfoList[ index ];
     }
   }
 
