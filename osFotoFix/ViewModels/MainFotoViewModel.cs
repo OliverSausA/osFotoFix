@@ -218,19 +218,14 @@ public partial class MainFotoViewModel : ViewModelBase
 
   private void OnFotoFixed( object? sender, FotoInfoEventArgs args )
   {
-    /*
-    Dispatcher.UIThread.InvokeAsync( () => {
-      if( args.FotoInfo != null )
-      {
-        var fotoVM = FotoInfoList.Where( f => f.Foto.ID == args.FotoInfo.ID ).First();
-        fotoVM.UpdateView();
-      }
-      else
-      {
-        OnFilterChanged();
-      }
+    Dispatcher.UIThread.Post( () => {
+      if (args.FotoInfo == null) return;
+
+      var fotoVM = FotoInfoList.Where( f => f.Foto.ID == args.FotoInfo.ID ).FirstOrDefault();
+      // fotoVM?.UpdateView();
+      FotoInfoList.Remove( fotoVM! );
+      OnPropertyChanged(nameof(FotoInfoList));
     });
-    */
   }
 
   private void OnExit( object? sender, ControlledApplicationLifetimeExitEventArgs e)

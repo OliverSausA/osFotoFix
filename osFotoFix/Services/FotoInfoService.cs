@@ -93,6 +93,7 @@ namespace osFotoFix.Services
           File.Delete(foto.File.FullName);
         }
         foto.Action = EAction.done;
+        FotoFixedEvent?.Invoke( this, new FotoInfoEventArgs( foto ) );
       }
     }
     protected void FotoFixIt( FotoInfo foto )
