@@ -16,10 +16,11 @@
   </UserControl.Resources>
   <Border Classes="View">
     <Grid
-      RowDefinitions="Auto,Auto,Auto,*,Auto" >
+      ColumnDefinitions="Auto,Auto"
+      RowDefinitions="Auto" >
       <Expander
-        Grid.Row="1"
         Margin="0,30,0,0"
+        VerticalAlignment="Top"
         Header="{DynamicResource Filter}"
         IsExpanded="True"
       >
@@ -93,81 +94,7 @@
         </StackPanel>
       </Expander>
       <Expander 
-        Grid.Row="2"
-        Margin="0,30,0,0"
-        Header="{DynamicResource CmdButtons}"
-        IsExpanded="True"
-        >
-        <Grid 
-          Margin="0,10,0,0"
-          ColumnDefinitions="50,Auto"
-          RowDefinitions="30,30,30,30"
-          >
-          <Panel
-            Margin="10,0,10,0"
-            Background="{StaticResource Warning}"
-            >
-            <Image Classes="cmd">
-              <DrawingImage Drawing="{StaticResource FluentIcons.delete_regular}" />
-            </Image>
-          </Panel>
-          <Image>
-            <DrawingImage Drawing="{StaticResource FluentIcons.delete_regular}" />
-          </Image>
-          <CheckBox
-            Grid.Column="1"
-            IsChecked="{Binding TrashCmdActive, Mode=TwoWay}" 
-            Content="{DynamicResource CmdTrash}"
-            />
-
-          <Panel
-            Margin="10,0,10,0"
-            Grid.Row="1"
-            Background="{StaticResource Alert}"
-            >
-            <Image Classes="cmd">
-              <DrawingImage Drawing="{StaticResource FluentIcons.delete_off_regular}" />
-            </Image>
-          </Panel>
-          <CheckBox
-            Grid.Row="1"
-            Grid.Column="1"
-            Content="{DynamicResource CmdDelete}"
-            IsChecked="{Binding DelCmdActive}" />
-
-          <Panel
-            Margin="10,0,10,0"
-            Grid.Row="2"
-            Background="{StaticResource OK_Color}"
-            >
-            <Image Classes="cmd">
-              <DrawingImage Drawing="{StaticResource FluentIcons.sticker_regular}" />
-            </Image>
-          </Panel>
-          <CheckBox 
-            Grid.Row="2"
-            Grid.Column="1"
-            Content="{DynamicResource CmdMove}"
-            IsChecked="{Binding MoveCmdActive}" />
-
-          <Panel
-            Margin="10,0,10,0"
-            Grid.Row="3"
-            Background="{StaticResource OK_Color}"
-            >
-            <Image Classes="cmd">
-              <DrawingImage Drawing="{StaticResource FluentIcons.sticker_add_regular}" />
-            </Image>
-          </Panel> 
-          <CheckBox 
-            Grid.Row="3"
-            Grid.Column="1"
-            Content="{DynamicResource CmdCopy}"
-            IsChecked="{Binding CopyCmdActive}" />
-        </Grid> 
-      </Expander>
-      <Expander 
-        Grid.Row="3"
+        Grid.Column="1" VerticalAlignment="Top"
         Margin="0,30,0,0"
         Header="{DynamicResource Layout}"
         IsExpanded="True"

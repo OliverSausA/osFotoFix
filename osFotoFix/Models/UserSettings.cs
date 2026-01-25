@@ -19,10 +19,6 @@ public class UserSettings
     FilterDatumFilechanged = EFilterState.eDisable;
     FilterFilenameTrashed = EFilterState.eDisable;
     FilterDoubles = EFilterState.eDisable;
-    TrashCmdActive = true;
-    DelCmdActive = true;
-    MoveCmdActive = true;
-    CopyCmdActive = true;
     CultureId = "DE-de";
     GeneralFontSize = 12;
     Targets = new List<Target>();
@@ -43,15 +39,6 @@ public class UserSettings
   public EFilterState FilterFilenameTrashed {get;set;}
   [XmlAttribute]
   public EFilterState FilterDoubles {get;set;}
-
-  [XmlAttribute]
-  public bool TrashCmdActive {get;set;}
-  [XmlAttribute]
-  public bool DelCmdActive {get;set;} 
-  [XmlAttribute]
-  public bool MoveCmdActive {get;set;}
-  [XmlAttribute]
-  public bool CopyCmdActive {get;set;}
 
   [XmlAttribute]
   public string CultureId {get;set;} = string.Empty;

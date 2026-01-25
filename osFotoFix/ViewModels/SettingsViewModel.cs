@@ -227,11 +227,6 @@ namespace osFotoFix.ViewModels
       var settings = settingsService.GetUserSettings;
       Source = settings.Source;
 
-      TrashCmdActive = settings.TrashCmdActive;
-      DelCmdActive   = settings.DelCmdActive;
-      MoveCmdActive  = settings.MoveCmdActive;
-      CopyCmdActive  = settings.CopyCmdActive;
-      
       CultureId = settings.CultureId;
       GeneralFontSize = settings.GeneralFontSize;
       ShowFotoInfoDetail = settings.ShowFotoInfoDetail;
@@ -243,11 +238,6 @@ namespace osFotoFix.ViewModels
     {
       var settings = settingsService.GetUserSettings;
       settings.Source = Source;
-
-      settings.TrashCmdActive = TrashCmdActive;
-      settings.DelCmdActive   = DelCmdActive;
-      settings.MoveCmdActive  = MoveCmdActive;
-      settings.CopyCmdActive  = CopyCmdActive;
 
       settings.CultureId = CultureId;
       settings.GeneralFontSize = GeneralFontSize;
