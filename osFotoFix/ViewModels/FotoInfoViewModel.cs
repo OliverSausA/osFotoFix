@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using Avalonia.Media.Imaging;
+using Avalonia.Threading;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using CommunityToolkit.Mvvm.Input;
@@ -10,6 +11,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace osFotoFix.ViewModels
 {
+  using System.Threading;
+  using System.Threading.Tasks;
   using Models;
 
   public partial class FotoInfoViewModel : ViewModelBase
@@ -112,45 +115,44 @@ namespace osFotoFix.ViewModels
 
     partial void OnPreviewSizeChanged( int value )
     {
-      using (var image = Image.Load( Foto.File.FullName ))
+      thumbnailCts?.Cancel();
+      thumbnailCts = new CancellationTokenSource();
+      _ = CreateThumbnailAsync( value, thumbnailCts.Token );
+    }
+    private static readonly SemaphoreSlim thumbnailSemaphore = 
+        new SemaphoreSlim(Environment.ProcessorCount);
+    private CancellationTokenSource? thumbnailCts;
+
+    private async Task CreateThumbnailAsync(int size, CancellationToken token)
+    {
+      await thumbnailSemaphore.WaitAsync(token);
+      try
       {
-        int w = value;
-        // int h = w * (image.Width / image.Height);
-        image.Mutate( x => x.Resize(w, 0));
-        using( var memstream = new MemoryStream() )
+        var bitmap = await Task.Run(() =>
         {
+          token.ThrowIfCancellationRequested();
+          using var image = Image.Load( Foto.File.FullName );
+          image.Mutate( x => x.Resize(size, 0));
+
+          using var memstream = new MemoryStream();
           image.Save(memstream, new SixLabors.ImageSharp.Formats.Bmp.BmpEncoder());
           memstream.Position = 0;
-          Thumpnail = new Avalonia.Media.Imaging.Bitmap(memstream);
-        }
-      }
-    }
+          return new Avalonia.Media.Imaging.Bitmap(memstream);
+        }, token);
 
-    /*
-    public Bitmap? Thumpnail {
-      get {
-        if( thumpnail == null )
-        {
-          using (var image = Image.Load( Foto.File.FullName ))
-          {
-            int w = 300;
-            // int h = w * (image.Width / image.Height);
-            image.Mutate( x => x.Resize(w, 0));
-            using( var memstream = new MemoryStream() )
-            {
-              image.Save(memstream, new SixLabors.ImageSharp.Formats.Bmp.BmpEncoder());
-              memstream.Position = 0;
-              thumpnail = new Avalonia.Media.Imaging.Bitmap(memstream);
-            }
-          }
-        }
-        return thumpnail;
+        await Dispatcher.UIThread.InvokeAsync( () => {
+          Thumpnail = bitmap;
+        } );
+      }
+      catch (OperationCanceledException)
+      {
+        // Ignore
+      }
+      finally
+      {
+        thumbnailSemaphore.Release();
       }
     }
-    public bool ThumpnailCallback() {
-      return false;
-    }
-    */
 
     public void UpdateView()
     {
