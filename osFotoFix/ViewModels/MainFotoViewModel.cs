@@ -37,6 +37,14 @@ public partial class MainFotoViewModel : ViewModelBase
     var settingsService = App.Current.Services.GetRequiredService<UserSettingsService>();
     SourcePath = settingsService.GetUserSettings.Source;
 
+    SelectPathCommand = new AsyncRelayCommand( async () => {
+      var directoryPicker = new Services.DirectoryPicker();
+      string path = await directoryPicker.GetFolderName( SourcePath );
+      if( path != string.Empty ) {
+        SourcePath = path;
+      }
+    });
+
     CreateMenuItems();
 
     /*
@@ -111,7 +119,13 @@ public partial class MainFotoViewModel : ViewModelBase
     FotoSelected = null;
     // UserSettingsVM.ResetFilterStatistik();
     Task.Run( () => ReadFotoInfos( value ) );
+
+    var settingsService = App.Current.Services.GetRequiredService<UserSettingsService>();
+    settingsService.GetUserSettings.Source = SourcePath;
+    settingsService.SaveUserSettings();
   }
+
+  public AsyncRelayCommand SelectPathCommand { get; }
 
   private void OnTargetCommand( FotoInfoViewModel foto, Target target )
   {
