@@ -124,7 +124,7 @@ namespace osFotoFix.ViewModels
     {
       Dispatcher.UIThread.InvokeAsync( () => {
         if (args.FotoInfo == null) return;
-        var fotoInfo = new FotoInfoViewModel( args.FotoInfo );
+        var fotoInfo = new FotoInfoViewModel( args.FotoInfo, 200 );
         AllFotoInfos.Add( fotoInfo );
         if( FilterMatch( fotoInfo ) )
         {

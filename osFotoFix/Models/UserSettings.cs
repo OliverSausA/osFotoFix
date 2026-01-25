@@ -30,6 +30,9 @@ public class UserSettings
   public List<Target> Targets {get; set;} = new();
 
   [XmlAttribute]
+  public int PreviewSize {get;set;} = 300;
+
+  [XmlAttribute]
   public EFilterState FilterDatumExif {get;set;}
   [XmlAttribute]
   public EFilterState FilterDatumFilename {get;set;}

@@ -14,10 +14,11 @@ namespace osFotoFix.ViewModels
 
   public partial class FotoInfoViewModel : ViewModelBase
   {
-    public FotoInfoViewModel( FotoInfo foto )
+    public FotoInfoViewModel( FotoInfo foto, int previewSize )
     {
       Foto = foto;
       CreateNewFileName();
+      PreviewSize = previewSize;
     }
 
     public FotoInfo Foto {get;set;}
@@ -103,7 +104,29 @@ namespace osFotoFix.ViewModels
         filename );
     }
 
+    [ObservableProperty]
     private Bitmap? thumpnail;
+
+    [ObservableProperty]
+    private int previewSize;
+
+    partial void OnPreviewSizeChanged( int value )
+    {
+      using (var image = Image.Load( Foto.File.FullName ))
+      {
+        int w = value;
+        // int h = w * (image.Width / image.Height);
+        image.Mutate( x => x.Resize(w, 0));
+        using( var memstream = new MemoryStream() )
+        {
+          image.Save(memstream, new SixLabors.ImageSharp.Formats.Bmp.BmpEncoder());
+          memstream.Position = 0;
+          Thumpnail = new Avalonia.Media.Imaging.Bitmap(memstream);
+        }
+      }
+    }
+
+    /*
     public Bitmap? Thumpnail {
       get {
         if( thumpnail == null )
@@ -127,6 +150,7 @@ namespace osFotoFix.ViewModels
     public bool ThumpnailCallback() {
       return false;
     }
+    */
 
     public void UpdateView()
     {

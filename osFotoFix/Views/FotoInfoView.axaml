@@ -18,8 +18,8 @@
     <vm:DesignFotoInfoViewModel/>
   </Design.DataContext>
   <Grid 
-    ColumnDefinitions="300,*,40">
-    <Image Width="300" 
+    ColumnDefinitions="Auto,*,40">
+    <Image Width="{Binding PreviewSize}" MaxHeight="{Binding PreviewSize}"
       Source="{Binding Thumpnail}"/>
     <StackPanel Grid.Column="1"> 
       <Label Content="{Binding Foto.File.Name}" />

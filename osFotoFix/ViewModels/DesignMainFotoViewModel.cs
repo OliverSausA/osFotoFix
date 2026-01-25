@@ -14,13 +14,13 @@ public class DesignMainFotoViewModel : MainFotoViewModel
 
     FileInfo fileInfo = new FileInfo("Test.jpg");
     var fotoInfo = new FotoInfo(fileInfo, DateTime.Now, ETypeOfCreationDate.Filesystem);
-    var FotoInfoViewModel = new FotoInfoViewModel(fotoInfo);
+    var FotoInfoViewModel = new FotoInfoViewModel(fotoInfo, 300);
     FotoInfoList.Add( FotoInfoViewModel);
     FotoSelected = FotoInfoViewModel;
 
     fileInfo = new FileInfo("Test2.jpg");
     fotoInfo = new FotoInfo(fileInfo, DateTime.Now, ETypeOfCreationDate.Filesystem);
-    FotoInfoViewModel = new FotoInfoViewModel(fotoInfo);
+    FotoInfoViewModel = new FotoInfoViewModel(fotoInfo, 300);
     FotoInfoList.Add( FotoInfoViewModel);
   }
 

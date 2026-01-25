@@ -36,6 +36,7 @@ public partial class MainFotoViewModel : ViewModelBase
     FotoInfoService.GetDateTimeFromStringTests();
     var settingsService = App.Current.Services.GetRequiredService<UserSettingsService>();
     SourcePath = settingsService.GetUserSettings.Source;
+    PreviewSize = settingsService.GetUserSettings.PreviewSize;
 
     SelectPathCommand = new AsyncRelayCommand( async () => {
       var directoryPicker = new Services.DirectoryPicker();
@@ -67,6 +68,26 @@ public partial class MainFotoViewModel : ViewModelBase
 
   protected virtual void CreateMenuItems()
   {
+    MainMenuItems.Add(new MainMenuItemVM()
+    {
+      Title = "PreviewSizeMinus",
+      IconName = "ZoomOut",
+      //IconColor = "Green",
+      Command = new RelayCommand( () => {
+        if( PreviewSize >= 100 )
+          PreviewSize -= 50;
+      })
+    });
+    MainMenuItems.Add(new MainMenuItemVM()
+    {
+      Title = "PreviewSizePlus",
+      IconName = "ZoomIn",
+      //IconColor = "Green",
+      Command = new RelayCommand( () => {
+        if( PreviewSize <= 800 )
+          PreviewSize += 50;
+      })
+    });
     MainMenuItems.Add(new MainMenuItemVM()
     {
       Title = "DoIt",
@@ -168,6 +189,20 @@ public partial class MainFotoViewModel : ViewModelBase
   }
 
   [ObservableProperty]
+  private int previewSize;
+
+  partial void OnPreviewSizeChanged( int value )
+  {
+    var settingsService = App.Current.Services.GetRequiredService<UserSettingsService>();
+    settingsService.GetUserSettings.PreviewSize = PreviewSize;
+    settingsService.SaveUserSettings();
+
+    foreach( var fotoVM in FotoInfoList ) {
+      fotoVM.PreviewSize =  PreviewSize;
+    }
+  }
+
+  [ObservableProperty]
   private bool runningDoIt;
 
   [ObservableProperty]
@@ -211,7 +246,7 @@ public partial class MainFotoViewModel : ViewModelBase
   {
     Dispatcher.UIThread.Post( () => {
       if (args.FotoInfo == null) return;
-      var fotoInfo = new FotoInfoViewModel( args.FotoInfo );
+      var fotoInfo = new FotoInfoViewModel( args.FotoInfo, PreviewSize );
       FotoInfoList.Add(fotoInfo);
       fotoInfo.Index = FotoInfoList.Count;
       OnPropertyChanged(nameof(FotoInfoList));
