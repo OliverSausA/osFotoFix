@@ -59,7 +59,7 @@ namespace osFotoFix.ViewModels
       this.FotoPreviewVM = FotoPreviewVM;
       this.FotoInfoDetailVM = FotoInfoDetailVM;
 
-      UserSettingsVM.NewSourceSelectedEvent += OnNewSourceSelected;
+      // UserSettingsVM.NewSourceSelectedEvent += OnNewSourceSelected;
       OnNewSourceSelected( UserSettingsVM.Source );
       UserSettingsVM.FilterChangedEvent += OnFilterChanged;
     }

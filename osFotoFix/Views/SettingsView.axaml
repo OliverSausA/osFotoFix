@@ -17,64 +17,6 @@
   <Border Classes="View">
     <Grid
       RowDefinitions="Auto,Auto,Auto,*,Auto" >
-      <Expander 
-        Grid.Row="0"
-        Classes="h1"
-        Margin="0,20,0,0"
-        Header="{DynamicResource Directories}"
-        IsExpanded="True"
-        >
-        <Grid 
-          Classes="p"
-          ColumnDefinitions="*,32"
-          RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
-          >
-          <Image Classes="cmd">
-            <DrawingImage Drawing="{StaticResource FluentIcons.camera_add_regular}" />
-          </Image>
-          <ContentPresenter
-            Margin="0,10,0,0"
-            Grid.Row="0"
-            Content="{DynamicResource SourceDir}" />
-          <TextBox
-            Grid.Row="1"
-            Text="{Binding Source}"
-            />
-          <Button
-            Grid.Row="1"
-            Grid.Column="1"
-            Content="..." 
-            Command="{Binding SelectSourceCmd}"
-            />
-          <ContentPresenter
-            Margin="0,10,0,0"
-            Grid.Row="2"
-            Content="{DynamicResource DestinationDir}" />
-          <TextBox
-            Grid.Row="3"
-            Text="{Binding Target}"
-            />
-          <Button
-            Grid.Row="3"
-            Command="{Binding SelectTargetCmd}"
-            Grid.Column="1"
-            Content="..." />
-          <ContentPresenter
-            Margin="0,10,0,0"
-            Grid.Row="4"
-            Content="{DynamicResource TrashDir}" />
-          <TextBox
-            Grid.Row="5"
-            Text="{Binding Trash}"
-            />
-          <Button
-            Grid.Row="5"
-            Grid.Column="1"
-            Content="..."
-            Command="{Binding SelectTrashCmd}"
-            />
-        </Grid>
-      </Expander>
       <Expander
         Grid.Row="1"
         Margin="0,30,0,0"

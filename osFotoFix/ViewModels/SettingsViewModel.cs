@@ -28,9 +28,6 @@ namespace osFotoFix.ViewModels
       this.settingsService = settingsService;
       userSettings = settingsService.GetUserSettings;
       Read();
-      SelectSourceCmd = new AsyncRelayCommand( OnSelectSource );
-      SelectTargetCmd = new AsyncRelayCommand( OnSelectTarget );
-      SelectTrashCmd  = new AsyncRelayCommand( OnSelectTrash );
 
       SupportedLanguageList = new List<KeyValuePair<string, string>>(){
         new KeyValuePair<string, string>("de-DE", App.GetStrRes("de-DE") ),
@@ -43,42 +40,6 @@ namespace osFotoFix.ViewModels
       Write();
     }
 
-    [ObservableProperty]
-    private string source = string.Empty;
-    private void OnNewSourceSelected( string source )
-    {
-      NewSourceSelectedEvent?.Invoke( source );
-    }
-    public delegate void NewSourceSelected( string source );
-    public NewSourceSelected? NewSourceSelectedEvent;
-
-    public AsyncRelayCommand SelectSourceCmd { get; }
-    public async Task OnSelectSource() {
-      Source = await GetFolderName( Source );
-    }
-
-    [ObservableProperty]
-    private string target = string.Empty;
-    private void OnNewTargetSelected( string target )
-    {
-      NewTargetSelectedEvent?.Invoke( target );
-    }
-    public delegate void NewTargetSelected( string target );
-    public NewTargetSelected? NewTargetSelectedEvent;
-    public AsyncRelayCommand SelectTargetCmd { get; }
-    public async Task OnSelectTarget() {
-      Target = await GetFolderName( Target );
-    }
-
-    [ObservableProperty]
-    private string trash = string.Empty;
-    
-    public AsyncRelayCommand SelectTrashCmd { get; }
-    public async Task OnSelectTrash() {
-      Trash = await GetFolderName( Trash );
-    }
-
-    
     public async Task<string> GetFolderName(string current)
     {
       try
@@ -253,6 +214,9 @@ namespace osFotoFix.ViewModels
     private bool showFotoInfoDetail;
 
     [ObservableProperty]
+    private string source = string.Empty;
+
+    [ObservableProperty]
     private string title = string.Empty;
 
     [ObservableProperty]
@@ -261,9 +225,7 @@ namespace osFotoFix.ViewModels
     private void Read()
     {
       var settings = settingsService.GetUserSettings;
-      Source = settings.Quelle;
-      Target = settings.Ziel;
-      Trash  = settings.Papierkorb;
+      Source = settings.Source;
 
       TrashCmdActive = settings.TrashCmdActive;
       DelCmdActive   = settings.DelCmdActive;
@@ -280,9 +242,7 @@ namespace osFotoFix.ViewModels
     private void Write()
     {
       var settings = settingsService.GetUserSettings;
-      settings.Quelle = Source;
-      settings.Ziel = Target;
-      settings.Papierkorb = Trash;
+      settings.Source = Source;
 
       settings.TrashCmdActive = TrashCmdActive;
       settings.DelCmdActive   = DelCmdActive;

@@ -29,11 +29,7 @@ public class UserSettings
   }
 
   [XmlAttribute]
-  public string Quelle {get;set;} = string.Empty;
-  [XmlAttribute]
-  public string Ziel {get;set;} = string.Empty;
-  [XmlAttribute]
-  public string Papierkorb {get;set;} = string.Empty;
+  public string Source {get;set;} = string.Empty;
   [XmlArray]
   public List<Target> Targets {get; set;} = new();
 

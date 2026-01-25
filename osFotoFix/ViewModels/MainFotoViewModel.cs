@@ -35,7 +35,7 @@ public partial class MainFotoViewModel : ViewModelBase
 
     FotoInfoService.GetDateTimeFromStringTests();
     var settingsService = App.Current.Services.GetRequiredService<UserSettingsService>();
-    SourcePath = settingsService.GetUserSettings.Quelle;
+    SourcePath = settingsService.GetUserSettings.Source;
 
     CreateMenuItems();
 

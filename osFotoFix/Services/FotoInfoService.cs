@@ -250,7 +250,7 @@ namespace osFotoFix.Services
       try
       {
         string path = Path.Combine(
-                settings.GetUserSettings.Ziel,
+                foto.TargetPath,
                 foto.Created.ToString("yyyy"));
         if( !Directory.Exists( path ) )
           return false;
