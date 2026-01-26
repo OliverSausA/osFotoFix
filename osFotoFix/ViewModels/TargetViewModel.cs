@@ -45,15 +45,6 @@ public class TargetViewModel : ObservableObject
     }
   }
 
-  public string Path
-  {
-    get { return Target.Path; }
-    set {
-      Target.Path = value;
-      OnPropertyChanged();
-    }
-  }
-
   public string IconColor
   {
     get { return Target.IconColor; }
@@ -61,6 +52,32 @@ public class TargetViewModel : ObservableObject
       Target.IconColor = value;
       OnPropertyChanged(nameof(IconName));
       OnPropertyChanged();
+    }
+  }
+
+  public string Path
+  {
+    get { return Target.Path; }
+    set {
+      Target.Path = value;
+      OnPropertyChanged();
+      OnPropertyChanged(nameof(IsPathValid));
+    }
+  }
+
+  public bool IsPathValid
+  {
+    get { return System.IO.Directory.Exists( Target.Path ); }
+  }
+
+  public List<ActionItem> ActionList {get;}
+
+  private ActionItem action;
+  public ActionItem Action {
+    get { return action; }
+    set {
+      action = value;
+      Target.Action = value.Value;
     }
   }
 
@@ -79,14 +96,12 @@ public class TargetViewModel : ObservableObject
     }
   }
 
-  public List<ActionItem> ActionList {get;}
-
-  private ActionItem action;
-  public ActionItem Action {
-    get { return action; }
+  public bool Enabled
+  {
+    get { return Target.Enabled; }
     set {
-      action = value;
-      Target.Action = value.Value;
+      Target.Enabled = value;
+      OnPropertyChanged();
     }
   }
 
