@@ -9,6 +9,7 @@ namespace osFotoFix.ViewModels
       Title = "Title of the target item",
       Path = "/home/user/pictures/somewhere",
       IconName = "Target",
+      IconColor = "#ff8cff54",
       Action = EAction.copy,
       Enabled = true,
     })

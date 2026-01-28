@@ -11,25 +11,14 @@ namespace osFotoFix.Services
     public UserSettingsService() {
       ReadUserSettings();
     }
-    ///// private static UserSettingsService? instance = null;
     private const string CONF = "osFotoFix.config";
     protected UserSettings userSettings = new();
 
-
-    /*****
-    public static UserSettingsService GetInstance {
-      get { 
-        if (instance == null )
-          instance = new UserSettingsService();
-        return instance;
-      }
-    }
-    *****/
     public UserSettings GetUserSettings {
       get { return userSettings; }
     }
 
-    protected void ReadUserSettings()
+    protected virtual void ReadUserSettings()
     {
       try
       {
@@ -47,7 +36,7 @@ namespace osFotoFix.Services
       catch {}
     }
 
-    public void SaveUserSettings()
+    public virtual void SaveUserSettings()
     {
       try
       {
@@ -68,13 +57,13 @@ namespace osFotoFix.Services
       }
     }
 
-    public string getUserHomePath()
+    public virtual string getUserHomePath()
     {
       return Environment.GetFolderPath(
                 Environment.SpecialFolder.ApplicationData);
     }
 
-    public string getUserPicturePath()
+    public virtual string getUserPicturePath()
     {
       return Environment.GetFolderPath(
                 Environment.SpecialFolder.MyPictures);

@@ -246,7 +246,6 @@ namespace osFotoFix.Services
     private bool IsFileExistsOnTarget( FotoInfo foto )
     {
       bool ret = false;
-      var settings = App.Current.Services.GetRequiredService<UserSettingsService>();
       try
       {
         string path = Path.Combine(
