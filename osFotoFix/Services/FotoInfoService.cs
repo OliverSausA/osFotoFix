@@ -42,7 +42,7 @@ namespace osFotoFix.Services
           return false;
       }
 
-      foreach( var f in dir.EnumerateFiles().OrderBy( f => f.Name ) ) {
+      foreach( var f in dir.EnumerateFiles().OrderBy( f => f.CreationTime ) ) {
         if( (!string.IsNullOrEmpty( f.Extension ) ) &&
             (ext.IndexOf(f.Extension, 0, StringComparison.InvariantCultureIgnoreCase ) >= 0 ) )
         {

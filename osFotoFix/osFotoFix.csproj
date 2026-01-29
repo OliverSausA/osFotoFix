@@ -39,7 +39,9 @@
     <PackageReference Include="MetadataExtractor" Version="2.7.2" />
     <!-- https://www.nuget.org/packages/Microsoft.Extensions.Hosting -->
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.4" />
-      <!-- https://www.nuget.org/packages/SixLabors.ImageSharp -->
+    <!-- https://www.nuget.org/packages/SixLabors.ImageSharp -->
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
+    <!-- https://github.com/AvaloniaCommunity/MessageBox.Avalonia -->
+    <PackageReference Include="MessageBox.Avalonia" Version="3.3.1.1" />
   </ItemGroup>
 </Project>

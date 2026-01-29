@@ -10,6 +10,8 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Threading;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Extensions.DependencyInjection;
@@ -171,7 +173,6 @@ public partial class MainFotoViewModel : ViewModelBase
     try
     {
       var fotoList = FotoInfoList.Select( f => f.Foto ).Where( f => f.ActionRequiered ).ToList();
-
       await fotoInfoService.FotoFixItAsync( 
         fotoList,
         progress,
@@ -180,6 +181,12 @@ public partial class MainFotoViewModel : ViewModelBase
     catch( OperationCanceledException )
     {
       // Ignore
+    }
+    catch( Exception ex )
+    {
+      Debug.WriteLine( $"Fehler bei DoIt: {ex.Message}" );
+      var msgBox = MessageBoxManager.GetMessageBoxStandard( "Fehler", $"Fehler bei DoIt: {ex.Message}", ButtonEnum.Ok, Icon.Error );
+      var result = await msgBox.ShowAsync();
     }
     finally
     {
