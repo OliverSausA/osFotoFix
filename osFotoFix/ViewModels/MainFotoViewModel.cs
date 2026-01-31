@@ -91,8 +91,11 @@ public partial class MainFotoViewModel : ViewModelBase
       Title = "Cancel",
       IconName = "Cancel",
       IconColor = "Red",
-      Command = new AsyncRelayCommand( async () => {
-        await OnDoItAsync();
+      Command = new RelayCommand( () => {
+        CancelReadFotoInfos?.Cancel();
+        doItCTS?.Cancel();
+      }, () => {
+        return RunningReadFoto || RunningDoIt;
       })
     });
 
