@@ -19,7 +19,7 @@ sub main()
   foreach my $build (@BUILD)
   {
     BuildTarget( $build );
-    if( $build =~ 'win10' ) {
+    if( $build =~ 'win-x64' ) {
       MakeWindowsSetup( $build, $version );
     }
     if( $build =~ 'linux' ) {

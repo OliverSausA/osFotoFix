@@ -13,7 +13,7 @@
   !define COMP_NAME "OliverSausA"
   !define COPYRIGHT "OS, 2020"
 
-  !define INSTALLER_NAME "win10-x64-setup/osFotoFix_v${VERSION}_setup.exe"
+  !define INSTALLER_NAME "win-x64-setup/osFotoFix_v${VERSION}_setup.exe"
   !define LICENSE_TEXT "../LICENSE"
   !define REG_ROOT "HKLM"
   !define REG_APP_PATH "Software\Microsoft\Windows\CurrentVersion\App Paths\${MAIN_APP_EXE}"
@@ -100,7 +100,7 @@ Section "Install"
   ;File "..\..\Deployment${SUFFIX}\Help\*.*"
 
   SetOutPath "$INSTDIR"
-  File "win10-x64-deployment\*.*"
+  File "win-x64-deployment\*.*"
 
   !ifdef REG_START_MENU
     !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
