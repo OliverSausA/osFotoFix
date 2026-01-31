@@ -25,12 +25,13 @@ using osFotoFix.Models;
 using osFotoFix.Services;
 
 /// <summary>
-/// TODO: Hier wird die FotoInfoList und das FotoSelected verwaltet. Damit ist dieses ViewModel der Zentrale Kern.
+/// Verwaltet alle Fotos und die Hauptfunktionen der Anwendung
 /// </summary>
 public partial class MainFotoViewModel : ViewModelBase
 {
   public MainFotoViewModel( FotoInfoService fotoInfoService )
   {
+
     this.fotoInfoService = fotoInfoService;
     fotoInfoService.FotoInfoReadEvent += OnFotoInfoRead;
     fotoInfoService.FotoFixedEvent += OnFotoFixed;
@@ -49,20 +50,6 @@ public partial class MainFotoViewModel : ViewModelBase
     });
 
     CreateMenuItems();
-
-    /*
-    FileInfo fileInfo = new FileInfo("Test.jpg");
-    var fotoInfo = new FotoInfo(fileInfo, DateTime.Now, ETypeOfCreationDate.Filesystem);
-    FotoInfoList.Add(fotoInfo);
-    FotoSelected = fotoInfo;
-    */
-
-    /*****
-    ImageVM = new ImageViewModel(SettingsVM);
-    FotoInfoDetailVM = new FotoInfoDetailViewModel();
-    FotoPreviewListVM = new FotoPreviewViewModel();
-    FotoInfoListVM = new FotoInfoListViewModel(SettingsVM, ImageVM, FotoPreviewListVM, FotoInfoDetailVM);
-    *****/
 
     var alt = Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
     if (alt != null) alt.Exit += OnExit;
@@ -254,8 +241,20 @@ public partial class MainFotoViewModel : ViewModelBase
     Dispatcher.UIThread.Post( () => {
       if (args.FotoInfo == null) return;
       var fotoInfo = new FotoInfoViewModel( args.FotoInfo, PreviewSize );
-      FotoInfoList.Add(fotoInfo);
-      fotoInfo.Index = FotoInfoList.Count;
+      if (FotoInfoList.Count == 0 )
+        FotoInfoList.Add(fotoInfo);
+      else if (FotoInfoList[FotoInfoList.Count - 1].Foto.File.CreationTimeUtc <= fotoInfo.Foto.File.CreationTimeUtc)
+        FotoInfoList.Add(fotoInfo);
+      else
+      {
+        for (int i = 0; i < FotoInfoList.Count; i++) {
+          if (FotoInfoList[i].Foto.File.CreationTimeUtc > fotoInfo.Foto.File.CreationTimeUtc) {
+            FotoInfoList.Insert(i, fotoInfo);
+            break;
+          }
+        }
+      }
+      // fotoInfo.Index = FotoInfoList.Count;
       OnPropertyChanged(nameof(FotoInfoList));
 
       /*
