@@ -5,18 +5,43 @@
              xmlns:views="clr-namespace:osFotoFix.Views;assembly=osFotoFix"
              xmlns:viewmodels="clr-namespace:osFotoFix.ViewModels;assembly=osFotoFix"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             Focusable= "True"
+             KeyDown= "OnKeyDown"
              x:CompileBindings="True"
-		         x:DataType="viewmodels:MainFotoViewModel"
+		         x:DataType="viewmodels:FotoPreviewViewModel"
              x:Class="osFotoFix.Views.FotoPreviewView">
   <Window.Resources>
     <views:BitmapFileValueConverter x:Key="FotoImage" />
-    <!--
-    <views:EActionCompareConverter x:Key="EActionCompare" />
-    <views:ActionColorValueConverter x:Key="ActionColor" />
-    <views:ActionBitmapValueConverter x:Key="ActionImage" />
-    -->
   </Window.Resources>
-  <Border Classes="View">
-    <Image Source="{Binding FotoSelected.Foto.File.FullName, Converter={StaticResource FotoImage}}"/>
-  </Border>
+  <Window.KeyBindings>
+    <KeyBinding Gesture= "Ctrl++" Command= "{Binding ZoomInCommand}"  />
+    <KeyBinding Gesture= "Ctrl+-" Command= "{Binding ZoomOutCommand}"  />
+  </Window.KeyBindings>
+  <ScrollViewer 
+     Name= "PART_ScrollViewer"
+    HorizontalScrollBarVisibility="Auto" 
+    VerticalScrollBarVisibility="Auto"
+    >
+    <Image 
+       Name= "PART_Image"
+       Source="{Binding FilePath, Converter={StaticResource FotoImage}}"
+       Stretch= "None"
+       RenderTransformOrigin= "0,0"
+       PointerPressed= "OnPointerPressed"
+       PointerReleased= "OnPointerReleased" 
+       PointerMoved= "OnPointerMoved"
+       >
+       <Image.RenderTransform>
+         <TransformGroup>
+           <ScaleTransform 
+              ScaleX= "{Binding Zoom}"
+              ScaleY= "{Binding Zoom}"/>
+            <TranslateTransform
+              X= "{Binding OffsetX}"
+              Y= "{Binding OffsetY}" />
+          </TransformGroup>
+       </Image.RenderTransform>
+    </Image>
+
+  </ScrollViewer>
 </Window>

@@ -211,6 +211,16 @@ public partial class MainFotoViewModel : ViewModelBase
   [ObservableProperty]
   private FotoInfoViewModel? fotoSelected = null;
 
+  partial void OnFotoSelectedChanged(FotoInfoViewModel? value)
+  {
+    if (FotoPreview == null)
+      FotoPreview = new FotoPreviewViewModel();
+    FotoPreview.SetFotoInfo(value);
+  }
+
+  [ObservableProperty]
+  private FotoPreviewViewModel? fotoPreview = null;
+
   [ObservableProperty]
   private bool runningReadFoto;
 
