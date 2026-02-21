@@ -130,6 +130,8 @@ public partial class MainFotoViewModel : ViewModelBase
   {
     FotoInfoList.Clear();
     FotoSelected = null;
+    FotoInfoMarked = 0;
+
     // UserSettingsVM.ResetFilterStatistik();
     Task.Run( () => ReadFotoInfos( value ) );
 
@@ -147,6 +149,7 @@ public partial class MainFotoViewModel : ViewModelBase
       var index = FotoInfoList.IndexOf( foto) +1;
       if ( index < FotoInfoList.Count )
       FotoSelected = FotoInfoList[ index ];
+      FotoInfoMarked = FotoInfoList.Count(f => f.Target != null);
     }
   }
 
@@ -209,6 +212,9 @@ public partial class MainFotoViewModel : ViewModelBase
   private ObservableCollection<FotoInfoViewModel> fotoInfoList = new();
 
   [ObservableProperty]
+  private int fotoInfoMarked;
+
+  [ObservableProperty]
   private FotoInfoViewModel? fotoSelected = null;
 
   partial void OnFotoSelectedChanged(FotoInfoViewModel? value)
@@ -223,13 +229,6 @@ public partial class MainFotoViewModel : ViewModelBase
 
   [ObservableProperty]
   private bool runningReadFoto;
-
-  // public SettingsViewModel SettingsVM { get; set; }
-
-  ///// public FotoInfoListViewModel FotoInfoListVM { get; set; }
-  ///// public FotoInfoDetailViewModel FotoInfoDetailVM { get; set; }
-  ///// public FotoPreviewViewModel FotoPreviewListVM { get; set; }
-  ///// public ImageViewModel ImageVM { get; set; }
 
   private CancellationTokenSource? CancelReadFotoInfos;
   private async void ReadFotoInfos( string source )
@@ -269,18 +268,7 @@ public partial class MainFotoViewModel : ViewModelBase
       }
       // fotoInfo.Index = FotoInfoList.Count;
       OnPropertyChanged(nameof(FotoInfoList));
-
-      /*
-      var fotoInfo = new FotoInfoViewModel( args.FotoInfo );
-      AllFotoInfos.Add( fotoInfo );
-      if( FilterMatch( fotoInfo ) )
-      {
-        fotoInfo.Index = FotoInfoList.Count;
-        FotoInfoList.Add( fotoInfo );
-        if( FotoInfoList.Count == 1 )
-          FotoSelected = fotoInfo;
-      }
-      */
+      FotoInfoMarked = FotoInfoList.Count(f => f.Target != null);
     });
   }
 
@@ -293,6 +281,7 @@ public partial class MainFotoViewModel : ViewModelBase
       // fotoVM?.UpdateView();
       FotoInfoList.Remove( fotoVM! );
       OnPropertyChanged(nameof(FotoInfoList));
+      FotoInfoMarked = FotoInfoList.Count(f => f.Target != null);
     });
   }
 
