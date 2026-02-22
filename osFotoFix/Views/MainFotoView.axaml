@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ic="using:FluentIcons.Avalonia"
              xmlns:views="clr-namespace:osFotoFix.Views;assembly=osFotoFix"
              xmlns:vm="clr-namespace:osFotoFix.ViewModels;assembly=osFotoFix"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -12,6 +13,11 @@
   <Design.DataContext>
     <vm:DesignMainFotoViewModel/>
   </Design.DataContext>
+  <UserControl.Resources>
+    <views:BitmapFileValueConverter x:Key="FotoImage" />
+    <views:ActionIconValueConverter x:Key="ActionIcon" />
+    <views:IconNameToPath x:Key="IconNameToPath" />
+  </UserControl.Resources>
   <Grid
     RowDefinitions="Auto,Auto,*"
     ColumnDefinitions="*">
@@ -43,8 +49,62 @@
         Height="10"
         Margin="0,2,0,2"
         />
+
+      <ScrollViewer
+        Grid.Row="2" Grid.Column="0"
+        IsVisible="{Binding ListView}"
+      >
+        <ListBox ItemsSource="{Binding FotoInfoList}"
+                 SelectedItem="{Binding FotoSelected, Mode=TwoWay}"
+                 SelectionMode="Single"
+                 DoubleTapped="ListBox_DoubleTapped"
+                 >
+            
+          <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+          </ListBox.ItemsPanel>
+
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <Border Margin="2"
+                            Background="LightGray">
+                  <Grid
+                    ColumnDefinitions="Auto"
+                  >
+                    <Image Source="{Binding Thumpnail}"
+                            Width="{Binding PreviewSize}"
+                            MaxHeight="{Binding PreviewSize}"
+                      Stretch="UniformToFill"/>
+                    <StackPanel 
+                      Background="Beige" 
+                      Width="32" Height="64"
+                      HorizontalAlignment="Right" 
+                      VerticalAlignment="Top"> 
+                      <ic:FluentIcon 
+                        IconSize="Size32"
+                        Icon="{Binding Target.IconName}" 
+                        Background="{Binding Target.IconColor}"
+                        />
+                      <ic:FluentIcon 
+                        IconSize="Size32"
+                        Icon="{Binding Action, Converter={StaticResource ActionIcon}}" 
+                        Background="{Binding Target.IconColor}"
+                        />
+                      <Label Content="{Binding Index}" HorizontalAlignment="Right" />
+                    </StackPanel>
+                  </Grid>
+                </Border>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+
+        </ListBox>
+      </ScrollViewer>
+
       <ListBox
           Grid.Row="2" Grid.Column="0"
+          IsVisible="{Binding !ListView}"
           ScrollViewer.VerticalScrollBarVisibility="Visible"
           SelectedItem="{Binding FotoSelected, Mode=TwoWay}"
           ItemsSource="{Binding FotoInfoList}"

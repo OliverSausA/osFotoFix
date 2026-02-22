@@ -79,6 +79,14 @@ public partial class MainFotoViewModel : ViewModelBase
     });
     MainMenuItems.Add(new MainMenuItemVM()
     {
+      Title = "ListView",
+      IconName = "FolderOpen",
+      Command = new RelayCommand( () => {
+        ListView = !ListView;
+      })
+    });
+    MainMenuItems.Add(new MainMenuItemVM()
+    {
       Title = "DoIt",
       IconName = "Save",
       IconColor = "Green",
@@ -202,6 +210,9 @@ public partial class MainFotoViewModel : ViewModelBase
     }
   }
 
+  [ObservableProperty]
+  private bool listView = true;
+  
   [ObservableProperty]
   private bool runningDoIt;
 
