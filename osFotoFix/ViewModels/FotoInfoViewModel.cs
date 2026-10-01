@@ -17,6 +17,12 @@ namespace osFotoFix.ViewModels
 
   public partial class FotoInfoViewModel : ViewModelBase
   {
+    static Target defaultTarget = new Target()
+    {
+      Action = EAction.ignore,
+      IconName = "ArrowLeft",
+      IconColor = "#ffffffff",
+    };
     public FotoInfoViewModel( FotoInfo foto, int previewSize )
     {
       Foto = foto;
@@ -27,7 +33,7 @@ namespace osFotoFix.ViewModels
     public FotoInfo Foto {get;set;}
 
     [ObservableProperty]
-    private Target? target = null;
+    private Target? target = defaultTarget;
     partial void OnTargetChanged(Target? value)
     {
       if( value != null )

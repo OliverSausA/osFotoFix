@@ -31,7 +31,6 @@ public partial class MainFotoViewModel : ViewModelBase
 {
   public MainFotoViewModel( FotoInfoService fotoInfoService )
   {
-
     this.fotoInfoService = fotoInfoService;
     fotoInfoService.FotoInfoReadEvent += OnFotoInfoRead;
     fotoInfoService.FotoFixedEvent += OnFotoFixed;
@@ -253,7 +252,10 @@ public partial class MainFotoViewModel : ViewModelBase
     RunningReadFoto = true;
 
     FotoSelected = null;
-    await fotoInfoService.ReadFotoInfos( baseDir, CancelReadFotoInfos.Token );
+    await Task.Run(async () => {
+      fotoCnt = 0;
+      await fotoInfoService.ReadFotoInfos( baseDir, CancelReadFotoInfos.Token );
+    });
 
     RunningReadFoto = false;
     CancelReadFotoInfos = null;
@@ -280,6 +282,8 @@ public partial class MainFotoViewModel : ViewModelBase
       // fotoInfo.Index = FotoInfoList.Count;
       OnPropertyChanged(nameof(FotoInfoList));
       FotoInfoMarked = FotoInfoList.Count(f => f.Target != null);
+      if (FotoInfoList.Count > 100)
+        CancelReadFotoInfos?.Cancel();
     });
   }
 
