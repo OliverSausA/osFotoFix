@@ -1,4 +1,5 @@
 ﻿using Avalonia;
+using AvaloniaUI.DiagnosticsSupport.Avalonia;
 using System;
 
 namespace osFotoFix;
@@ -16,6 +17,7 @@ sealed class Program
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
+            //.WithDeveloperTools()
             .WithInterFont()
             .LogToTrace();
 }

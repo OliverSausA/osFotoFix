@@ -1,11 +1,13 @@
 ﻿using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace osFotoFix.ViewModels;
 
 public abstract partial class ViewModelBase : ObservableObject
 {
+  private Task? initializationTask;
+
   [ObservableProperty]
   private ObservableCollection<MainMenuItemVM> mainMenuItems = new();
   
@@ -21,4 +23,14 @@ public abstract partial class ViewModelBase : ObservableObject
 
   protected virtual void OnActivated() {}
   protected virtual void OnDeactivated() {}
+
+  public Task InitializeAsync()
+  {
+    return initializationTask ??= OnInitializedAsync();
+  }
+
+  protected virtual Task OnInitializedAsync()
+  {
+    return Task.CompletedTask;
+  }
 }

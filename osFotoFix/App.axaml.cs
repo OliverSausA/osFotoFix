@@ -10,6 +10,7 @@ using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Avalonia.Styling;
+using AvaloniaUI.DiagnosticsSupport.Avalonia;
 
 namespace osFotoFix;
 
@@ -29,6 +30,9 @@ public sealed partial class App : Application
   public override void Initialize()
   {
     AvaloniaXamlLoader.Load(this);
+#if DEBUG
+    this.AttachDeveloperTools();
+#endif
   }  
   
   public new static App Current => (App)(Application.Current ?? throw new InvalidOperationException());

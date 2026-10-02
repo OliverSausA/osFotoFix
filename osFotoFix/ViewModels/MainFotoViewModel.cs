@@ -37,7 +37,7 @@ public partial class MainFotoViewModel : ViewModelBase
 
     FotoInfoService.GetDateTimeFromStringTests();
     var settingsService = App.Current.Services.GetRequiredService<UserSettingsService>();
-    SourcePath = settingsService.GetUserSettings.Source;
+    sourcePath = settingsService.GetUserSettings.Source;
     PreviewSize = settingsService.GetUserSettings.PreviewSize;
 
     SelectPathCommand = new AsyncRelayCommand( async () => {
@@ -52,6 +52,11 @@ public partial class MainFotoViewModel : ViewModelBase
 
     var alt = Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
     if (alt != null) alt.Exit += OnExit;
+  }
+
+  protected override Task OnInitializedAsync()
+  {
+    return Task.Run(() => ReadFotoInfos(SourcePath));
   }
 
   protected virtual void CreateMenuItems()
@@ -140,7 +145,7 @@ public partial class MainFotoViewModel : ViewModelBase
     FotoInfoMarked = 0;
 
     // UserSettingsVM.ResetFilterStatistik();
-    Task.Run( () => ReadFotoInfos( value ) );
+    Task.Run( async() => await ReadFotoInfos( value ) );
 
     var settingsService = App.Current.Services.GetRequiredService<UserSettingsService>();
     settingsService.GetUserSettings.Source = SourcePath;
@@ -241,7 +246,7 @@ public partial class MainFotoViewModel : ViewModelBase
   private bool runningReadFoto;
 
   private CancellationTokenSource? CancelReadFotoInfos;
-  private async void ReadFotoInfos( string source )
+  private async Task ReadFotoInfos( string source )
   {
     if ( CancelReadFotoInfos != null ) return;
     if( string.IsNullOrEmpty( source ) ) return;
@@ -252,10 +257,9 @@ public partial class MainFotoViewModel : ViewModelBase
     RunningReadFoto = true;
 
     FotoSelected = null;
-    await Task.Run(async () => {
-      fotoCnt = 0;
+    // await Task.Run(async () => {
       await fotoInfoService.ReadFotoInfos( baseDir, CancelReadFotoInfos.Token );
-    });
+    // });
 
     RunningReadFoto = false;
     CancelReadFotoInfos = null;
@@ -263,9 +267,10 @@ public partial class MainFotoViewModel : ViewModelBase
 
   private void OnFotoInfoRead( object? sender, FotoInfoEventArgs args )
   {
-    Dispatcher.UIThread.Post( () => {
-      if (args.FotoInfo == null) return;
-      var fotoInfo = new FotoInfoViewModel( args.FotoInfo, PreviewSize );
+    if (args.FotoInfo == null) return;
+    var fotoInfo = new FotoInfoViewModel( args.FotoInfo, PreviewSize );
+    Dispatcher.UIThread.Invoke( () => {
+    //Dispatcher.UIThread.Post( () => {
       if (FotoInfoList.Count == 0 )
         FotoInfoList.Add(fotoInfo);
       else if (FotoInfoList[FotoInfoList.Count - 1].Foto.File.CreationTimeUtc <= fotoInfo.Foto.File.CreationTimeUtc)
@@ -282,14 +287,15 @@ public partial class MainFotoViewModel : ViewModelBase
       // fotoInfo.Index = FotoInfoList.Count;
       OnPropertyChanged(nameof(FotoInfoList));
       FotoInfoMarked = FotoInfoList.Count(f => f.Target != null);
-      if (FotoInfoList.Count > 100)
+      if (FotoInfoList.Count > 300)
         CancelReadFotoInfos?.Cancel();
     });
   }
 
   private void OnFotoFixed( object? sender, FotoInfoEventArgs args )
   {
-    Dispatcher.UIThread.Post( () => {
+    Dispatcher.UIThread.Invoke( () => {
+    //Dispatcher.UIThread.Post( () => {
       if (args.FotoInfo == null) return;
 
       var fotoVM = FotoInfoList.Where( f => f.Foto.ID == args.FotoInfo.ID ).FirstOrDefault();
