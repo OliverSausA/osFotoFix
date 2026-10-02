@@ -69,28 +69,34 @@ namespace osFotoFix.Services
       foreach( var foto in fotoInfos )
       {
         token.ThrowIfCancellationRequested();
-        await using var source = File.OpenRead( foto.File.FullName );
 
-        var targetFile = Path.Combine(
-            foto.TargetPath,
-            foto.NewFileName
-        );
-        var targetDir = Path.GetDirectoryName( targetFile );
-        if( targetDir != null )
-          Directory.CreateDirectory( targetDir );
-        await using var target = File.Create( targetFile );
-
-        var buffer = new byte[81920];
-        int bytesRead;
-        while( ( bytesRead = await source.ReadAsync( buffer, token ) ) > 0 )
-        {
-          await target.WriteAsync( buffer.AsMemory(0, bytesRead), token );
-          done += bytesRead;
-          progress?.Report( (double)done / total * 100.0 );
-        }
-
-        if (foto.Action == EAction.move) {
+        if (foto.Action == EAction.delete)
           File.Delete(foto.File.FullName);
+        else
+        {
+          await using var source = File.OpenRead( foto.File.FullName );
+
+          var targetFile = Path.Combine(
+              foto.TargetPath,
+              foto.NewFileName
+          );
+          var targetDir = Path.GetDirectoryName( targetFile );
+          if( targetDir != null )
+            Directory.CreateDirectory( targetDir );
+          await using var target = File.Create( targetFile );
+
+          var buffer = new byte[81920];
+          int bytesRead;
+          while( ( bytesRead = await source.ReadAsync( buffer, token ) ) > 0 )
+          {
+            await target.WriteAsync( buffer.AsMemory(0, bytesRead), token );
+            done += bytesRead;
+            progress?.Report( (double)done / total * 100.0 );
+          }
+
+          if (foto.Action == EAction.move) {
+            File.Delete(foto.File.FullName);
+          }
         }
         foto.Action = EAction.done;
         FotoFixedEvent?.Invoke( this, new FotoInfoEventArgs( foto ) );

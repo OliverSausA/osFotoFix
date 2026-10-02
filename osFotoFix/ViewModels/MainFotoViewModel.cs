@@ -161,7 +161,7 @@ public partial class MainFotoViewModel : ViewModelBase
       var index = FotoInfoList.IndexOf( foto) +1;
       if ( index < FotoInfoList.Count )
       FotoSelected = FotoInfoList[ index ];
-      FotoInfoMarked = FotoInfoList.Count(f => f.Target != null);
+      FotoInfoMarked = FotoInfoList.Count(f => f.Target != null && f.Target.Action != EAction.ignore);
     }
   }
 
@@ -270,7 +270,6 @@ public partial class MainFotoViewModel : ViewModelBase
     if (args.FotoInfo == null) return;
     var fotoInfo = new FotoInfoViewModel( args.FotoInfo, PreviewSize );
     Dispatcher.UIThread.Invoke( () => {
-    //Dispatcher.UIThread.Post( () => {
       if (FotoInfoList.Count == 0 )
         FotoInfoList.Add(fotoInfo);
       else if (FotoInfoList[FotoInfoList.Count - 1].Foto.File.CreationTimeUtc <= fotoInfo.Foto.File.CreationTimeUtc)
@@ -286,7 +285,7 @@ public partial class MainFotoViewModel : ViewModelBase
       }
       // fotoInfo.Index = FotoInfoList.Count;
       OnPropertyChanged(nameof(FotoInfoList));
-      FotoInfoMarked = FotoInfoList.Count(f => f.Target != null);
+      FotoInfoMarked = FotoInfoList.Count(f => f.Target != null && f.Target.Action != EAction.ignore);
       if (FotoInfoList.Count > 300)
         CancelReadFotoInfos?.Cancel();
     });
@@ -295,14 +294,12 @@ public partial class MainFotoViewModel : ViewModelBase
   private void OnFotoFixed( object? sender, FotoInfoEventArgs args )
   {
     Dispatcher.UIThread.Invoke( () => {
-    //Dispatcher.UIThread.Post( () => {
       if (args.FotoInfo == null) return;
 
       var fotoVM = FotoInfoList.Where( f => f.Foto.ID == args.FotoInfo.ID ).FirstOrDefault();
-      // fotoVM?.UpdateView();
       FotoInfoList.Remove( fotoVM! );
       OnPropertyChanged(nameof(FotoInfoList));
-      FotoInfoMarked = FotoInfoList.Count(f => f.Target != null);
+      FotoInfoMarked = FotoInfoList.Count(f => f.Target != null && f.Target.Action != EAction.ignore);
     });
   }
 
