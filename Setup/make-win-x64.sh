@@ -1,7 +1,7 @@
 #!/bin/bash
 
 NSIS=/usr/bin/makensis
-BUILD=win10-x64
+BUILD=win-x64
 VERSION=0.3.3
 
 if [ -d ${BUILD}-deployment ]; then 
