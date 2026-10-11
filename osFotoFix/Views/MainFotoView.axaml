@@ -69,13 +69,15 @@
             <ListBox.ItemTemplate>
               <DataTemplate>
                 <Border Margin="2"
-                            Background="LightGray">
+                        Background="LightGray">
                   <Grid
                     ColumnDefinitions="Auto"
                   >
-                    <Image Source="{Binding Thumpnail}"
-                            Width="{Binding PreviewSize}"
-                            MaxHeight="{Binding PreviewSize}"
+                    <Image 
+                      Source="{Binding Thumpnail}"
+                      Width="{Binding PreviewSize}"
+                      MaxHeight="{Binding PreviewSize}"
+                      ToolTip.Tip="{Binding NewFileName}"
                       Stretch="UniformToFill"/>
                     <StackPanel 
                       Background="Beige" 
@@ -84,15 +86,17 @@
                       VerticalAlignment="Top"> 
                       <ic:FluentIcon 
                         IconSize="Size32"
+                        Height="32"
                         Icon="{Binding Target.IconName}" 
                         Background="{Binding Target.IconColor}"
                         />
                       <ic:FluentIcon 
                         IconSize="Size32"
+                        Height="32"
                         Icon="{Binding Action, Converter={StaticResource ActionIcon}}" 
                         Background="{Binding Target.IconColor}"
                         />
-                      <Label Content="{Binding Index}" HorizontalAlignment="Right" />
+                      <!-- <Label Content="{Binding Index}" HorizontalAlignment="Right" /> -->
                     </StackPanel>
                   </Grid>
                 </Border>
