@@ -30,6 +30,7 @@
        PointerPressed= "OnPointerPressed"
        PointerReleased= "OnPointerReleased" 
        PointerMoved= "OnPointerMoved"
+       DoubleTapped="OnDoubleTapped"
        >
        <Image.RenderTransform>
          <TransformGroup>

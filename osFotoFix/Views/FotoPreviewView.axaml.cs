@@ -144,6 +144,10 @@ namespace osFotoFix.Views
 
             e.Pointer.Capture(null);
         }
+        private void OnDoubleTapped(object? sender, TappedEventArgs e)
+        {
+            FitToWindow();
+        }
 
     }
 }
